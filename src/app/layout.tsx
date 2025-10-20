@@ -9,8 +9,40 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Digital Detox - Download App",
-  description: "Download Digital Detox app for Android, iOS, and Desktop. Block distracting apps and websites, track usage, and build healthier digital habits.",
+  title: "Digital Detox - Break Free from Digital Distractions",
+  description: "Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology. Join 50,000+ users who have reclaimed their time.",
+  keywords: ["digital detox", "app blocker", "screen time", "digital wellness", "focus app", "productivity", "mobile app", "website blocker"],
+  authors: [{ name: "Digital Detox Team" }],
+  creator: "Digital Detox",
+  publisher: "Digital Detox",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://digitaldetox.app',
+    title: 'Digital Detox - Break Free from Digital Distractions',
+    description: 'Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology.',
+    siteName: 'Digital Detox',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Digital Detox - Break Free from Digital Distractions',
+    description: 'Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology.',
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
 };
 
 export default function RootLayout({

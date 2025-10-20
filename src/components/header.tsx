@@ -20,12 +20,12 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <div className="h-8 w-16 rounded-lg bg-white flex items-center justify-center shadow-sm border border-gray-200">
+            <div className="h-8 w-16 rounded-lg flex items-center justify-center">
               <div className="text-center">
-                <div className="text-sm font-bold mb-0.5" style={{ color: '#6A0DAD' }}>
+                <div className="text-lg font-bold mb-0.5 text-white">
                   Digital
                 </div>
-                <div className="text-xs font-medium tracking-wide" style={{ color: '#000000' }}>
+                <div className="text-sm font-medium tracking-wide text-white">
                   DETOX.
                 </div>
               </div>

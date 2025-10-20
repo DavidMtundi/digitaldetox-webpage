@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Digital Detox Website
 
-## Getting Started
+A modern, responsive website for the Digital Detox app - helping users build healthier relationships with technology.
 
-First, run the development server:
+## 🚀 Features
 
+- **Modern Design**: Clean, professional UI with cream/white color scheme
+- **Responsive Layout**: Optimized for desktop, tablet, and mobile devices
+- **Email Signup**: Pre-launch waitlist with email collection
+- **Multiple Pages**: Homepage, About, Contact with comprehensive information
+- **Smooth Navigation**: Header with smooth scroll to download section
+- **Professional Contact**: Multiple contact methods and FAQ section
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15.5.6 with App Router
+- **Styling**: Tailwind CSS 4
+- **Icons**: Lucide React
+- **Language**: TypeScript
+- **Deployment**: Ready for Vercel/Netlify
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/DavidMtundi/digitaldetox-webpage.git
+cd digitaldetox-webpage
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## 🚀 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Deploy automatically on every push to main branch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Netlify
+1. Connect your GitHub repository to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `.next`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Manual Deployment
+```bash
+npm run build
+npm start
+```
 
-## Deploy on Vercel
+## 📁 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/
+│   ├── about/page.tsx      # About page
+│   ├── contact/page.tsx    # Contact page
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Homepage
+└── components/
+    ├── header.tsx          # Navigation header
+    ├── app-card.tsx        # App download cards
+    └── theme-provider.tsx  # Theme management
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Design System
+
+- **Primary Colors**: 
+  - Background: `#f4f4f0` (cream)
+  - White: `#ffffff`
+  - Black: `#000000`
+- **Typography**: Inter font family
+- **Spacing**: Consistent padding and margins
+- **Components**: Rounded corners, subtle shadows
+
+## 📱 Pages
+
+### Homepage (`/`)
+- Hero section with app icon and headline
+- Trust indicators (100% Free, 50,000+ Users, 2-Min Setup)
+- Email signup for early access
+- How it Works section (3-step process)
+- Download section with platform tabs
+- Why Digital Detox features
+- FAQ section
+
+### About (`/about`)
+- Mission and values
+- Key features overview
+- Statistics and social proof
+- Team information
+
+### Contact (`/contact`)
+- Multiple contact methods (Email, Live Chat, Phone)
+- Professional contact form
+- Comprehensive FAQ
+- Response time information
+
+## 🔧 Customization
+
+### Colors
+Update colors in `src/app/globals.css`:
+```css
+:root {
+  --cream: #f4f4f0;
+  --white: #ffffff;
+  --black: #000000;
+}
+```
+
+### Content
+- Update app information in `src/app/page.tsx`
+- Modify contact details in `src/app/contact/page.tsx`
+- Edit company information in `src/app/about/page.tsx`
+
+## 📈 Analytics & Tracking
+
+To add analytics:
+1. Add Google Analytics or similar tracking code to `src/app/layout.tsx`
+2. Update email signup form to integrate with your email service
+3. Add conversion tracking for key actions
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit changes: `git commit -m 'Add feature'`
+4. Push to branch: `git push origin feature-name`
+5. Submit a pull request
+
+## 📄 License
+
+This project is private and proprietary.
+
+## 📞 Support
+
+For questions or support, please contact:
+- Email: support@digitaldetox.app
+- GitHub Issues: [Create an issue](https://github.com/DavidMtundi/digitaldetox-webpage/issues)
+
+---
+
+Built with ❤️ for digital wellness

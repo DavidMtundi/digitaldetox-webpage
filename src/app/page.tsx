@@ -24,6 +24,33 @@ const digitalDetoxVersions = {
 
 export default function Home() {
   const [selectedPlatform, setSelectedPlatform] = useState('android')
+  const [email, setEmail] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) {
+      setError('Please enter your email address')
+      return
+    }
+    
+    setIsSubmitting(true)
+    setError('')
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    setIsSubmitting(false)
+    setIsSubmitted(true)
+    
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setEmail('')
+    }, 3000)
+  }
 
   const platformData = {
     android: {
@@ -98,14 +125,64 @@ export default function Home() {
               </div>
             </div>
             
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <button className="text-white px-8 py-4 rounded-lg font-medium hover:opacity-80 transition-all duration-200 text-lg bg-gray-800 hover:bg-gray-900">
-                Download Free - No Credit Card Required
-              </button>
-              <button className="text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-all duration-200 text-lg border border-gray-300">
-                Learn More
-              </button>
+            {/* Email Signup */}
+            <div className="max-w-md mx-auto mb-12">
+              <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+                <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#000000' }}>
+                  Get Early Access
+                </h3>
+                <p className="text-gray-600 text-center mb-6 text-sm">
+                  Be the first to know when Digital Detox launches. No spam, just updates.
+                </p>
+                {isSubmitted ? (
+                  <div className="text-center py-4">
+                    <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                      <CheckCircle className="h-6 w-6 text-green-600" />
+                    </div>
+                    <h4 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>
+                      You're on the list!
+                    </h4>
+                    <p className="text-gray-600 text-sm">
+                      We'll notify you as soon as Digital Detox is ready.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleEmailSubmit} className="space-y-4">
+                    <div>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email address"
+                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors ${
+                          error ? 'border-red-300' : 'border-gray-300'
+                        }`}
+                        required
+                      />
+                      {error && (
+                        <p className="text-red-500 text-sm mt-1">{error}</p>
+                      )}
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full text-white px-6 py-3 rounded-lg font-medium hover:opacity-80 transition-all duration-200 bg-gray-800 hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          <span>Adding to list...</span>
+                        </>
+                      ) : (
+                        <span>Notify Me When Ready</span>
+                      )}
+                    </button>
+                  </form>
+                )}
+                <p className="text-xs text-gray-500 text-center mt-3">
+                  Join 2,500+ people already on the waitlist
+                </p>
+              </div>
             </div>
 
           </div>
