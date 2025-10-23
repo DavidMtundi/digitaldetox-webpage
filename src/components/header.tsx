@@ -63,13 +63,15 @@ export default function Header() {
           {/* Enhanced Right side actions */}
           <div className="flex items-center space-x-4">
             {/* Enhanced Download Button */}
-            <button 
-              onClick={scrollToDownload}
+            <a 
+              href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:flex items-center space-x-2 btn-gradient"
             >
               <Download className="h-4 w-4" />
               <span>Download</span>
-            </button>
+            </a>
 
             {/* Mobile menu button */}
             <button
@@ -117,16 +119,16 @@ export default function Header() {
               >
                 Privacy
               </Link>
-              <button 
-                onClick={() => {
-                  scrollToDownload()
-                  setIsMenuOpen(false)
-                }}
+              <a 
+                href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
                 className="flex items-center justify-center space-x-2 btn-gradient mx-4 mt-4"
               >
                 <Download className="h-4 w-4" />
                 <span>Download</span>
-              </button>
+              </a>
             </nav>
           </div>
         )}

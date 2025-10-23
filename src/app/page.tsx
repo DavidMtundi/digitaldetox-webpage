@@ -192,12 +192,56 @@ export default function Home() {
                 <p className="text-xs text-gray-500 text-center mt-3">
                   Join 2,500+ people already on the waitlist
                 </p>
+                
+                {/* Direct Download Option */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <p className="text-sm text-gray-600 text-center mb-4">
+                    Or download the app directly
+                  </p>
+                  <a 
+                    href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full btn-secondary text-center inline-block"
+                  >
+                    <Download className="h-4 w-4 inline mr-2" />
+                    Get Digital Detox App
+                  </a>
+                </div>
               </div>
             </div>
 
           </div>
         </div>
 
+      </section>
+
+      {/* Firebase App Distribution CTA */}
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-blue-600">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+              Ready to Start Your Digital Detox Journey?
+            </h2>
+            <p className="text-xl text-purple-100 mb-8 leading-relaxed">
+              Download the app now and join thousands of users who have reclaimed their focus and built healthier digital habits.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2"
+              >
+                <Download className="h-5 w-5" />
+                <span>Download Digital Detox</span>
+              </a>
+              <div className="text-purple-100 text-sm">
+                <span className="font-semibold">50,000+</span> downloads • <span className="font-semibold">4.8/5</span> rating
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Enhanced How it Works Section */}
@@ -311,9 +355,14 @@ export default function Home() {
                       <p className="text-gray-600 mb-6">{platform.requirements}</p>
                       
                       {platform.available ? (
-                        <button className="w-full btn-gradient">
+                        <a 
+                          href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full btn-gradient inline-block text-center"
+                        >
                           Download Now
-                        </button>
+                        </a>
                       ) : (
                         <div className="text-center">
                           <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gray-200 flex items-center justify-center">
