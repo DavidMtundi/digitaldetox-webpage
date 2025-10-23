@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Digital Detox Team" }],
   creator: "Digital Detox",
   publisher: "Digital Detox",
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   robots: {
     index: true,
     follow: true,
@@ -34,11 +39,20 @@ export const metadata: Metadata = {
     title: 'Digital Detox - Break Free from Digital Distractions',
     description: 'Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology.',
     siteName: 'Digital Detox',
+    images: [
+      {
+        url: '/playstore.png',
+        width: 512,
+        height: 512,
+        alt: 'Digital Detox App Icon',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Digital Detox - Break Free from Digital Distractions',
     description: 'Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology.',
+    images: ['/playstore.png'],
   },
 };
 

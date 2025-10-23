@@ -16,58 +16,52 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 w-full backdrop-blur-md bg-white/90 border-b border-gray-200 z-50 shadow-sm">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-modern">
         <div className="flex h-16 items-center justify-between">
-          {/* Enhanced Logo */}
+          {/* Modern Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
-              <div className="text-center text-white">
-                <div className="text-sm font-bold">DD</div>
-              </div>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
+              <span className="text-white font-bold text-sm">DD</span>
             </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-gray-900 group-hover:text-purple-600 transition-colors">
-                Digital Detox
-              </div>
-            </div>
+            <span className="text-xl font-bold text-gradient-blue">Digital Detox</span>
           </Link>
 
-          {/* Enhanced Desktop Navigation */}
+          {/* Modern Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             <Link 
               href="/" 
-              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+              className="nav-link"
             >
               Home
             </Link>
             <Link 
               href="/about" 
-              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+              className="nav-link"
             >
               About
             </Link>
             <Link 
               href="/contact" 
-              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+              className="nav-link"
             >
               Contact
             </Link>
             <Link 
               href="/privacy" 
-              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+              className="nav-link"
             >
               Privacy
             </Link>
           </nav>
 
-          {/* Enhanced Right side actions */}
+          {/* Modern Right side actions */}
           <div className="flex items-center space-x-4">
-            {/* Enhanced Download Button */}
+            {/* Modern Download Button */}
             <a 
               href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center space-x-2 btn-gradient"
+              className="hidden sm:flex btn-primary"
             >
               <Download className="h-4 w-4" />
               <span>Download</span>
@@ -87,34 +81,34 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Enhanced Mobile Navigation */}
+        {/* Modern Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200 bg-white/95 backdrop-blur-sm">
             <nav className="flex flex-col space-y-2">
               <Link 
                 href="/" 
-                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
+                className="nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/about" 
-                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
+                className="nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/contact" 
-                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
+                className="nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
               <Link 
                 href="/privacy" 
-                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
+                className="nav-link"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Privacy
@@ -124,7 +118,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center justify-center space-x-2 btn-gradient mx-4 mt-4"
+                className="btn-primary mx-4 mt-4"
               >
                 <Download className="h-4 w-4" />
                 <span>Download</span>
