@@ -15,51 +15,57 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 w-full border-b backdrop-blur-sm z-50" style={{ backgroundColor: '#000000' }}>
+    <header className="sticky top-0 w-full backdrop-blur-md bg-white/90 border-b border-gray-200 z-50 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3">
-            <div className="h-8 w-16 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-lg font-bold mb-0.5 text-white">
-                  Digital
-                </div>
-                <div className="text-sm font-medium tracking-wide text-white">
-                  DETOX.
-                </div>
+          {/* Enhanced Logo */}
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-200">
+              <div className="text-center text-white">
+                <div className="text-sm font-bold">DD</div>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-gray-900 group-hover:text-purple-600 transition-colors">
+                Digital Detox
               </div>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Enhanced Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
             <Link 
               href="/" 
-              className="font-medium transition-colors hover:opacity-70 px-3 py-2 rounded-md text-white"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
             >
               Home
             </Link>
             <Link 
               href="/about" 
-              className="font-medium transition-colors hover:opacity-70 px-3 py-2 rounded-md text-white"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
             >
               About
             </Link>
             <Link 
               href="/contact" 
-              className="font-medium transition-colors hover:opacity-70 px-3 py-2 rounded-md text-white"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
             >
               Contact
             </Link>
+            <Link 
+              href="/privacy" 
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-600 hover:text-purple-600 hover:bg-purple-50"
+            >
+              Privacy
+            </Link>
           </nav>
 
-          {/* Right side actions */}
+          {/* Enhanced Right side actions */}
           <div className="flex items-center space-x-4">
-            {/* Download Button */}
+            {/* Enhanced Download Button */}
             <button 
               onClick={scrollToDownload}
-              className="hidden sm:flex items-center space-x-2 btn-primary"
+              className="hidden sm:flex items-center space-x-2 btn-gradient"
             >
               <Download className="h-4 w-4" />
               <span>Download</span>
@@ -68,7 +74,7 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg transition-colors hover:opacity-70 text-white"
+              className="md:hidden p-2 rounded-lg transition-colors hover:bg-gray-100 text-gray-600"
             >
               {isMenuOpen ? (
                 <X className="h-5 w-5" />
@@ -79,37 +85,44 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Enhanced Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-800">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden py-4 border-t border-gray-200 bg-white/95 backdrop-blur-sm">
+            <nav className="flex flex-col space-y-2">
               <Link 
                 href="/" 
-                className="font-medium transition-colors hover:opacity-70 text-white"
+                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/about" 
-                className="font-medium transition-colors hover:opacity-70 text-white"
+                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/contact" 
-                className="font-medium transition-colors hover:opacity-70 text-white"
+                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
+              </Link>
+              <Link 
+                href="/privacy" 
+                className="px-4 py-3 rounded-lg font-medium transition-colors hover:bg-purple-50 text-gray-600 hover:text-purple-600"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Privacy
               </Link>
               <button 
                 onClick={() => {
                   scrollToDownload()
                   setIsMenuOpen(false)
                 }}
-                className="flex items-center space-x-2 btn-primary w-full justify-center"
+                className="flex items-center justify-center space-x-2 btn-gradient mx-4 mt-4"
               >
                 <Download className="h-4 w-4" />
                 <span>Download</span>
