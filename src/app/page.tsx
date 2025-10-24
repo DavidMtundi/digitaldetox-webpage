@@ -3,35 +3,18 @@
 import { Download, Smartphone, CheckCircle, Shield, Users, Clock, Mail, Star, Zap, Globe } from "lucide-react"
 import { useState } from "react"
 import { theme, themeStyles } from "../styles/theme"
+import { useEmailSubscription } from "../hooks/useEmailSubscription"
 
 export default function Home() {
-  const [email, setEmail] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email) {
-      setError('Please enter your email address')
-      return
-    }
-    
-    setIsSubmitting(true)
-    setError('')
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setEmail('')
-    }, 3000)
-  }
+  const {
+    email,
+    isSubmitting,
+    isSubmitted,
+    error,
+    successMessage,
+    handleEmailChange,
+    handleSubmit
+  } = useEmailSubscription()
 
   return (
     <div className="min-h-screen" style={themeStyles.background.primary}>
@@ -112,12 +95,12 @@ export default function Home() {
 
             {/* Secondary CTA - Email for Updates */}
             <div className="max-w-md mx-auto animate-fade-in-up" style={{animationDelay: '0.5s'}}>
-              <form onSubmit={handleEmailSubmit} className="space-y-3" role="form" aria-label="Get testing updates">
+              <form onSubmit={(e) => handleSubmit(e, 'hero-section')} className="space-y-3" role="form" aria-label="Get testing updates">
                 <div className="flex gap-3">
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleEmailChange(e.target.value)}
                     placeholder="Email for testing updates"
                     className={`flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white hover:border-gray-400 focus:outline-none ${error ? 'border-red-300 focus:ring-red-500' : ''}`}
                     required
@@ -141,8 +124,8 @@ export default function Home() {
                   <p id="email-error" className="text-red-500 text-sm text-center" role="alert">{error}</p>
                 )}
                 {isSubmitted && (
-                  <p className="text-green-600 text-sm text-center">✓ You'll receive testing updates!</p>
-                )}
+                  <p className="text-green-600 text-sm text-center">✓ {successMessage || "You'll receive testing updates!"}</p>
+                      )}
               </form>
             </div>
 
