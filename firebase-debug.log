@@ -1,0 +1,36 @@
+[debug] [2025-10-24T06:19:24.428Z] ----------------------------------------------------------------------
+[debug] [2025-10-24T06:19:24.430Z] Command:       /opt/homebrew/Cellar/node/23.11.0/bin/node /opt/homebrew/bin/firebase deploy
+[debug] [2025-10-24T06:19:24.430Z] CLI Version:   14.10.1
+[debug] [2025-10-24T06:19:24.430Z] Platform:      darwin
+[debug] [2025-10-24T06:19:24.430Z] Node Version:  v23.11.0
+[debug] [2025-10-24T06:19:24.431Z] Time:          Fri Oct 24 2025 09:19:24 GMT+0300 (East Africa Time)
+[debug] [2025-10-24T06:19:24.431Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-10-24T06:19:24.539Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-10-24T06:19:24.539Z] > authorizing via signed-in user (diginowsolutions@gmail.com)
+[debug] [2025-10-24T06:19:24.540Z] [iam] checking project digitaldetox-app-2025 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-10-24T06:19:24.540Z] Checked if tokens are valid: false, expires at: 1761287561658
+[debug] [2025-10-24T06:19:24.540Z] Checked if tokens are valid: false, expires at: 1761287561658
+[debug] [2025-10-24T06:19:24.540Z] > refreshing access token with scopes: []
+[debug] [2025-10-24T06:19:24.541Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-10-24T06:19:24.541Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-10-24T06:19:24.855Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-10-24T06:19:24.856Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-10-24T06:19:24.869Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/digitaldetox-app-2025:testIamPermissions [none]
+[debug] [2025-10-24T06:19:24.869Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/digitaldetox-app-2025:testIamPermissions x-goog-quota-user=projects/digitaldetox-app-2025
+[debug] [2025-10-24T06:19:24.869Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/digitaldetox-app-2025:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-10-24T06:19:26.470Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/digitaldetox-app-2025:testIamPermissions 200
+[debug] [2025-10-24T06:19:26.470Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/digitaldetox-app-2025:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-10-24T06:19:26.470Z] Checked if tokens are valid: true, expires at: 1761290363856
+[debug] [2025-10-24T06:19:26.470Z] Checked if tokens are valid: true, expires at: 1761290363856
+[debug] [2025-10-24T06:19:26.471Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/digitaldetox-app-2025 [none]
+[debug] [2025-10-24T06:19:26.929Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/digitaldetox-app-2025 200
+[debug] [2025-10-24T06:19:26.930Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/digitaldetox-app-2025 {"projectId":"digitaldetox-app-2025","projectNumber":"35810547107","displayName":"digitaldetox-app-2025","name":"projects/digitaldetox-app-2025","resources":{"hostingSite":"digitaldetox-app-2025"},"state":"ACTIVE","etag":"1_6d50bd3e-eadd-4f25-aafa-30568e4879e7"}
+[info] 
+[info] === Deploying to 'digitaldetox-app-2025'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-10-24T06:19:26.933Z] Checked if tokens are valid: true, expires at: 1761290363856
+[debug] [2025-10-24T06:19:26.933Z] Checked if tokens are valid: true, expires at: 1761290363856
+[debug] [2025-10-24T06:19:26.933Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/digitaldetox-app-2025/versions [none]
+[debug] [2025-10-24T06:19:26.933Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/digitaldetox-app-2025/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
