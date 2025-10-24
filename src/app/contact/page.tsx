@@ -121,10 +121,10 @@ export default function Contact() {
                 Speak directly with our team
               </p>
               <a 
-                href="tel:+1-555-DETOX-1"
+                href="tel:+254721115847"
                 className="text-gray-600 hover:text-gray-800 font-medium"
               >
-                +1 (555) DETOX-1
+                +254 721 115 847
               </a>
             </div>
           </div>

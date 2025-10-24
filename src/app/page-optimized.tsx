@@ -1,6 +1,6 @@
 "use client"
 
-import { Download, Smartphone, CheckCircle, Shield, Users, Clock, Mail, Star, Zap, Globe } from "lucide-react"
+import { Download, Smartphone, CheckCircle, Shield, Users, Clock, Mail, Star, Zap } from "lucide-react"
 import { useState } from "react"
 
 export default function Home() {
@@ -137,21 +137,13 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
                 <Shield className="h-8 w-8 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">App Blocking</h3>
               <p className="text-gray-600">Block distracting apps during focus time</p>
-            </div>
-            
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
-                <Globe className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Website Blocking</h3>
-              <p className="text-gray-600">Block distracting websites and social media</p>
             </div>
             
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
@@ -163,8 +155,8 @@ export default function Home() {
             </div>
             
             <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-orange-100 flex items-center justify-center">
-                <CheckCircle className="h-8 w-8 text-orange-600" />
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                <CheckCircle className="h-8 w-8 text-green-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">Focus Modes</h3>
               <p className="text-gray-600">Predefined modes for different activities</p>

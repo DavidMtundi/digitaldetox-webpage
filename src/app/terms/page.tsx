@@ -461,7 +461,7 @@ export default function TermsPage() {
               </h3>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Phone className="h-5 w-5" />
-                <span>+1 (555) DETOX-1</span>
+                <span>+254 721 115 847</span>
               </div>
             </div>
           </div>
