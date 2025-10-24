@@ -87,10 +87,10 @@ export default function Contact() {
                 Get detailed help with your questions
               </p>
               <a 
-                href="mailto:support@digitaldetox.app"
+                href="mailto:davidmtundi001@gmail.com"
                 className="text-gray-600 hover:text-gray-800 font-medium"
               >
-                support@digitaldetox.app
+                davidmtundi001@gmail.com
               </a>
             </div>
 

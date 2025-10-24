@@ -453,7 +453,7 @@ export default function TermsPage() {
               </h3>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Mail className="h-5 w-5" />
-                <span>legal@digitaldetox.app</span>
+                <span>davidmtundi001@gmail.com</span>
               </div>
             </div>
             <div>

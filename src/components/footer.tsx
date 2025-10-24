@@ -72,11 +72,11 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a 
-                  href="mailto:support@digitaldetox.app" 
+                  href="mailto:davidmtundi001@gmail.com" 
                   className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center space-x-2"
                 >
                   <Mail className="h-4 w-4" />
-                  <span>support@digitaldetox.app</span>
+                  <span>davidmtundi001@gmail.com</span>
                 </a>
               </li>
               <li>

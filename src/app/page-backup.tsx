@@ -678,7 +678,7 @@ export default function Home() {
                 <Mail className="h-4 w-4 text-white" />
               </div>
               <span className="text-gray-700 font-semibold">Still have questions?</span>
-              <a href="mailto:support@digitaldetox.app" className="text-purple-600 font-semibold hover:text-purple-700 hover:underline transition-colors">
+              <a href="mailto:davidmtundi001@gmail.com" className="text-purple-600 font-semibold hover:text-purple-700 hover:underline transition-colors">
                 Contact Support
               </a>
             </div>

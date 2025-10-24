@@ -324,11 +324,11 @@ export default function VersionedPrivacyPage() {
               <div className="space-y-2">
                 <div className="flex items-center space-x-3 text-gray-600">
                   <Mail className="h-5 w-5" />
-                  <span><strong>Email:</strong> privacy@digitaldetox.app</span>
+                  <span><strong>Email:</strong> davidmtundi001@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-600">
                   <Mail className="h-5 w-5" />
-                  <span><strong>Support:</strong> support@digitaldetox.app</span>
+                  <span><strong>Support:</strong> davidmtundi001@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-600">
                   <Phone className="h-5 w-5" />
