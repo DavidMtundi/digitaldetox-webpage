@@ -2,6 +2,7 @@
 
 import { Download, Smartphone, CheckCircle, Shield, Users, Clock, Mail, Star, Zap, Globe } from "lucide-react"
 import { useState } from "react"
+import { theme, themeStyles } from "../styles/theme"
 
 export default function Home() {
   const [email, setEmail] = useState('')
@@ -33,9 +34,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen" style={themeStyles.background.primary}>
       {/* Ultra-Focused Hero Section for Testing */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <section className="relative overflow-hidden" style={themeStyles.background.hero}>
         {/* Subtle Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-float"></div>
@@ -46,10 +47,10 @@ export default function Home() {
         <div className="absolute inset-0 opacity-3">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              linear-gradient(45deg, #3b82f6 25%, transparent 25%),
-              linear-gradient(-45deg, #3b82f6 25%, transparent 25%),
-              linear-gradient(45deg, transparent 75%, #3b82f6 75%),
-              linear-gradient(-45deg, transparent 75%, #3b82f6 75%)
+              linear-gradient(45deg, ${theme.colors.patterns.primary} 25%, transparent 25%),
+              linear-gradient(-45deg, ${theme.colors.patterns.primary} 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, ${theme.colors.patterns.primary} 75%),
+              linear-gradient(-45deg, transparent 75%, ${theme.colors.patterns.primary} 75%)
             `,
             backgroundSize: '20px 20px',
             backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
@@ -98,7 +99,7 @@ export default function Home() {
                 href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full btn-gradient text-center inline-block text-lg sm:text-xl py-4 px-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full btn-gradient text-center inline-block text-lg sm:text-xl py-4 px-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center"
                 aria-label="Download Digital Detox app for beta testing"
               >
                 <Download className="h-5 w-5 mr-3" aria-hidden="true" />
@@ -141,7 +142,7 @@ export default function Home() {
                 )}
                 {isSubmitted && (
                   <p className="text-green-600 text-sm text-center">✓ You'll receive testing updates!</p>
-                      )}
+                )}
               </form>
             </div>
 
@@ -150,13 +151,13 @@ export default function Home() {
       </section>
 
       {/* Simple Features Section */}
-      <section className="py-16 bg-white relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden" style={themeStyles.background.features}>
         {/* Subtle geometric background */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              linear-gradient(90deg, #6366f1 25%, transparent 25%),
-              linear-gradient(90deg, transparent 75%, #6366f1 75%)
+              linear-gradient(90deg, ${theme.colors.patterns.secondary} 25%, transparent 25%),
+              linear-gradient(90deg, transparent 75%, ${theme.colors.patterns.secondary} 75%)
             `,
             backgroundSize: '40px 40px',
             backgroundPosition: '0 0, 20px 20px'
@@ -181,8 +182,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              <div className="text-center p-6 rounded-2xl" style={themeStyles.background.primary}>
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
                 <Shield className="h-8 w-8 text-blue-600" />
               </div>
@@ -190,43 +191,43 @@ export default function Home() {
               <p className="text-gray-600">Block distracting apps during focus time</p>
             </div>
             
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
-                <Globe className="h-8 w-8 text-green-600" />
+              <div className="text-center p-6 rounded-2xl" style={themeStyles.background.primary}>
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                  <Globe className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Website Blocking</h3>
+                <p className="text-gray-600">Block distracting websites, social media, and adult content</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">Website Blocking</h3>
-              <p className="text-gray-600">Block distracting websites, social media, and adult content</p>
-            </div>
-            
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-purple-100 flex items-center justify-center">
-                <Zap className="h-8 w-8 text-purple-600" />
+              
+              <div className="text-center p-6 rounded-2xl" style={themeStyles.background.primary}>
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-purple-100 flex items-center justify-center">
+                  <Zap className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Usage Analytics</h3>
+                <p className="text-gray-600">Track your digital habits and progress</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">Usage Analytics</h3>
-              <p className="text-gray-600">Track your digital habits and progress</p>
-            </div>
-            
-            <div className="text-center p-6 bg-gray-50 rounded-2xl">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-orange-100 flex items-center justify-center">
-                <CheckCircle className="h-8 w-8 text-orange-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Focus Modes</h3>
-              <p className="text-gray-600">Predefined modes for different activities</p>
+              
+              <div className="text-center p-6 rounded-2xl" style={themeStyles.background.primary}>
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-orange-100 flex items-center justify-center">
+                  <CheckCircle className="h-8 w-8 text-orange-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Focus Modes</h3>
+                <p className="text-gray-600">Predefined modes for different activities</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Simple Stats Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50 relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden" style={themeStyles.background.stats}>
         {/* Geometric background pattern */}
         <div className="absolute inset-0 opacity-8">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              linear-gradient(45deg, #8b5cf6 25%, transparent 25%),
-              linear-gradient(-45deg, #8b5cf6 25%, transparent 25%),
-              linear-gradient(45deg, transparent 75%, #8b5cf6 75%),
-              linear-gradient(-45deg, transparent 75%, #8b5cf6 75%)
+              linear-gradient(45deg, ${theme.colors.patterns.secondary} 25%, transparent 25%),
+              linear-gradient(-45deg, ${theme.colors.patterns.secondary} 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, ${theme.colors.patterns.secondary} 75%),
+              linear-gradient(-45deg, transparent 75%, ${theme.colors.patterns.secondary} 75%)
             `,
             backgroundSize: '50px 50px',
             backgroundPosition: '0 0, 0 25px, 25px -25px, -25px 0px'
@@ -269,14 +270,14 @@ export default function Home() {
                 <div className="text-xs sm:text-sm text-gray-500 mt-1">Real usage data</div>
               </div>
             </div>
-            
+
             {/* Call to Action */}
             <div className="max-w-md mx-auto">
               <a 
                 href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full btn-gradient text-center inline-block text-lg sm:text-xl py-4 px-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full btn-gradient text-center inline-block text-lg sm:text-xl py-4 px-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center justify-center"
                 aria-label="Download Digital Detox app for beta testing"
               >
                 <Download className="h-5 w-5 mr-3" aria-hidden="true" />

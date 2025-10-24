@@ -1,15 +1,16 @@
 "use client"
 
 import { Shield, Users, Target, Heart, Smartphone, Monitor, Tablet, Clock, TrendingUp, Award } from "lucide-react"
+import { themeStyles } from "../../styles/theme"
 
 export default function About() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f4f4f0' }}>
+    <div className="min-h-screen" style={themeStyles.background.primary}>
       {/* Hero Section */}
-      <section className="py-20" style={{ backgroundColor: '#f4f4f0' }}>
+      <section className="py-20" style={themeStyles.background.secondary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6" style={{ color: '#000000' }}>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6" style={themeStyles.text.primary}>
               About Digital Detox
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -37,11 +38,11 @@ export default function About() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-16" style={themeStyles.background.primary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#000000' }}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={themeStyles.text.primary}>
                 Our Mission
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
@@ -55,7 +56,7 @@ export default function About() {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
                   <Shield className="h-8 w-8 text-gray-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+                <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                   Protect Your Focus
                 </h3>
                 <p className="text-gray-600">
@@ -68,7 +69,7 @@ export default function About() {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
                   <Heart className="h-8 w-8 text-gray-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+                <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                   Improve Wellbeing
                 </h3>
                 <p className="text-gray-600">
@@ -81,7 +82,7 @@ export default function About() {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
                   <Target className="h-8 w-8 text-gray-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+                <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                   Build Better Habits
                 </h3>
                 <p className="text-gray-600">
@@ -95,11 +96,11 @@ export default function About() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16" style={{ backgroundColor: '#f4f4f0' }}>
+      <section className="py-16" style={themeStyles.background.secondary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#000000' }}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={themeStyles.text.primary}>
                 Key Features
               </h2>
               <p className="text-lg text-gray-600">
@@ -114,7 +115,7 @@ export default function About() {
                     <Shield className="h-6 w-6 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>
+                    <h3 className="text-lg font-bold mb-2" style={themeStyles.text.primary}>
                       App Blocking
                     </h3>
                     <p className="text-gray-600">
@@ -128,7 +129,7 @@ export default function About() {
                     <Monitor className="h-6 w-6 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>
+                    <h3 className="text-lg font-bold mb-2" style={themeStyles.text.primary}>
                       Website Restrictions
                     </h3>
                     <p className="text-gray-600">
@@ -142,7 +143,7 @@ export default function About() {
                     <TrendingUp className="h-6 w-6 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>
+                    <h3 className="text-lg font-bold mb-2" style={themeStyles.text.primary}>
                       Usage Tracking
                     </h3>
                     <p className="text-gray-600">
@@ -158,7 +159,7 @@ export default function About() {
                     <Clock className="h-6 w-6 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>
+                    <h3 className="text-lg font-bold mb-2" style={themeStyles.text.primary}>
                       Custom Schedules
                     </h3>
                     <p className="text-gray-600">
@@ -172,7 +173,7 @@ export default function About() {
                     <Smartphone className="h-6 w-6 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>
+                    <h3 className="text-lg font-bold mb-2" style={themeStyles.text.primary}>
                       Cross-Platform
                     </h3>
                     <p className="text-gray-600">
@@ -186,7 +187,7 @@ export default function About() {
                     <Heart className="h-6 w-6 text-gray-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold mb-2" style={{ color: '#000000' }}>
+                    <h3 className="text-lg font-bold mb-2" style={themeStyles.text.primary}>
                       Privacy First
                     </h3>
                     <p className="text-gray-600">
@@ -201,15 +202,15 @@ export default function About() {
       </section>
 
       {/* Why Digital Detox Section */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-16" style={themeStyles.background.primary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8" style={{ color: '#000000' }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8" style={themeStyles.text.primary}>
               Why Digital Detox?
             </h2>
             
             <div className="bg-gray-50 rounded-2xl p-8 mb-8">
-              <div className="text-6xl font-bold mb-4" style={{ color: '#000000' }}>
+              <div className="text-6xl font-bold mb-4" style={themeStyles.text.primary}>
                 96
               </div>
               <p className="text-lg text-gray-600 mb-4">
@@ -229,7 +230,7 @@ export default function About() {
 
             <div className="grid md:grid-cols-3 gap-6">
               <div className="p-6 rounded-xl border border-gray-200">
-                <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                   Better Focus
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -237,7 +238,7 @@ export default function About() {
                 </p>
               </div>
               <div className="p-6 rounded-xl border border-gray-200">
-                <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                   More Time
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -245,7 +246,7 @@ export default function About() {
                 </p>
               </div>
               <div className="p-6 rounded-xl border border-gray-200">
-                <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                   Better Sleep
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -258,10 +259,10 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16" style={{ backgroundColor: '#f4f4f0' }}>
+      <section className="py-16" style={themeStyles.background.secondary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8" style={{ color: '#000000' }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8" style={themeStyles.text.primary}>
               Built by Digital Wellness Experts
             </h2>
             
@@ -272,7 +273,7 @@ export default function About() {
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="p-8 rounded-2xl border border-gray-200">
-                <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+                <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                   Research-Based Approach
                 </h3>
                 <p className="text-gray-600">
@@ -282,7 +283,7 @@ export default function About() {
               </div>
 
               <div className="p-8 rounded-2xl border border-gray-200">
-                <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+                <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                   User-Centered Design
                 </h3>
                 <p className="text-gray-600">

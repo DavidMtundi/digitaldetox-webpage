@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Plus, Save, Edit, Trash2, Eye } from 'lucide-react';
+import { themeStyles } from '../../../styles/theme';
 
 interface PrivacyVersion {
   version: string;
@@ -107,7 +108,7 @@ export default function PrivacyPolicyAdmin() {
       <div className="max-w-6xl mx-auto">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
           <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-bold" style={{ color: '#000000' }}>
+            <h1 className="text-3xl font-bold" style={themeStyles.text.primary}>
               Privacy Policy Version Management
             </h1>
             <button

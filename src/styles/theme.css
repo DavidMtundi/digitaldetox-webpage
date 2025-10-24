@@ -1,0 +1,148 @@
+/* Theme-aware CSS Variables */
+/* This file provides CSS custom properties that can be dynamically updated */
+
+:root {
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-hero: #ffffff;
+  --bg-features: #ffffff;
+  --bg-stats: #ffffff;
+  --bg-cta: #4f46e5;
+  
+  /* Text Colors */
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --text-accent: #4f46e5;
+  
+  /* Brand Colors */
+  --brand-primary: #4f46e5;
+  --brand-secondary: #7c3aed;
+  --brand-success: #059669;
+  --brand-warning: #d97706;
+  --brand-error: #dc2626;
+  
+  /* UI Colors */
+  --ui-card: #ffffff;
+  --ui-border: #e5e7eb;
+  --ui-shadow: rgba(0, 0, 0, 0.1);
+  --ui-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Pattern Colors */
+  --pattern-primary: #3b82f6;
+  --pattern-secondary: #8b5cf6;
+  --pattern-opacity-low: 0.05;
+  --pattern-opacity-medium: 0.1;
+  --pattern-opacity-high: 0.2;
+  
+  /* Spacing */
+  --spacing-section-small: 4rem;
+  --spacing-section-medium: 5rem;
+  --spacing-section-large: 6rem;
+  --spacing-section-xlarge: 8rem;
+  
+  /* Typography */
+  --text-hero-mobile: 2.25rem;
+  --text-hero-tablet: 3rem;
+  --text-hero-desktop: 4rem;
+  --text-hero-xlarge: 4.5rem;
+  
+  --text-section-mobile: 1.5rem;
+  --text-section-tablet: 1.875rem;
+  --text-section-desktop: 2.25rem;
+  --text-section-xlarge: 3rem;
+}
+
+/* Theme-aware utility classes */
+.bg-theme-primary { background-color: var(--bg-primary); }
+.bg-theme-secondary { background-color: var(--bg-secondary); }
+.bg-theme-hero { background-color: var(--bg-hero); }
+.bg-theme-features { background-color: var(--bg-features); }
+.bg-theme-stats { background-color: var(--bg-stats); }
+.bg-theme-cta { background-color: var(--bg-cta); }
+
+.text-theme-primary { color: var(--text-primary); }
+.text-theme-secondary { color: var(--text-secondary); }
+.text-theme-muted { color: var(--text-muted); }
+.text-theme-accent { color: var(--text-accent); }
+
+.border-theme { border-color: var(--ui-border); }
+.shadow-theme { box-shadow: 0 1px 3px var(--ui-shadow); }
+
+/* Theme-aware card styles */
+.card-theme {
+  background-color: var(--ui-card);
+  border-color: var(--ui-border);
+  box-shadow: 0 1px 3px var(--ui-shadow);
+}
+
+/* Theme-aware button styles */
+.btn-theme-primary {
+  background-color: var(--brand-primary);
+  color: white;
+}
+
+.btn-theme-secondary {
+  background-color: var(--brand-secondary);
+  color: white;
+}
+
+/* Theme-aware pattern backgrounds */
+.pattern-hero {
+  background-image: 
+    linear-gradient(90deg, var(--pattern-primary) 25%, transparent 25%),
+    linear-gradient(90deg, transparent 75%, var(--pattern-primary) 75%);
+  background-size: 20px 20px;
+  opacity: var(--pattern-opacity-low);
+}
+
+.pattern-features {
+  background-image: 
+    linear-gradient(90deg, var(--pattern-secondary) 25%, transparent 25%),
+    linear-gradient(90deg, transparent 75%, var(--pattern-secondary) 75%);
+  background-size: 40px 40px;
+  opacity: var(--pattern-opacity-medium);
+}
+
+.pattern-stats {
+  background-image: 
+    linear-gradient(45deg, var(--pattern-secondary) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--pattern-secondary) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--pattern-secondary) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--pattern-secondary) 75%);
+  background-size: 50px 50px;
+  background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
+  opacity: var(--pattern-opacity-high);
+}
+
+/* Dark theme support (for future implementation) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --bg-hero: #1f2937;
+    --bg-features: #1f2937;
+    --bg-stats: #1f2937;
+    
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    
+    --ui-card: #374151;
+    --ui-border: #4b5563;
+    --ui-shadow: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Theme transition animations */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none;
+  }
+}

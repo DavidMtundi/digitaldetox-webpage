@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Shield, Lock, Eye, Database, Users, Globe, Mail, Phone, Smartphone, AlertCircle, Clock, FileText } from 'lucide-react';
 import { privacyPolicyVersions, versionSpecificContent } from '@/data/privacy-policy';
+import { themeStyles } from '../../styles/theme';
 
 export default function VersionedPrivacyPage() {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
@@ -169,7 +170,7 @@ export default function VersionedPrivacyPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-6">
               <Shield className="h-8 w-8 text-gray-600" />
             </div>
-            <h1 className="text-4xl font-bold mb-4" style={{ color: '#000000' }}>
+            <h1 className="text-4xl font-bold mb-4" style={themeStyles.text.primary}>
               Privacy Policy
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -216,7 +217,7 @@ export default function VersionedPrivacyPage() {
       {showVersionHistory && (
         <div className="bg-blue-50 border-b border-blue-200">
           <div className="max-w-4xl mx-auto px-4 py-8">
-            <h2 className="text-2xl font-bold mb-6" style={{ color: '#000000' }}>
+            <h2 className="text-2xl font-bold mb-6" style={themeStyles.text.primary}>
               Version History
             </h2>
             <div className="space-y-4">
@@ -263,7 +264,7 @@ export default function VersionedPrivacyPage() {
       <div className="max-w-4xl mx-auto px-4 py-16">
         {/* Introduction */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4" style={{ color: '#000000' }}>
+          <h2 className="text-2xl font-bold mb-4" style={themeStyles.text.primary}>
             Introduction
           </h2>
           <div className="prose prose-gray max-w-none">
@@ -286,7 +287,7 @@ export default function VersionedPrivacyPage() {
                   <div className="text-gray-600">
                     {section.icon}
                   </div>
-                  <h3 className="text-xl font-semibold" style={{ color: '#000000' }}>
+                  <h3 className="text-xl font-semibold" style={themeStyles.text.primary}>
                     {section.title}
                   </h3>
                 </div>
@@ -312,12 +313,12 @@ export default function VersionedPrivacyPage() {
 
         {/* Contact Information */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mt-8">
-          <h2 className="text-2xl font-bold mb-6" style={{ color: '#000000' }}>
+          <h2 className="text-2xl font-bold mb-6" style={themeStyles.text.primary}>
             Contact Us
           </h2>
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold mb-3" style={{ color: '#000000' }}>
+              <h3 className="font-semibold mb-3" style={themeStyles.text.primary}>
                 Contact Information
               </h3>
               <div className="space-y-2">
@@ -340,7 +341,7 @@ export default function VersionedPrivacyPage() {
 
         {/* Legal Notice */}
         <div className="bg-gray-100 rounded-2xl p-6 mt-8">
-          <h3 className="font-semibold mb-3" style={{ color: '#000000' }}>
+          <h3 className="font-semibold mb-3" style={themeStyles.text.primary}>
             Your Consent
           </h3>
           <p className="text-sm text-gray-600 mb-4">

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Mail, MessageCircle, Clock, CheckCircle, Send, Phone, MapPin, Users, Star } from "lucide-react"
+import { themeStyles } from "../../styles/theme"
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -38,12 +39,12 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f4f4f0' }}>
+    <div className="min-h-screen" style={themeStyles.background.secondary}>
       {/* Hero Section */}
-      <section className="py-20" style={{ backgroundColor: '#f4f4f0' }}>
+      <section className="py-20" style={themeStyles.background.secondary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6" style={{ color: '#000000' }}>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6" style={themeStyles.text.primary}>
               Get in Touch
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -71,7 +72,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Methods */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-16" style={themeStyles.background.primary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* Email Support */}
@@ -79,7 +80,7 @@ export default function Contact() {
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
                 <Mail className="h-8 w-8 text-gray-600" />
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+              <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                 Email Support
               </h3>
               <p className="text-gray-600 mb-4">
@@ -98,7 +99,7 @@ export default function Contact() {
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
                 <MessageCircle className="h-8 w-8 text-gray-600" />
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+              <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                 Live Chat
               </h3>
               <p className="text-gray-600 mb-4">
@@ -114,7 +115,7 @@ export default function Contact() {
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
                 <Phone className="h-8 w-8 text-gray-600" />
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ color: '#000000' }}>
+              <h3 className="text-xl font-bold mb-4" style={themeStyles.text.primary}>
                 Phone Support
               </h3>
               <p className="text-gray-600 mb-4">
@@ -132,11 +133,11 @@ export default function Contact() {
       </section>
 
       {/* Contact Form */}
-      <section className="py-16" style={{ backgroundColor: '#f4f4f0' }}>
+      <section className="py-16" style={themeStyles.background.secondary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#000000' }}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={themeStyles.text.primary}>
                 Send us a Message
               </h2>
               <p className="text-gray-600">
@@ -150,7 +151,7 @@ export default function Contact() {
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
                     <CheckCircle className="h-8 w-8 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4" style={{ color: '#000000' }}>
+                  <h3 className="text-2xl font-bold mb-4" style={themeStyles.text.primary}>
                     Message Sent!
                   </h3>
                   <p className="text-gray-600">
@@ -256,11 +257,11 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-16" style={themeStyles.background.primary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#000000' }}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4" style={themeStyles.text.primary}>
                 Frequently Asked Questions
               </h2>
               <p className="text-gray-600">
@@ -271,7 +272,7 @@ export default function Contact() {
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div className="p-6 rounded-xl border border-gray-200">
-                  <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                  <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                     How do I install Digital Detox?
                   </h3>
                   <p className="text-gray-600">
@@ -281,7 +282,7 @@ export default function Contact() {
                 </div>
 
                 <div className="p-6 rounded-xl border border-gray-200">
-                  <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                  <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                     Is Digital Detox free to use?
                   </h3>
                   <p className="text-gray-600">
@@ -291,7 +292,7 @@ export default function Contact() {
                 </div>
 
                 <div className="p-6 rounded-xl border border-gray-200">
-                  <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                  <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                     Can I customize which apps to block?
                   </h3>
                   <p className="text-gray-600">
@@ -303,7 +304,7 @@ export default function Contact() {
 
               <div className="space-y-6">
                 <div className="p-6 rounded-xl border border-gray-200">
-                  <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                  <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                     Does it work on all devices?
                   </h3>
                   <p className="text-gray-600">
@@ -313,7 +314,7 @@ export default function Contact() {
                 </div>
 
                 <div className="p-6 rounded-xl border border-gray-200">
-                  <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                  <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                     How do I reset my password?
                   </h3>
                   <p className="text-gray-600">
@@ -323,7 +324,7 @@ export default function Contact() {
                 </div>
 
                 <div className="p-6 rounded-xl border border-gray-200">
-                  <h3 className="text-lg font-bold mb-3" style={{ color: '#000000' }}>
+                  <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
                     Can I get a refund?
                   </h3>
                   <p className="text-gray-600">
