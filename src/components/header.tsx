@@ -15,48 +15,48 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 w-full backdrop-blur-md bg-white/90 border-b border-gray-200 z-50 shadow-sm">
+    <header className="sticky top-0 w-full backdrop-blur-lg bg-white/95 border-b border-gray-200/80 z-50 shadow-sm transition-all duration-300">
       <div className="container-modern">
-        <div className="flex h-16 items-center justify-between">
-          {/* Modern Logo */}
+        <div className="flex h-18 sm:h-20 items-center justify-between">
+          {/* Enhanced Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
-              <span className="text-white font-bold text-sm">DD</span>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+              <span className="text-white font-bold text-sm sm:text-base">DD</span>
             </div>
-            <span className="text-xl font-bold text-gradient-blue">Digital Detox</span>
+            <span className="text-xl sm:text-2xl font-bold text-gradient-blue group-hover:scale-105 transition-transform duration-300">Digital Detox</span>
           </Link>
 
-          {/* Modern Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Enhanced Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-2">
             <Link 
               href="/" 
-              className="nav-link"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
             >
               Home
             </Link>
             <Link 
               href="/about" 
-              className="nav-link"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
             >
               About
             </Link>
             <Link 
               href="/contact" 
-              className="nav-link"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
             >
               Contact
             </Link>
             <Link 
               href="/privacy" 
-              className="nav-link"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
             >
               Privacy
             </Link>
           </nav>
 
-          {/* Modern Right side actions */}
-          <div className="flex items-center space-x-4">
-            {/* Modern Download Button */}
+          {/* Enhanced Right side actions */}
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            {/* Enhanced Download Button */}
             <a 
               href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
               target="_blank"
@@ -67,48 +67,50 @@ export default function Header() {
               <span>Download</span>
             </a>
 
-            {/* Mobile menu button */}
+            {/* Enhanced Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg transition-colors hover:bg-gray-100 text-gray-600"
+              className="md:hidden p-2.5 rounded-xl transition-all duration-200 hover:bg-gray-100 active:bg-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
               )}
             </button>
           </div>
         </div>
 
-        {/* Modern Mobile Navigation */}
+        {/* Enhanced Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 bg-white/95 backdrop-blur-sm">
-            <nav className="flex flex-col space-y-2">
+          <div className="md:hidden py-6 border-t border-gray-200 bg-white/98 backdrop-blur-lg animate-fade-in-up">
+            <nav className="flex flex-col space-y-3">
               <Link 
                 href="/" 
-                className="nav-link"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/about" 
-                className="nav-link"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/contact" 
-                className="nav-link"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
               <Link 
                 href="/privacy" 
-                className="nav-link"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Privacy
