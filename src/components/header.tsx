@@ -72,7 +72,7 @@ export default function Header() {
             </Link>
             {/* Start Now Button */}
             <a 
-              href="https://play.google.com/apps/internaltest/4700927830210446463"
+              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex btn-primary text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 sm:py-2"
@@ -136,7 +136,7 @@ export default function Header() {
                 Privacy
               </Link>
               <a 
-                href="https://play.google.com/apps/internaltest/4700927830210446463"
+                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
