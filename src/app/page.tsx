@@ -50,36 +50,36 @@ export default function Home() {
           }}></div>
         </div>
 
-        {/* Checkerboard Pattern - Boxes */}
-        <div className="absolute inset-0 opacity-[0.06]">
+        {/* Checkerboard Pattern - Small Boxes */}
+        <div className="absolute inset-0 opacity-[0.12]">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              linear-gradient(45deg, rgba(16, 185, 129, 0.08) 25%, transparent 25%),
-              linear-gradient(-45deg, rgba(16, 185, 129, 0.08) 25%, transparent 25%),
-              linear-gradient(45deg, transparent 75%, rgba(16, 185, 129, 0.08) 75%),
-              linear-gradient(-45deg, transparent 75%, rgba(16, 185, 129, 0.08) 75%)
+              linear-gradient(45deg, rgba(16, 185, 129, 0.15) 25%, transparent 25%),
+              linear-gradient(-45deg, rgba(16, 185, 129, 0.15) 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, rgba(16, 185, 129, 0.15) 75%),
+              linear-gradient(-45deg, transparent 75%, rgba(16, 185, 129, 0.15) 75%)
+            `,
+            backgroundSize: '20px 20px',
+            backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+          }}></div>
+        </div>
+        
+        {/* Additional Checkerboard Layer for Depth */}
+        <div className="absolute inset-0 opacity-[0.08]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(45deg, rgba(16, 185, 129, 0.12) 25%, transparent 25%),
+              linear-gradient(-45deg, rgba(16, 185, 129, 0.12) 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, rgba(16, 185, 129, 0.12) 75%),
+              linear-gradient(-45deg, transparent 75%, rgba(16, 185, 129, 0.12) 75%)
             `,
             backgroundSize: '40px 40px',
             backgroundPosition: '0 0, 0 20px, 20px -20px, -20px 0px'
           }}></div>
         </div>
-        
-        {/* Additional Subtle Checkerboard Layer */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              linear-gradient(45deg, rgba(16, 185, 129, 0.05) 25%, transparent 25%),
-              linear-gradient(-45deg, rgba(16, 185, 129, 0.05) 25%, transparent 25%),
-              linear-gradient(45deg, transparent 75%, rgba(16, 185, 129, 0.05) 75%),
-              linear-gradient(-45deg, transparent 75%, rgba(16, 185, 129, 0.05) 75%)
-            `,
-            backgroundSize: '80px 80px',
-            backgroundPosition: '0 0, 0 40px, 40px -40px, -40px 0px'
-          }}></div>
-        </div>
 
-        {/* Light Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-white/60 backdrop-blur-[0.5px]"></div>
+        {/* Light Overlay for Text Readability - Reduced to show boxes better */}
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-[0.5px]"></div>
         
         <div className="container-modern py-16 sm:py-20 md:py-24 lg:py-28 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
@@ -115,7 +115,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                   {/* Google Play Badge - Official */}
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+                    href="https://play.google.com/apps/internaltest/4700927830210446463"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative hover:opacity-90 transition-opacity duration-200"
@@ -431,7 +431,7 @@ export default function Home() {
 
           <div className="text-center">
             <a 
-              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+              href="https://play.google.com/apps/internaltest/4700927830210446463"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-flex items-center gap-2 mb-3"
@@ -477,7 +477,7 @@ export default function Home() {
                 Get a Demo
               </a>
               <a 
-                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+                href="https://play.google.com/apps/internaltest/4700927830210446463"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
