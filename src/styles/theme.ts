@@ -10,7 +10,7 @@ export const theme = {
       hero: '#ffffff',         // Hero section background
       features: '#ffffff',     // Features section background
       stats: '#ffffff',        // Stats section background
-      cta: '#4f46e5',         // CTA section background (blue gradient)
+      cta: '#059669',         // CTA section background (dark green)
     },
     
     // Text Colors
@@ -18,15 +18,16 @@ export const theme = {
       primary: '#111827',      // Main text (dark gray)
       secondary: '#6b7280',    // Secondary text (medium gray)
       muted: '#9ca3af',        // Muted text (light gray)
-      accent: '#4f46e5',       // Accent text (blue)
+      accent: '#10b981',       // Accent text (green)
     },
     
-    // Brand Colors
+    // Brand Colors - Clause Style
     brand: {
-      primary: '#4f46e5',      // Main brand blue
-      secondary: '#7c3aed',    // Purple accent
-      success: '#059669',      // Green for success states
-      warning: '#d97706',      // Orange for warnings
+      primary: '#10b981',      // Main brand green (emerald-500)
+      secondary: '#059669',    // Dark green (emerald-600)
+      accent: '#fbbf24',       // Yellow for highlights
+      success: '#10b981',      // Green for success states
+      warning: '#f59e0b',      // Amber for warnings
       error: '#dc2626',        // Red for errors
     },
     
@@ -40,8 +41,8 @@ export const theme = {
     
     // Geometric Pattern Colors
     patterns: {
-      primary: '#3b82f6',      // Blue for patterns
-      secondary: '#8b5cf6',    // Purple for patterns
+      primary: '#10b981',      // Green for patterns
+      secondary: '#059669',    // Dark green for patterns
       opacity: {
         low: 0.05,             // Very subtle patterns
         medium: 0.1,           // Medium opacity patterns

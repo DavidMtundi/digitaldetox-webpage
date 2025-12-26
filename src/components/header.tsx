@@ -1,18 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X, Download } from "lucide-react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const scrollToDownload = () => {
-    const downloadSection = document.getElementById('download-section')
-    if (downloadSection) {
-      downloadSection.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <header className="sticky top-0 w-full backdrop-blur-lg bg-white/95 border-b border-gray-200/80 z-50 shadow-sm transition-all duration-300">
@@ -20,35 +14,48 @@ export default function Header() {
         <div className="flex h-18 sm:h-20 items-center justify-between">
           {/* Enhanced Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-              <span className="text-white font-bold text-sm sm:text-base">DD</span>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 relative flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+              <Image 
+                src="/digitaldetox.png" 
+                alt="Digital Detox Logo" 
+                width={48} 
+                height={48} 
+                className="object-contain"
+                priority
+              />
             </div>
-            <span className="text-xl sm:text-2xl font-bold text-gradient-blue group-hover:scale-105 transition-transform duration-300">Digital Detox</span>
+            <span className="text-lg sm:text-xl font-bold text-gray-900 group-hover:scale-105 transition-transform duration-300">Digital Detox</span>
           </Link>
 
           {/* Enhanced Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-2">
             <Link 
               href="/" 
-              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
             >
               Home
             </Link>
             <Link 
               href="/about" 
-              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
             >
               About
             </Link>
             <Link 
               href="/contact" 
-              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
             >
               Contact
             </Link>
             <Link 
+              href="/support" 
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
+            >
+              Support Us
+            </Link>
+            <Link 
               href="/privacy" 
-              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50/50"
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
             >
               Privacy
             </Link>
@@ -56,15 +63,21 @@ export default function Header() {
 
           {/* Enhanced Right side actions */}
           <div className="flex items-center space-x-3 sm:space-x-4">
-            {/* Enhanced Download Button */}
+            {/* Log in link */}
+            <Link 
+              href="/contact"
+              className="hidden sm:block text-gray-700 hover:text-emerald-600 font-medium transition-colors"
+            >
+              Log in
+            </Link>
+            {/* Start Now Button */}
             <a 
-              href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
+              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex btn-primary"
             >
-              <Download className="h-4 w-4" />
-              <span>Download</span>
+              Start Now
             </a>
 
             {/* Enhanced Mobile menu button */}
@@ -89,34 +102,41 @@ export default function Header() {
             <nav className="flex flex-col space-y-3">
               <Link 
                 href="/" 
-                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 href="/about" 
-                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link 
                 href="/contact" 
-                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
               <Link 
+                href="/support" 
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Support Us
+              </Link>
+              <Link 
                 href="/privacy" 
-                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                className="nav-link px-4 py-3 rounded-xl font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Privacy
               </Link>
               <a 
-                href="https://appdistribution.firebase.dev/i/fb68432dcd015219"
+                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}

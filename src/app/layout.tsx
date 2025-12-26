@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-plus-jakarta",
+  display: "swap",
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  preload: true,
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://digitaldetox.app'),
   title: "Digital Detox - Break Free from Digital Distractions",
   description: "Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology. Join 50,000+ users who have reclaimed their time.",
   keywords: ["digital detox", "app blocker", "screen time", "digital wellness", "focus app", "productivity", "mobile app", "website blocker"],
@@ -68,7 +72,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning={true}>
+      <body className={`${plusJakartaSans.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <Header />
         <main>{children}</main>
         <Footer />
