@@ -48,12 +48,6 @@ export default function Header() {
               Contact
             </Link>
             <Link 
-              href="/support" 
-              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
-            >
-              Support Us
-            </Link>
-            <Link 
               href="/privacy" 
               className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
             >
@@ -120,13 +114,6 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </Link>
-              <Link 
-                href="/support" 
-                className="nav-link px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Support Us
               </Link>
               <Link 
                 href="/privacy" 
