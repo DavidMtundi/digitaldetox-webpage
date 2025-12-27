@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simplified version - Clean and Modern -->
+  
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="240" fill="#10b981" opacity="0.1"/>
+  
+  <!-- Concentric Focus Rings -->
+  <circle cx="256" cy="256" r="180" stroke="#10b981" stroke-width="6" fill="none" opacity="0.2"/>
+  <circle cx="256" cy="256" r="140" stroke="#10b981" stroke-width="5" fill="none" opacity="0.3"/>
+  <circle cx="256" cy="256" r="100" stroke="#10b981" stroke-width="4" fill="none" opacity="0.4"/>
+  
+  <!-- Central Diamond/Crystal - Represents Clarity -->
+  <path d="M256 156 L316 256 L256 356 L196 256 Z" fill="url(#diamondGradient)" stroke="#10b981" stroke-width="3"/>
+  
+  <!-- Inner Highlight -->
+  <path d="M256 196 L286 256 L256 316 L226 256 Z" fill="url(#highlightGradient)"/>
+  
+  <!-- Focus Point -->
+  <circle cx="256" cy="256" r="16" fill="#10b981"/>
+  <circle cx="256" cy="256" r="10" fill="#ffffff"/>
+  
+  <!-- Light Rays -->
+  <line x1="256" y1="76" x2="256" y2="156" stroke="#10b981" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+  <line x1="256" y1="356" x2="256" y2="436" stroke="#10b981" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+  <line x1="156" y1="256" x2="196" y2="256" stroke="#10b981" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+  <line x1="316" y1="256" x2="356" y2="256" stroke="#10b981" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+  
+  <defs>
+    <linearGradient id="diamondGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#34d399;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#10b981;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+</svg>
+

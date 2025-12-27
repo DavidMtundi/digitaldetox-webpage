@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "digitaldetox-app-2025"
+    "default": "lucidfocus-landing"
   },
   "targets": {
-    "digitaldetox-app-2025": {
+    "lucidfocus-landing": {
       "hosting": {
-        "digitaldetox-web": [
-          "digitaldetox-web"
+        "lucidfocus-landing": [
+          "lucidfocus-landing"
         ]
       }
     }

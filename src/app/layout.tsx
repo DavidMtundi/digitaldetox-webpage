@@ -22,11 +22,14 @@ export const metadata: Metadata = {
   publisher: "LucidFocus",
   icons: {
     icon: [
-      { url: '/digitaldetox.png', sizes: 'any' },
-      { url: '/digitaldetox.png', type: 'image/png' },
+      { url: '/lucidfocus.png', sizes: 'any' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],
-    shortcut: '/digitaldetox.png',
-    apple: '/digitaldetox.png',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   robots: {
     index: true,
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
     siteName: 'LucidFocus',
     images: [
       {
-        url: '/digitaldetox.png',
+        url: '/lucidfocus.png',
         width: 512,
         height: 512,
         alt: 'LucidFocus App Icon',
@@ -59,7 +62,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'LucidFocus - Stay Lucid, Stay Focused',
     description: 'Take control of your digital habits with LucidFocus. Block distracting apps and websites, track usage, and build healthier relationships with technology. Achieve clarity in every task.',
-    images: [process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/digitaldetox.png` : '/digitaldetox.png'],
+    images: [process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/lucidfocus.png` : '/lucidfocus.png'],
   },
 };
 

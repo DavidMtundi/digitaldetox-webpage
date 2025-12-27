@@ -18,7 +18,7 @@ export default function Header() {
           <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group flex-shrink-0 min-w-0">
             <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative flex items-center justify-center group-hover:scale-110 transition-all duration-300 flex-shrink-0">
               <Image 
-                src="/digitaldetox.png" 
+                src="/lucidfocus.png" 
                 alt="LucidFocus Logo" 
                 width={48} 
                 height={48} 

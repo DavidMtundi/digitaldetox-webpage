@@ -3,6 +3,7 @@
     "rules": "firestore.rules"
   },
   "hosting": {
+    "site": "lucidfocus-landing",
     "public": "out",
     "ignore": [
       "firebase.json",

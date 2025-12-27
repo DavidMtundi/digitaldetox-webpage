@@ -36,7 +36,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-3 mb-6 group inline-block">
               <div className="w-14 h-14 relative flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                 <Image 
-                  src="/digitaldetox.png" 
+                  src="/lucidfocus.png" 
                   alt="LucidFocus Logo" 
                   width={56} 
                   height={56} 
