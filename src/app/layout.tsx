@@ -13,17 +13,20 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://digitaldetox.app'),
-  title: "Digital Detox - Break Free from Digital Distractions",
-  description: "Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology. Join 50,000+ users who have reclaimed their time.",
-  keywords: ["digital detox", "app blocker", "screen time", "digital wellness", "focus app", "productivity", "mobile app", "website blocker"],
-  authors: [{ name: "Digital Detox Team" }],
-  creator: "Digital Detox",
-  publisher: "Digital Detox",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lucidfocus-landing.web.app'),
+  title: "LucidFocus - Stay Lucid, Stay Focused",
+  description: "Take control of your digital habits with LucidFocus. Block distracting apps and websites, track usage, and build healthier relationships with technology. Achieve clarity in every task.",
+  keywords: ["lucid focus", "app blocker", "screen time", "digital wellness", "focus app", "productivity", "mobile app", "website blocker", "clarity", "focus"],
+  authors: [{ name: "LucidFocus Team" }],
+  creator: "LucidFocus",
+  publisher: "LucidFocus",
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/digitaldetox.png', sizes: 'any' },
+      { url: '/digitaldetox.png', type: 'image/png' },
+    ],
+    shortcut: '/digitaldetox.png',
+    apple: '/digitaldetox.png',
   },
   robots: {
     index: true,
@@ -39,24 +42,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://digitaldetox.app',
-    title: 'Digital Detox - Break Free from Digital Distractions',
-    description: 'Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology.',
-    siteName: 'Digital Detox',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lucidfocus-landing.web.app',
+    title: 'LucidFocus - Stay Lucid, Stay Focused',
+    description: 'Take control of your digital habits with LucidFocus. Block distracting apps and websites, track usage, and build healthier relationships with technology. Achieve clarity in every task.',
+    siteName: 'LucidFocus',
     images: [
       {
-        url: '/playstore.png',
+        url: '/digitaldetox.png',
         width: 512,
         height: 512,
-        alt: 'Digital Detox App Icon',
+        alt: 'LucidFocus App Icon',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Digital Detox - Break Free from Digital Distractions',
-    description: 'Take control of your digital habits with Digital Detox. Block distracting apps and websites, track usage, and build healthier relationships with technology.',
-    images: ['/playstore.png'],
+    title: 'LucidFocus - Stay Lucid, Stay Focused',
+    description: 'Take control of your digital habits with LucidFocus. Block distracting apps and websites, track usage, and build healthier relationships with technology. Achieve clarity in every task.',
+    images: [process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/digitaldetox.png` : '/digitaldetox.png'],
   },
 };
 

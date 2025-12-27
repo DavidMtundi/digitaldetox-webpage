@@ -11,7 +11,7 @@ export default function About() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold mb-6" style={themeStyles.text.primary}>
-              About Digital Detox
+              About LucidFocus
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               We're on a mission to help you build healthier relationships with technology. 
@@ -46,7 +46,7 @@ export default function About() {
                 Our Mission
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                We believe technology should enhance your life, not control it. Digital Detox gives you 
+                We believe technology should enhance your life, not control it. LucidFocus gives you 
                 the power to use technology intentionally and mindfully.
               </p>
             </div>
@@ -201,12 +201,12 @@ export default function About() {
         </div>
       </section>
 
-      {/* Why Digital Detox Section */}
+      {/* Why LucidFocus Section */}
       <section className="py-16" style={themeStyles.background.primary}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-8" style={themeStyles.text.primary}>
-              Why Digital Detox?
+              Why LucidFocus?
             </h2>
             
             <div className="bg-gray-50 rounded-2xl p-8 mb-8">
@@ -224,7 +224,7 @@ export default function About() {
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
               In today's hyperconnected world, digital distractions are everywhere. From endless 
               notifications to addictive social media feeds, technology has become a constant source 
-              of interruption. Digital Detox helps you reclaim your time, improve your focus, and 
+              of interruption. LucidFocus helps you reclaim your time, improve your focus, and 
               build healthier relationships with technology and the people around you.
             </p>
 

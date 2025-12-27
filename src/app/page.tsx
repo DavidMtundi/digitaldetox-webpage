@@ -6,7 +6,6 @@ import { useState } from "react"
 import { theme, themeStyles } from "../styles/theme"
 import { useEmailSubscription } from "../hooks/useEmailSubscription"
 import { useExternalLinks } from "@/hooks/useExternalLinks"
-import FirestoreTest from "@/components/FirestoreTest"
 
 export default function Home() {
   const {
@@ -93,7 +92,7 @@ export default function Home() {
             
             {/* Subtitle */}
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed">
-              Join our beta testing community. Help us build the perfect digital wellness app that helps you break free from distractions and become your best self.
+              Block distractions, block harmful content, and reclaim your focus. Join our beta testing community and help us build the perfect digital wellness app that helps you become your best self.
             </p>
 
             {/* Trust Indicators */}
@@ -410,7 +409,7 @@ export default function Home() {
               Join Our Beta Testing Community
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
-              Help us build the perfect digital wellness app. Your feedback shapes the future of Digital Detox.
+              Help us build the perfect digital wellness app. Your feedback shapes the future of LucidFocus.
             </p>
           </div>
 
@@ -496,7 +495,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <FirestoreTest />
     </div>
   )
 }

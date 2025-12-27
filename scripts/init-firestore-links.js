@@ -40,19 +40,19 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 const downloadLinks = {
-  googlePlay: "https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg",
+  googlePlay: "",
   appStore: null,
   windows: null,
   mac: null
 };
 
 const contact = {
-  email: "davidmtundi001@gmail.com",
-  phone: "+254721115847"
+  email: "",
+  phone: ""
 };
 
 const donation = {
-  url: "https://sandbox.intasend.com/pay/f7af953a-c8ba-4381-a93a-8440401d5202/"
+  url: ""
 };
 
 async function initializeLinks() {

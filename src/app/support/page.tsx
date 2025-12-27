@@ -69,7 +69,7 @@ export default function Support() {
             </h1>
             
             <p className="hero-subtitle mb-12 max-w-2xl mx-auto text-gray-700 leading-relaxed animate-fade-in-up" style={{animationDelay: '0.2s'}}>
-              Your support enables us to continue developing Digital Detox, reach more people, and create 
+              Your support enables us to continue developing LucidFocus, reach more people, and create 
               innovative features that help millions reclaim their time and focus.
             </p>
 
@@ -97,7 +97,7 @@ export default function Support() {
               Why Your Support Matters
             </h2>
             <p className="section-subtitle max-w-3xl mx-auto text-gray-700">
-              Every contribution helps us improve Digital Detox and make digital wellness accessible to everyone
+              Every contribution helps us improve LucidFocus and make digital wellness accessible to everyone
             </p>
           </div>
 
@@ -262,7 +262,7 @@ export default function Support() {
               Thank You for Your Support
             </h2>
             <p className="section-subtitle text-gray-700 mb-8">
-              Every donation, no matter the size, helps us continue building Digital Detox and making 
+              Every donation, no matter the size, helps us continue building LucidFocus and making 
               digital wellness accessible to everyone. We're grateful for your contribution to our mission.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

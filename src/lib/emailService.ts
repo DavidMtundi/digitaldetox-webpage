@@ -1,4 +1,4 @@
-import { collection, addDoc, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from './firebase';
 
 export interface EmailSubscription {
@@ -14,30 +14,47 @@ export interface EmailSubscription {
  */
 export async function saveEmailSubscription(email: string, source: string = 'website'): Promise<{ success: boolean; message: string; id?: string }> {
   try {
-    // Check if email already exists
-    const existingSubscription = await checkEmailExists(email);
-    if (existingSubscription) {
-      return {
-        success: false,
-        message: 'This email is already subscribed to updates.'
-      };
+    const normalizedEmail = email.toLowerCase().trim();
+    
+    // Check if email already exists by trying to read the document
+    const emailDocRef = doc(db, 'email-updates', normalizedEmail);
+    const emailDoc = await getDoc(emailDocRef);
+    
+    if (emailDoc.exists()) {
+      const data = emailDoc.data();
+      if (data.status === 'active') {
+        return {
+          success: false,
+          message: 'This email is already subscribed to updates.'
+        };
+      }
+      // If unsubscribed, allow re-subscription
     }
 
-    // Add email to Firestore collection
-    const docRef = await addDoc(collection(db, 'email-updates'), {
-      email: email.toLowerCase().trim(),
+    // Use email as document ID to prevent duplicates and match security rules
+    await setDoc(emailDocRef, {
+      email: normalizedEmail,
       subscribedAt: serverTimestamp(),
       source: source,
       status: 'active'
-    });
+    }, { merge: true }); // merge allows re-subscription if previously unsubscribed
 
     return {
       success: true,
       message: 'Successfully subscribed to updates!',
-      id: docRef.id
+      id: normalizedEmail
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error saving email subscription:', error);
+    
+    // Handle specific Firestore errors
+    if (error.code === 'permission-denied') {
+      return {
+        success: false,
+        message: 'Permission denied. Please check your email format.'
+      };
+    }
+    
     return {
       success: false,
       message: 'Failed to subscribe. Please try again later.'
@@ -50,13 +67,10 @@ export async function saveEmailSubscription(email: string, source: string = 'web
  */
 export async function checkEmailExists(email: string): Promise<boolean> {
   try {
-    const emailQuery = query(
-      collection(db, 'email-updates'),
-      where('email', '==', email.toLowerCase().trim())
-    );
-    
-    const querySnapshot = await getDocs(emailQuery);
-    return !querySnapshot.empty;
+    const normalizedEmail = email.toLowerCase().trim();
+    const emailDocRef = doc(db, 'email-updates', normalizedEmail);
+    const emailDoc = await getDoc(emailDocRef);
+    return emailDoc.exists() && emailDoc.data()?.status === 'active';
   } catch (error) {
     console.error('Error checking email existence:', error);
     return false;

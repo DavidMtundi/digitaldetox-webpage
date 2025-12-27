@@ -24,13 +24,13 @@ export default function TermsPage() {
       content: (
         <div className="space-y-4">
           <p className="text-gray-600">
-            By accessing and using Digital Detox, you accept and agree to be bound by the terms and provision of this agreement. 
+            By accessing and using LucidFocus, you accept and agree to be bound by the terms and provision of this agreement. 
             If you do not agree to abide by the above, please do not use this service.
           </p>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <h4 className="font-semibold text-blue-800 mb-2">Important Notice</h4>
             <p className="text-blue-700 text-sm">
-              These terms constitute a legally binding agreement between you and Digital Detox. Please read them carefully.
+              These terms constitute a legally binding agreement between you and LucidFocus. Please read them carefully.
             </p>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function TermsPage() {
       content: (
         <div className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-2">Digital Detox Services</h4>
+            <h4 className="font-semibold mb-2">LucidFocus Services</h4>
             <ul className="list-disc list-inside space-y-1 text-gray-600">
               <li>App and website blocking functionality</li>
               <li>Screen time tracking and analytics</li>
@@ -142,7 +142,7 @@ export default function TermsPage() {
           <div>
             <h4 className="font-semibold mb-2">Our Rights</h4>
             <ul className="list-disc list-inside space-y-1 text-gray-600">
-              <li>Digital Detox owns all rights to the software and service</li>
+              <li>LucidFocus owns all rights to the software and service</li>
               <li>Our trademarks, logos, and branding are protected</li>
               <li>Content we create remains our intellectual property</li>
               <li>We grant you a limited license to use our service</li>
@@ -223,7 +223,7 @@ export default function TermsPage() {
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <h4 className="font-semibold text-yellow-800 mb-2">Important Disclaimer</h4>
             <p className="text-yellow-700 text-sm">
-              Digital Detox is a tool to help manage digital habits. Individual results may vary, and we do not guarantee 
+              LucidFocus is a tool to help manage digital habits. Individual results may vary, and we do not guarantee 
               specific outcomes or improvements in productivity or well-being.
             </p>
           </div>
@@ -371,7 +371,7 @@ export default function TermsPage() {
               Terms of Service
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Please read these terms carefully before using Digital Detox. By using our service, you agree to be bound by these terms.
+              Please read these terms carefully before using LucidFocus. By using our service, you agree to be bound by these terms.
             </p>
             <div className="mt-8 text-sm text-gray-500">
               Last updated: {new Date().toLocaleDateString('en-US', { 
@@ -393,8 +393,8 @@ export default function TermsPage() {
           </h2>
           <div className="prose prose-gray max-w-none">
             <p className="text-gray-600 mb-4">
-              Welcome to Digital Detox. These Terms of Service ("Terms") govern your use of our digital wellness application 
-              and related services (collectively, the "Service") operated by Digital Detox ("us," "we," or "our").
+              Welcome to LucidFocus. These Terms of Service ("Terms") govern your use of our digital wellness application 
+              and related services (collectively, the "Service") operated by LucidFocus ("us," "we," or "our").
             </p>
             <p className="text-gray-600 mb-4">
               By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of 

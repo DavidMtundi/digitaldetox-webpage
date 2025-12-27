@@ -19,14 +19,14 @@ export default function Header() {
             <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative flex items-center justify-center group-hover:scale-110 transition-all duration-300 flex-shrink-0">
               <Image 
                 src="/digitaldetox.png" 
-                alt="Digital Detox Logo" 
+                alt="LucidFocus Logo" 
                 width={48} 
                 height={48} 
                 className="object-contain"
                 priority
               />
             </div>
-            <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 group-hover:scale-105 transition-transform duration-300 truncate">Digital Detox</span>
+            <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 group-hover:scale-105 transition-transform duration-300 truncate">LucidFocus</span>
           </Link>
 
           {/* Enhanced Desktop Navigation */}
