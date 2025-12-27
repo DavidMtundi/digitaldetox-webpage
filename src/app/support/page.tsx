@@ -14,9 +14,7 @@ export default function Support() {
     { amount: 100, label: "$100", popular: false },
   ]
 
-  // Temporarily disabled to resolve Google Safe Browsing warning
-  // const donationUrl = "https://sandbox.intasend.com/pay/f7af953a-c8ba-4381-a93a-8440401d5202/"
-  const donationUrl = "#"
+  const donationUrl = "https://sandbox.intasend.com/pay/f7af953a-c8ba-4381-a93a-8440401d5202/"
 
   const benefits = [
     {
@@ -136,16 +134,15 @@ export default function Support() {
               {donationAmounts.map((option) => (
                 <button
                   key={option.amount}
-                  onClick={() => {}}
-                  disabled
+                  onClick={() => window.open(donationUrl, '_blank', 'noopener,noreferrer')}
                   onMouseEnter={() => setHoveredAmount(option.label)}
                   onMouseLeave={() => setHoveredAmount(null)}
-                  className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 opacity-75 cursor-not-allowed ${
+                  className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 ${
                     option.popular
-                      ? 'border-blue-500 bg-blue-50 shadow-lg'
+                      ? 'border-blue-500 bg-blue-50 shadow-lg scale-105'
                       : hoveredAmount === option.label
-                      ? 'border-blue-400 bg-blue-50 shadow-md'
-                      : 'border-gray-200 bg-white'
+                      ? 'border-blue-400 bg-blue-50 shadow-md scale-105'
+                      : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-md'
                   }`}
                 >
                   {option.popular && (
@@ -170,10 +167,16 @@ export default function Support() {
 
             {/* Custom Amount Button */}
             <div className="mb-8">
-              <div className="group w-full bg-gray-100 text-center inline-block text-lg sm:text-xl font-semibold py-5 px-10 rounded-xl flex items-center justify-center gap-3 opacity-75 cursor-not-allowed">
-                <Gift className="h-6 w-6 text-gray-400" />
-                <span className="text-gray-500">Donations Coming Soon</span>
-              </div>
+              <a
+                href={donationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group w-full btn-gradient text-center inline-block text-lg sm:text-xl font-semibold py-5 px-10 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <Gift className="h-6 w-6" />
+                <span>Donate Custom Amount</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
 
             {/* Trust Indicators */}
@@ -249,10 +252,16 @@ export default function Support() {
               digital wellness accessible to everyone. We're grateful for your contribution to our mission.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="group bg-gray-100 text-lg font-semibold py-4 px-8 rounded-xl flex items-center justify-center gap-3 opacity-75 cursor-not-allowed">
-                <Gift className="h-5 w-5 text-gray-400" />
-                <span className="text-gray-500">Donations Coming Soon</span>
-              </div>
+              <a
+                href={donationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group btn-gradient text-lg font-semibold py-4 px-8 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <Gift className="h-5 w-5" />
+                <span>Donate Now</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
           </div>
         </div>

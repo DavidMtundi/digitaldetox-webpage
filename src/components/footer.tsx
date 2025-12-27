@@ -7,6 +7,7 @@ export default function Footer() {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
+    { href: '/support', label: 'Support Us' },
     { href: '/privacy', label: 'Privacy Policy' }
   ];
 
@@ -76,6 +77,11 @@ export default function Footer() {
               <li>
                 <Link href="/contact" className="text-emerald-50 hover:text-white transition-colors text-sm block">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/support" className="text-emerald-50 hover:text-white transition-colors text-sm block">
+                  Support Us
                 </Link>
               </li>
               <li>

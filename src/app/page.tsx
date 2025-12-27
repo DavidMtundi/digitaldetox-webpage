@@ -115,7 +115,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                   {/* Google Play Badge - Official */}
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox"
+                    href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative hover:opacity-90 transition-opacity duration-200"
@@ -431,7 +431,7 @@ export default function Home() {
 
           <div className="text-center">
             <a 
-              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox"
+              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-flex items-center gap-2 mb-3"
@@ -477,7 +477,7 @@ export default function Home() {
                 Get a Demo
               </a>
               <a 
-                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox"
+                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"

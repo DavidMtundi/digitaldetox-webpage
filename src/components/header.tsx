@@ -48,6 +48,12 @@ export default function Header() {
               Contact
             </Link>
             <Link 
+              href="/support" 
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
+            >
+              Support Us
+            </Link>
+            <Link 
               href="/privacy" 
               className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
             >
@@ -66,7 +72,7 @@ export default function Header() {
             </Link>
             {/* Start Now Button */}
             <a 
-              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox"
+              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex btn-primary text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 sm:py-2"
@@ -116,6 +122,13 @@ export default function Header() {
                 Contact
               </Link>
               <Link 
+                href="/support" 
+                className="nav-link px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Support Us
+              </Link>
+              <Link 
                 href="/privacy" 
                 className="nav-link px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
                 onClick={() => setIsMenuOpen(false)}
@@ -123,7 +136,7 @@ export default function Header() {
                 Privacy
               </Link>
               <a 
-                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox"
+                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
