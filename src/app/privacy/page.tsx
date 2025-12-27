@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp, Shield, Lock, Eye, Database, Users, Globe, Mail, Phone, Smartphone, AlertCircle, Clock, FileText } from 'lucide-react';
 import { privacyPolicyVersions, versionSpecificContent } from '@/data/privacy-policy';
 import { themeStyles } from '../../styles/theme';
+import { useExternalLinks } from '@/hooks/useExternalLinks';
 
 export default function VersionedPrivacyPage() {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
   const [selectedVersion, setSelectedVersion] = useState<string>('1.0');
   const [showVersionHistory, setShowVersionHistory] = useState(false);
+  const { links } = useExternalLinks();
 
   const toggleSection = (section: string) => {
     setOpenSections(prev => ({
@@ -324,11 +326,11 @@ export default function VersionedPrivacyPage() {
               <div className="space-y-2">
                 <div className="flex items-center space-x-3 text-gray-600">
                   <Mail className="h-5 w-5" />
-                  <span><strong>Email:</strong> davidmtundi001@gmail.com</span>
+                  <span><strong>Email:</strong> {links.contact.email}</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-600">
                   <Mail className="h-5 w-5" />
-                  <span><strong>Support:</strong> davidmtundi001@gmail.com</span>
+                  <span><strong>Support:</strong> {links.contact.email}</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-600">
                   <Phone className="h-5 w-5" />

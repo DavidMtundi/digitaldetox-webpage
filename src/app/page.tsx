@@ -5,6 +5,8 @@ import Image from "next/image"
 import { useState } from "react"
 import { theme, themeStyles } from "../styles/theme"
 import { useEmailSubscription } from "../hooks/useEmailSubscription"
+import { useExternalLinks } from "@/hooks/useExternalLinks"
+import FirestoreTest from "@/components/FirestoreTest"
 
 export default function Home() {
   const {
@@ -16,6 +18,7 @@ export default function Home() {
     handleEmailChange,
     handleSubmit
   } = useEmailSubscription()
+  const { links } = useExternalLinks()
 
   return (
     <div className="min-h-screen bg-white">
@@ -115,7 +118,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                   {/* Google Play Badge - Official */}
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+                    href={links.downloadLinks.googlePlay}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative hover:opacity-90 transition-opacity duration-200"
@@ -431,7 +434,7 @@ export default function Home() {
 
           <div className="text-center">
             <a 
-              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+              href={links.downloadLinks.googlePlay}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-flex items-center gap-2 mb-3"
@@ -477,7 +480,7 @@ export default function Home() {
                 Get a Demo
               </a>
               <a 
-                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+                href={links.downloadLinks.googlePlay}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
@@ -493,6 +496,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <FirestoreTest />
     </div>
   )
 }

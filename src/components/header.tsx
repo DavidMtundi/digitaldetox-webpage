@@ -4,9 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, X, Download } from "lucide-react"
+import { useExternalLinks } from "@/hooks/useExternalLinks"
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { links } = useExternalLinks();
 
   return (
     <header className="sticky top-0 w-full backdrop-blur-lg bg-white/95 border-b border-gray-200/80 z-50 shadow-sm transition-all duration-300">
@@ -72,7 +74,7 @@ export default function Header() {
             </Link>
             {/* Start Now Button */}
             <a 
-              href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+              href={links.downloadLinks.googlePlay}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex btn-primary text-xs sm:text-sm md:text-base px-3 sm:px-4 py-1.5 sm:py-2"
@@ -136,7 +138,7 @@ export default function Header() {
                 Privacy
               </Link>
               <a 
-                href="https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&hl=en-US&ah=3WY6T2CHMySIEXGXLKprhIh8XAg"
+                href={links.downloadLinks.googlePlay}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}

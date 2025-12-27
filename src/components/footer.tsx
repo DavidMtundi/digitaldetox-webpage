@@ -1,8 +1,12 @@
+"use client"
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Phone } from 'lucide-react';
+import { useExternalLinks } from '@/hooks/useExternalLinks';
 
 export default function Footer() {
+  const { links } = useExternalLinks();
   const footerLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
@@ -98,20 +102,20 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="mailto:davidmtundi001@gmail.com" 
+                  href={`mailto:${links.contact.email}`}
                   className="text-emerald-50 hover:text-white transition-colors text-sm block flex items-start gap-3 group"
                 >
                   <Mail className="h-5 w-5 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="break-all">davidmtundi001@gmail.com</span>
+                  <span className="break-all">{links.contact.email}</span>
                 </a>
               </li>
               <li>
                 <a 
-                  href="tel:+254721115847" 
+                  href={`tel:${links.contact.phone}`}
                   className="text-emerald-50 hover:text-white transition-colors text-sm block flex items-center gap-3 group"
                 >
                   <Phone className="h-5 w-5 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                  <span>+254 721 115 847</span>
+                  <span>{links.contact.phone}</span>
                 </a>
               </li>
             </ul>

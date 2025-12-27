@@ -4,7 +4,10 @@ import { useState } from "react"
 import { Mail, MessageCircle, Clock, CheckCircle, Send, Phone, MapPin, Users, Star } from "lucide-react"
 import { themeStyles } from "../../styles/theme"
 
+import { useExternalLinks } from '@/hooks/useExternalLinks';
+
 export default function Contact() {
+  const { links } = useExternalLinks();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -87,10 +90,10 @@ export default function Contact() {
                 Get detailed help with your questions
               </p>
               <a 
-                href="mailto:davidmtundi001@gmail.com"
+                href={`mailto:${links.contact.email}`}
                 className="text-gray-600 hover:text-gray-800 font-medium"
               >
-                davidmtundi001@gmail.com
+                {links.contact.email}
               </a>
             </div>
 
@@ -122,10 +125,10 @@ export default function Contact() {
                 Speak directly with our team
               </p>
               <a 
-                href="tel:+254721115847"
+                href={`tel:${links.contact.phone}`}
                 className="text-gray-600 hover:text-gray-800 font-medium"
               >
-                +254 721 115 847
+                {links.contact.phone}
               </a>
             </div>
           </div>

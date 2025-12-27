@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, FileText, Scale, AlertTriangle, Users, Shield, Mail, Phone } from 'lucide-react';
 import { themeStyles } from '../../styles/theme';
+import { useExternalLinks } from '@/hooks/useExternalLinks';
 
 export default function TermsPage() {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+  const { links } = useExternalLinks();
 
   const toggleSection = (section: string) => {
     setOpenSections(prev => ({
@@ -453,7 +455,7 @@ export default function TermsPage() {
               </h3>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Mail className="h-5 w-5" />
-                <span>davidmtundi001@gmail.com</span>
+                <span>{links.contact.email}</span>
               </div>
             </div>
             <div>
@@ -462,7 +464,7 @@ export default function TermsPage() {
               </h3>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Phone className="h-5 w-5" />
-                <span>+254 721 115 847</span>
+                <span>{links.contact.phone}</span>
               </div>
             </div>
           </div>

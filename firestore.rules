@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public read access to config documents
+    match /config/{documentId} {
+      allow read: if true;
+      allow write: if request.auth != null; // Only authenticated users can write
+    }
+    
+    // Allow public write access to email-updates collection (for email subscriptions)
+    match /email-updates/{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+

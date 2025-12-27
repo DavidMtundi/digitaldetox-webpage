@@ -3,9 +3,11 @@
 import { Heart, Sparkles, Shield, Users, TrendingUp, Gift, ArrowRight, CheckCircle, Star, Zap } from "lucide-react"
 import { themeStyles } from "../../styles/theme"
 import { useState } from "react"
+import { useExternalLinks } from "@/hooks/useExternalLinks"
 
 export default function Support() {
   const [hoveredAmount, setHoveredAmount] = useState<string | null>(null)
+  const { links } = useExternalLinks()
 
   const donationAmounts = [
     { amount: 10, label: "$10", popular: false },
@@ -14,7 +16,7 @@ export default function Support() {
     { amount: 100, label: "$100", popular: false },
   ]
 
-  const donationUrl = "https://sandbox.intasend.com/pay/f7af953a-c8ba-4381-a93a-8440401d5202/"
+  const donationUrl = links.donation.url || "#"
 
   const benefits = [
     {
@@ -134,11 +136,14 @@ export default function Support() {
               {donationAmounts.map((option) => (
                 <button
                   key={option.amount}
-                  onClick={() => window.open(donationUrl, '_blank', 'noopener,noreferrer')}
+                  onClick={() => donationUrl && donationUrl !== "#" ? window.open(donationUrl, '_blank', 'noopener,noreferrer') : {}}
                   onMouseEnter={() => setHoveredAmount(option.label)}
                   onMouseLeave={() => setHoveredAmount(null)}
+                  disabled={!donationUrl || donationUrl === "#"}
                   className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 ${
-                    option.popular
+                    !donationUrl || donationUrl === "#"
+                      ? 'border-gray-200 bg-gray-100 cursor-not-allowed opacity-60'
+                      : option.popular
                       ? 'border-blue-500 bg-blue-50 shadow-lg scale-105'
                       : hoveredAmount === option.label
                       ? 'border-blue-400 bg-blue-50 shadow-md scale-105'
@@ -168,10 +173,19 @@ export default function Support() {
             {/* Custom Amount Button */}
             <div className="mb-8">
               <a
-                href={donationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group w-full btn-gradient text-center inline-block text-lg sm:text-xl font-semibold py-5 px-10 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transition-all duration-300"
+                href={donationUrl && donationUrl !== "#" ? donationUrl : "#"}
+                target={donationUrl && donationUrl !== "#" ? "_blank" : undefined}
+                rel={donationUrl && donationUrl !== "#" ? "noopener noreferrer" : undefined}
+                onClick={(e) => {
+                  if (!donationUrl || donationUrl === "#") {
+                    e.preventDefault();
+                  }
+                }}
+                className={`group w-full text-center inline-block text-lg sm:text-xl font-semibold py-5 px-10 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 flex items-center justify-center gap-3 shadow-xl transition-all duration-300 ${
+                  donationUrl && donationUrl !== "#"
+                    ? "btn-gradient hover:shadow-2xl"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed opacity-60"
+                }`}
               >
                 <Gift className="h-6 w-6" />
                 <span>Donate Custom Amount</span>
@@ -253,10 +267,19 @@ export default function Support() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href={donationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group btn-gradient text-lg font-semibold py-4 px-8 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transition-all duration-300"
+                href={donationUrl && donationUrl !== "#" ? donationUrl : "#"}
+                target={donationUrl && donationUrl !== "#" ? "_blank" : undefined}
+                rel={donationUrl && donationUrl !== "#" ? "noopener noreferrer" : undefined}
+                onClick={(e) => {
+                  if (!donationUrl || donationUrl === "#") {
+                    e.preventDefault();
+                  }
+                }}
+                className={`group text-lg font-semibold py-4 px-8 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 flex items-center justify-center gap-3 shadow-xl transition-all duration-300 ${
+                  donationUrl && donationUrl !== "#"
+                    ? "btn-gradient hover:shadow-2xl"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed opacity-60"
+                }`}
               >
                 <Gift className="h-5 w-5" />
                 <span>Donate Now</span>
