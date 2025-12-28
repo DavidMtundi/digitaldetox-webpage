@@ -1,10 +1,10 @@
-# Digital Detox Website
+# LucidFocus Landing Page
 
-A modern, responsive website for the Digital Detox app - helping users build healthier relationships with technology.
+A modern, responsive landing page for LucidFocus - helping users achieve clarity and focus by blocking distractions and building healthier digital habits.
 
 ## 🚀 Features
 
-- **Modern Design**: Clean, professional UI with cream/white color scheme
+- **Modern Design**: Clean, professional UI with emerald green theme
 - **Responsive Layout**: Optimized for desktop, tablet, and mobile devices
 - **Email Signup**: Pre-launch waitlist with email collection
 - **Multiple Pages**: Homepage, About, Contact with comprehensive information
@@ -41,20 +41,13 @@ npm run dev
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
-1. Connect your GitHub repository to Vercel
-2. Deploy automatically on every push to main branch
-
-### Netlify
-1. Connect your GitHub repository to Netlify
-2. Set build command: `npm run build`
-3. Set publish directory: `.next`
-
-### Manual Deployment
+### Firebase Hosting (Current)
 ```bash
 npm run build
-npm start
+firebase deploy --only hosting --project lucidfocus-landing
 ```
+
+Site URL: https://lucidfocus-landing.web.app
 
 ## 📁 Project Structure
 
@@ -75,10 +68,10 @@ src/
 ## 🎨 Design System
 
 - **Primary Colors**: 
-  - Background: `#f4f4f0` (cream)
-  - White: `#ffffff`
-  - Black: `#000000`
-- **Typography**: Inter font family
+  - Emerald Green: `#10b981`
+  - Background: `#ffffff`
+  - Text: `#1f2937`
+- **Typography**: Plus Jakarta Sans font family
 - **Spacing**: Consistent padding and margins
 - **Components**: Rounded corners, subtle shadows
 
@@ -90,7 +83,7 @@ src/
 - Email signup for early access
 - How it Works section (3-step process)
 - Download section with platform tabs
-- Why Digital Detox features
+- Why LucidFocus features
 - FAQ section
 
 ### About (`/about`)
@@ -144,8 +137,8 @@ This project is private and proprietary.
 ## 📞 Support
 
 For questions or support, please contact:
-- Email: support@digitaldetox.app
-- GitHub Issues: [Create an issue](https://github.com/DavidMtundi/digitaldetox-webpage/issues)
+- Email: (configured via Firestore)
+- Site: https://lucidfocus-landing.web.app
 
 ---
 
