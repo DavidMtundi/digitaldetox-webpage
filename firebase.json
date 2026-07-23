@@ -3,7 +3,7 @@
     "rules": "firestore.rules"
   },
   "hosting": {
-    "site": "lucidfocus-landing",
+    "site": "detoxifyblocker",
     "public": "out",
     "ignore": [
       "firebase.json",

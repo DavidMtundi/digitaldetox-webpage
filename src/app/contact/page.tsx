@@ -51,7 +51,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Have questions about LucidFocus? Need help with installation? 
+              Have questions about Pauseward? Need help with installation? 
               We're here to help you build healthier digital habits.
             </p>
             
@@ -268,7 +268,7 @@ export default function Contact() {
                 Frequently Asked Questions
               </h2>
               <p className="text-gray-600">
-                Quick answers to common questions about LucidFocus
+                Quick answers to common questions about Pauseward
               </p>
             </div>
 
@@ -276,7 +276,7 @@ export default function Contact() {
               <div className="space-y-6">
                 <div className="p-6 rounded-xl border border-gray-200">
                   <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
-                    How do I install LucidFocus?
+                    How do I install Pauseward?
                   </h3>
                   <p className="text-gray-600">
                     Download the app from our homepage and follow the simple setup wizard. 
@@ -286,10 +286,10 @@ export default function Contact() {
 
                 <div className="p-6 rounded-xl border border-gray-200">
                   <h3 className="text-lg font-bold mb-3" style={themeStyles.text.primary}>
-                    Is LucidFocus free to use?
+                    Is Pauseward free to use?
                   </h3>
                   <p className="text-gray-600">
-                    Yes! LucidFocus is completely free with no hidden costs or premium features. 
+                    Yes! Pauseward is completely free with no hidden costs or premium features. 
                     We believe digital wellness should be accessible to everyone.
                   </p>
                 </div>
@@ -311,7 +311,7 @@ export default function Contact() {
                     Does it work on all devices?
                   </h3>
                   <p className="text-gray-600">
-                    LucidFocus is available for Android, iOS, and Desktop. 
+                    Pauseward is available for Android, iOS, and Desktop. 
                     We're working on expanding to more platforms.
                   </p>
                 </div>
@@ -321,7 +321,7 @@ export default function Contact() {
                     How do I reset my password?
                   </h3>
                   <p className="text-gray-600">
-                    LucidFocus doesn't require an account or password. 
+                    Pauseward doesn't require an account or password. 
                     All your settings are stored locally on your device.
                   </p>
                 </div>
@@ -331,7 +331,7 @@ export default function Contact() {
                     Can I get a refund?
                   </h3>
                   <p className="text-gray-600">
-                    Since LucidFocus is free, there are no charges to refund. 
+                    Since Pauseward is free, there are no charges to refund. 
                     If you're having issues, contact our support team.
                   </p>
                 </div>

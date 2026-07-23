@@ -409,7 +409,7 @@ export default function Home() {
               Join Our Beta Testing Community
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
-              Help us build the perfect digital wellness app. Your feedback shapes the future of LucidFocus.
+              Help us build the perfect digital wellness app. Your feedback shapes the future of Pauseward.
             </p>
           </div>
 

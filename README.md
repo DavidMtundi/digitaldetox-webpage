@@ -41,13 +41,24 @@ npm run dev
 
 ## 🚀 Deployment
 
-### Firebase Hosting (Current)
+### Firebase Hosting (detoxifyblocker – default)
 ```bash
+firebase use detoxifyblocker
+npm run build
+firebase deploy --only hosting
+```
+
+Site URL: https://detoxifyblocker.web.app
+
+Set Firebase config in `.env.local` (see `.env.example`). Create the project first: `firebase login` then `firebase projects:create detoxifyblocker` (or use [Firebase Console](https://console.firebase.google.com/)).
+
+### Deploy to lucidfocus-landing instead
+```bash
+firebase use lucidfocus-landing
+# Temporarily set firebase.json hosting "site" to lucidfocus-landing if needed
 npm run build
 firebase deploy --only hosting --project lucidfocus-landing
 ```
-
-Site URL: https://lucidfocus-landing.web.app
 
 ## 📁 Project Structure
 

@@ -1,13 +1,18 @@
 {
   "projects": {
-    "default": "lucidfocus-landing"
+    "default": "detoxifyblocker",
+    "lucidfocus-landing": "lucidfocus-landing",
+    "detoxifyblocker": "detoxifyblocker"
   },
   "targets": {
     "lucidfocus-landing": {
       "hosting": {
-        "lucidfocus-landing": [
-          "lucidfocus-landing"
-        ]
+        "lucidfocus-landing": ["lucidfocus-landing"]
+      }
+    },
+    "detoxifyblocker": {
+      "hosting": {
+        "detoxifyblocker": ["detoxifyblocker"]
       }
     }
   },

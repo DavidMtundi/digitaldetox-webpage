@@ -5,10 +5,12 @@ import Link from "next/link"
 import Image from "next/image"
 import { Menu, X, Download } from "lucide-react"
 import { useExternalLinks } from "@/hooks/useExternalLinks"
+import { useAuth } from "@/components/auth/auth-provider"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { links } = useExternalLinks();
+  const { user } = useAuth();
 
   return (
     <header className="sticky top-0 w-full backdrop-blur-lg bg-white/95 border-b border-gray-200/80 z-50 shadow-sm transition-all duration-300">
@@ -18,15 +20,15 @@ export default function Header() {
           <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group flex-shrink-0 min-w-0">
             <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative flex items-center justify-center group-hover:scale-110 transition-all duration-300 flex-shrink-0">
               <Image 
-                src="/lucidfocus.png" 
-                alt="LucidFocus Logo" 
+                src="/pauseward.png" 
+                alt="Pauseward Logo" 
                 width={48} 
                 height={48} 
                 className="object-contain"
                 priority
               />
             </div>
-            <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 group-hover:scale-105 transition-transform duration-300 truncate">LucidFocus</span>
+            <span className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 group-hover:scale-105 transition-transform duration-300 truncate">Pauseward</span>
           </Link>
 
           {/* Enhanced Desktop Navigation */}
@@ -56,6 +58,12 @@ export default function Header() {
               Support Us
             </Link>
             <Link 
+              href="/download" 
+              className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
+            >
+              Apps
+            </Link>
+            <Link 
               href="/privacy" 
               className="nav-link px-4 py-2 rounded-lg font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50/50"
             >
@@ -67,10 +75,10 @@ export default function Header() {
           <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 flex-shrink-0">
             {/* Log in link */}
             <Link 
-              href="/contact"
+              href={user ? "/dashboard" : "/dashboard/login"}
               className="hidden sm:block text-sm md:text-base text-gray-700 hover:text-emerald-600 font-medium transition-colors"
             >
-              Log in
+              {user ? "Dashboard" : "Log in"}
             </Link>
             {/* Start Now Button */}
             <a 
@@ -129,6 +137,20 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Support Us
+              </Link>
+              <Link 
+                href="/download" 
+                className="nav-link px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Apps
+              </Link>
+              <Link 
+                href={user ? "/dashboard" : "/dashboard/login"}
+                className="nav-link px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium transition-all duration-200 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {user ? "Dashboard" : "Log in"}
               </Link>
               <Link 
                 href="/privacy" 

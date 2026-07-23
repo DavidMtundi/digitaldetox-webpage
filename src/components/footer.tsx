@@ -36,8 +36,8 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-3 mb-6 group inline-block">
               <div className="w-14 h-14 relative flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                 <Image 
-                  src="/lucidfocus.png" 
-                  alt="LucidFocus Logo" 
+                  src="/pauseward.png" 
+                  alt="Pauseward Logo" 
                   width={56} 
                   height={56} 
                   className="object-contain"
@@ -45,7 +45,7 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-xl font-bold text-white group-hover:text-emerald-100 transition-colors duration-300">
-                  LucidFocus
+                  Pauseward
                 </div>
               </div>
             </Link>
@@ -143,7 +143,7 @@ export default function Footer() {
         <div className="border-t border-emerald-500/30 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-emerald-50 text-sm text-center md:text-left">
-              © {new Date().getFullYear()} LucidFocus. All rights reserved.
+              © {new Date().getFullYear()} Pauseward. All rights reserved.
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               {legalLinks.map((link) => (

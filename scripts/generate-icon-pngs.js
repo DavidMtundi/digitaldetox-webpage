@@ -1,5 +1,5 @@
 /**
- * Generate PNG versions of LucidFocus icon at various sizes
+ * Generate PNG versions of Pauseward icon at various sizes
  * Requires: npm install sharp
  */
 
@@ -12,68 +12,43 @@ const sizes = [
   { size: 32, name: 'favicon-32x32.png' },
   { size: 48, name: 'icon-48x48.png' },
   { size: 192, name: 'icon-192x192.png' },
-  { size: 512, name: 'lucidfocus.png' }, // Main icon
-  { size: 180, name: 'apple-touch-icon.png' }, // Apple touch icon
+  { size: 512, name: 'pauseward.png' },
+  { size: 180, name: 'apple-touch-icon.png' },
 ];
 
-const inputSvg = path.join(__dirname, '../public/lucidfocus-icon-simple.svg');
+const inputPng = path.join(__dirname, '../../brand/source/pauseward-logo-icon.png');
 const outputDir = path.join(__dirname, '../public');
 
 async function generateIcons() {
-  console.log('🎨 Generating LucidFocus icon PNGs...\n');
+  console.log('🎨 Generating Pauseward icon PNGs...\n');
 
-  // Check if SVG exists
-  if (!fs.existsSync(inputSvg)) {
-    console.error('❌ SVG file not found:', inputSvg);
+  if (!fs.existsSync(inputPng)) {
+    console.error('❌ PNG file not found:', inputPng);
     process.exit(1);
   }
 
   try {
     for (const { size, name } of sizes) {
       const outputPath = path.join(outputDir, name);
-      
-      await sharp(inputSvg)
-        .resize(size, size, {
-          fit: 'contain',
-          background: { r: 255, g: 255, b: 255, alpha: 0 }
-        })
+
+      await sharp(inputPng)
+        .resize(size, size, { fit: 'contain', background: { r: 15, g: 20, b: 25, alpha: 1 } })
         .png()
         .toFile(outputPath);
-      
+
       console.log(`✅ Generated ${name} (${size}x${size})`);
     }
 
-    // Also create favicon.ico (16x16 and 32x32 combined)
-    const favicon16 = await sharp(inputSvg)
-      .resize(16, 16, {
-        fit: 'contain',
-        background: { r: 255, g: 255, b: 255, alpha: 0 }
-      })
+    const favicon32 = await sharp(inputPng)
+      .resize(32, 32, { fit: 'contain', background: { r: 15, g: 20, b: 25, alpha: 1 } })
       .png()
       .toBuffer();
 
-    const favicon32 = await sharp(inputSvg)
-      .resize(32, 32, {
-        fit: 'contain',
-        background: { r: 255, g: 255, b: 255, alpha: 0 }
-      })
-      .png()
-      .toBuffer();
-
-    // For favicon.ico, we'll just copy the 32x32 as a simple solution
-    // (Creating proper .ico requires additional libraries)
-    fs.writeFileSync(
-      path.join(outputDir, 'favicon.ico'),
-      favicon32
-    );
-    console.log('✅ Generated favicon.ico (32x32)');
+    fs.writeFileSync(path.join(outputDir, 'favicon.ico'), favicon32);
+    fs.copyFileSync(path.join(outputDir, 'pauseward.png'), path.join(outputDir, 'lucidfocus.png'));
+    console.log('✅ Generated favicon.ico and lucidfocus.png alias');
 
     console.log('\n🎉 All icons generated successfully!');
-    console.log('\n📝 Next steps:');
-    console.log('1. Update layout.tsx to use new icon paths');
-    console.log('2. Update header.tsx and footer.tsx logo references');
-    console.log('3. Test icons at different sizes');
-    
   } catch (error) {
     console.error('❌ Error generating icons:', error);
     process.exit(1);

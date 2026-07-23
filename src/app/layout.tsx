@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import SiteChrome from "@/components/layout/site-chrome";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -14,15 +13,15 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lucidfocus-landing.web.app'),
-  title: "LucidFocus - Stay Lucid, Stay Focused",
-  description: "Take control of your digital habits with LucidFocus. Block distracting apps and websites, track usage, and build healthier relationships with technology. Achieve clarity in every task.",
-  keywords: ["lucid focus", "app blocker", "screen time", "digital wellness", "focus app", "productivity", "mobile app", "website blocker", "clarity", "focus"],
-  authors: [{ name: "LucidFocus Team" }],
-  creator: "LucidFocus",
-  publisher: "LucidFocus",
+  title: "Pauseward: App Blocker & Focus",
+  description: "Pause before distraction. Guard your focus with Pauseward — block apps, run focus sessions, and manage screen time across Mac, Windows, iOS, and Android.",
+  keywords: ["pauseward", "app blocker", "screen time", "focus app", "focus timer", "digital detox", "app block", "distraction blocker", "deep work", "stay focused"],
+  authors: [{ name: "Pauseward Team" }],
+  creator: "Pauseward",
+  publisher: "Pauseward",
   icons: {
     icon: [
-      { url: '/lucidfocus.png', sizes: 'any' },
+      { url: '/pauseward.png', sizes: 'any' },
       { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon-48x48.png', sizes: '48x48', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -46,23 +45,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lucidfocus-landing.web.app',
-    title: 'LucidFocus - Stay Lucid, Stay Focused',
-    description: 'Take control of your digital habits with LucidFocus. Block distracting apps and websites, track usage, and build healthier relationships with technology. Achieve clarity in every task.',
-    siteName: 'LucidFocus',
+    title: 'Pauseward: App Blocker & Focus',
+    description: 'Pause before distraction. Guard your focus with Pauseward — block apps, run focus sessions, and manage screen time across Mac, Windows, iOS, and Android.',
+    siteName: 'Pauseward',
     images: [
       {
-        url: '/lucidfocus.png',
+        url: '/pauseward.png',
         width: 512,
         height: 512,
-        alt: 'LucidFocus App Icon',
+        alt: 'Pauseward App Icon',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LucidFocus - Stay Lucid, Stay Focused',
-    description: 'Take control of your digital habits with LucidFocus. Block distracting apps and websites, track usage, and build healthier relationships with technology. Achieve clarity in every task.',
-    images: [process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/lucidfocus.png` : '/lucidfocus.png'],
+    title: 'Pauseward: App Blocker & Focus',
+    description: 'Pause before distraction. Guard your focus with Pauseward — block apps, run focus sessions, and manage screen time across Mac, Windows, iOS, and Android.',
+    images: [process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/pauseward.png` : '/pauseward.png'],
   },
 };
 
@@ -79,9 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${plusJakartaSans.variable} font-sans antialiased`} suppressHydrationWarning={true}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
