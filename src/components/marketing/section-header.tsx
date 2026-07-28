@@ -20,13 +20,13 @@ export default function SectionHeader({
       {eyebrow && <p className={`page-eyebrow ${light ? "!text-emerald-300" : ""}`}>{eyebrow}</p>}
       <h2
         className={`font-display text-3xl tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.1] ${
-          light ? "text-white" : "text-gray-900"
+          light ? "text-white" : "text-gray-900 dark:text-gray-50"
         }`}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-5 text-base leading-relaxed md:text-lg ${light ? "text-emerald-100/85" : "text-gray-600"}`}>
+        <p className={`mt-5 text-base leading-relaxed md:text-lg ${light ? "text-emerald-100/85" : "text-gray-600 dark:text-gray-400"}`}>
           {subtitle}
         </p>
       )}

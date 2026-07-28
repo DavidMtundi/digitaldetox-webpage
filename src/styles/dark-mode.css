@@ -1,0 +1,227 @@
+/* Class-based dark mode — toggled via .dark on <html> */
+
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.dark .marketing-page {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.dark .hero-shell {
+  background: #0b100e;
+  border-color: rgba(16, 185, 129, 0.12);
+}
+
+.dark .mesh-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16, 185, 129, 0.12), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(20, 184, 166, 0.08), transparent 45%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(16, 185, 129, 0.06), transparent 50%),
+    linear-gradient(180deg, #071210 0%, #0c1411 45%, #0b100e 100%);
+}
+
+.dark .text-lead {
+  color: #9ca3af;
+}
+
+.dark .hero-accent {
+  color: #34d399;
+}
+
+.dark .page-eyebrow {
+  @apply border-emerald-800/50 bg-emerald-950/40 text-emerald-300;
+}
+
+.dark .btn-secondary {
+  @apply border-gray-700 bg-gray-900 text-gray-100 hover:border-emerald-700 hover:bg-gray-800;
+}
+
+.dark .btn-primary:focus-visible,
+.dark .btn-secondary:focus-visible,
+.dark .btn-gradient:focus-visible {
+  @apply ring-offset-gray-950;
+}
+
+.dark .card,
+.dark .card-modern,
+.dark .card-gradient,
+.dark .card-glass {
+  @apply border-gray-800 bg-gray-900;
+}
+
+.dark .card-gradient {
+  @apply from-gray-900 to-emerald-950/30;
+}
+
+.dark .glass-card {
+  @apply border-gray-800/80 bg-gray-900/70 shadow-black/20;
+}
+
+.dark .marketing-card {
+  @apply border-gray-800 bg-gray-900 shadow-black/20 hover:border-emerald-800/50;
+}
+
+.dark .marketing-card-highlight {
+  @apply border-emerald-700 ring-emerald-900/50;
+}
+
+.dark .legal-accordion-item {
+  @apply border-gray-800 bg-gray-900;
+}
+
+.dark .prose-legal h4 {
+  @apply text-gray-100;
+}
+
+.dark .faq-bento-item {
+  @apply border-gray-800 bg-gray-900 hover:border-emerald-800/60;
+}
+
+.dark .bento-cell {
+  @apply border-gray-800/80 bg-gray-900/90;
+}
+
+.dark .pill-tag {
+  @apply border-emerald-800/60 bg-emerald-950/50 text-emerald-300;
+}
+
+.dark .input-modern {
+  @apply border-gray-700 bg-gray-900 text-gray-100 hover:border-gray-600;
+}
+
+.dark .input-modern::placeholder {
+  @apply text-gray-500;
+}
+
+.dark .contact-stat-band {
+  @apply border-gray-800 bg-gray-900;
+}
+
+.dark .contact-stat-card {
+  @apply border-gray-800 from-gray-900 to-gray-900;
+}
+
+.dark .contact-stat-value {
+  @apply text-emerald-400;
+}
+
+.dark .contact-stat-label {
+  @apply text-gray-400;
+}
+
+.dark .contact-form-shell,
+.dark .contact-aside-panel {
+  @apply border-gray-800 bg-gray-900;
+}
+
+.dark .contact-form-shell--elevated {
+  @apply border-gray-800/80 bg-gray-900/95;
+}
+
+.dark .contact-label {
+  @apply text-gray-300;
+}
+
+.dark .contact-topic-pill {
+  @apply border-gray-700 bg-gray-900 text-gray-300 hover:border-emerald-700 hover:text-emerald-300;
+}
+
+.dark .contact-channel-card {
+  @apply border-gray-800 bg-gray-900 hover:border-emerald-800/60;
+}
+
+.dark .contact-channel-card--primary {
+  @apply border-emerald-900/60 from-emerald-950/40 via-gray-900 to-gray-900;
+}
+
+.dark .contact-resource-link {
+  @apply border-gray-800 bg-gray-900/80 text-gray-300 hover:border-emerald-800 hover:bg-gray-900 hover:text-emerald-300;
+}
+
+.dark .contact-copy-btn {
+  @apply border-gray-700 bg-gray-900 text-emerald-300 hover:border-emerald-700 hover:bg-gray-800;
+}
+
+.dark .contact-form-header {
+  @apply border-gray-800;
+}
+
+.dark .contact-form-footer {
+  @apply border-gray-800;
+}
+
+.dark .theme-toggle {
+  @apply border-gray-700 bg-gray-900 text-gray-300 hover:border-emerald-700 hover:bg-gray-800 hover:text-emerald-300;
+}
+
+.dark .theme-toggle-system-badge {
+  @apply text-emerald-400;
+}
+
+.dark .marketing-page .text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark .marketing-page .text-gray-800 {
+  @apply text-gray-200;
+}
+
+.dark .marketing-page .text-gray-700 {
+  @apply text-gray-300;
+}
+
+.dark .marketing-page .text-gray-600 {
+  @apply text-gray-400;
+}
+
+.dark .marketing-page .text-gray-500 {
+  @apply text-gray-500;
+}
+
+.dark .contact-timeline-step h3 {
+  @apply text-gray-100;
+}
+
+.dark .contact-channels h2 {
+  @apply text-gray-100;
+}
+
+/* Dashboard */
+.dark .dashboard-shell {
+  @apply bg-gray-950 text-gray-100;
+}
+
+.dark .dashboard-sidebar {
+  @apply border-gray-800 bg-gray-900;
+}
+
+.dark .dashboard-sidebar-title {
+  @apply text-gray-100;
+}
+
+.dark .dashboard-nav-link {
+  @apply text-gray-400 hover:bg-gray-800 hover:text-gray-100;
+}
+
+.dark .dashboard-nav-link--active {
+  @apply bg-emerald-950/60 text-emerald-300;
+}
+
+.dark .dashboard-card {
+  @apply border-gray-800 bg-gray-900;
+}
+
+.dark .dashboard-card-header {
+  @apply border-gray-800;
+}
+
+.dark .dashboard-empty {
+  @apply border-gray-700 bg-gray-900;
+}

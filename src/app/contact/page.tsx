@@ -1,147 +1,200 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { CheckCircle, Clock, Mail, MessageCircle, Phone, Send, Star, Users } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Shield,
+} from "lucide-react";
 import PageHero from "@/components/marketing/page-hero";
 import SectionHeader from "@/components/marketing/section-header";
 import SectionShell from "@/components/marketing/section-shell";
-import MarketingCard from "@/components/marketing/marketing-card";
-import FaqBento from "@/components/marketing/faq-bento";
 import TrustBadges from "@/components/marketing/trust-badges";
+import RevealOnScroll from "@/components/marketing/reveal-on-scroll";
+import LegalAccordion from "@/components/marketing/legal-accordion";
+import ContactForm from "@/components/marketing/contact-form";
+import ContactChannels, {
+  ContactResources,
+  ContactTimeline,
+} from "@/components/marketing/contact-channels";
+import CtaBand, { CtaPrimary, CtaSecondary } from "@/components/marketing/cta-band";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
+import { DEFAULT_CONTACT_EMAIL } from "@/lib/contact";
 
 const FAQ = [
   {
-    q: "How do I install Pauseward?",
-    a: "Download from Google Play and follow the setup wizard — under two minutes start to finish.",
+    id: "mpesa",
+    q: "How do I pay with M-Pesa?",
+    a: "Sign in to the web dashboard, open Payments, pick a plan, and complete checkout via Paystack. You’ll receive an STK push on your phone. Keep your checkout reference if you need help.",
   },
   {
-    q: "Is Pauseward free?",
-    a: "Core blocking and focus features are free. Pro adds advanced schedules, analytics, and sync.",
+    id: "password",
+    q: "I forgot my dashboard password",
+    a: "Password reset is coming soon. Email us from the address on your account and we’ll verify ownership before helping you regain access.",
   },
   {
-    q: "Can I customize what gets blocked?",
-    a: "Yes — apps, sites, schedules, and exceptions are fully configurable.",
+    id: "platforms",
+    q: "Which platforms are supported?",
+    a: "Android is live. iOS and macOS are in beta. Windows is coming soon. Billing, devices, and blocklists can be managed from the web dashboard.",
   },
   {
-    q: "Which devices are supported?",
-    a: "Android is live. iOS, Windows, and Mac are in development.",
+    id: "refund",
+    q: "Can I get a refund?",
+    a: "Refunds depend on where you purchased (Paystack, Google Play, or App Store). Email us with your payment reference and we’ll review your case.",
+  },
+  {
+    id: "privacy",
+    q: "How is my data handled?",
+    a: "Accounts and billing are stored in PostgreSQL. We don’t sell your data or read content inside other apps. Read our Privacy Policy for full details.",
+  },
+  {
+    id: "bug",
+    q: "How do I report a bug?",
+    a: "Use the form below and choose “Bug report”. Include your device model, OS version, Pauseward app version, and steps to reproduce the issue.",
   },
 ];
 
-export default function Contact() {
+export default function ContactPage() {
   const { links } = useExternalLinks();
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
-  };
+  const contactEmail = links.contact.email || DEFAULT_CONTACT_EMAIL;
+  const contactPhone = links.contact.phone?.trim();
+  const contactHours = links.contact.hours || "Mon–Fri, 9am–6pm EAT";
+  const [openFaq, setOpenFaq] = useState<Record<string, boolean>>({ "mpesa": true });
 
   return (
     <div className="marketing-page">
       <PageHero
-        eyebrow="We're here to help"
-        title="Let's talk"
-        subtitle="Questions about setup, billing, or partnerships? Drop us a line."
+        eyebrow="Contact"
+        title={
+          <>
+            Real support.
+            <br />
+            <span className="hero-accent">No runaround.</span>
+          </>
+        }
+        subtitle="Whether it’s M-Pesa billing, a bug on Android, or a partnership idea — tell us what you need and we’ll get back to you."
         size="compact"
       >
+        <a href="#message" className="btn-primary inline-flex items-center gap-2">
+          <MessageCircle className="h-4 w-4" />
+          Send a message
+        </a>
+        <a href={`mailto:${contactEmail}`} className="btn-secondary inline-flex items-center gap-2">
+          <Mail className="h-4 w-4" />
+          Email directly
+        </a>
         <TrustBadges
           items={[
             { icon: Clock, label: "Reply within 48h" },
-            { icon: Users, label: "50,000+ users" },
-            { icon: Star, label: "4.8/5 rating" },
+            { icon: MapPin, label: "Based in Kenya" },
+            { icon: Shield, label: "Privacy-first" },
           ]}
         />
       </PageHero>
 
-      <SectionShell tone="white">
-        <div className="grid gap-5 md:grid-cols-3">
-          <MarketingCard glass icon={Mail} title="Email" description="Best for billing and detailed support.">
-            <a href={`mailto:${links.contact.email}`} className="text-sm font-semibold text-emerald-700 hover:underline">
-              {links.contact.email || "hello@pauseward.app"}
-            </a>
-          </MarketingCard>
-          <MarketingCard glass icon={MessageCircle} title="Live chat" description="Quick answers during business hours.">
-            <span className="pill-tag">Coming in app</span>
-          </MarketingCard>
-          <MarketingCard glass icon={Phone} title="Phone" description="Speak with our team directly.">
-            <a href={`tel:${links.contact.phone}`} className="text-sm font-semibold text-emerald-700 hover:underline">
-              {links.contact.phone || "Contact us"}
-            </a>
-          </MarketingCard>
-        </div>
-      </SectionShell>
-
-      <SectionShell tone="mesh">
-        <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
-          <SectionHeader
-            align="left"
-            eyebrow="Message"
-            title="Send a note"
-            subtitle="We typically respond within 24–48 hours on business days."
-          />
-          <div className="contact-form-shell">
-            {isSubmitted ? (
-              <div className="py-12 text-center">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100">
-                  <CheckCircle className="h-7 w-7 text-emerald-600" />
-                </div>
-                <h3 className="type-card-title text-xl">Message sent</h3>
-                <p className="mt-2 text-gray-600">We&apos;ll be in touch soon.</p>
+      <section className="contact-stat-band" aria-label="Support highlights">
+        <div className="container-modern">
+          <div className="contact-stat-grid">
+            <RevealOnScroll>
+              <div className="contact-stat-card">
+                <p className="contact-stat-value">48h</p>
+                <p className="contact-stat-label">Typical response time</p>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid gap-5 md:grid-cols-2">
-                  <div>
-                    <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-gray-700">Name</label>
-                    <input id="name" name="name" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} required className="input-modern" placeholder="Your name" />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} required className="input-modern" placeholder="you@example.com" />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-gray-700">Topic</label>
-                  <select id="subject" name="subject" value={formData.subject} onChange={(e) => setFormData((p) => ({ ...p, subject: e.target.value }))} required className="input-modern">
-                    <option value="">Select a topic</option>
-                    <option value="general">General</option>
-                    <option value="technical">Technical</option>
-                    <option value="billing">Billing</option>
-                    <option value="feature">Feature request</option>
-                    <option value="bug">Bug report</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-gray-700">Message</label>
-                  <textarea id="message" name="message" value={formData.message} onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))} required rows={5} className="input-modern resize-none" placeholder="How can we help?" />
-                </div>
-                <button type="submit" disabled={isSubmitting} className="btn-primary flex w-full items-center justify-center gap-2">
-                  {isSubmitting ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" /> : <Send className="h-4 w-4" />}
-                  {isSubmitting ? "Sending…" : "Send message"}
-                </button>
-              </form>
-            )}
+            </RevealOnScroll>
+            <RevealOnScroll delay={80}>
+              <div className="contact-stat-card">
+                <p className="contact-stat-value">EAT</p>
+                <p className="contact-stat-label">{contactHours}</p>
+              </div>
+            </RevealOnScroll>
+            <RevealOnScroll delay={160}>
+              <div className="contact-stat-card">
+                <p className="contact-stat-value">Email</p>
+                <p className="contact-stat-label">Primary support channel</p>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
+      </section>
+
+      <SectionShell tone="white">
+        <SectionHeader
+          eyebrow="Channels"
+          title="Choose how to reach us"
+          subtitle="Self-serve options are fastest for billing and downloads. Email us for everything else."
+        />
+        <RevealOnScroll>
+          <ContactChannels email={contactEmail} phone={contactPhone} hours={contactHours} />
+        </RevealOnScroll>
       </SectionShell>
 
-      <SectionShell tone="white" className="!pt-0">
-        <SectionHeader eyebrow="FAQ" title="Common questions" />
-        <div className="mx-auto max-w-4xl">
-          <FaqBento items={FAQ} />
+      <SectionShell tone="mesh" id="message">
+        <div className="contact-layout">
+          <aside className="contact-aside">
+            <SectionHeader
+              align="left"
+              eyebrow="Message us"
+              title="Tell us what’s going on"
+              subtitle="The more context you share, the faster we can help — especially for billing and bugs."
+            />
+            <RevealOnScroll>
+              <div className="contact-aside-panel">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-emerald-800">
+                  What happens next
+                </h3>
+                <ContactTimeline />
+              </div>
+            </RevealOnScroll>
+            <RevealOnScroll delay={100}>
+              <ContactResources />
+            </RevealOnScroll>
+          </aside>
+
+          <RevealOnScroll delay={120}>
+            <div className="contact-form-shell contact-form-shell--elevated">
+              <ContactForm contactEmail={contactEmail} />
+            </div>
+          </RevealOnScroll>
         </div>
       </SectionShell>
+
+      <SectionShell tone="white">
+        <SectionHeader
+          eyebrow="FAQ"
+          title="Common questions"
+          subtitle="Still unsure? Expand an answer below or write to us."
+        />
+        <div className="mx-auto max-w-3xl">
+          <LegalAccordion
+            sections={FAQ.map((item) => ({
+              id: item.id,
+              title: item.q,
+              content: <p>{item.a}</p>,
+            }))}
+            openSections={openFaq}
+            onToggle={(id) => setOpenFaq((prev) => ({ ...prev, [id]: !prev[id] }))}
+          />
+          <p className="mt-8 text-center text-sm text-gray-600">
+            Didn&apos;t find your answer?{" "}
+            <Link href="#message" className="font-semibold text-emerald-700 hover:underline">
+              Send us a message
+              <ArrowRight className="ml-1 inline h-4 w-4" />
+            </Link>
+          </p>
+        </div>
+      </SectionShell>
+
+      <CtaBand
+        title="Prefer self-serve?"
+        subtitle="Check your plan, payments, and devices in the dashboard — or grab the app for your platform."
+      >
+        <CtaPrimary href="/dashboard/login">Open dashboard</CtaPrimary>
+        <CtaSecondary href="/download">Download apps</CtaSecondary>
+      </CtaBand>
     </div>
   );
 }

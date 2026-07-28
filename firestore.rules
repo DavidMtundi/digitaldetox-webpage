@@ -19,6 +19,25 @@ service cloud.firestore {
              data.status in ['active', 'unsubscribed'] &&
              data.email.size() <= 254; // Email max length
     }
+
+    function isValidContactMessage() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['name', 'email', 'subject', 'message', 'status', 'createdAt', 'source']) &&
+             data.name is string &&
+             data.email is string &&
+             isValidEmail(data.email) &&
+             data.subject is string &&
+             data.message is string &&
+             data.status == 'new' &&
+             data.source == 'website-contact' &&
+             data.name.size() >= 2 &&
+             data.name.size() <= 120 &&
+             data.email.size() <= 254 &&
+             data.message.size() >= 10 &&
+             data.message.size() <= 2000 &&
+             data.subject.size() <= 64 &&
+             (!('platform' in data) || data.platform == null || data.platform is string);
+    }
     
     // Config collection - Public read for specific documents only
     match /config/{documentId} {
@@ -49,6 +68,12 @@ service cloud.firestore {
       
       // Prevent deletes from public
       allow delete: if false;
+    }
+
+    // Website contact form — create only, no public reads
+    match /contact-messages/{messageId} {
+      allow create: if isValidContactMessage() && request.resource.data.size() <= 20;
+      allow read, update, delete: if false;
     }
     
     // Deny all other access by default

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Check, Loader2, Shield, Sparkles } from "lucide-react";
 import PageHero from "@/components/marketing/page-hero";
 import SectionShell from "@/components/marketing/section-shell";
@@ -10,6 +10,7 @@ import { useAuth } from "@/components/auth/auth-provider";
 import {
   CatalogProduct,
   displayPrice,
+  FALLBACK_CATALOG_PRODUCTS,
   fetchBillingCatalog,
   initiateCheckout,
 } from "@/lib/billing";
@@ -25,11 +26,13 @@ const BENEFITS = [
 
 export default function PricingPage() {
   const { user, loading: authLoading } = useAuth();
-  const [products, setProducts] = useState<CatalogProduct[]>([]);
+  const [products, setProducts] = useState<CatalogProduct[]>(FALLBACK_CATALOG_PRODUCTS);
   const [currency, setCurrency] = useState<"KES" | "USD">("KES");
   const [loading, setLoading] = useState(true);
+  const [catalogLive, setCatalogLive] = useState(false);
   const [checkoutProductId, setCheckoutProductId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const resumeCheckoutRef = useRef(false);
 
   useEffect(() => {
     const region = detectRegionCode();
@@ -38,12 +41,17 @@ export default function PricingPage() {
 
     fetchBillingCatalog(region)
       .then((catalog) => {
-        setProducts(catalog.products);
+        if (catalog.products.length > 0) {
+          setProducts(catalog.products);
+        }
         if (catalog.defaultCurrency === "KES" || catalog.defaultCurrency === "USD") {
           setCurrency(catalog.defaultCurrency);
         }
+        setCatalogLive(true);
       })
-      .catch(() => setError("Could not load pricing. Try again later."))
+      .catch(() => {
+        setError("Showing estimated prices — live catalog is temporarily unavailable.");
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -73,6 +81,21 @@ export default function PricingPage() {
     },
     [currency],
   );
+
+  useEffect(() => {
+    if (!user || authLoading || loading || resumeCheckoutRef.current) return;
+
+    const productId = new URLSearchParams(window.location.search).get("product");
+    if (!productId || !products.some((product) => product.id === productId)) return;
+
+    resumeCheckoutRef.current = true;
+    void startCheckout(productId);
+  }, [user, authLoading, loading, products, startCheckout]);
+
+  function signInHref(productId: string) {
+    const redirect = `/pricing?product=${encodeURIComponent(productId)}`;
+    return `/dashboard/login?redirect=${encodeURIComponent(redirect)}`;
+  }
 
   return (
     <div className="marketing-page">
@@ -112,14 +135,24 @@ export default function PricingPage() {
         <SectionHeader
           eyebrow="Plans"
           title="Choose your level"
-          subtitle="Upgrade when you need advanced blocking, analytics, and sync."
+          subtitle={
+            user
+              ? "Upgrade when you need advanced blocking, analytics, and sync."
+              : "Browse plans and prices below — sign in when you're ready to subscribe."
+          }
         />
 
         {error && (
-          <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          <div
+            className={`mx-auto mt-8 max-w-2xl rounded-xl border px-4 py-3 text-sm ${
+              catalogLive
+                ? "border-red-200 bg-red-50 text-red-800"
+                : "border-amber-200 bg-amber-50 text-amber-900"
+            }`}
+          >
             {error}
-            {!user && (
-              <Link href="/dashboard/login" className="ml-2 font-semibold underline">
+            {!user && error.includes("sign in") && (
+              <Link href="/dashboard/login?redirect=%2Fpricing" className="ml-2 font-semibold underline">
                 Sign in
               </Link>
             )}
@@ -140,6 +173,7 @@ export default function PricingPage() {
               benefits={BENEFITS}
               checkoutProductId={checkoutProductId}
               onCheckout={startCheckout}
+              signInHref={signInHref}
               user={user}
               authLoading={authLoading}
             />
@@ -151,6 +185,7 @@ export default function PricingPage() {
               benefits={[...BENEFITS, "Family dashboard", "Shared policies"]}
               checkoutProductId={checkoutProductId}
               onCheckout={startCheckout}
+              signInHref={signInHref}
               user={user}
               authLoading={authLoading}
               highlighted
@@ -177,6 +212,7 @@ function PricingCard({
   benefits,
   checkoutProductId,
   onCheckout,
+  signInHref,
   user,
   authLoading,
   highlighted = false,
@@ -188,12 +224,14 @@ function PricingCard({
   benefits: string[];
   checkoutProductId: string | null;
   onCheckout: (productId: string) => void;
+  signInHref: (productId: string) => string;
   user: ReturnType<typeof useAuth>["user"];
   authLoading: boolean;
   highlighted?: boolean;
 }) {
   const monthly = products.find((p) => p.interval === "monthly");
   const annual = products.find((p) => p.interval === "annual");
+  const headlinePrice = monthly ? displayPrice(monthly.prices, currency) : null;
 
   return (
     <div className={`glass-card flex flex-col !p-8 ${highlighted ? "gradient-border ring-2 ring-emerald-100" : ""}`}>
@@ -204,6 +242,13 @@ function PricingCard({
       )}
       <h2 className="font-display text-2xl text-gray-900">{title}</h2>
       <p className="mt-1 text-sm text-gray-600">{subtitle}</p>
+
+      {headlinePrice ? (
+        <div className="mt-6">
+          <p className="font-display text-4xl font-bold text-gray-900">{headlinePrice}</p>
+          <p className="mt-1 text-xs text-gray-500">per month · cancel anytime</p>
+        </div>
+      ) : null}
 
       <ul className="mt-6 space-y-2">
         {benefits.map((benefit) => (
@@ -221,11 +266,9 @@ function PricingCard({
             price={displayPrice(monthly.prices, currency)}
             loading={checkoutProductId === monthly.id}
             disabled={authLoading || checkoutProductId !== null}
-            onClick={() => {
-              if (!user) return;
-              onCheckout(monthly.id);
-            }}
-            signInRequired={!user}
+            onClick={() => onCheckout(monthly.id)}
+            signInHref={signInHref(monthly.id)}
+            signedIn={Boolean(user)}
           />
         )}
         {annual && (
@@ -235,11 +278,9 @@ function PricingCard({
             badge="Save ~2 months"
             loading={checkoutProductId === annual.id}
             disabled={authLoading || checkoutProductId !== null}
-            onClick={() => {
-              if (!user) return;
-              onCheckout(annual.id);
-            }}
-            signInRequired={!user}
+            onClick={() => onCheckout(annual.id)}
+            signInHref={signInHref(annual.id)}
+            signedIn={Boolean(user)}
             secondary
           />
         )}
@@ -255,7 +296,8 @@ function PlanButton({
   loading,
   disabled,
   onClick,
-  signInRequired,
+  signInHref,
+  signedIn,
   secondary = false,
 }: {
   label: string;
@@ -264,42 +306,43 @@ function PlanButton({
   loading: boolean;
   disabled: boolean;
   onClick: () => void;
-  signInRequired: boolean;
+  signInHref: string;
+  signedIn: boolean;
   secondary?: boolean;
 }) {
-  if (signInRequired) {
+  const className = `flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition disabled:opacity-60 ${
+    secondary
+      ? "border border-gray-200 bg-gray-50 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:hover:bg-gray-800"
+      : "bg-emerald-600 text-white hover:bg-emerald-700"
+  }`;
+
+  const priceBlock = (
+    <div className="text-right">
+      <div className="font-semibold">{price}</div>
+      {!signedIn ? <div className="text-xs opacity-80">Sign in to subscribe</div> : null}
+    </div>
+  );
+
+  if (!signedIn) {
     return (
-      <Link
-        href="/dashboard/login"
-        className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition ${
-          secondary
-            ? "border border-gray-200 bg-gray-50 hover:bg-gray-100"
-            : "bg-emerald-600 text-white hover:bg-emerald-700"
-        }`}
-      >
-        <span className="font-medium">{label}</span>
-        <span className="text-sm opacity-90">Sign in to subscribe</span>
+      <Link href={signInHref} className={className}>
+        <div>
+          <div className="font-medium">{label}</div>
+          {badge ? <div className="text-xs opacity-80">{badge}</div> : null}
+        </div>
+        {priceBlock}
       </Link>
     );
   }
 
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition disabled:opacity-60 ${
-        secondary
-          ? "border border-gray-200 bg-gray-50 hover:bg-gray-100"
-          : "bg-emerald-600 text-white hover:bg-emerald-700"
-      }`}
-    >
+    <button type="button" onClick={onClick} disabled={disabled} className={className}>
       <div>
         <div className="font-medium">{label}</div>
-        {badge && <div className="text-xs opacity-80">{badge}</div>}
+        {badge ? <div className="text-xs opacity-80">{badge}</div> : null}
       </div>
       <div className="flex items-center gap-2 font-semibold">
-        {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         {price}
       </div>
     </button>

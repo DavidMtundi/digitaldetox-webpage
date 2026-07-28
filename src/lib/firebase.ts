@@ -11,17 +11,31 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
 };
 
-function getOrInitApp(): FirebaseApp {
+export function isFirestoreConfigured(): boolean {
+  return Boolean(
+    process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+      process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN &&
+      process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  );
+}
+
+function isFirebaseConfigured(): boolean {
+  return isFirestoreConfigured();
+}
+
+function getOrInitApp(): FirebaseApp | null {
+  if (!isFirebaseConfigured()) return null;
   if (getApps().length > 0) return getApps()[0];
   return initializeApp(firebaseConfig);
 }
 
 const app = getOrInitApp();
-export const db: Firestore = getFirestore(app);
+export const db: Firestore | null = app ? getFirestore(app) : null;
 
 let authInstance: Auth | undefined;
 
-export function getFirebaseAuth(): Auth {
+export function getFirebaseAuth(): Auth | null {
+  if (!app) return null;
   if (!authInstance) authInstance = getAuth(app);
   return authInstance;
 }

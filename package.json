@@ -8,8 +8,10 @@
     "export": "next build && next export",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --import tsx --test src/lib/*.test.ts",
     "deploy": "npm run build && firebase deploy",
-    "deploy:hosting": "firebase deploy --only hosting"
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:rules": "firebase deploy --only firestore:rules"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -29,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.6",
     "tailwindcss": "^4",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }

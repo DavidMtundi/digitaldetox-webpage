@@ -16,7 +16,7 @@ export default function DashboardHomePage() {
 
   useEffect(() => {
     if (!user) return;
-    getOverview(user.uid)
+    getOverview()
       .then(setOverview)
       .catch((err: Error) => setError(err.message));
     fetchEntitlements()
@@ -88,12 +88,19 @@ export default function DashboardHomePage() {
             {!entitlement || entitlement.tier === "free" ? (
               <p>
                 •{" "}
-                <Link href="/pricing" className="font-medium text-emerald-700 hover:underline">
-                  Upgrade to Pro
+                <Link href="/dashboard/payments" className="font-medium text-emerald-700 hover:underline">
+                  View payments or subscribe
                 </Link>{" "}
                 with M-Pesa or card
               </p>
-            ) : null}
+            ) : (
+              <p>
+                •{" "}
+                <Link href="/dashboard/payments" className="font-medium text-emerald-700 hover:underline">
+                  View payment history
+                </Link>
+              </p>
+            )}
           </div>
         </DashboardCard>
       </div>

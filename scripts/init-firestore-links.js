@@ -43,7 +43,8 @@ const downloadLinks = {
   googlePlay: "",
   appStore: null,
   windows: null,
-  mac: null
+  mac: null,
+  web: null,
 };
 
 const contact = {

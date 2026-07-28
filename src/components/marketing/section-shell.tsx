@@ -9,9 +9,9 @@ type SectionShellProps = {
 };
 
 const TONES = {
-  default: "bg-[#f8faf9]",
-  white: "bg-white",
-  mesh: "relative overflow-hidden bg-[#f0fdf4]",
+  default: "bg-[#f8faf9] dark:bg-gray-950",
+  white: "bg-white dark:bg-gray-900",
+  mesh: "relative overflow-hidden bg-[#f0fdf4] dark:bg-emerald-950/20",
   dark: "relative overflow-hidden bg-gray-950 text-white",
 };
 

@@ -3,35 +3,28 @@
 import { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import {
+  getEnvDownloadLinks,
+  mergeDownloadLinks,
+  type DownloadLinksConfig,
+} from '@/lib/download-links';
+import { getEnvContactInfo } from '@/lib/contact';
 
 export interface ExternalLinks {
-  downloadLinks: {
-    googlePlay: string;
-    appStore: string | null;
-    windows: string | null;
-    mac: string | null;
-  };
+  downloadLinks: DownloadLinksConfig;
   contact: {
     email: string;
     phone: string;
+    hours?: string;
   };
   donation: {
     url: string | null;
   };
 }
 
-// Fallback values in case Firebase is unavailable
 const FALLBACK_LINKS: ExternalLinks = {
-  downloadLinks: {
-    googlePlay: "",
-    appStore: null,
-    windows: null,
-    mac: null,
-  },
-  contact: {
-    email: "",
-    phone: "",
-  },
+  downloadLinks: mergeDownloadLinks(undefined, getEnvDownloadLinks()),
+  contact: getEnvContactInfo(),
   donation: {
     url: null,
   },
@@ -44,59 +37,57 @@ export function useExternalLinks() {
 
   useEffect(() => {
     const fetchLinks = async () => {
+      const envDownloads = getEnvDownloadLinks();
+      const envContact = getEnvContactInfo();
+
       try {
         setLoading(true);
-        
-        // Fetch from three separate documents (note: document name is lowercase 'downloadlinks')
+
+        if (!db) {
+          setLinks({
+            ...FALLBACK_LINKS,
+            downloadLinks: mergeDownloadLinks(undefined, envDownloads),
+            contact: envContact,
+          });
+          setError(null);
+          return;
+        }
+
         const [downloadLinksDoc, contactDoc, donationDoc] = await Promise.all([
-          getDoc(doc(db, 'config', 'downloadlinks')), // lowercase as shown in Firestore
+          getDoc(doc(db, 'config', 'downloadlinks')),
           getDoc(doc(db, 'config', 'contact')),
           getDoc(doc(db, 'config', 'donation'))
         ]);
-        
+
+        const firestoreDownloads = downloadLinksDoc.exists()
+          ? (downloadLinksDoc.data() as Partial<DownloadLinksConfig>)
+          : undefined;
+
         const fetchedLinks: ExternalLinks = {
-          downloadLinks: {
-            googlePlay: downloadLinksDoc.exists() && downloadLinksDoc.data().googlePlay 
-              ? downloadLinksDoc.data().googlePlay 
-              : FALLBACK_LINKS.downloadLinks.googlePlay,
-            appStore: downloadLinksDoc.exists() && downloadLinksDoc.data().appStore 
-              ? downloadLinksDoc.data().appStore 
-              : FALLBACK_LINKS.downloadLinks.appStore,
-            windows: downloadLinksDoc.exists() && downloadLinksDoc.data().windows 
-              ? downloadLinksDoc.data().windows 
-              : FALLBACK_LINKS.downloadLinks.windows,
-            mac: downloadLinksDoc.exists() && downloadLinksDoc.data().mac 
-              ? downloadLinksDoc.data().mac 
-              : FALLBACK_LINKS.downloadLinks.mac,
-          },
+          downloadLinks: mergeDownloadLinks(firestoreDownloads, envDownloads),
           contact: {
-            email: contactDoc.exists() && contactDoc.data().email 
-              ? contactDoc.data().email 
-              : FALLBACK_LINKS.contact.email,
-            phone: contactDoc.exists() && contactDoc.data().phone 
-              ? contactDoc.data().phone 
-              : FALLBACK_LINKS.contact.phone,
+            email:
+              (contactDoc.exists() && contactDoc.data().email) || envContact.email,
+            phone:
+              (contactDoc.exists() && contactDoc.data().phone) || envContact.phone,
+            hours: envContact.hours,
           },
           donation: {
-            url: donationDoc.exists() && donationDoc.data().url 
-              ? donationDoc.data().url 
+            url: donationDoc.exists() && donationDoc.data().url
+              ? donationDoc.data().url
               : FALLBACK_LINKS.donation.url,
           }
         };
-        
-        // Check if we got any data from Firestore
-        const hasFirestoreData = downloadLinksDoc.exists() || contactDoc.exists() || donationDoc.exists();
-        
-        if (hasFirestoreData) {
-          setLinks(fetchedLinks);
-        } else {
-          setLinks(FALLBACK_LINKS);
-        }
+
+        setLinks(fetchedLinks);
         setError(null);
       } catch {
         setError('Failed to load links');
-        // Use fallback values on error
-        setLinks(FALLBACK_LINKS);
+        setLinks({
+          ...FALLBACK_LINKS,
+          downloadLinks: mergeDownloadLinks(undefined, envDownloads),
+          contact: envContact,
+        });
       } finally {
         setLoading(false);
       }
@@ -107,4 +98,3 @@ export function useExternalLinks() {
 
   return { links, loading, error };
 }
-

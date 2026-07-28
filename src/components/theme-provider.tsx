@@ -1,129 +1,95 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  applyThemeClass,
+  isThemePreference,
+  resolveTheme,
+  THEME_STORAGE_KEY,
+  type ThemePreference,
+} from "@/lib/theme";
 
-// Theme types
-export type Theme = 'light' | 'dark' | 'auto'
+type ResolvedTheme = "light" | "dark";
 
-interface ThemeContextType {
-  theme: Theme
-  setTheme: (theme: Theme) => void
-  resolvedTheme: 'light' | 'dark'
+interface ThemeContextValue {
+  preference: ThemePreference;
+  resolvedTheme: ResolvedTheme;
+  setPreference: (preference: ThemePreference) => void;
+  toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-interface ThemeProviderProps {
-  children: ReactNode
-  defaultTheme?: Theme
+function readStoredPreference(): ThemePreference {
+  if (typeof window === "undefined") return "system";
+  const stored = localStorage.getItem(THEME_STORAGE_KEY);
+  return isThemePreference(stored) ? stored : "system";
 }
 
-export function ThemeProvider({ children, defaultTheme = 'light' }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme)
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light')
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [preference, setPreferenceState] = useState<ThemePreference>("system");
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
+  const [mounted, setMounted] = useState(false);
 
-  // Resolve theme based on user preference and system setting
+  const applyResolved = useCallback((next: ResolvedTheme) => {
+    setResolvedTheme(next);
+    applyThemeClass(next);
+  }, []);
+
+  const setPreference = useCallback(
+    (next: ThemePreference) => {
+      setPreferenceState(next);
+      localStorage.setItem(THEME_STORAGE_KEY, next);
+      applyResolved(resolveTheme(next));
+    },
+    [applyResolved],
+  );
+
+  const toggleTheme = useCallback(() => {
+    setPreference(resolvedTheme === "dark" ? "light" : "dark");
+  }, [resolvedTheme, setPreference]);
+
   useEffect(() => {
-    const resolveTheme = () => {
-      if (theme === 'auto') {
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        return systemPrefersDark ? 'dark' : 'light'
+    const stored = readStoredPreference();
+    setPreferenceState(stored);
+    applyResolved(resolveTheme(stored));
+    setMounted(true);
+  }, [applyResolved]);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => {
+      if (preference === "system") {
+        applyResolved(resolveTheme("system"));
       }
-      return theme as 'light' | 'dark'
-    }
+    };
 
-    setResolvedTheme(resolveTheme())
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, [preference, mounted, applyResolved]);
 
-    // Listen for system theme changes when auto is selected
-    if (theme === 'auto') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      const handleChange = () => setResolvedTheme(resolveTheme())
-      mediaQuery.addEventListener('change', handleChange)
-      return () => mediaQuery.removeEventListener('change', handleChange)
-    }
-  }, [theme])
+  const value = useMemo(
+    () => ({ preference, resolvedTheme, setPreference, toggleTheme }),
+    [preference, resolvedTheme, setPreference, toggleTheme],
+  );
 
-  // Apply theme to document
-  useEffect(() => {
-    const root = document.documentElement
-    root.setAttribute('data-theme', resolvedTheme)
-    
-    // Update CSS custom properties based on theme
-    if (resolvedTheme === 'dark') {
-      root.style.setProperty('--bg-primary', '#1f2937')
-      root.style.setProperty('--bg-secondary', '#111827')
-      root.style.setProperty('--bg-hero', '#1f2937')
-      root.style.setProperty('--bg-features', '#1f2937')
-      root.style.setProperty('--bg-stats', '#1f2937')
-      root.style.setProperty('--text-primary', '#f9fafb')
-      root.style.setProperty('--text-secondary', '#d1d5db')
-      root.style.setProperty('--text-muted', '#9ca3af')
-      root.style.setProperty('--ui-card', '#374151')
-      root.style.setProperty('--ui-border', '#4b5563')
-      root.style.setProperty('--ui-shadow', 'rgba(0, 0, 0, 0.3)')
-    } else {
-      root.style.setProperty('--bg-primary', '#ffffff')
-      root.style.setProperty('--bg-secondary', '#f8fafc')
-      root.style.setProperty('--bg-hero', '#ffffff')
-      root.style.setProperty('--bg-features', '#ffffff')
-      root.style.setProperty('--bg-stats', '#ffffff')
-      root.style.setProperty('--text-primary', '#111827')
-      root.style.setProperty('--text-secondary', '#6b7280')
-      root.style.setProperty('--text-muted', '#9ca3af')
-      root.style.setProperty('--ui-card', '#ffffff')
-      root.style.setProperty('--ui-border', '#e5e7eb')
-      root.style.setProperty('--ui-shadow', 'rgba(0, 0, 0, 0.1)')
-    }
-  }, [resolvedTheme])
-
-  // Load theme from localStorage on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme
-    if (savedTheme && ['light', 'dark', 'auto'].includes(savedTheme)) {
-      setTheme(savedTheme)
-    }
-  }, [])
-
-  // Save theme to localStorage when changed
-  useEffect(() => {
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {
-  const context = useContext(ThemeContext)
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider')
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
-  return context
-}
-
-// Theme toggle component
-export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-
-  const cycleTheme = () => {
-    const themes: Theme[] = ['light', 'dark', 'auto']
-    const currentIndex = themes.indexOf(theme)
-    const nextIndex = (currentIndex + 1) % themes.length
-    setTheme(themes[nextIndex])
-  }
-
-  return (
-    <button
-      onClick={cycleTheme}
-      className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light'} theme`}
-    >
-      {theme === 'light' && '🌞'}
-      {theme === 'dark' && '🌙'}
-      {theme === 'auto' && '🔄'}
-    </button>
-  )
+  return context;
 }

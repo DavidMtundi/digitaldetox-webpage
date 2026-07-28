@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/components/layout/site-chrome";
+import ThemeScript from "@/components/theme-script";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -86,6 +87,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${plusJakartaSans.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
+        <ThemeScript />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

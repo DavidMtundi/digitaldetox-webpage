@@ -8,11 +8,16 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { User } from "firebase/auth";
-import { isAuthConfigured, watchAuth } from "@/lib/auth";
+import {
+  AUTH_CHANGED_EVENT,
+  isAuthConfigured,
+  readStoredUser,
+  validateSession,
+  type AuthUser,
+} from "@/lib/auth";
 
 interface AuthContextValue {
-  user: User | null;
+  user: AuthUser | null;
   loading: boolean;
   configured: boolean;
 }
@@ -24,20 +29,45 @@ const AuthContext = createContext<AuthContextValue>({
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
   const configured = isAuthConfigured();
 
   useEffect(() => {
-    if (!configured) {
-      setLoading(false);
-      return;
+    let cancelled = false;
+
+    async function syncUser() {
+      if (!configured) {
+        setUser(null);
+        setLoading(false);
+        return;
+      }
+
+      const stored = readStoredUser();
+      if (!stored) {
+        if (!cancelled) {
+          setUser(null);
+          setLoading(false);
+        }
+        return;
+      }
+
+      const validated = await validateSession();
+      if (!cancelled) {
+        setUser(validated);
+        setLoading(false);
+      }
     }
-    const unsubscribe = watchAuth((nextUser) => {
-      setUser(nextUser);
-      setLoading(false);
-    });
-    return unsubscribe;
+
+    void syncUser();
+    const onAuthChanged = () => {
+      setUser(readStoredUser());
+    };
+    window.addEventListener(AUTH_CHANGED_EVENT, onAuthChanged);
+    return () => {
+      cancelled = true;
+      window.removeEventListener(AUTH_CHANGED_EVENT, onAuthChanged);
+    };
   }, [configured]);
 
   const value = useMemo(

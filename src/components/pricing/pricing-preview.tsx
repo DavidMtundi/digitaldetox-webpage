@@ -8,6 +8,7 @@ import { ArrowRight, Check, CreditCard, Loader2, Smartphone } from "lucide-react
 import {
   CatalogProduct,
   displayPrice,
+  FALLBACK_CATALOG_PRODUCTS,
   fetchBillingCatalog,
 } from "@/lib/billing";
 import { detectDefaultCurrency, detectRegionCode } from "@/lib/geo";
@@ -26,25 +27,8 @@ const PRO_FEATURES = [
   "Priority support",
 ];
 
-const FALLBACK_PRODUCTS: CatalogProduct[] = [
-  {
-    id: "pauseward_pro_monthly",
-    tier: "pro",
-    interval: "monthly",
-    displayName: "Pauseward Pro",
-    prices: { KES: 399, USD: 499 },
-  },
-  {
-    id: "pauseward_family_monthly",
-    tier: "family",
-    interval: "monthly",
-    displayName: "Pauseward Family",
-    prices: { KES: 899, USD: 999 },
-  },
-];
-
 export default function PricingPreview() {
-  const [products, setProducts] = useState<CatalogProduct[]>(FALLBACK_PRODUCTS);
+  const [products, setProducts] = useState<CatalogProduct[]>(FALLBACK_CATALOG_PRODUCTS);
   const [currency, setCurrency] = useState<"KES" | "USD">("KES");
   const [loading, setLoading] = useState(true);
   const [apiConnected, setApiConnected] = useState(false);

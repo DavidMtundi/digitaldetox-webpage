@@ -10,25 +10,33 @@ export default function DevicesPage() {
   const { user } = useAuth();
   const [devices, setDevices] = useState<DashboardDevice[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) return;
-    listDevices(user.uid)
+    listDevices()
       .then(setDevices)
+      .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false));
   }, [user]);
 
   return (
     <DashboardPage
       title="Devices"
-      subtitle="Mac, Windows, iOS, and Android clients linked to your account."
+      subtitle="Mac, Windows, iOS, and Android clients linked to your Pauseward account."
     >
+      {error ? (
+        <DashboardCard title="Could not load devices">
+          <p className="text-sm text-amber-700">{error}</p>
+        </DashboardCard>
+      ) : null}
+
       {loading ? (
         <p className="text-sm text-gray-500">Loading devices…</p>
       ) : devices.length === 0 ? (
         <EmptyState
           title="No devices linked"
-          description="Sign in on desktop or mobile with this account to register a device for sync."
+          description="Sign in on desktop or mobile with this account. Apps register devices through the Pauseward API when you start a session."
           action={
             <Link href="/download" className="text-sm font-medium text-emerald-700 hover:underline">
               Download an app

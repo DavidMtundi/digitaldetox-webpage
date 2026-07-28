@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import '../styles/theme.css';
+@import '../styles/dark-mode.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
@@ -867,6 +870,164 @@ html {
   @apply rounded-3xl border border-gray-200/80 bg-white p-8 shadow-xl shadow-emerald-900/5 md:p-10;
 }
 
+.contact-form-shell--elevated {
+  @apply relative overflow-hidden border-white/80 bg-white/95 shadow-2xl shadow-emerald-900/10 backdrop-blur-sm;
+}
+
+.contact-form-shell--elevated::before {
+  content: "";
+  @apply pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-600;
+}
+
+.contact-layout {
+  @apply mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start;
+}
+
+.contact-aside {
+  @apply space-y-6;
+}
+
+.contact-aside-panel {
+  @apply rounded-2xl border border-emerald-100/80 bg-white/70 p-6 shadow-sm backdrop-blur-sm md:p-8;
+}
+
+.contact-label {
+  @apply mb-1.5 block text-sm font-medium text-gray-700;
+}
+
+.contact-channel-grid {
+  @apply grid gap-5 md:grid-cols-3;
+}
+
+.contact-success-icon {
+  @apply mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100;
+}
+
+.contact-stat-band {
+  @apply border-b border-emerald-100/60 bg-white py-8 md:py-10;
+}
+
+.contact-stat-grid {
+  @apply grid gap-4 sm:grid-cols-3;
+}
+
+.contact-stat-card {
+  @apply rounded-2xl border border-emerald-100/80 bg-gradient-to-br from-emerald-50/50 to-white px-6 py-5 text-center shadow-sm;
+}
+
+.contact-stat-value {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  @apply text-2xl font-semibold text-emerald-800 md:text-3xl;
+}
+
+.contact-stat-label {
+  @apply mt-1 text-sm text-gray-600;
+}
+
+.contact-channel-link {
+  @apply mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 transition hover:gap-3;
+}
+
+.contact-copy-btn {
+  @apply inline-flex items-center gap-2 rounded-xl border border-emerald-200 bg-white px-4 py-2.5 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50;
+}
+
+.contact-resources {
+  @apply grid gap-2 sm:grid-cols-2;
+}
+
+.contact-resource-link {
+  @apply flex items-center gap-3 rounded-xl border border-gray-200/80 bg-white/80 px-4 py-3 text-sm font-medium text-gray-700 shadow-sm transition hover:border-emerald-200 hover:bg-white hover:text-emerald-800;
+}
+
+.contact-timeline {
+  @apply mt-5 space-y-5;
+}
+
+.contact-timeline-step {
+  @apply relative flex gap-4 pl-1;
+}
+
+.contact-timeline-marker {
+  @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-sm font-semibold text-white shadow-md shadow-emerald-900/15;
+}
+
+.contact-form {
+  @apply space-y-6;
+}
+
+.contact-form-header {
+  @apply flex items-start gap-4 border-b border-gray-100 pb-6;
+}
+
+.contact-form-header-icon {
+  @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700;
+}
+
+.contact-form-footer {
+  @apply flex flex-col gap-4 border-t border-gray-100 pt-6 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.contact-topic-grid {
+  @apply mt-2 flex flex-wrap gap-2;
+}
+
+.contact-topic-pill {
+  @apply rounded-full border border-gray-200 bg-white px-3.5 py-2 text-sm font-medium text-gray-700 transition hover:border-emerald-300 hover:text-emerald-800;
+}
+
+.contact-topic-pill--active {
+  @apply border-emerald-600 bg-emerald-600 text-white shadow-md shadow-emerald-900/15 hover:border-emerald-700 hover:bg-emerald-700 hover:text-white;
+}
+
+.contact-honeypot {
+  @apply pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0;
+}
+
+.contact-field-error {
+  @apply mt-1.5 text-xs text-red-600;
+}
+
+.contact-form-alert {
+  @apply rounded-xl px-4 py-3 text-sm;
+}
+
+.contact-form-alert--error {
+  @apply border border-red-200 bg-red-50 text-red-700;
+}
+
+.input-modern--error {
+  @apply border-red-300 focus:border-red-500 focus:ring-red-500/20;
+}
+
+.contact-channel-card {
+  @apply flex flex-col rounded-2xl border border-gray-200/80 bg-white p-6 shadow-sm transition hover:border-emerald-200 hover:shadow-md;
+}
+
+.contact-channel-card--primary {
+  @apply border-emerald-200/80 bg-gradient-to-br from-emerald-50/90 via-white to-white md:col-span-3 md:p-8;
+}
+
+.contact-channel-icon {
+  @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700;
+}
+
+.contact-channel-icon--muted {
+  @apply bg-gray-100 text-gray-700;
+}
+
+.contact-success-state {
+  @apply py-8 text-center md:py-12;
+}
+
+.theme-toggle {
+  @apply relative inline-flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white text-gray-600 transition hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800;
+}
+
+.theme-toggle-system-badge {
+  @apply absolute -bottom-0.5 -right-0.5 rounded-full bg-white p-0.5 text-emerald-600 shadow-sm;
+}
+
 .input-modern {
   @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm transition focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20;
 }
@@ -880,15 +1041,35 @@ html {
 }
 
 .platform-bento {
-  @apply grid gap-5 lg:grid-cols-2;
+  @apply flex flex-col gap-5;
+}
+
+.platform-row {
+  @apply grid grid-cols-1 gap-5 md:grid-cols-2;
+}
+
+.platform-row--solo {
+  @apply md:grid-cols-1;
+}
+
+.platform-row--solo .platform-tile {
+  @apply md:max-w-3xl md:mx-auto md:w-full;
 }
 
 .platform-tile {
-  @apply relative overflow-hidden rounded-2xl border border-white/70 bg-white/70 p-6 shadow-lg shadow-emerald-900/5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8;
+  @apply relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/70 bg-white/70 p-6 shadow-lg shadow-emerald-900/5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8;
 }
 
 .platform-tile-featured {
-  @apply lg:col-span-2 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-8;
+  @apply ring-1 ring-emerald-200/80;
+}
+
+.platform-logo-wrap {
+  @apply flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-gray-200/80 bg-white p-2.5 shadow-sm;
+}
+
+.platform-logo {
+  @apply relative flex items-center justify-center;
 }
 
 /* Modern scrollbar */

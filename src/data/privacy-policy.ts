@@ -1,4 +1,6 @@
-// Privacy Policy Versions Data
+export const LEGAL_CONTACT_EMAIL = "privacy@pauseward.com";
+export const LEGAL_EFFECTIVE_DATE = "July 29, 2026";
+
 export interface PrivacyVersion {
   version: string;
   effectiveDate: string;
@@ -9,150 +11,187 @@ export interface PrivacyVersion {
 
 export interface PrivacyPolicyData {
   versions: PrivacyVersion[];
-  sections: {
-    [key: string]: {
-      title: string;
-      content: string;
-      icon: string;
-    };
-  };
+  sections: Record<string, { title: string; content: string }>;
 }
 
 export const privacyPolicyVersions: PrivacyPolicyData = {
   versions: [
     {
+      version: "2.0",
+      effectiveDate: LEGAL_EFFECTIVE_DATE,
+      lastUpdated: LEGAL_EFFECTIVE_DATE,
+      isCurrent: true,
+      changes: [
+        "Rebranded to Pauseward across web, desktop, and mobile",
+        "Documented PostgreSQL account storage and web email/password sign-in",
+        "Added Paystack billing (M-Pesa and card) and subscription entitlements",
+        "Described device and blocklist sync via pauseward-api",
+        "Updated third-party processors (Paystack, Google Play, Firebase where applicable)",
+      ],
+    },
+    {
       version: "1.0",
       effectiveDate: "October 22, 2024",
       lastUpdated: "October 22, 2024",
-      isCurrent: true,
-      changes: [
-        "Initial privacy policy release",
-        "Established data collection practices",
-        "Defined user rights and permissions",
-        "Implemented Firebase integration policies"
-      ]
-    },
-    {
-      version: "0.9",
-      effectiveDate: "September 15, 2024",
-      lastUpdated: "September 15, 2024",
       isCurrent: false,
       changes: [
-        "Beta version privacy policy",
-        "Limited data collection during testing",
-        "Basic user rights framework"
-      ]
-    }
+        "Initial privacy policy under the DigitalDetox product name",
+        "Firebase-based authentication and analytics",
+      ],
+    },
   ],
   sections: {
-    "introduction": {
+    introduction: {
       title: "Introduction",
-      icon: "Shield",
-      content: `DigitalDetox ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application DigitalDetox (the "App"). Please read this privacy policy carefully.`
+      content: `Pauseward ("we," "our," or "us") provides digital wellness software — including mobile apps, desktop clients, and a web dashboard — to help you block distractions and build healthier screen habits.
+
+This Privacy Policy explains what information we collect, how we use it, who we share it with, and the choices you have. It applies when you use Pauseward websites, applications, APIs, and related services (collectively, the "Service").
+
+If you do not agree with this policy, please do not use the Service.`,
     },
     "information-collection": {
       title: "Information We Collect",
-      icon: "Database",
-      content: `We collect information to provide and improve our service. This includes personal information you provide directly, usage data from your device, and technical information necessary for app functionality.`
+      content: `### Account information
+- Email address and password (for web accounts stored in our PostgreSQL database)
+- Account identifiers, subscription tier, and entitlement status
+- Firebase authentication identifiers on some mobile or legacy clients
+
+### Billing and payments
+- Checkout references, payment status, product purchased, and currency
+- Payment channel (for example M-Pesa or card) processed by Paystack
+- We do not store full card numbers or M-Pesa PINs on our servers
+
+### Device and sync data
+- Device platform, app version, timezone, and last-seen timestamps
+- Blocklist metadata (app identifiers and domains you choose to block — not in-app message content)
+- Focus session summaries and usage analytics you choose to sync
+
+### Technical and usage data
+- IP address, browser type, and diagnostic logs for security and reliability
+- Crash reports and performance metrics
+- Cookies or local storage tokens to keep you signed in on the web
+
+### Information we do not collect
+- Content inside other apps (messages, emails, browsing history within pages)
+- Contacts, photos, microphone, or camera (unless a future feature explicitly requests it and you consent)
+- Precise GPS location`,
     },
     "how-we-use": {
       title: "How We Use Your Information",
-      icon: "Eye",
-      content: `We use your information to provide core app functionality, improve our service, and ensure security. We never sell your data and only use it as described in this policy.`
+      content: `We use information to:
+- Create and secure your account and authenticate sessions
+- Provide blocking, focus sessions, schedules, and cross-device sync
+- Process subscriptions, renewals, refunds where applicable, and payment reconciliation
+- Operate the web dashboard (devices, blocklists, payments, and account settings)
+- Improve reliability, detect abuse, and prevent fraud
+- Send service messages (receipts, renewal reminders, security alerts)
+- Comply with law and enforce our Terms of Service
+
+We do not sell your personal information.`,
     },
     "data-sharing": {
       title: "Data Sharing",
-      icon: "Users",
-      content: `We DO NOT sell your data. We may share information only in limited circumstances: with your explicit consent, with service providers that help us operate the app, when required by law, or to protect our rights.`
+      content: `We share information only when necessary:
+
+### Service providers
+- **Paystack** — payment processing (M-Pesa, cards)
+- **Google Play / Apple App Store** — in-app purchases where you buy through those stores
+- **Cloud hosting** — databases and API infrastructure for pauseward-api
+- **Firebase / Google Cloud** — optional legacy sync, marketing site configuration, or mobile auth where enabled
+
+### Legal and safety
+- When required by law, court order, or government request
+- To protect rights, safety, and security of users and Pauseward
+
+### Business transfers
+- If we merge, acquire, or sell assets, data may transfer subject to this policy
+
+We require processors to handle data only for our instructions and apply appropriate safeguards.`,
     },
     "data-security": {
       title: "Data Storage and Security",
-      icon: "Lock",
-      content: `We implement industry-standard security measures including local storage, secure cloud storage via Firebase, SSL/TLS encryption, and secure authentication.`
+      content: `We use administrative, technical, and organizational measures including:
+- Encrypted connections (HTTPS/TLS) for web and API traffic
+- Hashed passwords for web accounts (passwords are not stored in plain text)
+- Access controls on production databases and admin tools
+- Webhook signature verification for payment providers
+
+No method of transmission or storage is 100% secure. Please use a strong, unique password and keep it confidential.`,
     },
-    "permissions": {
-      title: "Permissions Explained",
-      icon: "Smartphone",
-      content: `We request specific permissions to provide app functionality: Accessibility Service for app blocking, Usage Stats for tracking, and Display Over Other Apps for notifications.`
+    permissions: {
+      title: "Device Permissions",
+      content: `Mobile and desktop apps may request OS permissions to function:
+
+### Android
+- **Accessibility / usage access** — detect when a blocked app opens and show blocking UI
+- **Display over other apps** — focus overlays and reminders
+- **Usage stats** — screen-time and app-duration analytics
+
+### iOS / macOS
+- **Screen Time / Family Controls** (where supported) — app shields and limits
+- **Notifications** — focus session reminders
+
+### What permissions do not allow
+- Reading private content inside other applications
+- Recording your screen without your knowledge
+- Accessing unrelated personal files
+
+You can revoke permissions in system settings; some features may stop working.`,
     },
     "your-rights": {
       title: "Your Privacy Rights",
-      icon: "Shield",
-      content: `You have the right to access, update, delete, and export your data. You can also opt-out of analytics tracking and manage your privacy preferences through app settings.`
+      content: `Depending on your location, you may have the right to:
+- Access a copy of personal data we hold about you
+- Correct inaccurate account information
+- Delete your account and associated cloud data
+- Export portable copies of your data
+- Object to or restrict certain processing
+- Withdraw consent where processing is consent-based
+
+To exercise these rights, contact us at the email below. We may verify your identity before fulfilling requests.
+
+Kenya Data Protection Act and other applicable laws may provide additional rights for residents of Kenya and other regions.`,
     },
     "children-privacy": {
       title: "Children's Privacy",
-      icon: "Shield",
-      content: `DigitalDetox is not intended for children under 13. We do not knowingly collect personal information from children under 13 and will delete such information if discovered.`
+      content: `Pauseward is not directed at children under 13 (or the minimum age required in your country). We do not knowingly collect personal information from children. If you believe a child has provided us data, contact us and we will delete it promptly.
+
+Family plans may be managed by a parent or guardian who is responsible for minors' use of the Service.`,
     },
     "data-retention": {
       title: "Data Retention",
-      icon: "Database",
-      content: `We retain data while your account is active, up to 90 days after account deletion for inactive users, and anonymized analytics for up to 2 years.`
+      content: `We retain data while your account is active or as needed to provide the Service.
+
+After account deletion:
+- Account and profile data are removed from active systems within a reasonable period
+- Billing records may be kept longer where required for tax, accounting, or legal obligations
+- Anonymized analytics may be retained to improve the product
+
+You may request deletion by contacting support or through in-app settings where available.`,
     },
     "international-users": {
       title: "International Users",
-      icon: "Globe",
-      content: `Your information may be transferred to and processed in countries other than your own. We ensure adequate safeguards are in place to protect your data and comply with GDPR, CCPA, and other privacy regulations.`
+      content: `Pauseward is operated from Kenya and may process data in Kenya, the United States, the European Union, or other regions where our providers host infrastructure.
+
+When we transfer data internationally, we use appropriate safeguards such as standard contractual clauses or equivalent mechanisms where required by law.
+
+If you use the Service from the EU, UK, or other jurisdictions with specific privacy laws, you may have additional rights as described in the "Your Privacy Rights" section.`,
     },
     "changes-updates": {
       title: "Changes to This Policy",
-      icon: "Eye",
-      content: `We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy in the app, updating the date, and sending in-app notifications for significant changes.`
-    }
-  }
+      content: `We may update this Privacy Policy from time to time. When we make material changes, we will:
+- Post the updated policy on this page with a new effective date
+- Update the version history below
+- Notify registered users by email or in-app notice when appropriate
+
+Continued use of the Service after changes become effective constitutes acceptance of the updated policy.`,
+    },
+  },
 };
 
-// Version-specific content variations
-export const versionSpecificContent = {
+export const versionSpecificContent: Record<string, Partial<Record<string, string>>> = {
+  "2.0": {},
   "1.0": {
-    "introduction": `DigitalDetox ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application DigitalDetox (the "App"). Please read this privacy policy carefully.`,
-    "information-collection": `### Personal Information
-- **Account Information**: Email address, display name, and profile photo (when using Google Sign-In)
-- **Authentication Data**: User ID and authentication tokens for secure login
-- **Device Information**: Device model, operating system version, and unique device identifiers
-
-### App Usage Data
-- **App Usage Statistics**: Which apps you use, frequency, and duration
-- **Screen Time Data**: Total daily screen time and app-specific screen time
-- **Blocked Apps List**: Apps you choose to block or limit
-- **Focus Sessions**: Duration and frequency of focus mode usage
-- **Daily Limits**: App usage limits you set
-
-### What We Do NOT Collect
-- Content within other apps
-- Browsing history or website content
-- Contacts, SMS, or call logs
-- Precise location data
-- Audio, video, or camera access`,
-    "permissions": `### Accessibility Service
-- **Why**: To detect when you open a blocked app and display blocking dialog
-- **What**: Access to package names of running apps
-- **What NOT**: We cannot read app content, messages, or personal data within apps
-
-### Usage Stats Permission
-- **Why**: To track how long you use each app
-- **What**: App usage duration and frequency
-- **What NOT**: We cannot see what you do within apps
-
-### Display Over Other Apps
-- **Why**: To show focus mode notifications and blocking dialogs
-- **What**: Permission to display overlay windows
-- **What NOT**: We don't capture screenshots or record your screen`
+    introduction: `This archived version applied to the DigitalDetox mobile application prior to the Pauseward rebrand. Current users are governed by version 2.0 unless otherwise agreed in writing.`,
   },
-  "0.9": {
-    "introduction": `DigitalDetox ("we," "our," or "us") is committed to protecting your privacy during our beta testing phase. This Privacy Policy explains our limited data collection practices during the testing period.`,
-    "information-collection": `### Beta Testing Data
-- **Basic Usage Data**: App launch frequency and basic functionality usage
-- **Crash Reports**: Technical data to improve app stability
-- **Feedback Data**: Any feedback you provide during testing
-
-### Limited Collection
-During beta testing, we collect minimal data necessary for app functionality and improvement.`,
-    "permissions": `### Beta Permissions
-- **Basic App Access**: Required for core functionality
-- **Usage Tracking**: Limited to essential metrics only
-
-*Note: Full permission explanations will be available in the final release.*`
-  }
 };

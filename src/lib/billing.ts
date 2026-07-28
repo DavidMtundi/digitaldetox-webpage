@@ -1,4 +1,7 @@
-import { getAuth } from "firebase/auth";
+import { displayPrice, formatPrice } from "@/lib/billing-format";
+import { apiGet, apiPost } from "@/lib/api-client";
+
+export { displayPrice, formatPrice };
 
 export interface CatalogProduct {
   id: string;
@@ -8,6 +11,38 @@ export interface CatalogProduct {
   description?: string;
   prices: Record<string, number>;
 }
+
+/** Shown when the catalog API is unreachable — matches pauseward-api seed prices. */
+export const FALLBACK_CATALOG_PRODUCTS: CatalogProduct[] = [
+  {
+    id: "pauseward_pro_monthly",
+    tier: "pro",
+    interval: "monthly",
+    displayName: "Pauseward Pro",
+    prices: { KES: 399, USD: 499 },
+  },
+  {
+    id: "pauseward_pro_annual",
+    tier: "pro",
+    interval: "annual",
+    displayName: "Pauseward Pro (Annual)",
+    prices: { KES: 3499, USD: 3999 },
+  },
+  {
+    id: "pauseward_family_monthly",
+    tier: "family",
+    interval: "monthly",
+    displayName: "Pauseward Family",
+    prices: { KES: 799, USD: 899 },
+  },
+  {
+    id: "pauseward_family_annual",
+    tier: "family",
+    interval: "annual",
+    displayName: "Pauseward Family (Annual)",
+    prices: { KES: 7499, USD: 7999 },
+  },
+];
 
 export interface BillingCatalogResponse {
   schemaVersion: number;
@@ -39,60 +74,27 @@ export interface CheckoutStatusResponse {
   entitlement?: EntitlementResponse;
 }
 
-function getApiBaseUrl(): string {
-  const url = process.env.NEXT_PUBLIC_PAUSEWARD_API_URL;
-  if (!url) {
-    throw new Error("NEXT_PUBLIC_PAUSEWARD_API_URL is not configured");
-  }
-  return url.replace(/\/$/, "");
+export interface PaymentHistoryItem {
+  reference: string;
+  status: string;
+  productId: string;
+  productName: string;
+  tier: string;
+  interval: string;
+  amountMinor: number;
+  currency: string;
+  formatted: string;
+  channel: string | null;
+  createdAt: string;
+  completedAt: string | null;
+  failedAt: string | null;
+  failureReason: string | null;
+  authorizationUrl: string | null;
 }
 
-async function getAuthToken(): Promise<string> {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (!user) {
-    throw new Error("Sign in required");
-  }
-  return user.getIdToken();
-}
-
-async function apiGet<T>(path: string, auth = false): Promise<T> {
-  const headers: Record<string, string> = {};
-  if (auth) {
-    headers.Authorization = `Bearer ${await getAuthToken()}`;
-  }
-
-  const response = await fetch(`${getApiBaseUrl()}${path}`, { headers });
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    const message =
-      typeof data.error === "string" ? data.error : `Request failed (${response.status})`;
-    throw new Error(message);
-  }
-
-  return data as T;
-}
-
-async function apiPost<T>(path: string, body: Record<string, unknown>): Promise<T> {
-  const response = await fetch(`${getApiBaseUrl()}${path}`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${await getAuthToken()}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-  const data = await response.json().catch(() => ({}));
-
-  if (!response.ok) {
-    const message =
-      typeof data.error === "string" ? data.error : `Request failed (${response.status})`;
-    throw new Error(message);
-  }
-
-  return data as T;
+export interface PaymentHistoryResponse {
+  total: number;
+  items: PaymentHistoryItem[];
 }
 
 export async function fetchBillingCatalog(region?: string): Promise<BillingCatalogResponse> {
@@ -102,6 +104,17 @@ export async function fetchBillingCatalog(region?: string): Promise<BillingCatal
 
 export async function fetchEntitlements(): Promise<EntitlementResponse> {
   return apiGet<EntitlementResponse>("/v1/me/entitlements", true);
+}
+
+export async function fetchPaymentHistory(
+  params?: { status?: string; limit?: number; offset?: number },
+): Promise<PaymentHistoryResponse> {
+  const search = new URLSearchParams();
+  if (params?.status) search.set("status", params.status);
+  if (params?.limit != null) search.set("limit", String(params.limit));
+  if (params?.offset != null) search.set("offset", String(params.offset));
+  const query = search.toString();
+  return apiGet<PaymentHistoryResponse>(`/v1/me/payments${query ? `?${query}` : ""}`, true);
 }
 
 export async function fetchCheckoutStatus(
@@ -124,21 +137,5 @@ export async function initiateCheckout(input: {
     currency: input.currency ?? "KES",
     callbackUrl: input.callbackUrl,
     cancelUrl: input.cancelUrl,
-  });
-}
-
-export function formatPrice(amountMajor: number, currency: string): string {
-  const code = currency.toUpperCase();
-  if (code === "KES") return `KSh ${amountMajor.toLocaleString()}`;
-  if (code === "USD") return `$${(amountMajor / 100).toFixed(2)}`;
-  return `${code} ${amountMajor}`;
-}
-
-/** Catalog prices are stored in major units for KES, minor for USD (cents). */
-export function displayPrice(prices: Record<string, number>, currency: string): string {
-  const code = currency.toUpperCase();
-  const amount = prices[code];
-  if (amount == null) return "—";
-  if (code === "USD") return `$${(amount / 100).toFixed(2)}`;
-  return `KSh ${amount.toLocaleString()}`;
+  }, true);
 }

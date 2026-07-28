@@ -25,7 +25,7 @@ export default function PageHero({
 
   return (
     <section
-      className={`hero-shell relative overflow-hidden border-b border-emerald-100/50 ${
+      className={`hero-shell relative overflow-hidden border-b border-emerald-100/50 dark:border-gray-800/60 ${
         size === "compact" ? "py-16 md:py-20" : "py-20 md:py-28 lg:py-32"
       }`}
     >
@@ -45,7 +45,7 @@ export default function PageHero({
             <h1
               className={`font-display ${
                 size === "compact" ? "text-4xl md:text-5xl lg:text-[3.25rem]" : "text-[2.75rem] md:text-6xl lg:text-[4.25rem]"
-              } leading-[1.05] tracking-tight text-gray-900`}
+              } leading-[1.05] tracking-tight text-gray-900 dark:text-gray-50`}
             >
               {title}
             </h1>

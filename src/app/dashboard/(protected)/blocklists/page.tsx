@@ -10,11 +10,13 @@ export default function BlocklistsPage() {
   const { user } = useAuth();
   const [policies, setPolicies] = useState<DashboardPolicy[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) return;
-    listPolicies(user.uid)
+    listPolicies()
       .then(setPolicies)
+      .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false));
   }, [user]);
 
@@ -23,12 +25,18 @@ export default function BlocklistsPage() {
       title="Blocklists"
       subtitle="Groups of apps and sites to block during focus."
     >
+      {error ? (
+        <DashboardCard title="Could not load blocklists">
+          <p className="text-sm text-amber-700">{error}</p>
+        </DashboardCard>
+      ) : null}
+
       {loading ? (
         <p className="text-sm text-gray-500">Loading blocklists…</p>
       ) : policies.length === 0 ? (
         <EmptyState
-          title="No blocklists synced yet"
-          description="Create blocklists in the macOS or Windows desktop app, or on Android. They will appear here after cloud sync."
+          title="No blocklists yet"
+          description="Create blocklists in the macOS or Windows desktop app. They sync to your account through the Pauseward API."
           action={
             <Link href="/download" className="text-sm font-medium text-emerald-700 hover:underline">
               Download Pauseward

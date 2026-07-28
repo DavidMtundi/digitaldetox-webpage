@@ -116,23 +116,23 @@
   opacity: var(--pattern-opacity-high);
 }
 
-/* Dark theme support (for future implementation) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #1f2937;
-    --bg-secondary: #111827;
-    --bg-hero: #1f2937;
-    --bg-features: #1f2937;
-    --bg-stats: #1f2937;
-    
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --text-muted: #9ca3af;
-    
-    --ui-card: #374151;
-    --ui-border: #4b5563;
-    --ui-shadow: rgba(0, 0, 0, 0.3);
-  }
+/* Dark theme variables — applied when .dark is on <html> */
+.dark {
+  --bg-primary: #111827;
+  --bg-secondary: #030712;
+  --bg-hero: #111827;
+  --bg-features: #111827;
+  --bg-stats: #111827;
+  --bg-cta: #047857;
+
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-accent: #6ee7b7;
+
+  --ui-card: #1f2937;
+  --ui-border: #374151;
+  --ui-shadow: rgba(0, 0, 0, 0.35);
 }
 
 /* Theme transition animations */
