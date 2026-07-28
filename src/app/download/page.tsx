@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Download, Monitor, Smartphone, Laptop, Globe } from "lucide-react";
+import { ArrowRight, Check, Download, Globe, Laptop, Monitor, Smartphone } from "lucide-react";
+import PageHero from "@/components/marketing/page-hero";
+import SectionShell from "@/components/marketing/section-shell";
+import SectionHeader from "@/components/marketing/section-header";
 import { PLATFORMS, statusLabel } from "@/lib/platforms";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
 
@@ -13,6 +16,12 @@ const ICONS = {
   web: Globe,
 } as const;
 
+const STATUS_PILL: Record<string, string> = {
+  available: "platform-pill-live",
+  beta: "platform-pill-beta",
+  coming_soon: "platform-pill-soon",
+};
+
 export default function DownloadPage() {
   const { links } = useExternalLinks();
 
@@ -22,81 +31,83 @@ export default function DownloadPage() {
   }
 
   return (
-    <div className="bg-white">
-      <section className="border-b border-gray-200 bg-gradient-to-br from-emerald-50/60 via-white to-blue-50/40">
-        <div className="container-modern py-16 md:py-20">
-          <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">All platforms</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
-            Pauseward on every device you use
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-gray-600">
-            Android is live today. macOS and iOS are in beta. Windows is coming soon. Use the web
-            dashboard to manage blocklists and linked devices across environments.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/dashboard/login" className="btn-primary">
-              Open web dashboard
-            </Link>
-            <a href="#platforms" className="btn-secondary">
-              Compare platforms
-            </a>
-          </div>
-        </div>
-      </section>
+    <div className="marketing-page">
+      <PageHero
+        eyebrow="All platforms"
+        title={
+          <>
+            One focus system.
+            <br />
+            <span className="italic text-emerald-800">Every device.</span>
+          </>
+        }
+        subtitle="Android is live. iOS and macOS are in beta. Windows is on the way. Manage policies from any browser."
+        size="compact"
+      >
+        <a href="#platforms" className="btn-primary inline-flex items-center gap-2">
+          Compare platforms
+          <ArrowRight className="h-4 w-4" />
+        </a>
+        <Link href="/pricing" className="btn-secondary">
+          View pricing
+        </Link>
+      </PageHero>
 
-      <section id="platforms" className="container-modern py-16">
-        <div className="grid gap-6 lg:grid-cols-2">
+      <SectionShell id="platforms" tone="white">
+        <SectionHeader
+          eyebrow="Platforms"
+          title="Pick your environment"
+          subtitle="Each platform is tailored to how you actually use that device."
+        />
+        <div className="platform-bento">
           {PLATFORMS.map((platform) => {
             const Icon = ICONS[platform.id];
             const href = resolveHref(platform);
             const downloadable = Boolean(href) && platform.status !== "coming_soon";
+            const featured = platform.status === "available";
 
             return (
               <article
                 key={platform.id}
-                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+                className={`platform-tile ${featured ? "platform-tile-featured gradient-border" : ""}`}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
-                      <Icon className="h-5 w-5" />
+                <div>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="bento-icon icon-bg-emerald text-emerald-700">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h2 className="type-card-title text-xl">{platform.name}</h2>
+                        <p className="mt-1 text-sm text-gray-600">{platform.tagline}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-xl font-semibold text-gray-900">{platform.name}</h2>
-                      <p className="text-sm text-gray-600">{platform.tagline}</p>
-                    </div>
+                    <span className={`platform-pill ${STATUS_PILL[platform.status]}`}>
+                      {statusLabel(platform.status)}
+                    </span>
                   </div>
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-                    {statusLabel(platform.status)}
-                  </span>
+                  <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+                    {platform.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
+                        <Check className="h-4 w-4 shrink-0 text-emerald-600" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                <ul className="mt-5 space-y-2 text-sm text-gray-700">
-                  {platform.features.map((feature) => (
-                    <li key={feature}>• {feature}</li>
-                  ))}
-                </ul>
-
-                <div className="mt-6">
+                <div className="mt-6 lg:mt-0">
                   {platform.id === "web" ? (
-                    <Link href="/dashboard/login" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:underline">
-                      Sign in to dashboard
+                    <Link href="/dashboard/login" className="btn-secondary inline-flex">
+                      Open dashboard
                     </Link>
                   ) : downloadable && href ? (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-                    >
+                    <a href={href} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-2">
                       <Download className="h-4 w-4" />
                       Download
                     </a>
                   ) : (
                     <p className="text-sm text-gray-500">
-                      {platform.status === "coming_soon"
-                        ? "Join the waitlist on the home page — we will email you when it ships."
-                        : "Download link coming soon — check back or contact support."}
+                      {platform.status === "coming_soon" ? "Notify me when it ships" : "Link coming soon"}
                     </p>
                   )}
                 </div>
@@ -104,7 +115,7 @@ export default function DownloadPage() {
             );
           })}
         </div>
-      </section>
+      </SectionShell>
     </div>
   );
 }

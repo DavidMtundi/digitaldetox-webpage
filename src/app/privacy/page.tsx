@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Shield, Lock, Eye, Database, Users, Globe, Mail, Phone, Smartphone, AlertCircle, Clock, FileText } from 'lucide-react';
+import { Clock, Database, Eye, FileText, Globe, Lock, Mail, Phone, Shield, Smartphone } from 'lucide-react';
 import { privacyPolicyVersions, versionSpecificContent } from '@/data/privacy-policy';
-import { themeStyles } from '../../styles/theme';
 import { useExternalLinks } from '@/hooks/useExternalLinks';
+import PageHero from '@/components/marketing/page-hero';
+import LegalAccordion from '@/components/marketing/legal-accordion';
 
 export default function VersionedPrivacyPage() {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
@@ -45,7 +46,7 @@ export default function VersionedPrivacyPage() {
     {
       id: 'data-sharing',
       title: 'Data Sharing',
-      icon: <Users className="h-5 w-5" />,
+      icon: <Shield className="h-5 w-5" />,
       content: privacyPolicyVersions.sections['data-sharing'].content
     },
     {
@@ -164,96 +165,67 @@ export default function VersionedPrivacyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-6">
-              <Shield className="h-8 w-8 text-gray-600" />
-            </div>
-            <h1 className="text-4xl font-bold mb-4" style={themeStyles.text.primary}>
-              Privacy Policy
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Your privacy is important to us. Learn how we collect, use, and protect your information when you use DigitalDetox.
-            </p>
-            
-            {/* Version Selector */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <div className="flex items-center space-x-3">
-                <Clock className="h-5 w-5 text-gray-500" />
-                <span className="text-sm text-gray-500">Version:</span>
-                <select
-                  value={selectedVersion}
-                  onChange={(e) => setSelectedVersion(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                >
-                  {privacyPolicyVersions.versions.map((version) => (
-                    <option key={version.version} value={version.version}>
-                      {version.version} {version.isCurrent ? '(Current)' : ''}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              <div className="flex items-center space-x-2 text-sm text-gray-500">
-                <span>Effective:</span>
-                <span className="font-medium">{currentVersion?.effectiveDate}</span>
-              </div>
-            </div>
-
-            {/* Version History Toggle */}
-            <button
-              onClick={() => setShowVersionHistory(!showVersionHistory)}
-              className="mt-4 text-sm text-blue-600 hover:text-blue-800 flex items-center space-x-1 mx-auto"
+    <div className="marketing-page">
+      <PageHero
+        eyebrow="Legal"
+        title="Privacy Policy"
+        subtitle="How we collect, use, and protect your information when you use Pauseward."
+        size="compact"
+      >
+        <div className="flex flex-col items-center gap-3 sm:flex-row">
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <Clock className="h-4 w-4" />
+            <select
+              value={selectedVersion}
+              onChange={(e) => setSelectedVersion(e.target.value)}
+              className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
             >
-              <FileText className="h-4 w-4" />
-              <span>{showVersionHistory ? 'Hide' : 'Show'} Version History</span>
-            </button>
+              {privacyPolicyVersions.versions.map((version) => (
+                <option key={version.version} value={version.version}>
+                  v{version.version} {version.isCurrent ? "(Current)" : ""}
+                </option>
+              ))}
+            </select>
           </div>
+          <span className="text-sm text-gray-500">Effective {currentVersion?.effectiveDate}</span>
         </div>
-      </div>
+        <button
+          type="button"
+          onClick={() => setShowVersionHistory(!showVersionHistory)}
+          className="text-sm font-medium text-emerald-700 hover:underline"
+        >
+          <FileText className="mr-1 inline h-4 w-4" />
+          {showVersionHistory ? "Hide" : "Show"} version history
+        </button>
+      </PageHero>
 
-      {/* Version History */}
       {showVersionHistory && (
-        <div className="bg-blue-50 border-b border-blue-200">
-          <div className="max-w-4xl mx-auto px-4 py-8">
-            <h2 className="text-2xl font-bold mb-6" style={themeStyles.text.primary}>
-              Version History
-            </h2>
-            <div className="space-y-4">
+        <div className="border-b border-emerald-100 bg-emerald-50/50">
+          <div className="container-modern py-10">
+            <h2 className="font-display text-2xl text-gray-900">Version history</h2>
+            <div className="mt-6 space-y-4">
               {privacyPolicyVersions.versions.map((version) => (
                 <div
                   key={version.version}
-                  className={`p-4 rounded-lg border ${
-                    version.isCurrent 
-                      ? 'bg-green-50 border-green-200' 
-                      : 'bg-white border-gray-200'
+                  className={`rounded-2xl border p-5 ${
+                    version.isCurrent ? "border-emerald-200 bg-white" : "border-gray-200 bg-white/80"
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-lg">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-semibold text-gray-900">
                       Version {version.version}
                       {version.isCurrent && (
-                        <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
-                          Current
-                        </span>
+                        <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800">Current</span>
                       )}
                     </h3>
-                    <div className="text-sm text-gray-500">
-                      Effective: {version.effectiveDate}
-                    </div>
+                    <span className="text-sm text-gray-500">Effective {version.effectiveDate}</span>
                   </div>
                   {version.changes && (
-                    <div>
-                      <h4 className="font-medium mb-2">Changes in this version:</h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-gray-600">
-                        {version.changes.map((change, index) => (
-                          <li key={index}>{change}</li>
-                        ))}
-                      </ul>
-                    </div>
+                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-gray-600">
+                      {version.changes.map((change, index) => (
+                        <li key={index}>{change}</li>
+                      ))}
+                    </ul>
                   )}
                 </div>
               ))}
@@ -262,99 +234,46 @@ export default function VersionedPrivacyPage() {
         </div>
       )}
 
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-16">
-        {/* Introduction */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4" style={themeStyles.text.primary}>
-            Introduction
-          </h2>
-          <div className="prose prose-gray max-w-none">
-            <p className="text-gray-600 mb-4">
-              {versionSpecificContent[selectedVersion as keyof typeof versionSpecificContent]?.introduction || 
-               privacyPolicyVersions.sections.introduction.content}
-            </p>
-          </div>
-        </div>
-
-        {/* Privacy Sections */}
-        <div className="space-y-6">
-          {sections.slice(1).map((section) => (
-            <div key={section.id} className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-              <button
-                onClick={() => toggleSection(section.id)}
-                className="w-full px-8 py-6 text-left hover:bg-gray-50 transition-colors duration-200 flex items-center justify-between"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="text-gray-600">
-                    {section.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold" style={themeStyles.text.primary}>
-                    {section.title}
-                  </h3>
-                </div>
-                <div className="text-gray-400">
-                  {openSections[section.id] ? (
-                    <ChevronUp className="h-5 w-5" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5" />
-                  )}
-                </div>
-              </button>
-              
-              {openSections[section.id] && (
-                <div className="px-8 pb-6 border-t border-gray-100">
-                  <div className="pt-6">
-                    {renderContent(section.content)}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Contact Information */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mt-8">
-          <h2 className="text-2xl font-bold mb-6" style={themeStyles.text.primary}>
-            Contact Us
-          </h2>
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-semibold mb-3" style={themeStyles.text.primary}>
-                Contact Information
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-3 text-gray-600">
-                  <Mail className="h-5 w-5" />
-                  <span><strong>Email:</strong> {links.contact.email}</span>
-                </div>
-                <div className="flex items-center space-x-3 text-gray-600">
-                  <Mail className="h-5 w-5" />
-                  <span><strong>Support:</strong> {links.contact.email}</span>
-                </div>
-                <div className="flex items-center space-x-3 text-gray-600">
-                  <Phone className="h-5 w-5" />
-                  <span><strong>Response Time:</strong> We aim to respond within 48 hours</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Legal Notice */}
-        <div className="bg-gray-100 rounded-2xl p-6 mt-8">
-          <h3 className="font-semibold mb-3" style={themeStyles.text.primary}>
-            Your Consent
-          </h3>
-          <p className="text-sm text-gray-600 mb-4">
-            By using DigitalDetox, you consent to this Privacy Policy and agree to its terms.
+      <div className="container-modern py-12 md:py-16">
+        <div className="glass-card mb-8 !p-8">
+          <h2 className="font-display text-2xl text-gray-900">Introduction</h2>
+          <p className="mt-4 leading-relaxed text-gray-600">
+            {versionSpecificContent[selectedVersion as keyof typeof versionSpecificContent]?.introduction ||
+              privacyPolicyVersions.sections.introduction.content}
           </p>
-          <div className="border-t border-gray-300 pt-4">
-            <p className="text-xs text-gray-500">
-              <strong>DigitalDetox</strong> - Digital Wellness Companion<br />
-              Version {selectedVersion} | © 2024 DigitalDetox. All rights reserved.
-            </p>
+        </div>
+
+        <LegalAccordion
+          sections={sections.slice(1).map((section) => ({
+            id: section.id,
+            title: section.title,
+            icon: section.icon,
+            content: renderContent(section.content),
+          }))}
+          openSections={openSections}
+          onToggle={(id) => toggleSection(id)}
+        />
+
+        <div className="glass-card mt-8 !p-8">
+          <h2 className="font-display text-2xl text-gray-900">Contact us</h2>
+          <div className="mt-4 space-y-3 text-gray-600">
+            <div className="flex items-center gap-3">
+              <Mail className="h-5 w-5 text-emerald-600" />
+              <span>{links.contact.email}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Phone className="h-5 w-5 text-emerald-600" />
+              <span>We aim to respond within 48 hours</span>
+            </div>
           </div>
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-sm text-gray-600">
+          <p className="font-semibold text-gray-900">Your consent</p>
+          <p className="mt-2">By using Pauseward, you consent to this Privacy Policy and agree to its terms.</p>
+          <p className="mt-4 text-xs text-gray-500">
+            Pauseward · Version {selectedVersion} · © {new Date().getFullYear()} Pauseward. All rights reserved.
+          </p>
         </div>
       </div>
     </div>

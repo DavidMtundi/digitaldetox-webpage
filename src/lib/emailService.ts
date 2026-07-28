@@ -1,11 +1,11 @@
-import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
+import { collection, serverTimestamp, getDocs, doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from './firebase';
 
 export interface EmailSubscription {
   id?: string;
   email: string;
-  subscribedAt: any; // Firestore timestamp
-  source: string; // Where the subscription came from
+  subscribedAt: unknown;
+  source: string;
   status: 'active' | 'unsubscribed';
 }
 
@@ -44,11 +44,15 @@ export async function saveEmailSubscription(email: string, source: string = 'web
       message: 'Successfully subscribed to updates!',
       id: normalizedEmail
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error saving email subscription:', error);
-    
-    // Handle specific Firestore errors
-    if (error.code === 'permission-denied') {
+
+    const code =
+      error && typeof error === 'object' && 'code' in error
+        ? String((error as { code?: string }).code)
+        : undefined;
+
+    if (code === 'permission-denied') {
       return {
         success: false,
         message: 'Permission denied. Please check your email format.'

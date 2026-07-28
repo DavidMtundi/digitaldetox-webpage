@@ -64,7 +64,7 @@ export function useEmailSubscription() {
           error: result.message
         }));
       }
-    } catch (error) {
+    } catch {
       setState(prev => ({
         ...prev,
         isSubmitted: false,

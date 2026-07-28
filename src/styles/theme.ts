@@ -122,35 +122,31 @@ export const theme = {
   }
 }
 
+type ThemeLeaf = string | number | ThemeNode;
+type ThemeNode = { [key: string]: ThemeLeaf };
+
+function resolveThemePath(root: ThemeNode, path: string, fallback: string): string {
+  const keys = path.split('.');
+  let value: ThemeLeaf = root;
+
+  for (const key of keys) {
+    if (typeof value !== 'object' || value === null || Array.isArray(value) || !(key in value)) {
+      console.warn(`Theme value not found: ${path}`);
+      return fallback;
+    }
+    value = value[key];
+  }
+
+  return typeof value === 'string' ? value : fallback;
+}
+
 // Theme utility functions
 export const getThemeColor = (path: string): string => {
-  const keys = path.split('.')
-  let value: any = theme.colors
-  
-  for (const key of keys) {
-    value = value[key]
-    if (value === undefined) {
-      console.warn(`Theme color not found: ${path}`)
-      return '#000000'
-    }
-  }
-  
-  return value
+  return resolveThemePath(theme.colors as ThemeNode, path, '#000000');
 }
 
 export const getThemeSpacing = (path: string): string => {
-  const keys = path.split('.')
-  let value: any = theme.spacing
-  
-  for (const key of keys) {
-    value = value[key]
-    if (value === undefined) {
-      console.warn(`Theme spacing not found: ${path}`)
-      return '1rem'
-    }
-  }
-  
-  return value
+  return resolveThemePath(theme.spacing as ThemeNode, path, '1rem');
 }
 
 // CSS-in-JS style objects for easy use

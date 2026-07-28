@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { DashboardCard, DashboardPage } from "@/components/dashboard/page-shell";
 import { useAuth } from "@/components/auth/auth-provider";
 import { getOverview, type DashboardOverview } from "@/lib/dashboard-repository";
+import { EntitlementResponse, fetchEntitlements } from "@/lib/billing";
 import { PLATFORMS } from "@/lib/platforms";
 
 export default function DashboardHomePage() {
   const { user } = useAuth();
   const [overview, setOverview] = useState<DashboardOverview | null>(null);
+  const [entitlement, setEntitlement] = useState<EntitlementResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -17,6 +19,9 @@ export default function DashboardHomePage() {
     getOverview(user.uid)
       .then(setOverview)
       .catch((err: Error) => setError(err.message));
+    fetchEntitlements()
+      .then(setEntitlement)
+      .catch(() => setEntitlement(null));
   }, [user]);
 
   return (
@@ -40,12 +45,16 @@ export default function DashboardHomePage() {
         </DashboardCard>
       ) : null}
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-4">
         <MetricCard label="Linked devices" value={overview ? String(overview.deviceCount) : "—"} />
         <MetricCard label="Blocklists" value={overview ? String(overview.policyCount) : "—"} />
         <MetricCard
           label="Active enforcement"
           value={overview ? String(overview.activeDevices) : "—"}
+        />
+        <MetricCard
+          label="Plan"
+          value={entitlement ? entitlement.tier.charAt(0).toUpperCase() + entitlement.tier.slice(1) : "Free"}
         />
       </div>
 
@@ -76,6 +85,15 @@ export default function DashboardHomePage() {
             <p>• Edit blocklists on desktop, then sync here</p>
             <p>• Review linked devices and enforcement health</p>
             <p>• Download builds for each platform from the apps page</p>
+            {!entitlement || entitlement.tier === "free" ? (
+              <p>
+                •{" "}
+                <Link href="/pricing" className="font-medium text-emerald-700 hover:underline">
+                  Upgrade to Pro
+                </Link>{" "}
+                with M-Pesa or card
+              </p>
+            ) : null}
           </div>
         </DashboardCard>
       </div>

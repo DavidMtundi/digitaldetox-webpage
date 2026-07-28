@@ -93,7 +93,7 @@ export function useExternalLinks() {
           setLinks(FALLBACK_LINKS);
         }
         setError(null);
-      } catch (err: any) {
+      } catch {
         setError('Failed to load links');
         // Use fallback values on error
         setLinks(FALLBACK_LINKS);

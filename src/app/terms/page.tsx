@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, FileText, Scale, AlertTriangle, Users, Shield, Mail, Phone } from 'lucide-react';
-import { themeStyles } from '../../styles/theme';
+import { AlertTriangle, FileText, Mail, Phone, Scale, Shield, Users } from 'lucide-react';
 import { useExternalLinks } from '@/hooks/useExternalLinks';
+import PageHero from '@/components/marketing/page-hero';
+import LegalAccordion from '@/components/marketing/legal-accordion';
 
 export default function TermsPage() {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
@@ -27,9 +28,9 @@ export default function TermsPage() {
             By accessing and using Pauseward, you accept and agree to be bound by the terms and provision of this agreement. 
             If you do not agree to abide by the above, please do not use this service.
           </p>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="font-semibold text-blue-800 mb-2">Important Notice</h4>
-            <p className="text-blue-700 text-sm">
+          <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
+            <h4 className="font-semibold text-emerald-900 mb-2">Important Notice</h4>
+            <p className="text-emerald-800 text-sm">
               These terms constitute a legally binding agreement between you and Pauseward. Please read them carefully.
             </p>
           </div>
@@ -55,7 +56,7 @@ export default function TermsPage() {
           <div>
             <h4 className="font-semibold mb-2">Service Availability</h4>
             <ul className="list-disc list-inside space-y-1 text-gray-600">
-              <li>Services are provided on an "as is" and "as available" basis</li>
+              <li>Services are provided on an &quot;as is&quot; and &quot;as available&quot; basis</li>
               <li>We reserve the right to modify or discontinue services</li>
               <li>Service availability may vary by region</li>
               <li>Some features may require internet connectivity</li>
@@ -88,9 +89,9 @@ export default function TermsPage() {
               <li>Do not use the service to harm others or violate laws</li>
             </ul>
           </div>
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <h4 className="font-semibold text-red-800 mb-2">Prohibited Activities</h4>
-            <ul className="list-disc list-inside space-y-1 text-red-700 text-sm">
+          <div className="rounded-xl border border-rose-100 bg-rose-50 p-4">
+            <h4 className="font-semibold text-rose-900 mb-2">Prohibited Activities</h4>
+            <ul className="list-disc list-inside space-y-1 text-rose-800 text-sm">
               <li>Reverse engineering or decompiling the software</li>
               <li>Creating multiple accounts to circumvent restrictions</li>
               <li>Sharing account credentials with others</li>
@@ -124,9 +125,9 @@ export default function TermsPage() {
               <li>Export your data in a portable format</li>
             </ul>
           </div>
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <h4 className="font-semibold text-green-800 mb-2">Data Protection Commitment</h4>
-            <p className="text-green-700 text-sm">
+          <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
+            <h4 className="font-semibold text-emerald-900 mb-2">Data Protection Commitment</h4>
+            <p className="text-emerald-800 text-sm">
               We are committed to protecting your privacy and will never sell your personal information to third parties.
             </p>
           </div>
@@ -214,15 +215,15 @@ export default function TermsPage() {
           <div>
             <h4 className="font-semibold mb-2">Disclaimers</h4>
             <ul className="list-disc list-inside space-y-1 text-gray-600">
-              <li>Service is provided "as is" without warranties</li>
+              <li>Service is provided &quot;as is&quot; without warranties</li>
               <li>We do not guarantee specific results</li>
               <li>We are not responsible for third-party content</li>
               <li>Use the service at your own risk</li>
             </ul>
           </div>
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <h4 className="font-semibold text-yellow-800 mb-2">Important Disclaimer</h4>
-            <p className="text-yellow-700 text-sm">
+          <div className="rounded-xl border border-amber-100 bg-amber-50 p-4">
+            <h4 className="font-semibold text-amber-900 mb-2">Important Disclaimer</h4>
+            <p className="text-amber-800 text-sm">
               Pauseward is a tool to help manage digital habits. Individual results may vary, and we do not guarantee 
               specific outcomes or improvements in productivity or well-being.
             </p>
@@ -359,130 +360,70 @@ export default function TermsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-6">
-              <Scale className="h-8 w-8 text-gray-600" />
-            </div>
-            <h1 className="text-4xl font-bold mb-4" style={themeStyles.text.primary}>
-              Terms of Service
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Please read these terms carefully before using Pauseward. By using our service, you agree to be bound by these terms.
-            </p>
-            <div className="mt-8 text-sm text-gray-500">
-              Last updated: {new Date().toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="marketing-page">
+      <PageHero
+        eyebrow="Legal"
+        title="Terms of Service"
+        subtitle="Please read these terms carefully before using Pauseward. By using our service, you agree to be bound by them."
+        size="compact"
+      >
+        <p className="text-sm text-gray-500">
+          Last updated:{" "}
+          {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+        </p>
+      </PageHero>
 
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-16">
-        {/* Introduction */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4" style={themeStyles.text.primary}>
-            Introduction
-          </h2>
-          <div className="prose prose-gray max-w-none">
-            <p className="text-gray-600 mb-4">
-              Welcome to Pauseward. These Terms of Service ("Terms") govern your use of our digital wellness application 
-              and related services (collectively, the "Service") operated by Pauseward ("us," "we," or "our").
+      <div className="container-modern py-12 md:py-16">
+        <div className="glass-card mb-8 !p-8">
+          <h2 className="font-display text-2xl text-gray-900">Introduction</h2>
+          <div className="mt-4 space-y-4 text-gray-600 prose-legal">
+            <p>
+              Welcome to Pauseward. These Terms of Service govern your use of our digital wellness application
+              and related services operated by Pauseward.
             </p>
-            <p className="text-gray-600 mb-4">
-              By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of 
-              these terms, then you may not access the Service.
-            </p>
-            <p className="text-gray-600">
-              These Terms apply to all visitors, users, and others who access or use the Service. Please read these 
-              Terms carefully before using our Service.
+            <p>
+              By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part
+              of these terms, you may not access the Service.
             </p>
           </div>
         </div>
 
-        {/* Terms Sections */}
-        <div className="space-y-6">
-          {sections.map((section) => (
-            <div key={section.id} className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-              <button
-                onClick={() => toggleSection(section.id)}
-                className="w-full px-8 py-6 text-left hover:bg-gray-50 transition-colors duration-200 flex items-center justify-between"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="text-gray-600">
-                    {section.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold" style={themeStyles.text.primary}>
-                    {section.title}
-                  </h3>
-                </div>
-                <div className="text-gray-400">
-                  {openSections[section.id] ? (
-                    <ChevronUp className="h-5 w-5" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5" />
-                  )}
-                </div>
-              </button>
-              
-              {openSections[section.id] && (
-                <div className="px-8 pb-6 border-t border-gray-100">
-                  <div className="pt-6">
-                    {section.content}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <LegalAccordion
+          sections={sections.map((section) => ({
+            id: section.id,
+            title: section.title,
+            icon: section.icon,
+            content: section.content,
+          }))}
+          openSections={openSections}
+          onToggle={(id) => toggleSection(id)}
+        />
 
-        {/* Contact Information */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mt-8">
-          <h2 className="text-2xl font-bold mb-6" style={themeStyles.text.primary}>
-            Contact Us
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+        <div className="glass-card mt-8 !p-8">
+          <h2 className="font-display text-2xl text-gray-900">Contact us</h2>
+          <div className="mt-4 grid gap-6 md:grid-cols-2">
             <div>
-              <h3 className="font-semibold mb-3" style={themeStyles.text.primary}>
-                Legal Questions
-              </h3>
-              <div className="flex items-center space-x-3 text-gray-600">
-                <Mail className="h-5 w-5" />
-                <span>{links.contact.email}</span>
+              <h3 className="font-semibold text-gray-900">Legal questions</h3>
+              <div className="mt-2 flex items-center gap-2 text-gray-600">
+                <Mail className="h-4 w-4 text-emerald-600" />
+                {links.contact.email}
               </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-3" style={themeStyles.text.primary}>
-                General Support
-              </h3>
-              <div className="flex items-center space-x-3 text-gray-600">
-                <Phone className="h-5 w-5" />
-                <span>{links.contact.phone}</span>
+              <h3 className="font-semibold text-gray-900">General support</h3>
+              <div className="mt-2 flex items-center gap-2 text-gray-600">
+                <Phone className="h-4 w-4 text-emerald-600" />
+                {links.contact.phone}
               </div>
             </div>
           </div>
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm text-gray-600">
-              <strong>Response Time:</strong> We typically respond to legal inquiries within 48 hours. For urgent matters, please call our support line.
-            </p>
-          </div>
         </div>
 
-        {/* Legal Notice */}
-        <div className="bg-gray-100 rounded-2xl p-6 mt-8">
-          <h3 className="font-semibold mb-3" style={themeStyles.text.primary}>
-            Legal Notice
-          </h3>
-          <p className="text-sm text-gray-600">
-            These Terms of Service are governed by the laws of the United States. If you are located outside the United States, 
-            please note that your information may be transferred to, stored, and processed in the United States where our servers are located.
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-sm text-gray-600">
+          <p className="font-semibold text-gray-900">Legal notice</p>
+          <p className="mt-2">
+            These Terms are governed by the laws of the United States. International users may have additional rights
+            under local regulations.
           </p>
         </div>
       </div>

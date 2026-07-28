@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import '../styles/theme.css';
 
+@theme {
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-display), Georgia, "Times New Roman", serif;
+}
+
 /* Modern Design System - Inspired by Stripe, Linear, Vercel */
 :root {
   /* Primary Brand Colors - Modern & Trustworthy */
@@ -55,15 +60,43 @@ body {
   line-height: 1.5;
 }
 
-/* Enhanced Typography - Clause Style */
+/* Enhanced Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.marketing-page h1,
+.marketing-page h2,
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.marketing-page h3,
+.marketing-page h4,
+.type-card-title {
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.text-lead {
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
   letter-spacing: -0.01em;
-  line-height: 1.3;
+  color: #4b5563;
+}
+
+.page-eyebrow {
+  @apply mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200/80 bg-emerald-50/80 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-emerald-800;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 p {
-  line-height: 1.6;
+  line-height: 1.65;
   letter-spacing: -0.005em;
 }
 
@@ -157,7 +190,7 @@ p {
 
 /* Modern Button System - Clause Style (Green) */
 .btn-primary {
-  @apply bg-emerald-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] min-h-[44px] active:scale-[0.98];
+  @apply bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-emerald-700 transition-all duration-300 shadow-md shadow-emerald-900/10 hover:shadow-lg transform hover:scale-[1.02] min-h-[44px] active:scale-[0.98];
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -185,7 +218,7 @@ p {
 }
 
 .btn-secondary {
-  @apply bg-white text-gray-900 border-2 border-emerald-500 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 hover:border-emerald-600 transition-all duration-300 shadow-sm hover:shadow-md min-h-[44px] active:scale-[0.98];
+  @apply bg-white text-gray-900 border border-emerald-200 px-6 py-3 rounded-xl font-semibold hover:bg-emerald-50 hover:border-emerald-300 transition-all duration-300 shadow-sm hover:shadow-md min-h-[44px] active:scale-[0.98];
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -431,6 +464,286 @@ p {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Marketing design system */
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.font-sans {
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+.media-frame {
+  @apply ring-1 ring-black/5;
+}
+
+.marketing-page {
+  @apply bg-[#f8faf9] text-gray-900;
+}
+
+.marketing-card {
+  @apply rounded-2xl border border-gray-200/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8;
+}
+
+.marketing-card-highlight {
+  @apply border-emerald-300 ring-2 ring-emerald-100;
+}
+
+.legal-accordion-item {
+  @apply overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm;
+}
+
+.prose-legal p {
+  @apply mb-4 leading-relaxed;
+}
+
+.prose-legal ul {
+  @apply mb-4 list-disc space-y-2 pl-5;
+}
+
+.prose-legal h4 {
+  @apply mb-2 font-semibold text-gray-900;
+}
+
+.marketing-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+.reveal-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.reveal-up-delay-1 { animation-delay: 0.1s; }
+.reveal-up-delay-2 { animation-delay: 0.2s; }
+.reveal-up-delay-3 { animation-delay: 0.3s; }
+
+/* Dribbble-inspired marketing system */
+.hero-shell {
+  background: #fafdfb;
+}
+
+.mesh-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(16, 185, 129, 0.18), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(20, 184, 166, 0.12), transparent 45%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(16, 185, 129, 0.08), transparent 50%),
+    linear-gradient(180deg, #f0fdf4 0%, #ffffff 45%, #f8faf9 100%);
+}
+
+.glow-orb {
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.glow-orb-emerald { background: rgba(16, 185, 129, 0.22); }
+.glow-orb-teal { background: rgba(20, 184, 166, 0.18); }
+.glow-orb-white { background: rgba(255, 255, 255, 0.12); }
+
+.hero-ring {
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero-media-wrap {
+  perspective: 1200px;
+}
+
+.hero-phone-float {
+  transform: rotate(-4deg);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-phone-float:hover {
+  transform: rotate(-1deg) translateY(-6px);
+}
+
+.glass-card {
+  @apply rounded-2xl border border-white/70 bg-white/70 p-6 shadow-lg shadow-emerald-900/5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.5), rgba(20, 184, 166, 0.2), rgba(16, 185, 129, 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.bento-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 1.25rem;
+  }
+}
+
+.bento-cell {
+  @apply rounded-2xl border border-white/80 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8;
+}
+
+.bento-icon {
+  @apply flex h-12 w-12 items-center justify-center rounded-2xl;
+}
+
+.icon-bg-emerald { @apply bg-emerald-100; }
+.icon-bg-teal { @apply bg-teal-100; }
+.icon-bg-amber { @apply bg-amber-100; }
+.icon-bg-rose { @apply bg-rose-100; }
+
+.pill-tag {
+  @apply rounded-full border border-emerald-200/80 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800;
+}
+
+.how-it-works {
+  @apply grid gap-6 md:grid-cols-3 md:gap-5;
+}
+
+.how-step {
+  @apply relative rounded-2xl border border-gray-200/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-md md:p-8;
+}
+
+.how-step-top {
+  @apply mb-5 flex items-center justify-between;
+}
+
+.how-step-num {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  @apply text-3xl text-emerald-300;
+}
+
+.how-step-icon {
+  @apply flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/20;
+}
+
+.how-step:not(:last-child)::before {
+  content: "";
+  @apply absolute -right-3 top-10 hidden h-px w-6 bg-emerald-200 md:block;
+}
+
+.how-step-body h3 {
+  @apply text-lg font-semibold tracking-tight text-gray-900;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+.how-step-body p {
+  @apply mt-2 text-sm leading-relaxed text-gray-600;
+}
+
+.stat-glass {
+  @apply rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-md;
+}
+
+.stat-glass .font-display {
+  @apply text-4xl md:text-5xl;
+}
+
+.trust-marquee {
+  @apply flex flex-wrap items-center justify-center gap-3 md:gap-4;
+}
+
+.trust-badge {
+  @apply inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm;
+}
+
+.platform-strip {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.platform-strip-card {
+  @apply flex min-h-[140px] flex-col justify-between gap-4 rounded-2xl border p-5 transition duration-300;
+}
+
+.platform-strip-live {
+  @apply border-emerald-200 bg-white shadow-md hover:-translate-y-1 hover:shadow-xl;
+}
+
+.platform-strip-muted {
+  @apply border-dashed border-gray-200 bg-gray-50/80 opacity-75;
+}
+
+.platform-strip-icon {
+  @apply flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700;
+}
+
+.platform-pill {
+  @apply rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide;
+}
+
+.platform-pill-live { @apply bg-emerald-100 text-emerald-800; }
+.platform-pill-beta { @apply bg-amber-100 text-amber-800; }
+.platform-pill-soon { @apply bg-gray-100 text-gray-600; }
+
+.faq-bento {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.faq-bento-item {
+  @apply rounded-2xl border border-gray-200/80 bg-white p-6 shadow-sm transition hover:border-emerald-200 hover:shadow-md;
+}
+
+.cta-panel {
+  @apply rounded-3xl border border-white/10 bg-white/5 px-6 py-12 backdrop-blur-sm md:px-12 md:py-16;
+}
+
+.quote-card {
+  @apply relative overflow-hidden rounded-3xl border border-emerald-100 bg-gradient-to-br from-white to-emerald-50/50 p-8 md:p-12;
+}
+
+.quote-card::before {
+  content: "\201C";
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  @apply absolute -top-4 left-6 text-8xl leading-none text-emerald-200;
+}
+
+.contact-form-shell {
+  @apply rounded-3xl border border-gray-200/80 bg-white p-8 shadow-xl shadow-emerald-900/5 md:p-10;
+}
+
+.input-modern {
+  @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm transition focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20;
+}
+
+.donation-grid {
+  @apply grid grid-cols-2 gap-3 md:grid-cols-4;
+}
+
+.donation-tile {
+  @apply relative rounded-2xl border-2 p-6 text-center transition duration-300;
+}
+
+.platform-bento {
+  @apply grid gap-5 lg:grid-cols-2;
+}
+
+.platform-tile {
+  @apply relative overflow-hidden rounded-2xl border border-white/70 bg-white/70 p-6 shadow-lg shadow-emerald-900/5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8;
+}
+
+.platform-tile-featured {
+  @apply lg:col-span-2 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-8;
 }
 
 /* Modern scrollbar */

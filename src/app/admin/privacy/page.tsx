@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, Save, Edit, Trash2, Eye } from 'lucide-react';
+import { Plus, Save, Trash2 } from 'lucide-react';
 import { themeStyles } from '../../../styles/theme';
 
 interface PrivacyVersion {
@@ -39,7 +39,6 @@ export default function PrivacyPolicyAdmin() {
     }
   ]);
 
-  const [editingVersion, setEditingVersion] = useState<string | null>(null);
   const [newVersion, setNewVersion] = useState<Partial<PrivacyVersion>>({
     version: '',
     effectiveDate: '',
