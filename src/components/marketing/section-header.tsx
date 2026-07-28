@@ -1,3 +1,5 @@
+import RevealOnScroll from "./reveal-on-scroll";
+
 type SectionHeaderProps = {
   eyebrow?: string;
   title: string;
@@ -13,8 +15,8 @@ export default function SectionHeader({
   align = "center",
   light = false,
 }: SectionHeaderProps) {
-  return (
-    <div className={`mb-14 md:mb-16 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}`}>
+  const content = (
+    <>
       {eyebrow && <p className={`page-eyebrow ${light ? "!text-emerald-300" : ""}`}>{eyebrow}</p>}
       <h2
         className={`font-display text-3xl tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.1] ${
@@ -28,6 +30,14 @@ export default function SectionHeader({
           {subtitle}
         </p>
       )}
-    </div>
+    </>
   );
+
+  const wrapperClass = `mb-14 md:mb-16 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}`;
+
+  if (align === "left") {
+    return <div className={wrapperClass}>{content}</div>;
+  }
+
+  return <RevealOnScroll className={wrapperClass}>{content}</RevealOnScroll>;
 }

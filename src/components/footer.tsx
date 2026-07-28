@@ -35,7 +35,7 @@ export default function Footer() {
               <div className="relative h-11 w-11">
                 <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" />
               </div>
-              <span className="font-display text-xl text-white">Pauseward</span>
+              <span className="font-display text-xl font-bold text-white">Pauseward</span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-gray-400">
               Pause before distraction. Block apps, protect focus, and build healthier digital habits — starting in Kenya and worldwide.

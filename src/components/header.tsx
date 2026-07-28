@@ -28,7 +28,7 @@ export default function Header() {
             <div className="relative h-10 w-10 shrink-0 transition group-hover:scale-105">
               <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" priority />
             </div>
-            <span className="truncate font-display text-xl text-gray-900">Pauseward</span>
+            <span className="truncate font-display text-xl font-bold text-gray-900">Pauseward</span>
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">

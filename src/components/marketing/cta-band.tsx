@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import RevealOnScroll from "./reveal-on-scroll";
 import FocusBackground from "./focus-background";
 
 type CtaBandProps = {
@@ -13,11 +14,13 @@ export default function CtaBand({ title, subtitle, children }: CtaBandProps) {
     <section className="relative overflow-hidden py-24 md:py-32">
       <FocusBackground variant="cta" />
       <div className="container-modern relative z-10">
+        <RevealOnScroll variant="scale">
         <div className="cta-panel mx-auto max-w-3xl text-center">
           <h2 className="font-display text-3xl text-white md:text-4xl md:leading-tight">{title}</h2>
           {subtitle && <p className="mx-auto mt-5 max-w-xl text-lg text-emerald-50/90">{subtitle}</p>}
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">{children}</div>
         </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

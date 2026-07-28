@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import RevealOnScroll from "./reveal-on-scroll";
 
 type MediaSplitProps = {
   children: ReactNode;
@@ -13,8 +14,12 @@ export default function MediaSplit({ children, media, reverse = false, className
     <div
       className={`grid items-center gap-10 lg:grid-cols-2 lg:gap-16 ${reverse ? "lg:[&>*:first-child]:order-2" : ""} ${className}`}
     >
-      <div className="min-w-0">{children}</div>
-      <div className="min-w-0">{media}</div>
+      <RevealOnScroll className="min-w-0" delay={reverse ? 120 : 0}>
+        {children}
+      </RevealOnScroll>
+      <RevealOnScroll className="min-w-0" delay={reverse ? 0 : 120} variant="scale">
+        {media}
+      </RevealOnScroll>
     </div>
   );
 }

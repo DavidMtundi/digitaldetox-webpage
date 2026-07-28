@@ -40,7 +40,7 @@ export default function PageHero({
                 : ""
           }
         >
-          <div className={`reveal-up ${isCenter ? "mx-auto max-w-4xl" : "max-w-2xl"}`}>
+          <div className={`hero-enter ${isCenter ? "mx-auto max-w-4xl" : "max-w-2xl"}`}>
             {eyebrow && <p className="page-eyebrow">{eyebrow}</p>}
             <h1
               className={`font-display ${
@@ -64,7 +64,7 @@ export default function PageHero({
           </div>
 
           {media && (
-            <div className="hero-media-wrap reveal-up reveal-up-delay-2 mx-auto w-full max-w-[320px] lg:max-w-none lg:justify-self-end">
+            <div className="hero-media-wrap hero-enter hero-enter-delay-2 mx-auto w-full max-w-[320px] lg:max-w-none lg:justify-self-end">
               {media}
             </div>
           )}

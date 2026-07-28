@@ -53,7 +53,7 @@ export default function Support() {
           <>
             Fuel the future of
             <br />
-            <span className="italic text-emerald-800">
+            <span className="hero-accent">
               digital wellness.
             </span>
           </>
@@ -100,7 +100,7 @@ export default function Support() {
                     Popular
                   </span>
                 )}
-                <div className="font-display text-2xl text-gray-900">{option.label}</div>
+                <div className="font-display text-2xl font-bold text-gray-900">{option.label}</div>
                 <div className="mt-1 text-xs text-gray-500">One-time</div>
               </button>
             ))}

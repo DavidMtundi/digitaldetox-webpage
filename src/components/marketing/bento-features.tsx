@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import RevealOnScroll from "./reveal-on-scroll";
 
 export type BentoItem = {
   icon: LucideIcon;
@@ -36,26 +37,29 @@ export default function BentoFeatures({ items }: { items: BentoItem[] }) {
         const Icon = item.icon;
         const key = item.accent ?? "emerald";
         return (
-          <article
+          <RevealOnScroll
             key={item.title}
-            className={`bento-cell group bg-gradient-to-br ${ACCENT_BG[key]} ${SPAN[item.span ?? "default"]} reveal-up`}
-            style={{ animationDelay: `${i * 0.08}s` }}
+            delay={i * 80}
+            variant="scale"
+            className={`h-full ${SPAN[item.span ?? "default"]}`}
           >
-            <div className={`bento-icon ${ACCENT_ICON[key]}`}>
-              <Icon className="h-6 w-6" />
-            </div>
-            <h3 className="type-card-title mt-5 text-lg text-gray-900">{item.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-gray-600">{item.description}</p>
-            {item.span === "hero" && (
-              <div className="mt-6 flex flex-wrap gap-2">
-                {["Focus", "Block", "Track"].map((tag) => (
-                  <span key={tag} className="pill-tag">
-                    {tag}
-                  </span>
-                ))}
+            <article className={`bento-cell group h-full bg-gradient-to-br ${ACCENT_BG[key]}`}>
+              <div className={`bento-icon ${ACCENT_ICON[key]}`}>
+                <Icon className="h-6 w-6" />
               </div>
-            )}
-          </article>
+              <h3 className="type-card-title mt-5 text-lg text-gray-900">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-600">{item.description}</p>
+              {item.span === "hero" && (
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {["Focus", "Block", "Track"].map((tag) => (
+                    <span key={tag} className="pill-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          </RevealOnScroll>
         );
       })}
     </div>

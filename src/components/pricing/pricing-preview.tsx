@@ -209,7 +209,7 @@ function PricingTierCard({
       <p className="mt-1 text-sm text-gray-600">{tagline}</p>
 
       <div className="mt-6 mb-8">
-        <div className="font-display text-4xl text-gray-900">{price}</div>
+        <div className="font-display text-4xl font-bold text-gray-900">{price}</div>
         <div className="text-xs text-gray-500 mt-1">{priceNote}</div>
       </div>
 

@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { Laptop, Monitor, Smartphone } from "lucide-react";
+import RevealOnScroll from "./reveal-on-scroll";
 
 type PlatformStripItem = {
   label: string;
@@ -20,7 +21,7 @@ const DEFAULT_ICONS: Record<string, LucideIcon> = {
 export default function PlatformStrip({ items }: { items: PlatformStripItem[] }) {
   return (
     <div className="platform-strip">
-      {items.map((item) => {
+      {items.map((item, i) => {
         const Icon = item.icon ?? DEFAULT_ICONS[item.label] ?? Smartphone;
         const inner = (
           <>
@@ -45,22 +46,23 @@ export default function PlatformStrip({ items }: { items: PlatformStripItem[] })
 
         if (item.href) {
           return (
-            <a
-              key={item.label}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="platform-strip-card platform-strip-live"
-            >
-              {inner}
-            </a>
+            <RevealOnScroll key={item.label} delay={i * 80}>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="platform-strip-card platform-strip-live block h-full"
+              >
+                {inner}
+              </a>
+            </RevealOnScroll>
           );
         }
 
         return (
-          <div key={item.label} className="platform-strip-card platform-strip-muted">
-            {inner}
-          </div>
+          <RevealOnScroll key={item.label} delay={i * 80}>
+            <div className="platform-strip-card platform-strip-muted h-full">{inner}</div>
+          </RevealOnScroll>
         );
       })}
     </div>

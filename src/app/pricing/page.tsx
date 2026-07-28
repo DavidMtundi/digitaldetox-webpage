@@ -82,7 +82,7 @@ export default function PricingPage() {
           <>
             Focus without
             <br />
-            <span className="italic text-emerald-800">compromise.</span>
+            <span className="hero-accent">compromise.</span>
           </>
         }
         subtitle={

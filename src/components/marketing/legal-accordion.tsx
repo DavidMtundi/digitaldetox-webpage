@@ -35,9 +35,13 @@ export default function LegalAccordion({
                 {section.icon && <span className="text-emerald-600">{section.icon}</span>}
                 <span className="font-semibold text-gray-900">{section.title}</span>
               </span>
-              <ChevronDown className={`h-5 w-5 shrink-0 text-gray-400 transition ${open ? "rotate-180" : ""}`} />
+              <ChevronDown className={`h-5 w-5 shrink-0 text-gray-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
             </button>
-            {open && <div className="border-t border-gray-100 px-5 py-5 text-gray-600 prose-legal">{section.content}</div>}
+            <div className={`accordion-panel ${open ? "accordion-panel-open" : "accordion-panel-closed"}`}>
+              <div className="accordion-panel-inner">
+                <div className="border-t border-gray-100 px-5 py-5 text-gray-600 prose-legal">{section.content}</div>
+              </div>
+            </div>
           </div>
         );
       })}

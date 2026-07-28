@@ -47,7 +47,7 @@ export default function About() {
           <>
             Wellness tools
             <br />
-            <span className="italic text-emerald-800">built for real life.</span>
+            <span className="hero-accent">built for real life.</span>
           </>
         }
         subtitle="We're helping people in Kenya and worldwide build healthier relationships with technology — one intentional pause at a time."
@@ -90,7 +90,7 @@ export default function About() {
             subtitle="The average person reaches for their phone 96 times daily. Pauseward helps you take that number down."
           />
           <div className="quote-card text-center">
-            <div className="font-display relative z-10 text-7xl text-emerald-800 md:text-8xl">96</div>
+            <div className="font-display relative z-10 text-7xl font-bold text-emerald-700 md:text-8xl">96</div>
             <p className="relative z-10 mt-3 text-sm text-gray-500">Source: RescueTime research</p>
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">

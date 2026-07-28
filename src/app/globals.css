@@ -3,7 +3,6 @@
 
 @theme {
   --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-display), Georgia, "Times New Roman", serif;
 }
 
 /* Modern Design System - Inspired by Stripe, Linear, Vercel */
@@ -69,9 +68,14 @@ h1, h2, h3, h4, h5, h6 {
 .marketing-page h1,
 .marketing-page h2,
 .font-display {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.hero-accent {
+  color: #047857;
+  font-weight: 600;
 }
 
 .marketing-page h3,
@@ -112,6 +116,58 @@ p {
   }
 }
 
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFloat {
+  0%, 100% {
+    transform: rotate(-4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-4deg) translateY(-14px);
+  }
+}
+
+@keyframes orbDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(18px, -12px) scale(1.04);
+  }
+  66% {
+    transform: translate(-12px, 8px) scale(0.98);
+  }
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes iconPop {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
@@ -134,10 +190,10 @@ p {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
   }
   50% {
-    box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+    box-shadow: 0 0 32px rgba(16, 185, 129, 0.45);
   }
 }
 
@@ -156,14 +212,25 @@ p {
   .animate-fade-in-scale,
   .animate-float,
   .animate-pulse-glow,
-  .animate-gradient {
-    animation: none;
+  .animate-gradient,
+  .hero-enter,
+  .hero-phone-float,
+  .glow-orb,
+  .hero-ring {
+    animation: none !important;
   }
-  
+
   .animate-fade-in-up,
-  .animate-fade-in-scale {
+  .animate-fade-in-scale,
+  .reveal-up {
     opacity: 1;
     transform: none;
+  }
+
+  .motion-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
@@ -468,9 +535,9 @@ html {
 
 /* Marketing design system */
 .font-display {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
 }
 
 .font-sans {
@@ -514,12 +581,55 @@ html {
 }
 
 .reveal-up {
-  animation: fadeInUp 0.7s ease-out both;
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .reveal-up-delay-1 { animation-delay: 0.1s; }
 .reveal-up-delay-2 { animation-delay: 0.2s; }
-.reveal-up-delay-3 { animation-delay: 0.3s; }
+.reveal-up-delay-3 { animation-delay: 0.35s; }
+
+/* Scroll-triggered motion */
+.motion-reveal {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-reveal-up {
+  transform: translateY(28px);
+}
+
+.motion-reveal-scale {
+  transform: translateY(20px) scale(0.97);
+}
+
+.motion-reveal-fade {
+  transform: none;
+}
+
+.motion-reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Hero entrance (above the fold) */
+.hero-enter {
+  animation: heroEnter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-delay-1 { animation-delay: 0.08s; }
+.hero-enter-delay-2 { animation-delay: 0.18s; }
+.hero-enter-delay-3 { animation-delay: 0.3s; }
+
+.btn-arrow-nudge .btn-arrow-icon {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-arrow-nudge:hover .btn-arrow-icon {
+  transform: translateX(4px);
+}
 
 /* Dribbble-inspired marketing system */
 .hero-shell {
@@ -543,12 +653,16 @@ html {
   pointer-events: none;
 }
 
-.glow-orb-emerald { background: rgba(16, 185, 129, 0.22); }
-.glow-orb-teal { background: rgba(20, 184, 166, 0.18); }
-.glow-orb-white { background: rgba(255, 255, 255, 0.12); }
+.glow-orb-emerald { background: rgba(16, 185, 129, 0.22); animation: orbDrift 14s ease-in-out infinite; }
+.glow-orb-teal { background: rgba(20, 184, 166, 0.18); animation: orbDrift 16s ease-in-out infinite -5s; }
+.glow-orb-white { background: rgba(255, 255, 255, 0.12); animation: orbDrift 18s ease-in-out infinite -8s; }
 
 .hero-ring {
-  animation: float 8s ease-in-out infinite;
+  animation: ringPulse 7s ease-in-out infinite;
+}
+
+.hero-ring:nth-child(2) {
+  animation-delay: -3s;
 }
 
 .hero-media-wrap {
@@ -556,12 +670,14 @@ html {
 }
 
 .hero-phone-float {
+  animation: heroFloat 5.5s ease-in-out infinite;
   transform: rotate(-4deg);
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero-phone-float:hover {
-  transform: rotate(-1deg) translateY(-6px);
+  animation-play-state: paused;
+  transform: rotate(-1deg) translateY(-8px) scale(1.01);
 }
 
 .glass-card {
@@ -630,12 +746,9 @@ html {
 }
 
 .how-step-num {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
-  @apply text-3xl text-emerald-300;
-}
-
-.how-step-icon {
-  @apply flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/20;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  @apply text-3xl text-emerald-400;
 }
 
 .how-step:not(:last-child)::before {
@@ -665,7 +778,7 @@ html {
 }
 
 .trust-badge {
-  @apply inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm;
+  @apply inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md;
 }
 
 .platform-strip {
@@ -677,7 +790,38 @@ html {
 }
 
 .platform-strip-live {
-  @apply border-emerald-200 bg-white shadow-md hover:-translate-y-1 hover:shadow-xl;
+  @apply border-emerald-200 bg-white shadow-md hover:-translate-y-1.5 hover:shadow-xl hover:border-emerald-300;
+}
+
+.bento-cell:hover .bento-icon {
+  animation: iconPop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.how-step:hover .how-step-icon {
+  transform: scale(1.06);
+}
+
+.how-step-icon {
+  @apply flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/20 transition-transform duration-300;
+}
+
+.accordion-panel {
+  display: grid;
+  transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+
+.accordion-panel-closed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.accordion-panel-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-panel-inner {
+  overflow: hidden;
 }
 
 .platform-strip-muted {
@@ -714,7 +858,8 @@ html {
 
 .quote-card::before {
   content: "\201C";
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
   @apply absolute -top-4 left-6 text-8xl leading-none text-emerald-200;
 }
 

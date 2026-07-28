@@ -38,7 +38,7 @@ export default function DownloadPage() {
           <>
             One focus system.
             <br />
-            <span className="italic text-emerald-800">Every device.</span>
+            <span className="hero-accent">Every device.</span>
           </>
         }
         subtitle="Android is live. iOS and macOS are in beta. Windows is on the way. Manage policies from any browser."

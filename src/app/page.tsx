@@ -94,7 +94,7 @@ export default function Home() {
           <>
             Pause before
             <br />
-            <span className="italic text-emerald-800">distraction.</span>
+            <span className="hero-accent">distraction.</span>
           </>
         }
         subtitle="Block apps, protect your attention, and build healthier digital habits. Core features stay free — Pro unlocks the full toolkit."
@@ -103,9 +103,9 @@ export default function Home() {
         }
         align="left"
       >
-        <Link href="/pricing" className="btn-primary inline-flex items-center gap-2">
+        <Link href="/pricing" className="btn-primary btn-arrow-nudge inline-flex items-center gap-2">
           View pricing
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="btn-arrow-icon h-4 w-4" />
         </Link>
         <Link href="/contact" className="btn-secondary">
           Book a demo
@@ -165,9 +165,9 @@ export default function Home() {
             title="See it in action"
             subtitle="Watch blocking, focus sessions, and insights come together — or drop in your own demo reel."
           />
-          <Link href="/download" className="btn-primary mt-4 inline-flex items-center gap-2">
+          <Link href="/download" className="btn-primary btn-arrow-nudge mt-4 inline-flex items-center gap-2">
             Try it free
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="btn-arrow-icon h-4 w-4" />
           </Link>
         </MediaSplit>
       </SectionShell>
