@@ -40,9 +40,9 @@ export default function DashboardGate({ children }: { children: ReactNode }) {
   if (!user) return null;
 
   return (
-    <div className="dashboard-shell flex min-h-screen bg-[#f5f5f7] dark:bg-gray-950">
+    <div className="dashboard-shell flex h-dvh min-h-dvh overflow-hidden bg-[#f5f5f7] dark:bg-gray-950">
       <DashboardSidebar />
-      <main className="flex-1 overflow-y-auto">{children}</main>
+      <main className="flex min-h-0 flex-1 flex-col overflow-y-auto">{children}</main>
     </div>
   );
 }

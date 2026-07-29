@@ -28,6 +28,7 @@ export default function PricingPage() {
   const { user, loading: authLoading } = useAuth();
   const [products, setProducts] = useState<CatalogProduct[]>(FALLBACK_CATALOG_PRODUCTS);
   const [currency, setCurrency] = useState<"KES" | "USD">("KES");
+  const [supportedCurrencies, setSupportedCurrencies] = useState<Array<"KES" | "USD">>(["KES", "USD"]);
   const [loading, setLoading] = useState(true);
   const [catalogLive, setCatalogLive] = useState(false);
   const [checkoutProductId, setCheckoutProductId] = useState<string | null>(null);
@@ -44,9 +45,16 @@ export default function PricingPage() {
         if (catalog.products.length > 0) {
           setProducts(catalog.products);
         }
-        if (catalog.defaultCurrency === "KES" || catalog.defaultCurrency === "USD") {
-          setCurrency(catalog.defaultCurrency);
-        }
+        const currencies = (catalog.supportedCurrencies ?? ["KES", "USD"]).filter(
+          (code): code is "KES" | "USD" => code === "KES" || code === "USD",
+        );
+        const available = currencies.length > 0 ? currencies : ["KES"];
+        setSupportedCurrencies(available);
+        const preferred =
+          catalog.defaultCurrency === "KES" || catalog.defaultCurrency === "USD"
+            ? catalog.defaultCurrency
+            : detected;
+        setCurrency(available.includes(preferred) ? preferred : available[0]);
         setCatalogLive(true);
       })
       .catch(() => {
@@ -116,7 +124,7 @@ export default function PricingPage() {
         size="compact"
       >
         <div className="currency-toggle inline-flex rounded-full border border-gray-200/80 bg-white/90 p-1 shadow-lg backdrop-blur-sm">
-          {(["KES", "USD"] as const).map((code) => (
+          {supportedCurrencies.map((code) => (
             <button
               key={code}
               type="button"

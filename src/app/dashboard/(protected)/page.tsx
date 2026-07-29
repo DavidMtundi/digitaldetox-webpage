@@ -58,8 +58,8 @@ export default function DashboardHomePage() {
         />
       </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-2">
-        <DashboardCard title="Platforms">
+      <div className="mt-8 grid flex-1 gap-6 lg:grid-cols-2 lg:items-stretch">
+        <DashboardCard className="h-full" title="Platforms">
           <ul className="space-y-3">
             {PLATFORMS.map((platform) => (
               <li key={platform.id} className="flex items-start justify-between gap-3">
@@ -79,7 +79,11 @@ export default function DashboardHomePage() {
           </ul>
         </DashboardCard>
 
-        <DashboardCard title="Quick actions" footer="Use desktop or mobile apps for focus sessions and blocking.">
+        <DashboardCard
+          className="h-full"
+          title="Quick actions"
+          footer="Use desktop or mobile apps for focus sessions and blocking."
+        >
           <div className="space-y-3 text-sm text-gray-700">
             <p>• Start a focus session on macOS or Android</p>
             <p>• Edit blocklists on desktop, then sync here</p>

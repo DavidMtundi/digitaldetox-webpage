@@ -14,9 +14,15 @@ export default function SiteChrome({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
       <AuthProvider>
-        {!isDashboard && <Header />}
-        <main>{children}</main>
-        {!isDashboard && <Footer />}
+        {isDashboard ? (
+          children
+        ) : (
+          <>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </>
+        )}
       </AuthProvider>
     </ThemeProvider>
   );

@@ -38,7 +38,7 @@ export default function DashboardSidebar() {
   }
 
   return (
-    <aside className="dashboard-sidebar flex h-full w-full flex-col border-r border-gray-200 bg-[#ececef] md:w-60 dark:border-gray-800 dark:bg-gray-900">
+    <aside className="dashboard-sidebar flex w-full shrink-0 flex-col border-r border-gray-200 bg-[#ececef] md:w-60 dark:border-gray-800 dark:bg-gray-900">
       <div className="border-b border-gray-200 px-5 py-5 dark:border-gray-800">
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2">

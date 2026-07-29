@@ -29,6 +29,7 @@ export default function DashboardPaymentsContent() {
   const [payments, setPayments] = useState<PaymentHistoryItem[]>([]);
   const [products, setProducts] = useState<CatalogProduct[]>([]);
   const [currency, setCurrency] = useState<"KES" | "USD">("KES");
+  const [supportedCurrencies, setSupportedCurrencies] = useState<Array<"KES" | "USD">>(["KES", "USD"]);
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [loading, setLoading] = useState(true);
   const [checkoutProductId, setCheckoutProductId] = useState<string | null>(null);
@@ -53,13 +54,21 @@ export default function DashboardPaymentsContent() {
   }, [statusFilter]);
 
   useEffect(() => {
-    setCurrency(detectDefaultCurrency());
+    const detected = detectDefaultCurrency();
+    setCurrency(detected);
     fetchBillingCatalog()
       .then((catalog) => {
         setProducts(catalog.products);
-        if (catalog.defaultCurrency === "KES" || catalog.defaultCurrency === "USD") {
-          setCurrency(catalog.defaultCurrency);
-        }
+        const currencies = (catalog.supportedCurrencies ?? ["KES", "USD"]).filter(
+          (code): code is "KES" | "USD" => code === "KES" || code === "USD",
+        );
+        const available = currencies.length > 0 ? currencies : ["KES"];
+        setSupportedCurrencies(available);
+        const preferred =
+          catalog.defaultCurrency === "KES" || catalog.defaultCurrency === "USD"
+            ? catalog.defaultCurrency
+            : detected;
+        setCurrency(available.includes(preferred) ? preferred : available[0]);
       })
       .catch(() => undefined);
   }, []);
@@ -230,22 +239,28 @@ export default function DashboardPaymentsContent() {
               <span className="font-medium text-gray-900">{currency}</span>
             </p>
 
-            <div className="mb-4 flex gap-2">
-              {(["KES", "USD"] as const).map((code) => (
-                <button
-                  key={code}
-                  type="button"
-                  onClick={() => setCurrency(code)}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-medium ${
-                    currency === code
-                      ? "bg-emerald-600 text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  {code}
-                </button>
-              ))}
-            </div>
+            {supportedCurrencies.length > 1 ? (
+              <div className="mb-4 flex gap-2">
+                {supportedCurrencies.map((code) => (
+                  <button
+                    key={code}
+                    type="button"
+                    onClick={() => setCurrency(code)}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-medium ${
+                      currency === code
+                        ? "bg-emerald-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    {code}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p className="mb-4 text-xs text-gray-500">
+                This Paystack account accepts {supportedCurrencies[0]} only.
+              </p>
+            )}
 
             <div className="space-y-3">
               <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Pro</p>
