@@ -42,12 +42,12 @@ export default function Header() {
   return (
     <header className={shellClass}>
       <div className="container-modern">
-        <div className="site-header-bar flex h-14 items-center justify-between gap-4 px-3 md:h-16 md:px-5">
+        <div className="site-header-bar flex h-14 items-center justify-between gap-3 px-2.5 sm:px-3 md:h-16 md:px-5">
           <Link href="/" className="group flex min-w-0 items-center gap-2.5 md:gap-3">
             <div className="relative h-9 w-9 shrink-0 transition group-hover:scale-105 md:h-10 md:w-10">
               <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" priority />
             </div>
-            <span className="truncate font-display text-lg font-bold text-white md:text-xl">Pauseward</span>
+            <span className="truncate font-display text-base font-bold text-white sm:text-lg md:text-xl">Pauseward</span>
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">

@@ -29,7 +29,7 @@ export default function SocialProofAvatars({
           </div>
         ))}
       </div>
-      <p className="text-center text-sm text-gray-400 sm:text-left">
+      <p className="max-w-[min(100%,18rem)] text-center text-sm leading-snug text-gray-400 sm:max-w-none sm:text-left">
         {text ?? (
           <>
             Join <span className="font-semibold text-white">{count}</span> {label}

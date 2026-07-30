@@ -22,7 +22,7 @@ export default function SectionShell({
   id,
 }: SectionShellProps) {
   return (
-    <section id={id} className={`py-16 md:py-20 lg:py-24 ${TONES[tone]} ${className}`}>
+    <section id={id} className={`py-12 md:py-20 lg:py-24 ${TONES[tone]} ${className}`}>
       {tone === "mesh" && <FocusBackground variant="section" />}
       {tone === "dark" && (
         <div className="pointer-events-none absolute inset-0" aria-hidden>

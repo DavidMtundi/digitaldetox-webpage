@@ -30,7 +30,7 @@ export default function PlugStyleHero({
       <FocusBackground variant="plug-dark" />
       <div className="plug-hero-watermark font-display" aria-hidden>Pauseward</div>
 
-      <div className="container-modern relative z-10 pt-28 md:pt-32 lg:pt-36">
+      <div className="container-modern relative z-10 pt-24 sm:pt-28 md:pt-32 lg:pt-36">
         <div className="mx-auto max-w-4xl text-center">
           {badge ? (
             <div className="hero-enter inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-gray-300 backdrop-blur-sm">

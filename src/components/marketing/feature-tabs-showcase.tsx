@@ -75,9 +75,9 @@ export default function FeatureTabsSection({
 
   return (
     <div ref={sectionRef} className="feature-tabs-section">
-      <div className="feature-tabs-header mx-auto mb-10 max-w-3xl text-center md:mb-12">
+      <div className="feature-tabs-header mx-auto mb-8 max-w-3xl text-center md:mb-12">
         {eyebrow && <p className="page-eyebrow mx-auto">{eyebrow}</p>}
-        <h2 className="feature-tabs-title font-display text-3xl font-bold tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+        <h2 className="feature-tabs-title font-display text-[1.625rem] font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
           {title}
         </h2>
         {subtitle && (
@@ -87,7 +87,7 @@ export default function FeatureTabsSection({
         )}
       </div>
 
-      <div className="feature-tabs-unified overflow-hidden rounded-3xl border border-gray-200/90 bg-white shadow-xl shadow-emerald-900/5 ring-1 ring-gray-200/50 dark:border-gray-700/80 dark:bg-gray-900 dark:shadow-black/30 dark:ring-gray-700/50">
+      <div className="feature-tabs-unified overflow-hidden rounded-2xl border border-gray-200/90 bg-white shadow-xl shadow-emerald-900/5 ring-1 ring-gray-200/50 sm:rounded-3xl dark:border-gray-700/80 dark:bg-gray-900 dark:shadow-black/30 dark:ring-gray-700/50">
         {items.map((item, index) => (
           <input
             key={`input-${item.id}`}
@@ -106,7 +106,7 @@ export default function FeatureTabsSection({
           role="tablist"
           aria-label="Product features"
         >
-          <div className="feature-tabs-rail-inner flex min-w-min justify-center gap-0 px-2 md:px-4">
+          <div className="feature-tabs-rail-inner flex min-w-min justify-start gap-0 px-1 sm:justify-center sm:px-2 md:px-4">
             {items.map((item, index) => (
               <label
                 key={item.id}
@@ -116,7 +116,7 @@ export default function FeatureTabsSection({
                 id={`feature-tab-${item.id}`}
                 tabIndex={index === 0 ? 0 : -1}
                 onKeyDown={(event) => onTabKeyDown(event, index)}
-                className="feature-tab-slot relative inline-flex shrink-0 cursor-pointer items-center gap-2 border-b-2 border-b-transparent px-5 py-4 text-sm font-semibold text-gray-600 transition hover:bg-white/70 hover:text-gray-900 md:px-6 md:text-base dark:text-gray-400 dark:hover:bg-gray-800/50 dark:hover:text-gray-200"
+                className="feature-tab-slot relative inline-flex shrink-0 cursor-pointer items-center gap-1.5 border-b-2 border-b-transparent px-3 py-3.5 text-xs font-semibold text-gray-600 transition hover:bg-white/70 hover:text-gray-900 sm:gap-2 sm:px-5 sm:py-4 sm:text-sm md:px-6 md:text-base dark:text-gray-400 dark:hover:bg-gray-800/50 dark:hover:text-gray-200"
               >
                 <item.icon className="h-4 w-4 shrink-0" aria-hidden />
                 {item.label}
@@ -132,12 +132,12 @@ export default function FeatureTabsSection({
               id={`feature-panel-${item.id}`}
               role="tabpanel"
               aria-labelledby={`feature-tab-${item.id}`}
-              className="feature-tab-panel px-6 py-8 md:px-10 md:py-10 lg:px-12 lg:py-12"
+              className="feature-tab-panel px-4 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10 lg:px-12 lg:py-12"
             >
               <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
                 <div className="min-w-0">
                   <p className="feature-label">{item.label}</p>
-                  <h3 className="feature-tabs-detail-title font-display mt-3 text-2xl font-bold tracking-tight md:text-3xl">
+                  <h3 className="feature-tabs-detail-title font-display mt-3 text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
                     {item.title}
                   </h3>
                   <p className="feature-tabs-detail-body mt-4 text-base leading-relaxed">

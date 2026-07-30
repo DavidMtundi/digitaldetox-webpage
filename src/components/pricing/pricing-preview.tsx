@@ -102,7 +102,7 @@ export default function PricingPreview({ hideStarter = false }: { hideStarter?: 
   const familyPricing = tierPricing("family");
 
   return (
-    <section id="pricing" className="relative overflow-hidden py-20 md:py-28">
+    <section id="pricing" className="relative overflow-hidden py-14 sm:py-20 md:py-28">
       <FocusBackground variant="section" />
       <div className="container-modern relative z-10">
         <div className="mesh-section-header">

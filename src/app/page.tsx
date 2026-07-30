@@ -1,13 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import {
   Download,
-  Lock,
   Moon,
-  Shield,
   Sparkles,
-  Users,
 } from "lucide-react";
 import PlugStyleHero, {
   PlugHeroCtaPrimary,
@@ -21,8 +17,8 @@ import PricingPreview from "@/components/pricing/pricing-preview";
 import StatBar from "@/components/marketing/stat-bar";
 import ProductFaqSection from "@/components/marketing/product-faq-section";
 import FeatureTabsSection, { buildDefaultFeatureTabs } from "@/components/marketing/feature-tabs-showcase";
+import ParentsSection from "@/components/marketing/parents-section";
 import ReviewCarousel, { type ReviewItem } from "@/components/marketing/review-carousel";
-import BentoFeatures from "@/components/marketing/bento-features";
 import { marketingMedia } from "@/lib/marketing-media";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
 
@@ -41,35 +37,6 @@ const STEPS = [
     icon: Sparkles,
     title: "Reclaim your focus",
     description: "Boundaries hold through the day — see what improved and build better habits over time.",
-  },
-];
-
-const PARENT_BENEFITS = [
-  {
-    icon: Shield,
-    title: "Block harmful content",
-    description:
-      "Adult sites and risky feeds blocked network-wide — harder to bypass than a single browser tab.",
-    accent: "emerald" as const,
-    span: "wide" as const,
-  },
-  {
-    icon: Users,
-    title: "Family dashboard",
-    description: "Up to six devices on one plan — shared policies and usage trends, not message spying.",
-    accent: "teal" as const,
-  },
-  {
-    icon: Lock,
-    title: "Parent PIN",
-    description: "Kids can't uninstall or turn off protection on shared phones in a moment of impulse.",
-    accent: "amber" as const,
-  },
-  {
-    icon: Moon,
-    title: "Sleep & study schedules",
-    description: "Wind down screens before bed and keep social apps off during homework hours.",
-    accent: "rose" as const,
   },
 ];
 
@@ -145,24 +112,7 @@ export default function Home() {
       </SectionShell>
 
       <SectionShell tone="mesh" id="families" className="scroll-mt-28">
-        <div className="mesh-section-header">
-          <SectionHeader
-            eyebrow="For parents"
-            title="Help your kids stay safer online"
-            subtitle="Pauseward doesn't read messages — it limits time on the apps and sites where harm often happens, with rules you control from one dashboard."
-          />
-        </div>
-        <BentoFeatures items={PARENT_BENEFITS} />
-        <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-400">
-          Harassment often happens on social apps late at night. Schedules and app limits reduce exposure
-          without you hovering over every notification.{" "}
-          <Link
-            href="/pricing"
-            className="font-semibold text-emerald-700 hover:text-emerald-600 dark:text-emerald-400"
-          >
-            See Family pricing
-          </Link>
-        </p>
+        <ParentsSection />
       </SectionShell>
 
       <section className="how-it-works-band">

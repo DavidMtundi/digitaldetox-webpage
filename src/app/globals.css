@@ -1024,6 +1024,183 @@ html {
   @apply rounded-full border border-emerald-200/80 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800;
 }
 
+/* Parents / families showcase */
+.parents-showcase {
+  @apply space-y-8 md:space-y-10;
+}
+
+.parents-showcase-panel {
+  @apply relative overflow-hidden rounded-3xl border border-emerald-900/20 bg-gray-950 text-white shadow-2xl shadow-emerald-950/30;
+}
+
+.parents-showcase-glow {
+  @apply pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_0%,rgba(16,185,129,0.22),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_100%,rgba(20,184,166,0.12),transparent_50%)];
+}
+
+.parents-showcase-inner {
+  @apply relative z-10 grid items-center gap-10 p-6 sm:p-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:gap-12 md:p-10 lg:p-12;
+}
+
+.parents-showcase-eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.14em] text-emerald-400/90;
+}
+
+.parents-showcase-title {
+  @apply mt-3 text-[1.75rem] leading-[1.1] tracking-tight text-white sm:text-4xl md:text-[2.5rem];
+}
+
+.parents-showcase-lead {
+  @apply mt-4 text-base leading-relaxed text-gray-400 sm:mt-5 sm:text-lg;
+}
+
+.parents-trust-pills {
+  @apply mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3;
+}
+
+.parents-trust-pill {
+  @apply inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3.5 py-2 text-xs font-medium text-gray-300 backdrop-blur-sm sm:text-sm;
+}
+
+.parents-cta-row {
+  @apply mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center;
+}
+
+.parents-cta-primary {
+  @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-gray-950 shadow-lg shadow-emerald-500/25 transition hover:-translate-y-0.5 hover:bg-emerald-400;
+}
+
+.parents-cta-secondary {
+  @apply inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/10;
+}
+
+.parents-showcase-media {
+  @apply flex justify-center md:justify-end;
+}
+
+.parents-phone-frame .media-frame {
+  @apply border-white/15 bg-gray-900 shadow-2xl shadow-black/40 ring-1 ring-white/10;
+}
+
+.parents-phone-duo {
+  @apply relative flex items-end justify-center gap-3 sm:gap-4;
+}
+
+.parents-phone-primary {
+  @apply mx-auto w-[200px] sm:mx-0 sm:w-[210px];
+}
+
+.parents-phone-secondary {
+  @apply w-[160px] opacity-90 lg:w-[170px];
+}
+
+.parents-media-caption {
+  @apply mt-4 text-center text-xs text-gray-500 dark:text-gray-400 sm:text-sm;
+}
+
+.parents-setup-steps {
+  @apply grid gap-3 sm:grid-cols-3 sm:gap-4;
+}
+
+.parents-setup-step {
+  @apply flex gap-4 rounded-2xl border border-emerald-100/80 bg-white/80 p-4 shadow-sm backdrop-blur-sm dark:border-gray-700/80 dark:bg-gray-900/80;
+}
+
+.parents-setup-num {
+  @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white shadow-md shadow-emerald-900/20;
+}
+
+.parents-setup-title {
+  @apply text-sm font-semibold text-gray-900 dark:text-gray-50;
+}
+
+.parents-setup-body {
+  @apply mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm dark:text-gray-400;
+}
+
+.parents-family-strip {
+  @apply flex flex-col gap-4 rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md dark:border-emerald-800/50 dark:from-emerald-950/40 dark:to-gray-900/90 dark:hover:border-emerald-700/60 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.parents-family-strip-label {
+  @apply text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-400;
+}
+
+.parents-family-strip-title {
+  @apply mt-1 font-display text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-50;
+}
+
+.parents-family-strip-body {
+  @apply mt-1 text-sm text-gray-600 dark:text-gray-400;
+}
+
+.parents-family-strip-cta {
+  @apply inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-emerald-700 dark:text-emerald-400;
+}
+
+.parents-scenarios-grid {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.parents-scenario-card {
+  @apply rounded-2xl border border-emerald-100/80 bg-white/90 p-5 shadow-sm backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md dark:border-gray-700/80 dark:bg-gray-900/90 dark:hover:border-emerald-800/60;
+}
+
+.parents-scenario-icon {
+  @apply flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400;
+}
+
+.parents-scenario-title {
+  @apply mt-4 text-base font-semibold tracking-tight text-gray-900 dark:text-gray-50;
+}
+
+.parents-scenario-body {
+  @apply mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400;
+}
+
+.parents-bottom-row {
+  @apply grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-stretch lg:gap-8;
+}
+
+.parents-protection-cards {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-1;
+}
+
+.parents-protection-card {
+  @apply flex gap-4 rounded-2xl border border-emerald-100/80 bg-white/90 p-5 shadow-sm dark:border-gray-700/80 dark:bg-gray-900/90;
+}
+
+.parents-protection-title {
+  @apply text-sm font-semibold text-gray-900 dark:text-gray-50;
+}
+
+.parents-protection-body {
+  @apply mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400;
+}
+
+.parents-quote-card {
+  @apply flex flex-col justify-between rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-white to-emerald-50/60 p-6 shadow-sm dark:border-emerald-900/40 dark:from-gray-900 dark:to-emerald-950/30 md:p-8;
+}
+
+.parents-quote-text {
+  @apply text-base leading-relaxed text-gray-700 dark:text-gray-300 md:text-lg;
+}
+
+.parents-quote-footer {
+  @apply mt-6 flex items-center gap-3 border-t border-emerald-100/80 pt-5 dark:border-gray-700/80;
+}
+
+.parents-quote-avatar {
+  @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-400 to-pink-500 text-xs font-bold text-white shadow-md;
+}
+
+.parents-quote-name {
+  @apply text-sm font-semibold text-gray-900 dark:text-gray-50;
+}
+
+.parents-quote-role {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
 .how-it-works-band {
   @apply border-y border-emerald-100/50 bg-[#f8faf9] py-10 md:py-12 dark:border-emerald-900/30 dark:bg-gray-950;
 }
@@ -1680,6 +1857,80 @@ html {
     min-height: 48px;
     padding: 0.75rem 1.5rem;
   }
+
+  .marketing-page {
+    overflow-x: clip;
+  }
+
+  .site-header-shell--fixed {
+    padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+  }
+
+  .mesh-section-header {
+    @apply mb-8;
+  }
+
+  .how-it-works-band {
+    @apply py-8;
+  }
+
+  .how-it-works-heading {
+    @apply mb-5;
+  }
+
+  .plug-hero-watermark {
+    font-size: clamp(3.25rem, 13vw, 5.5rem);
+    top: 42%;
+  }
+
+  .review-carousel-viewport {
+    mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  }
+
+  .review-carousel-section {
+    @apply py-8;
+  }
+
+  .parents-showcase-inner {
+    @apply p-5;
+  }
+
+  .parents-phone-secondary {
+    @apply hidden;
+  }
+
+  .parents-setup-steps {
+    @apply grid-cols-1;
+  }
+
+  .parents-family-strip {
+    @apply p-4;
+  }
+
+  .review-card {
+    width: min(100%, 268px);
+  }
+
+  .site-footer-cta-panel {
+    @apply mt-8 p-5;
+  }
+
+  .site-footer-grid {
+    @apply mt-10 gap-8;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+}
+
+.mesh-section-header {
+  @apply mx-auto mb-8 max-w-3xl text-center md:mb-10;
 }
 
 /* Enhanced scroll behavior */

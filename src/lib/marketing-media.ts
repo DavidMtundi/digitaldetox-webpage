@@ -79,6 +79,12 @@ export const marketingMedia = {
     width: 800,
     height: 600,
   } satisfies MarketingImage,
+  parents: {
+    src: env("NEXT_PUBLIC_PARENTS_IMAGE", "/marketing/parents-family-dashboard.svg"),
+    alt: "Pauseward family dashboard showing schedules and device policies",
+    width: 390,
+    height: 844,
+  } satisfies MarketingImage,
 } as const;
 
 function parseVideoEnv(url: string, fallback: VideoSource): VideoSource {

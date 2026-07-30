@@ -27,7 +27,7 @@ function StarRow({ rating = 5 }: { rating?: number }) {
 
 function ReviewCard({ item }: { item: ReviewItem }) {
   return (
-    <article className="review-card group flex w-[min(100%,280px)] shrink-0 snap-start flex-col rounded-2xl border border-emerald-100/80 bg-white/90 p-4 shadow-sm shadow-emerald-900/5 ring-1 ring-gray-200/40 backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200/90 hover:shadow-md dark:border-gray-700/80 dark:bg-gray-800/90 dark:ring-gray-700/50 dark:hover:border-emerald-700/60 md:w-[300px] md:p-5">
+    <article className="review-card group flex w-[min(100%,268px)] shrink-0 snap-start flex-col rounded-2xl border border-emerald-100/80 bg-white/90 p-4 shadow-sm shadow-emerald-900/5 ring-1 ring-gray-200/40 backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200/90 hover:shadow-md dark:border-gray-700/80 dark:bg-gray-800/90 dark:ring-gray-700/50 dark:hover:border-emerald-700/60 sm:w-[300px] md:p-5">
       <StarRow rating={item.rating ?? 5} />
       <p className="review-card-quote mt-3 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
         &ldquo;{item.quote}&rdquo;

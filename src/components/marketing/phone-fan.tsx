@@ -9,11 +9,11 @@ type PhoneFanProps = {
 
 export default function PhoneFan({ left, center, right }: PhoneFanProps) {
   return (
-    <div className="phone-fan mx-auto mt-12 max-w-4xl px-4 md:mt-16">
-      <div className="phone-fan-inner flex items-end justify-center gap-3 md:gap-5">
-        <PhoneSlot image={left} className="phone-fan-left -rotate-6 md:-rotate-8" size="sm" />
+    <div className="phone-fan mx-auto mt-8 max-w-4xl px-2 sm:mt-12 sm:px-4 md:mt-16">
+      <div className="phone-fan-inner flex items-end justify-center gap-2 sm:gap-3 md:gap-5">
+        <PhoneSlot image={left} className="phone-fan-left hidden sm:block -rotate-6 md:-rotate-8" size="sm" />
         <PhoneSlot image={center} className="phone-fan-center z-10" size="lg" priority />
-        <PhoneSlot image={right} className="phone-fan-right rotate-6 md:rotate-8" size="sm" />
+        <PhoneSlot image={right} className="phone-fan-right hidden sm:block rotate-6 md:rotate-8" size="sm" />
       </div>
     </div>
   );
@@ -30,7 +30,10 @@ function PhoneSlot({
   size?: "sm" | "lg";
   priority?: boolean;
 }) {
-  const width = size === "lg" ? "w-[140px] md:w-[200px] lg:w-[240px]" : "w-[100px] md:w-[140px] lg:w-[170px]";
+  const width =
+    size === "lg"
+      ? "w-[148px] sm:w-[140px] md:w-[200px] lg:w-[240px]"
+      : "w-[100px] md:w-[140px] lg:w-[170px]";
 
   return (
     <div
