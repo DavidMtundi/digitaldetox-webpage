@@ -8,12 +8,15 @@ import SectionShell from "@/components/marketing/section-shell";
 import SectionHeader from "@/components/marketing/section-header";
 import { useAuth } from "@/components/auth/auth-provider";
 import {
+  annualListFromMonthlyPrices,
   CatalogProduct,
-  displayPrice,
   FALLBACK_CATALOG_PRODUCTS,
   fetchBillingCatalog,
   initiateCheckout,
 } from "@/lib/billing";
+import { bestAnnualSavings, maxAnnualSavingsPercent } from "@/lib/billing-discount";
+import BillingIntervalToggle, { type BillingInterval } from "@/components/pricing/billing-interval-toggle";
+import PricingAmount, { PricingAmountInline } from "@/components/pricing/pricing-amount";
 import { detectDefaultCurrency, detectRegionCode } from "@/lib/geo";
 
 const BENEFITS = [
@@ -27,8 +30,8 @@ const BENEFITS = [
 export default function PricingPage() {
   const { user, loading: authLoading } = useAuth();
   const [products, setProducts] = useState<CatalogProduct[]>(FALLBACK_CATALOG_PRODUCTS);
-  const [currency, setCurrency] = useState<"KES" | "USD">("KES");
-  const [supportedCurrencies, setSupportedCurrencies] = useState<Array<"KES" | "USD">>(["KES", "USD"]);
+  const [checkoutCurrency, setCheckoutCurrency] = useState<"KES" | "USD">("KES");
+  const [interval, setInterval] = useState<BillingInterval>("annual");
   const [loading, setLoading] = useState(true);
   const [catalogLive, setCatalogLive] = useState(false);
   const [checkoutProductId, setCheckoutProductId] = useState<string | null>(null);
@@ -38,23 +41,21 @@ export default function PricingPage() {
   useEffect(() => {
     const region = detectRegionCode();
     const detected = detectDefaultCurrency();
-    setCurrency(detected);
+    setCheckoutCurrency(detected);
 
     fetchBillingCatalog(region)
       .then((catalog) => {
         if (catalog.products.length > 0) {
           setProducts(catalog.products);
         }
-        const currencies = (catalog.supportedCurrencies ?? ["KES", "USD"]).filter(
-          (code): code is "KES" | "USD" => code === "KES" || code === "USD",
-        );
-        const available = currencies.length > 0 ? currencies : ["KES"];
-        setSupportedCurrencies(available);
         const preferred =
           catalog.defaultCurrency === "KES" || catalog.defaultCurrency === "USD"
             ? catalog.defaultCurrency
             : detected;
-        setCurrency(available.includes(preferred) ? preferred : available[0]);
+        const supported = (catalog.supportedCurrencies ?? ["KES", "USD"]).filter(
+          (code): code is "KES" | "USD" => code === "KES" || code === "USD",
+        );
+        setCheckoutCurrency(supported.includes(preferred) ? preferred : supported[0] ?? detected);
         setCatalogLive(true);
       })
       .catch(() => {
@@ -66,6 +67,19 @@ export default function PricingPage() {
   const proProducts = products.filter((p) => p.tier === "pro");
   const familyProducts = products.filter((p) => p.tier === "family");
 
+  const maxSavingsPercent = maxAnnualSavingsPercent(
+    [
+      {
+        monthly: proProducts.find((p) => p.interval === "monthly")?.prices ?? {},
+        annual: proProducts.find((p) => p.interval === "annual")?.prices ?? {},
+      },
+      {
+        monthly: familyProducts.find((p) => p.interval === "monthly")?.prices ?? {},
+        annual: familyProducts.find((p) => p.interval === "annual")?.prices ?? {},
+      },
+    ],
+  );
+
   const startCheckout = useCallback(
     async (productId: string) => {
       setError(null);
@@ -75,7 +89,7 @@ export default function PricingPage() {
         const siteUrl = window.location.origin;
         const { authorizationUrl } = await initiateCheckout({
           productId,
-          currency,
+          currency: checkoutCurrency,
           callbackUrl: `${siteUrl}/pricing/success`,
           cancelUrl: `${siteUrl}/pricing/cancel`,
         });
@@ -87,7 +101,7 @@ export default function PricingPage() {
         setCheckoutProductId(null);
       }
     },
-    [currency],
+    [checkoutCurrency],
   );
 
   useEffect(() => {
@@ -116,39 +130,28 @@ export default function PricingPage() {
             <span className="hero-accent">compromise.</span>
           </>
         }
-        subtitle={
-          currency === "KES"
-            ? "Pay with M-Pesa or card in Kenya. Core features stay free during launch."
-            : "Pay with card worldwide. Core features stay free during launch."
-        }
+        subtitle="Pay with M-Pesa or card in Kenya · card worldwide. Local price shown first."
         size="compact"
       >
-        <div className="currency-toggle inline-flex rounded-full border border-gray-200/80 bg-white/90 p-1 shadow-lg backdrop-blur-sm">
-          {supportedCurrencies.map((code) => (
-            <button
-              key={code}
-              type="button"
-              onClick={() => setCurrency(code)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                currency === code ? "bg-emerald-600 text-white" : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              {code === "KES" ? "Kenya (KES)" : "Global (USD)"}
-            </button>
-          ))}
-        </div>
+        <BillingIntervalToggle
+          value={interval}
+          onChange={setInterval}
+          savingsPercent={maxSavingsPercent}
+        />
       </PageHero>
 
-      <SectionShell tone="white" className="!pt-8">
-        <SectionHeader
-          eyebrow="Plans"
-          title="Choose your level"
-          subtitle={
-            user
-              ? "Upgrade when you need advanced blocking, analytics, and sync."
-              : "Browse plans and prices below — sign in when you're ready to subscribe."
-          }
-        />
+      <SectionShell tone="default" className="!pt-8">
+        <div className="mesh-section-header">
+          <SectionHeader
+            eyebrow="Plans"
+            title="Choose your level"
+            subtitle={
+              user
+                ? "Upgrade when you need advanced blocking, analytics, and sync."
+                : "Browse plans and prices below — sign in when you're ready to subscribe."
+            }
+          />
+        </div>
 
         {error && (
           <div
@@ -177,7 +180,8 @@ export default function PricingPage() {
               title="Pro"
               subtitle="For individuals who want deeper focus tools"
               products={proProducts}
-              currency={currency}
+              interval={interval}
+              checkoutCurrency={checkoutCurrency}
               benefits={BENEFITS}
               checkoutProductId={checkoutProductId}
               onCheckout={startCheckout}
@@ -189,7 +193,8 @@ export default function PricingPage() {
               title="Family"
               subtitle="Up to 6 devices — best for households"
               products={familyProducts}
-              currency={currency}
+              interval={interval}
+              checkoutCurrency={checkoutCurrency}
               benefits={[...BENEFITS, "Family dashboard", "Shared policies"]}
               checkoutProductId={checkoutProductId}
               onCheckout={startCheckout}
@@ -216,7 +221,8 @@ function PricingCard({
   title,
   subtitle,
   products,
-  currency,
+  interval,
+  checkoutCurrency,
   benefits,
   checkoutProductId,
   onCheckout,
@@ -228,7 +234,8 @@ function PricingCard({
   title: string;
   subtitle: string;
   products: CatalogProduct[];
-  currency: "KES" | "USD";
+  interval: BillingInterval;
+  checkoutCurrency: "KES" | "USD";
   benefits: string[];
   checkoutProductId: string | null;
   onCheckout: (productId: string) => void;
@@ -239,7 +246,20 @@ function PricingCard({
 }) {
   const monthly = products.find((p) => p.interval === "monthly");
   const annual = products.find((p) => p.interval === "annual");
-  const headlinePrice = monthly ? displayPrice(monthly.prices, currency) : null;
+  const active = interval === "annual" && annual ? annual : monthly;
+  const savings = monthly && annual ? bestAnnualSavings(monthly.prices, annual.prices) : null;
+
+  const compareAtPrices =
+    interval === "annual" && monthly ? annualListFromMonthlyPrices(monthly.prices) : null;
+
+  const priceNote =
+    interval === "annual"
+      ? savings
+        ? `Save ${savings.percent}% vs paying monthly · cancel anytime`
+        : "Cancel anytime · billed once per year"
+      : "Cancel anytime · billed monthly";
+
+  const checkoutNote = `Checkout in ${checkoutCurrency === "KES" ? "KES (M-Pesa or card)" : "USD (card)"} based on your location`;
 
   return (
     <div className={`glass-card flex flex-col !p-8 ${highlighted ? "gradient-border ring-2 ring-emerald-100" : ""}`}>
@@ -248,13 +268,23 @@ function PricingCard({
           <Sparkles className="h-3 w-3" /> Best value
         </span>
       )}
+      {interval === "annual" && savings && (
+        <span className="mb-3 self-start rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
+          Save {savings.percent}% · {savings.monthsSaved} months free
+        </span>
+      )}
       <h2 className="font-display text-2xl text-gray-900">{title}</h2>
       <p className="mt-1 text-sm text-gray-600">{subtitle}</p>
 
-      {headlinePrice ? (
+      {active ? (
         <div className="mt-6">
-          <p className="font-display text-4xl font-bold text-gray-900">{headlinePrice}</p>
-          <p className="mt-1 text-xs text-gray-500">per month · cancel anytime</p>
+          <PricingAmount
+            prices={active.prices}
+            primaryCurrency={checkoutCurrency}
+            compareAtPrices={compareAtPrices}
+            interval={interval}
+            priceNote={priceNote}
+          />
         </div>
       ) : null}
 
@@ -268,10 +298,11 @@ function PricingCard({
       </ul>
 
       <div className="mt-8 space-y-3">
-        {monthly && (
+        {monthly && interval === "monthly" && (
           <PlanButton
-            label="Monthly"
-            price={displayPrice(monthly.prices, currency)}
+            label="Subscribe monthly"
+            prices={monthly.prices}
+            primaryCurrency={checkoutCurrency}
             loading={checkoutProductId === monthly.id}
             disabled={authLoading || checkoutProductId !== null}
             onClick={() => onCheckout(monthly.id)}
@@ -279,19 +310,24 @@ function PricingCard({
             signedIn={Boolean(user)}
           />
         )}
-        {annual && (
+        {annual && interval === "annual" && (
           <PlanButton
-            label="Annual"
-            price={displayPrice(annual.prices, currency)}
-            badge="Save ~2 months"
+            label="Subscribe yearly"
+            prices={annual.prices}
+            primaryCurrency={checkoutCurrency}
+            badge={
+              savings
+                ? `Save ${savings.percent}% · ${savings.monthsSaved} months free`
+                : undefined
+            }
             loading={checkoutProductId === annual.id}
             disabled={authLoading || checkoutProductId !== null}
             onClick={() => onCheckout(annual.id)}
             signInHref={signInHref(annual.id)}
             signedIn={Boolean(user)}
-            secondary
           />
         )}
+        <p className="text-center text-[11px] text-gray-500">{checkoutNote}</p>
       </div>
     </div>
   );
@@ -299,7 +335,8 @@ function PricingCard({
 
 function PlanButton({
   label,
-  price,
+  prices,
+  primaryCurrency,
   badge,
   loading,
   disabled,
@@ -309,7 +346,8 @@ function PlanButton({
   secondary = false,
 }: {
   label: string;
-  price: string;
+  prices: Record<string, number>;
+  primaryCurrency: "KES" | "USD";
   badge?: string;
   loading: boolean;
   disabled: boolean;
@@ -325,9 +363,9 @@ function PlanButton({
   }`;
 
   const priceBlock = (
-    <div className="text-right">
-      <div className="font-semibold">{price}</div>
-      {!signedIn ? <div className="text-xs opacity-80">Sign in to subscribe</div> : null}
+    <div className="shrink-0">
+      <PricingAmountInline prices={prices} primaryCurrency={primaryCurrency} />
+      {!signedIn ? <div className="mt-0.5 text-right text-xs opacity-80">Sign in to subscribe</div> : null}
     </div>
   );
 
@@ -351,7 +389,7 @@ function PlanButton({
       </div>
       <div className="flex items-center gap-2 font-semibold">
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-        {price}
+        {!loading && priceBlock}
       </div>
     </button>
   );

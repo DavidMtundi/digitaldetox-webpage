@@ -1,5 +1,5 @@
 type FocusBackgroundProps = {
-  variant?: "hero" | "section" | "cta";
+  variant?: "hero" | "section" | "cta" | "plug-dark";
   className?: string;
 };
 
@@ -14,13 +14,30 @@ export default function FocusBackground({ variant = "section", className = "" }:
     );
   }
 
+  if (variant === "plug-dark") {
+    return (
+      <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden>
+        <div className="absolute inset-0 bg-[#050807]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 90% 55% at 50% 100%, rgba(16, 185, 129, 0.35), transparent 55%), radial-gradient(ellipse 60% 40% at 20% 20%, rgba(20, 184, 166, 0.08), transparent 50%)",
+          }}
+        />
+        <div className="glow-orb glow-orb-emerald left-1/2 top-[60%] h-[32rem] w-[48rem] -translate-x-1/2 opacity-40" />
+        <div className="marketing-grain absolute inset-0 opacity-[0.18]" />
+      </div>
+    );
+  }
+
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden>
       <div
         className={`absolute inset-0 ${
           variant === "hero"
             ? "mesh-hero"
-            : "bg-gradient-to-b from-emerald-50/50 via-white to-[#f8faf9]"
+            : "bg-gradient-to-b from-emerald-50/50 via-white to-[#f8faf9] dark:from-emerald-950/50 dark:via-gray-950 dark:to-gray-950"
         }`}
       />
       <div className="glow-orb glow-orb-emerald -left-32 top-10" />

@@ -10,6 +10,12 @@ type RevealOnScrollProps = {
   once?: boolean;
 };
 
+function isInViewport(el: HTMLElement, margin = 24) {
+  const rect = el.getBoundingClientRect();
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  return rect.top < vh - margin && rect.bottom > margin;
+}
+
 export default function RevealOnScroll({
   children,
   className = "",
@@ -19,30 +25,66 @@ export default function RevealOnScroll({
 }: RevealOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [init, setInit] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInit(true);
       setVisible(true);
+      return;
+    }
+
+    setInit(true);
+
+    const show = () => setVisible(true);
+
+    const check = () => {
+      if (isInViewport(el)) {
+        show();
+        return true;
+      }
+      return false;
+    };
+
+    if (check() && once) {
       return;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          show();
           if (once) observer.disconnect();
         } else if (!once) {
           setVisible(false);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -48px 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -5% 0px" },
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+
+    const onScroll = () => {
+      if (check() && once) {
+        observer.disconnect();
+        window.removeEventListener("scroll", onScroll, { capture: true });
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+
+    requestAnimationFrame(check);
+    const t1 = window.setTimeout(check, 50);
+    const t2 = window.setTimeout(check, 300);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll, { capture: true });
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
   }, [once]);
 
   const variantClass =
@@ -51,7 +93,7 @@ export default function RevealOnScroll({
   return (
     <div
       ref={ref}
-      className={`motion-reveal ${variantClass} ${visible ? "motion-reveal-visible" : ""} ${className}`}
+      className={`motion-reveal ${variantClass} ${init ? "motion-reveal-init" : ""} ${visible ? "motion-reveal-visible" : ""} ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}

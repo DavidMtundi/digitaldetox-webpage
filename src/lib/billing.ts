@@ -1,7 +1,16 @@
 import { displayPrice, formatPrice } from "@/lib/billing-format";
 import { apiGet, apiPost } from "@/lib/api-client";
 
-export { displayPrice, formatPrice };
+export {
+  displayPrice,
+  displayDualPrice,
+  formatPrice,
+  annualListFromMonthlyPrices,
+  equivalentMonthlyPrices,
+  getPricePair,
+  type BillingCurrency,
+  type PricePair,
+} from "@/lib/billing-format";
 
 export interface CatalogProduct {
   id: string;

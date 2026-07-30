@@ -1,14 +1,15 @@
 "use client";
 
-import { Award, Heart, Shield, Target, TrendingUp, Users } from "lucide-react";
+import { Heart, Shield, Target } from "lucide-react";
 import PageHero from "@/components/marketing/page-hero";
 import SectionHeader from "@/components/marketing/section-header";
 import SectionShell from "@/components/marketing/section-shell";
 import BentoFeatures from "@/components/marketing/bento-features";
 import MediaFrame from "@/components/marketing/media-frame";
 import MediaSplit from "@/components/marketing/media-split";
+import StatBar from "@/components/marketing/stat-bar";
 import TrustBadges from "@/components/marketing/trust-badges";
-import CtaBand, { CtaPrimary, CtaSecondary } from "@/components/marketing/cta-band";
+import { MARKETING_PROOF_STATS, MARKETING_TRUST_BADGES } from "@/lib/marketing-content";
 import { marketingMedia } from "@/lib/marketing-media";
 
 const VALUES = [
@@ -52,19 +53,13 @@ export default function About() {
         }
         subtitle="We're helping people in Kenya and worldwide build healthier relationships with technology — one intentional pause at a time."
       >
-        <TrustBadges
-          items={[
-            { icon: Users, label: "50,000+ users" },
-            { icon: TrendingUp, label: "2M+ hours saved" },
-            { icon: Award, label: "4.8/5 rating" },
-          ]}
-        />
+        <TrustBadges items={[...MARKETING_TRUST_BADGES]} />
       </PageHero>
 
-      <SectionShell tone="white">
-        <MediaSplit
-          media={<MediaFrame image={marketingMedia.about} aspect="wide" />}
-        >
+      <StatBar stats={MARKETING_PROOF_STATS} />
+
+      <SectionShell tone="default">
+        <MediaSplit media={<MediaFrame image={marketingMedia.about} aspect="wide" />}>
           <SectionHeader
             align="left"
             eyebrow="Mission"
@@ -78,11 +73,13 @@ export default function About() {
       </SectionShell>
 
       <SectionShell tone="mesh">
-        <SectionHeader eyebrow="Values" title="What we stand for" />
+        <div className="mesh-section-header">
+          <SectionHeader eyebrow="Values" title="What we stand for" />
+        </div>
         <BentoFeatures items={VALUES} />
       </SectionShell>
 
-      <SectionShell tone="white">
+      <SectionShell tone="default">
         <div className="mx-auto max-w-4xl">
           <SectionHeader
             eyebrow="The problem"
@@ -104,12 +101,14 @@ export default function About() {
         </div>
       </SectionShell>
 
-      <SectionShell tone="default">
-        <SectionHeader
-          eyebrow="Approach"
-          title="Research-led, community-shaped"
-          subtitle="Science informs our features. Beta testers tell us what actually works."
-        />
+      <SectionShell tone="mesh">
+        <div className="mesh-section-header">
+          <SectionHeader
+            eyebrow="Approach"
+            title="Research-led, community-shaped"
+            subtitle="Science informs our features. Real daily use shapes what we ship."
+          />
+        </div>
         <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
           <div className="glass-card">
             <h3 className="type-card-title text-lg">Research-based design</h3>
@@ -120,16 +119,11 @@ export default function About() {
           <div className="glass-card">
             <h3 className="type-card-title text-lg">User-centered iteration</h3>
             <p className="mt-3 text-sm leading-relaxed text-gray-600">
-              We ship what beta testers need in daily life, from M-Pesa billing to flexible block schedules.
+              We ship what people need in daily life — M-Pesa billing, on-demand focus modes, and flexible block schedules.
             </p>
           </div>
         </div>
       </SectionShell>
-
-      <CtaBand title="See what Pauseward can do" subtitle="Free on Android. Pro when you're ready.">
-        <CtaPrimary href="/download">Get the app</CtaPrimary>
-        <CtaSecondary href="/pricing">View pricing</CtaSecondary>
-      </CtaBand>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { termsOfService, type TermsSectionId } from '@/data/terms-of-service';
 import { useExternalLinks } from '@/hooks/useExternalLinks';
 import { renderLegalMarkdown } from '@/lib/legal-markdown';
 import PageHero from '@/components/marketing/page-hero';
+import SectionShell from '@/components/marketing/section-shell';
 import LegalAccordion from '@/components/marketing/legal-accordion';
 
 const SECTION_ICONS: Record<TermsSectionId, ReactNode> = {
@@ -68,19 +69,22 @@ export default function TermsPage() {
         subtitle="Please read these terms carefully before using Pauseward. They govern your account, subscriptions, and use of our apps and web dashboard."
         size="compact"
       >
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-400">
           Version {termsOfService.version} · Effective {termsOfService.effectiveDate}
         </p>
       </PageHero>
 
-      <div className="container-modern py-12 md:py-16">
+      <SectionShell tone="default">
         <div className="glass-card mb-8 !p-8">
-          <h2 className="font-display text-2xl text-gray-900">Agreement</h2>
-          <div className="mt-4">
+          <h2 className="font-display text-2xl text-gray-900 dark:text-gray-50">Agreement</h2>
+          <div className="mt-4 text-gray-700 dark:text-gray-300">
             {renderLegalMarkdown(termsOfService.sections.acceptance.content)}
           </div>
-          <p className="mt-4 text-sm text-gray-500">
-            Related: <Link href="/privacy" className="text-emerald-700 hover:underline">Privacy Policy</Link>
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            Related:{' '}
+            <Link href="/privacy" className="text-emerald-700 hover:underline dark:text-emerald-400">
+              Privacy Policy
+            </Link>
           </p>
         </div>
 
@@ -91,24 +95,27 @@ export default function TermsPage() {
         />
 
         <div className="glass-card mt-8 !p-8">
-          <h2 className="font-display text-2xl text-gray-900">Contact us</h2>
-          <p className="mt-2 text-sm text-gray-600">Legal questions or billing disputes</p>
-          <div className="mt-4 flex items-center gap-3 text-gray-600">
+          <h2 className="font-display text-2xl text-gray-900 dark:text-gray-50">Contact us</h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Legal questions or billing disputes</p>
+          <div className="mt-4 flex items-center gap-3 text-gray-600 dark:text-gray-300">
             <Mail className="h-5 w-5 text-emerald-600" />
-            <a href={`mailto:${contactEmail}`} className="font-medium text-emerald-700 hover:underline">
+            <a
+              href={`mailto:${contactEmail}`}
+              className="font-medium text-emerald-700 hover:underline dark:text-emerald-400"
+            >
               {contactEmail}
             </a>
           </div>
         </div>
 
-        <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-sm text-gray-600">
-          <p className="font-semibold text-gray-900">Legal notice</p>
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-sm text-gray-600 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-400">
+          <p className="font-semibold text-gray-900 dark:text-gray-50">Legal notice</p>
           <p className="mt-2">
             These Terms are governed by the laws of the Republic of Kenya. Nothing in these Terms limits
             mandatory consumer rights that apply in your country of residence.
           </p>
         </div>
-      </div>
+      </SectionShell>
     </div>
   );
 }

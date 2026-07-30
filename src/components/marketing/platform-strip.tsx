@@ -1,67 +1,109 @@
-import type { LucideIcon } from "lucide-react";
-import { Laptop, Monitor, Smartphone } from "lucide-react";
+import Link from "next/link";
+import { Download, ExternalLink } from "lucide-react";
+import PlatformLogo from "@/components/marketing/platform-logo";
 import RevealOnScroll from "./reveal-on-scroll";
+import type { DownloadLinksConfig } from "@/lib/download-links";
+import {
+  PLATFORMS,
+  resolvePlatformDownloadTarget,
+  type PlatformId,
+  type PlatformInfo,
+} from "@/lib/platforms";
 
-type PlatformStripItem = {
-  label: string;
-  status: "live" | "soon" | "beta";
-  href?: string;
-  icon?: LucideIcon;
+/** Native + desktop platforms shown on the home page strip. */
+const HOME_PLATFORM_IDS: PlatformId[] = ["android", "ios", "macos", "windows"];
+
+const ACCENT_CLASS: Record<PlatformId, string> = {
+  android: "platform-strip-accent-emerald",
+  ios: "platform-strip-accent-emerald",
+  macos: "platform-strip-accent-emerald",
+  windows: "platform-strip-accent-emerald",
+  web: "platform-strip-accent-emerald",
 };
 
-const DEFAULT_ICONS: Record<string, LucideIcon> = {
-  Android: Smartphone,
-  "Google Play": Smartphone,
-  iOS: Smartphone,
-  "App Store": Smartphone,
-  Windows: Monitor,
-  macOS: Laptop,
+function platformById(id: PlatformId) {
+  const platform = PLATFORMS.find((entry) => entry.id === id);
+  if (!platform) throw new Error(`Unknown platform: ${id}`);
+  return platform;
+}
+
+type PlatformStripProps = {
+  downloadLinks: DownloadLinksConfig;
 };
 
-export default function PlatformStrip({ items }: { items: PlatformStripItem[] }) {
+function PlatformDownloadButton({
+  platform,
+  href,
+  external,
+}: {
+  platform: PlatformInfo;
+  href: string;
+  external: boolean;
+}) {
+  const label = platform.ctaLabel;
+  const className = "platform-strip-download";
+
+  const content = (
+    <>
+      {platform.id !== "web" ? <Download className="h-4 w-4 shrink-0" aria-hidden /> : null}
+      <span className="truncate">{label}</span>
+      {external ? (
+        <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-80" aria-hidden />
+      ) : null}
+    </>
+  );
+
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {content}
+    </Link>
+  );
+}
+
+export default function PlatformStrip({ downloadLinks }: PlatformStripProps) {
+  const platforms = HOME_PLATFORM_IDS.map(platformById);
+
   return (
     <div className="platform-strip">
-      {items.map((item, i) => {
-        const Icon = item.icon ?? DEFAULT_ICONS[item.label] ?? Smartphone;
-        const inner = (
-          <>
-            <div className="flex w-full items-start justify-between gap-3">
-              <div className="platform-strip-icon">
-                <Icon className="h-5 w-5" />
-              </div>
-              <span className={`platform-pill platform-pill-${item.status}`}>
-                {item.status === "live" ? "Live" : item.status === "beta" ? "Beta" : "Soon"}
-              </span>
-            </div>
-            <div>
-              <p className="type-card-title text-base text-gray-900">
-                {item.label === "Google Play" ? "Android" : item.label}
-              </p>
-              <p className="mt-1 text-xs text-gray-500">
-                {item.status === "live" ? "Download now" : item.status === "beta" ? "Join beta" : "Coming soon"}
-              </p>
-            </div>
-          </>
-        );
-
-        if (item.href) {
-          return (
-            <RevealOnScroll key={item.label} delay={i * 80}>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="platform-strip-card platform-strip-live block h-full"
-              >
-                {inner}
-              </a>
-            </RevealOnScroll>
-          );
-        }
+      {platforms.map((platform, i) => {
+        const target = resolvePlatformDownloadTarget(platform, downloadLinks);
 
         return (
-          <RevealOnScroll key={item.label} delay={i * 80}>
-            <div className="platform-strip-card platform-strip-muted h-full">{inner}</div>
+          <RevealOnScroll key={platform.id} delay={i * 70} variant="scale">
+            <article
+              className={`platform-strip-card platform-strip-card-active ${ACCENT_CLASS[platform.id]}`}
+            >
+              <div className="platform-strip-card-head">
+                <div className="platform-strip-logo">
+                  <PlatformLogo platformId={platform.id} size={40} />
+                </div>
+              </div>
+
+              <div className="platform-strip-card-body">
+                <p className="platform-strip-name">{platform.name}</p>
+                <p className="platform-strip-tagline">{platform.tagline}</p>
+              </div>
+
+              {target ? (
+                <PlatformDownloadButton
+                  platform={platform}
+                  href={target.href}
+                  external={target.external}
+                />
+              ) : (
+                <Link href="/contact" className="platform-strip-download platform-strip-download-outline">
+                  Request access
+                </Link>
+              )}
+            </article>
           </RevealOnScroll>
         );
       })}

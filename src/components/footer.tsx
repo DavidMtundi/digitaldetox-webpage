@@ -2,102 +2,223 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone } from "lucide-react";
+import type { ReactNode } from "react";
+import { ArrowUpRight, Globe, Mail, MapPin, Phone } from "lucide-react";
+import PlatformLogo from "@/components/marketing/platform-logo";
 import { useAuth } from "@/components/auth/auth-provider";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
+import {
+  PLATFORMS,
+  resolvePlatformDownloadTarget,
+  type PlatformId,
+} from "@/lib/platforms";
 
-const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+const FOOTER_PLATFORM_IDS: PlatformId[] = ["android", "ios", "macos", "windows"];
+
+const PRODUCT_LINKS = [
+  { href: "/#features", label: "Features" },
+  { href: "/download", label: "Download" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/download", label: "Apps" },
-  { href: "/contact", label: "Contact" },
-  { href: "/support", label: "Support" },
 ];
 
-const LEGAL = [
-  { href: "/privacy", label: "Privacy Policy" },
-  { href: "/terms", label: "Terms of Service" },
+const COMPANY_LINKS = [
+  { href: "/about", label: "About" },
+  { href: "/support", label: "Support us" },
 ];
+
+const LEGAL_LINKS = [
+  { href: "/privacy", label: "Privacy policy" },
+  { href: "/terms", label: "Terms of service" },
+];
+
+function FooterNavLink({
+  href,
+  children,
+  external,
+}: {
+  href: string;
+  children: ReactNode;
+  external?: boolean;
+}) {
+  const className = "site-footer-link inline-flex items-center gap-1";
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+        {children}
+        <ArrowUpRight className="h-3 w-3 opacity-60" aria-hidden />
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+function platformById(id: PlatformId) {
+  const platform = PLATFORMS.find((entry) => entry.id === id);
+  if (!platform) throw new Error(`Unknown platform: ${id}`);
+  return platform;
+}
 
 export default function Footer() {
   const { links } = useExternalLinks();
   const { user } = useAuth();
+  const dashboardHref = user ? "/dashboard" : "/dashboard/login";
+  const dashboardLabel = user ? "Dashboard" : "Log in";
 
   return (
-    <footer className="relative overflow-hidden bg-gray-950 text-white">
-      <div className="marketing-grain absolute inset-0 opacity-10" />
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-gray-950 to-gray-950" />
-      <div className="container-modern relative z-10 py-16 md:py-20">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-1">
-            <Link href="/" className="mb-5 flex items-center gap-3">
-              <div className="relative h-11 w-11">
+    <footer className="site-footer">
+      <div className="marketing-grain site-footer-grain" aria-hidden />
+      <div className="site-footer-glow" aria-hidden />
+
+      <div className="container-modern relative z-10">
+        <div className="site-footer-cta-panel">
+          <div className="site-footer-cta-inner">
+            <div className="site-footer-cta-copy">
+              <p className="site-footer-eyebrow">Focus on demand</p>
+              <h2 className="site-footer-cta-title font-display">Protect your attention on every device</h2>
+              <p className="site-footer-cta-subtitle">
+                Download on Android, iOS, Windows, or macOS. Upgrade on web with M-Pesa or card when you need more.
+              </p>
+            </div>
+            <div className="site-footer-cta-actions">
+              <Link href="/download" className="site-footer-cta-primary">
+                Get the app
+                <ArrowUpRight className="h-4 w-4" aria-hidden />
+              </Link>
+              <Link href="/pricing" className="site-footer-cta-secondary">
+                View pricing
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="site-footer-grid">
+          <div className="site-footer-brand">
+            <Link href="/" className="site-footer-logo group">
+              <div className="relative h-11 w-11 shrink-0 transition group-hover:scale-105">
                 <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" />
               </div>
               <span className="font-display text-xl font-bold text-white">Pauseward</span>
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-gray-400">
-              Pause before distraction. Block apps, protect focus, and build healthier digital habits — starting in Kenya and worldwide.
+            <p className="site-footer-tagline">
+              Pause before distraction. Block apps and sites, turn focus modes on when you need them, and sync
+              boundaries across your devices.
             </p>
+            <div className="site-footer-origin-row">
+              <span className="site-footer-origin-pill site-footer-origin-pill-accent">
+                <MapPin className="h-3.5 w-3.5 text-emerald-400" aria-hidden />
+                Kenya-born
+              </span>
+              <span className="site-footer-origin-pill">
+                <Globe className="h-3.5 w-3.5 text-emerald-400/90" aria-hidden />
+                Focus everywhere
+              </span>
+            </div>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-300">Explore</h3>
-            <ul className="space-y-2.5">
-              {LINKS.map((link) => (
+          <nav className="site-footer-nav-col" aria-label="Product">
+            <h3 className="site-footer-col-title">Product</h3>
+            <ul className="site-footer-links">
+              {PRODUCT_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-gray-400 transition hover:text-white">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-300">Contact</h3>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li>
-                <a href={`mailto:${links.contact.email}`} className="flex items-start gap-2 hover:text-white">
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0" />
-                  <span className="break-all">{links.contact.email}</span>
-                </a>
-              </li>
-              <li>
-                <a href={`tel:${links.contact.phone}`} className="flex items-center gap-2 hover:text-white">
-                  <Phone className="h-4 w-4 shrink-0" />
-                  {links.contact.phone}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-300">Legal</h3>
-            <ul className="space-y-2.5">
-              {LEGAL.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-gray-400 transition hover:text-white">
-                    {link.label}
-                  </Link>
+                  <FooterNavLink href={link.href}>{link.label}</FooterNavLink>
                 </li>
               ))}
               <li>
-                <Link
-                  href={user ? "/dashboard" : "/dashboard/login"}
-                  className="text-sm text-gray-400 transition hover:text-white"
+                <FooterNavLink href={dashboardHref}>{dashboardLabel}</FooterNavLink>
+              </li>
+            </ul>
+          </nav>
+
+          <nav className="site-footer-nav-col" aria-label="Company">
+            <h3 className="site-footer-col-title">Company</h3>
+            <ul className="site-footer-links">
+              {COMPANY_LINKS.map((link) => (
+                <li key={link.href}>
+                  <FooterNavLink href={link.href}>{link.label}</FooterNavLink>
+                </li>
+              ))}
+              <li>
+                <FooterNavLink href="/contact">Contact</FooterNavLink>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="site-footer-nav-col site-footer-contact-col">
+            <h3 className="site-footer-col-title">Contact</h3>
+            <ul className="site-footer-contact">
+              <li>
+                <a href={`mailto:${links.contact.email}`} className="site-footer-contact-link">
+                  <Mail className="h-4 w-4 shrink-0 text-emerald-400/80" aria-hidden />
+                  <span className="site-footer-email">{links.contact.email}</span>
+                </a>
+              </li>
+              {links.contact.phone ? (
+                <li>
+                  <a href={`tel:${links.contact.phone}`} className="site-footer-contact-link">
+                    <Phone className="h-4 w-4 shrink-0 text-emerald-400/80" aria-hidden />
+                    <span>{links.contact.phone}</span>
+                  </a>
+                </li>
+              ) : null}
+            </ul>
+          </div>
+
+          <nav className="site-footer-nav-col" aria-label="Legal">
+            <h3 className="site-footer-col-title">Legal</h3>
+            <ul className="site-footer-links">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <FooterNavLink href={link.href}>{link.label}</FooterNavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        <div className="site-footer-platforms">
+          <p className="site-footer-col-title mb-3">Download</p>
+          <div className="site-footer-platform-grid">
+            {FOOTER_PLATFORM_IDS.map((id) => {
+              const platform = platformById(id);
+              const target = resolvePlatformDownloadTarget(platform, links.downloadLinks);
+              if (!target) return null;
+
+              const chip = (
+                <>
+                  <span className="site-footer-platform-logo">
+                    <PlatformLogo platformId={id} size={22} />
+                  </span>
+                  <span className="truncate">{platform.name}</span>
+                </>
+              );
+
+              return target.external ? (
+                <a
+                  key={id}
+                  href={target.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="site-footer-platform-chip"
                 >
-                  {user ? "Web dashboard" : "Log in"}
+                  {chip}
+                  <ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0 opacity-50" aria-hidden />
+                </a>
+              ) : (
+                <Link key={id} href={target.href} className="site-footer-platform-chip">
+                  {chip}
                 </Link>
-              </li>
-            </ul>
+              );
+            })}
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-gray-500 md:flex-row">
+        <div className="site-footer-bottom">
           <p>© {new Date().getFullYear()} Pauseward. All rights reserved.</p>
-          <p>Built for focus. Pay with M-Pesa or card in Kenya.</p>
+          <p className="site-footer-bottom-meta">M-Pesa & card via Paystack · Cancel anytime on Pro & Family</p>
         </div>
       </div>
     </footer>

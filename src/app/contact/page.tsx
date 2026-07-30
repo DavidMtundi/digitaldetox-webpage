@@ -2,17 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import {
-  ArrowRight,
-  Clock,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Shield,
-} from "lucide-react";
+import { ArrowRight, Clock, Mail, MapPin, MessageCircle, Shield } from "lucide-react";
 import PageHero from "@/components/marketing/page-hero";
 import SectionHeader from "@/components/marketing/section-header";
 import SectionShell from "@/components/marketing/section-shell";
+import StatBar from "@/components/marketing/stat-bar";
 import TrustBadges from "@/components/marketing/trust-badges";
 import RevealOnScroll from "@/components/marketing/reveal-on-scroll";
 import LegalAccordion from "@/components/marketing/legal-accordion";
@@ -21,7 +15,10 @@ import ContactChannels, {
   ContactResources,
   ContactTimeline,
 } from "@/components/marketing/contact-channels";
-import CtaBand, { CtaPrimary, CtaSecondary } from "@/components/marketing/cta-band";
+import {
+  PlugHeroCtaPrimary,
+  PlugHeroCtaSecondary,
+} from "@/components/marketing/plug-style-hero";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
 import { DEFAULT_CONTACT_EMAIL } from "@/lib/contact";
 
@@ -39,7 +36,7 @@ const FAQ = [
   {
     id: "platforms",
     q: "Which platforms are supported?",
-    a: "Android is live. iOS and macOS are in beta. Windows is coming soon. Billing, devices, and blocklists can be managed from the web dashboard.",
+    a: "Android, iOS, Windows, and macOS are available. Billing, devices, and blocklists can be managed from the web dashboard.",
   },
   {
     id: "refund",
@@ -63,7 +60,7 @@ export default function ContactPage() {
   const contactEmail = links.contact.email || DEFAULT_CONTACT_EMAIL;
   const contactPhone = links.contact.phone?.trim();
   const contactHours = links.contact.hours || "Mon–Fri, 9am–6pm EAT";
-  const [openFaq, setOpenFaq] = useState<Record<string, boolean>>({ "mpesa": true });
+  const [openFaq, setOpenFaq] = useState<Record<string, boolean>>({ mpesa: true });
 
   return (
     <div className="marketing-page">
@@ -79,60 +76,45 @@ export default function ContactPage() {
         subtitle="Whether it’s M-Pesa billing, a bug on Android, or a partnership idea — tell us what you need and we’ll get back to you."
         size="compact"
       >
-        <a href="#message" className="btn-primary inline-flex items-center gap-2">
-          <MessageCircle className="h-4 w-4" />
+        <PlugHeroCtaPrimary href="#message">
+          <MessageCircle className="h-4 w-4" aria-hidden />
           Send a message
-        </a>
-        <a href={`mailto:${contactEmail}`} className="btn-secondary inline-flex items-center gap-2">
-          <Mail className="h-4 w-4" />
+        </PlugHeroCtaPrimary>
+        <PlugHeroCtaSecondary href={`mailto:${contactEmail}`}>
+          <Mail className="h-4 w-4" aria-hidden />
           Email directly
-        </a>
+        </PlugHeroCtaSecondary>
         <TrustBadges
           items={[
             { icon: Clock, label: "Reply within 48h" },
-            { icon: MapPin, label: "Based in Kenya" },
+            { icon: MapPin, label: "Kenya-born" },
             { icon: Shield, label: "Privacy-first" },
           ]}
         />
       </PageHero>
 
-      <section className="contact-stat-band" aria-label="Support highlights">
-        <div className="container-modern">
-          <div className="contact-stat-grid">
-            <RevealOnScroll>
-              <div className="contact-stat-card">
-                <p className="contact-stat-value">48h</p>
-                <p className="contact-stat-label">Typical response time</p>
-              </div>
-            </RevealOnScroll>
-            <RevealOnScroll delay={80}>
-              <div className="contact-stat-card">
-                <p className="contact-stat-value">EAT</p>
-                <p className="contact-stat-label">{contactHours}</p>
-              </div>
-            </RevealOnScroll>
-            <RevealOnScroll delay={160}>
-              <div className="contact-stat-card">
-                <p className="contact-stat-value">Email</p>
-                <p className="contact-stat-label">Primary support channel</p>
-              </div>
-            </RevealOnScroll>
-          </div>
-        </div>
-      </section>
+      <StatBar
+        stats={[
+          { value: "48h", label: "Typical response" },
+          { value: "EAT", label: contactHours },
+          { value: "Email", label: "Primary channel" },
+        ]}
+      />
 
-      <SectionShell tone="white">
-        <SectionHeader
-          eyebrow="Channels"
-          title="Choose how to reach us"
-          subtitle="Self-serve options are fastest for billing and downloads. Email us for everything else."
-        />
+      <SectionShell tone="default">
+        <div className="mesh-section-header">
+          <SectionHeader
+            eyebrow="Channels"
+            title="Choose how to reach us"
+            subtitle="Self-serve options are fastest for billing and downloads. Email us for everything else."
+          />
+        </div>
         <RevealOnScroll>
           <ContactChannels email={contactEmail} phone={contactPhone} hours={contactHours} />
         </RevealOnScroll>
       </SectionShell>
 
-      <SectionShell tone="mesh" id="message">
+      <SectionShell tone="mesh" id="message" className="scroll-mt-28">
         <div className="contact-layout">
           <aside className="contact-aside">
             <SectionHeader
@@ -143,7 +125,7 @@ export default function ContactPage() {
             />
             <RevealOnScroll>
               <div className="contact-aside-panel">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-emerald-800">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-emerald-800 dark:text-emerald-300">
                   What happens next
                 </h3>
                 <ContactTimeline />
@@ -162,12 +144,14 @@ export default function ContactPage() {
         </div>
       </SectionShell>
 
-      <SectionShell tone="white">
-        <SectionHeader
-          eyebrow="FAQ"
-          title="Common questions"
-          subtitle="Still unsure? Expand an answer below or write to us."
-        />
+      <SectionShell tone="default">
+        <div className="mesh-section-header">
+          <SectionHeader
+            eyebrow="FAQ"
+            title="Common questions"
+            subtitle="Still unsure? Expand an answer below or write to us."
+          />
+        </div>
         <div className="mx-auto max-w-3xl">
           <LegalAccordion
             sections={FAQ.map((item) => ({
@@ -178,23 +162,18 @@ export default function ContactPage() {
             openSections={openFaq}
             onToggle={(id) => setOpenFaq((prev) => ({ ...prev, [id]: !prev[id] }))}
           />
-          <p className="mt-8 text-center text-sm text-gray-600">
+          <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
             Didn&apos;t find your answer?{" "}
-            <Link href="#message" className="font-semibold text-emerald-700 hover:underline">
+            <Link
+              href="#message"
+              className="font-semibold text-emerald-700 hover:text-emerald-600 dark:text-emerald-400"
+            >
               Send us a message
               <ArrowRight className="ml-1 inline h-4 w-4" />
             </Link>
           </p>
         </div>
       </SectionShell>
-
-      <CtaBand
-        title="Prefer self-serve?"
-        subtitle="Check your plan, payments, and devices in the dashboard — or grab the app for your platform."
-      >
-        <CtaPrimary href="/dashboard/login">Open dashboard</CtaPrimary>
-        <CtaSecondary href="/download">Download apps</CtaSecondary>
-      </CtaBand>
     </div>
   );
 }

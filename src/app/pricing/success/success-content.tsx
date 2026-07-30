@@ -3,9 +3,14 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { CheckCircle, Loader2, XCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, Loader2, XCircle } from "lucide-react";
 import { useAuth } from "@/components/auth/auth-provider";
 import { CheckoutStatusResponse, fetchCheckoutStatus } from "@/lib/billing";
+import PageHero from "@/components/marketing/page-hero";
+import SectionShell from "@/components/marketing/section-shell";
+import {
+  PlugHeroCtaPrimary,
+} from "@/components/marketing/plug-style-hero";
 
 type PageState = "loading" | "pending" | "completed" | "failed" | "unauthenticated";
 
@@ -70,24 +75,28 @@ export default function PricingSuccessContent() {
 
   if (authLoading || state === "loading") {
     return (
-      <StatusShell icon={<Loader2 className="h-16 w-16 animate-spin text-emerald-600" />}>
-        <h1 className="mt-6 font-display text-3xl text-gray-900">Confirming payment…</h1>
-        <p className="mt-3 max-w-md text-gray-600">
-          Hang tight — we&apos;re verifying your payment with Paystack.
-        </p>
-      </StatusShell>
+      <CheckoutStatusPage
+        eyebrow="Checkout"
+        title="Confirming payment…"
+        subtitle="Hang tight — we're verifying your payment with Paystack."
+        icon={<Loader2 className="h-16 w-16 animate-spin text-emerald-500" />}
+      />
     );
   }
 
   if (state === "unauthenticated") {
     return (
-      <StatusShell icon={<Loader2 className="h-16 w-16 text-amber-500" />}>
-        <h1 className="mt-6 font-display text-3xl text-gray-900">Sign in to confirm</h1>
-        <p className="mt-3 max-w-md text-gray-600">
-          Sign in with the same account you used at checkout so we can activate your plan.
-        </p>
-        <ActionLinks signInHref={`/dashboard/login?redirect=/pricing/success?reference=${reference}`} />
-      </StatusShell>
+      <CheckoutStatusPage
+        eyebrow="Checkout"
+        title="Sign in to confirm"
+        subtitle="Sign in with the same account you used at checkout so we can activate your plan."
+        icon={<Loader2 className="h-16 w-16 text-amber-400" />}
+        actions={
+          <ActionLinks
+            signInHref={`/dashboard/login?redirect=/pricing/success?reference=${reference}`}
+          />
+        }
+      />
     );
   }
 
@@ -97,62 +106,83 @@ export default function PricingSuccessContent() {
     const expiresAt = status?.entitlement?.expiresAt;
 
     return (
-      <StatusShell icon={<CheckCircle className="h-16 w-16 text-emerald-600" />}>
-        <h1 className="mt-6 font-display text-3xl text-gray-900">You&apos;re on {planName}!</h1>
-        <p className="mt-3 max-w-md text-gray-600">
-          {status?.message ??
-            `Payment confirmed. Your ${tier} features are active on this account.`}
-        </p>
-        {expiresAt && (
-          <p className="mt-2 text-sm text-gray-500">
-            Renews on {new Date(expiresAt).toLocaleDateString()}
-          </p>
-        )}
-        <ActionLinks />
-      </StatusShell>
+      <CheckoutStatusPage
+        eyebrow="Checkout"
+        title={`You're on ${planName}!`}
+        subtitle={
+          status?.message ?? `Payment confirmed. Your ${tier} features are active on this account.`
+        }
+        icon={<CheckCircle className="h-16 w-16 text-emerald-500" />}
+        extra={
+          expiresAt ? (
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Renews on {new Date(expiresAt).toLocaleDateString()}
+            </p>
+          ) : null
+        }
+        actions={<ActionLinks />}
+      />
     );
   }
 
   if (state === "pending") {
     return (
-      <StatusShell icon={<Loader2 className="h-16 w-16 animate-spin text-emerald-600" />}>
-        <h1 className="mt-6 font-display text-3xl text-gray-900">Almost there</h1>
-        <p className="mt-3 max-w-md text-gray-600">
-          {status?.message ??
-            "Your payment is being processed. This usually takes under a minute."}
-        </p>
-        <p className="mt-2 text-xs text-gray-400">Reference: {reference}</p>
-        <ActionLinks />
-      </StatusShell>
+      <CheckoutStatusPage
+        eyebrow="Checkout"
+        title="Almost there"
+        subtitle={
+          status?.message ?? "Your payment is being processed. This usually takes under a minute."
+        }
+        icon={<Loader2 className="h-16 w-16 animate-spin text-emerald-500" />}
+        extra={
+          <p className="text-xs text-gray-400">Reference: {reference}</p>
+        }
+        actions={<ActionLinks />}
+      />
     );
   }
 
   return (
-    <StatusShell icon={<XCircle className="h-16 w-16 text-red-500" />}>
-      <h1 className="mt-6 font-display text-3xl text-gray-900">Could not confirm payment</h1>
-      <p className="mt-3 max-w-md text-gray-600">
-        If you completed payment, your plan may still activate shortly. Check your dashboard or
-        contact support with reference{" "}
-        <span className="font-mono text-sm">{reference ?? "—"}</span>.
-      </p>
-      <ActionLinks includePricing />
-    </StatusShell>
+    <CheckoutStatusPage
+      eyebrow="Checkout"
+      title="Could not confirm payment"
+      subtitle="If you completed payment, your plan may still activate shortly. Check your dashboard or contact support."
+      icon={<XCircle className="h-16 w-16 text-red-400" />}
+      extra={
+        <p className="font-mono text-sm text-gray-500 dark:text-gray-400">
+          Reference: {reference ?? "—"}
+        </p>
+      }
+      actions={<ActionLinks includePricing />}
+    />
   );
 }
 
-function StatusShell({
+function CheckoutStatusPage({
+  eyebrow,
+  title,
+  subtitle,
   icon,
-  children,
+  extra,
+  actions,
 }: {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
   icon: React.ReactNode;
-  children: React.ReactNode;
+  extra?: React.ReactNode;
+  actions?: React.ReactNode;
 }) {
   return (
-    <div className="marketing-page min-h-[60vh]">
-      <div className="container-modern flex flex-col items-center justify-center py-20 text-center">
-        {icon}
-        {children}
-      </div>
+    <div className="marketing-page">
+      <PageHero eyebrow={eyebrow} title={title} subtitle={subtitle} size="compact" />
+      <SectionShell tone="default">
+        <div className="flex flex-col items-center py-4 text-center">
+          {icon}
+          {extra}
+          {actions}
+        </div>
+      </SectionShell>
     </div>
   );
 }
@@ -164,35 +194,23 @@ function ActionLinks({
   signInHref?: string;
   includePricing?: boolean;
 }) {
+  const secondaryClass =
+    "inline-flex min-h-[48px] items-center justify-center rounded-full border border-gray-200 bg-white px-7 py-3 text-sm font-semibold text-gray-700 transition hover:border-emerald-300 hover:bg-emerald-50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 dark:hover:border-emerald-700 dark:hover:bg-emerald-950/30";
+
   return (
-    <div className="mt-8 flex flex-wrap justify-center gap-3">
+    <div className="mt-8 flex flex-wrap justify-center gap-4">
       {signInHref ? (
-        <Link
-          href={signInHref}
-          className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
-        >
-          Sign in
-        </Link>
+        <PlugHeroCtaPrimary href={signInHref}>Sign in</PlugHeroCtaPrimary>
       ) : (
-        <Link
-          href="/dashboard"
-          className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
-        >
-          Open dashboard
-        </Link>
+        <PlugHeroCtaPrimary href="/dashboard">Open dashboard</PlugHeroCtaPrimary>
       )}
-      <Link
-        href="/download"
-        className="rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-      >
+      <Link href="/download" className={secondaryClass}>
         Download apps
       </Link>
       {includePricing && (
-        <Link
-          href="/pricing"
-          className="rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-        >
+        <Link href="/pricing" className={secondaryClass}>
           Back to pricing
+          <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       )}
     </div>

@@ -7,6 +7,8 @@ import { LEGAL_CONTACT_EMAIL, privacyPolicyVersions, versionSpecificContent } fr
 import { useExternalLinks } from '@/hooks/useExternalLinks';
 import { renderLegalMarkdown } from '@/lib/legal-markdown';
 import PageHero from '@/components/marketing/page-hero';
+import SectionShell from '@/components/marketing/section-shell';
+import SectionHeader from '@/components/marketing/section-header';
 import LegalAccordion from '@/components/marketing/legal-accordion';
 
 const SECTION_ICONS: Record<string, ReactNode> = {
@@ -66,26 +68,26 @@ export default function PrivacyPage() {
         size="compact"
       >
         <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Clock className="h-4 w-4" />
+          <div className="flex items-center gap-2 text-sm text-gray-300">
+            <Clock className="h-4 w-4 text-emerald-400" />
             <select
               value={selectedVersion}
               onChange={(e) => setSelectedVersion(e.target.value)}
-              className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"
             >
               {privacyPolicyVersions.versions.map((version) => (
-                <option key={version.version} value={version.version}>
+                <option key={version.version} value={version.version} className="text-gray-900">
                   v{version.version} {version.isCurrent ? '(Current)' : ''}
                 </option>
               ))}
             </select>
           </div>
-          <span className="text-sm text-gray-500">Effective {currentVersion?.effectiveDate}</span>
+          <span className="text-sm text-gray-400">Effective {currentVersion?.effectiveDate}</span>
         </div>
         <button
           type="button"
           onClick={() => setShowVersionHistory(!showVersionHistory)}
-          className="text-sm font-medium text-emerald-700 hover:underline"
+          className="text-sm font-medium text-emerald-400 hover:text-emerald-300"
         >
           <FileText className="mr-1 inline h-4 w-4" />
           {showVersionHistory ? 'Hide' : 'Show'} version history
@@ -93,46 +95,48 @@ export default function PrivacyPage() {
       </PageHero>
 
       {showVersionHistory && (
-        <div className="border-b border-emerald-100 bg-emerald-50/50">
-          <div className="container-modern py-10">
-            <h2 className="font-display text-2xl text-gray-900">Version history</h2>
-            <div className="mt-6 space-y-4">
-              {privacyPolicyVersions.versions.map((version) => (
-                <div
-                  key={version.version}
-                  className={`rounded-2xl border p-5 ${
-                    version.isCurrent ? 'border-emerald-200 bg-white' : 'border-gray-200 bg-white/80'
-                  }`}
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="font-semibold text-gray-900">
-                      Version {version.version}
-                      {version.isCurrent && (
-                        <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800">
-                          Current
-                        </span>
-                      )}
-                    </h3>
-                    <span className="text-sm text-gray-500">Effective {version.effectiveDate}</span>
-                  </div>
-                  {version.changes && (
-                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-gray-600">
-                      {version.changes.map((change) => (
-                        <li key={change}>{change}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
+        <SectionShell tone="mesh">
+          <div className="mesh-section-header">
+            <SectionHeader eyebrow="Archive" title="Version history" />
           </div>
-        </div>
+          <div className="mx-auto max-w-3xl space-y-4">
+            {privacyPolicyVersions.versions.map((version) => (
+              <div
+                key={version.version}
+                className={`rounded-2xl border p-5 ${
+                  version.isCurrent
+                    ? 'border-emerald-200 bg-white dark:border-emerald-800 dark:bg-gray-900'
+                    : 'border-gray-200 bg-white/80 dark:border-gray-700 dark:bg-gray-900/80'
+                }`}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-50">
+                    Version {version.version}
+                    {version.isCurrent && (
+                      <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
+                        Current
+                      </span>
+                    )}
+                  </h3>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">Effective {version.effectiveDate}</span>
+                </div>
+                {version.changes && (
+                  <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400">
+                    {version.changes.map((change) => (
+                      <li key={change}>{change}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </SectionShell>
       )}
 
-      <div className="container-modern py-12 md:py-16">
+      <SectionShell tone="default">
         <div className="glass-card mb-8 !p-8">
-          <h2 className="font-display text-2xl text-gray-900">Introduction</h2>
-          <div className="mt-4">
+          <h2 className="font-display text-2xl text-gray-900 dark:text-gray-50">Introduction</h2>
+          <div className="mt-4 text-gray-700 dark:text-gray-300">
             {renderLegalMarkdown(
               versionSpecificContent[selectedVersion]?.introduction ||
                 privacyPolicyVersions.sections.introduction.content,
@@ -147,29 +151,36 @@ export default function PrivacyPage() {
         />
 
         <div className="glass-card mt-8 !p-8">
-          <h2 className="font-display text-2xl text-gray-900">Contact us</h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <h2 className="font-display text-2xl text-gray-900 dark:text-gray-50">Contact us</h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
             Questions about this policy or your data? Email us — we aim to respond within 48 hours.
           </p>
-          <div className="mt-4 flex items-center gap-3 text-gray-600">
+          <div className="mt-4 flex items-center gap-3 text-gray-600 dark:text-gray-300">
             <Mail className="h-5 w-5 text-emerald-600" />
-            <a href={`mailto:${contactEmail}`} className="font-medium text-emerald-700 hover:underline">
+            <a
+              href={`mailto:${contactEmail}`}
+              className="font-medium text-emerald-700 hover:underline dark:text-emerald-400"
+            >
               {contactEmail}
             </a>
           </div>
-          <p className="mt-4 text-sm text-gray-500">
-            See also our <Link href="/terms" className="text-emerald-700 hover:underline">Terms of Service</Link>.
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            See also our{' '}
+            <Link href="/terms" className="text-emerald-700 hover:underline dark:text-emerald-400">
+              Terms of Service
+            </Link>
+            .
           </p>
         </div>
 
-        <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-sm text-gray-600">
-          <p className="font-semibold text-gray-900">Your consent</p>
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-sm text-gray-600 dark:border-gray-700 dark:bg-gray-900/50 dark:text-gray-400">
+          <p className="font-semibold text-gray-900 dark:text-gray-50">Your consent</p>
           <p className="mt-2">By using Pauseward, you acknowledge this Privacy Policy.</p>
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-gray-500 dark:text-gray-500">
             Pauseward · Version {selectedVersion} · © {new Date().getFullYear()} Pauseward. All rights reserved.
           </p>
         </div>
-      </div>
+      </SectionShell>
     </div>
   );
 }

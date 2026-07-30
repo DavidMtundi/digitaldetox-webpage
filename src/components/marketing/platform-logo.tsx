@@ -8,13 +8,14 @@ interface PlatformLogoProps {
   className?: string;
 }
 
+/** Official platform mark from `/public/platforms/*` (brand colors preserved). */
 export default function PlatformLogo({ platformId, size = 40, className = "" }: PlatformLogoProps) {
   const platform = PLATFORMS.find((entry) => entry.id === platformId);
   if (!platform) return null;
 
   return (
     <div
-      className={`platform-logo ${platform.logoClassName ?? ""} ${className}`.trim()}
+      className={`platform-logo ${className}`.trim()}
       style={{ width: size, height: size }}
     >
       <Image
@@ -23,6 +24,7 @@ export default function PlatformLogo({ platformId, size = 40, className = "" }: 
         width={size}
         height={size}
         className="h-full w-full object-contain"
+        unoptimized
       />
     </div>
   );

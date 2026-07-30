@@ -35,10 +35,10 @@ export const marketingMedia = {
   },
   demo: {
     video: parseVideoEnv(
-      env("NEXT_PUBLIC_DEMO_VIDEO_URL", ""),
-      { type: "placeholder" } as VideoSource,
+      env("NEXT_PUBLIC_DEMO_VIDEO_URL", "/marketing/pauseward-demo-ios.mp4"),
+      { type: "file", src: "/marketing/pauseward-demo-ios.mp4" } as VideoSource,
     ),
-    poster: env("NEXT_PUBLIC_DEMO_VIDEO_POSTER", "/marketing/video-poster.svg"),
+    poster: env("NEXT_PUBLIC_DEMO_VIDEO_POSTER", "/marketing/hero-app-preview.svg"),
   },
   features: [
     {
@@ -50,6 +50,29 @@ export const marketingMedia = {
       alt: "Usage analytics dashboard",
     },
   ] as MarketingImage[],
+  /** Per-feature demo clips for the Features tab section */
+  featureTabs: {
+    appBlocking: featureTabDemo(
+      "NEXT_PUBLIC_FEATURE_VIDEO_APP_BLOCKING",
+      "/marketing/pauseward-demo-ios.mp4",
+      "/marketing/feature-blocking.svg",
+    ),
+    insights: featureTabDemo(
+      "NEXT_PUBLIC_FEATURE_VIDEO_INSIGHTS",
+      "/marketing/feature-insights.mp4",
+      "/marketing/feature-analytics.svg",
+    ),
+    focusModes: featureTabDemo(
+      "NEXT_PUBLIC_FEATURE_VIDEO_FOCUS_MODES",
+      "/marketing/feature-focus-modes.mp4",
+      "/marketing/hero-app-preview.svg",
+    ),
+    websiteBlocking: featureTabDemo(
+      "NEXT_PUBLIC_FEATURE_VIDEO_WEBSITE_BLOCKING",
+      "/marketing/feature-website-blocking.mp4",
+      "/marketing/feature-blocking.svg",
+    ),
+  },
   about: {
     src: env("NEXT_PUBLIC_ABOUT_IMAGE", "/marketing/about-mission.svg"),
     alt: "Person focusing without phone distractions",
@@ -72,4 +95,17 @@ function parseVideoEnv(url: string, fallback: VideoSource): VideoSource {
   }
 
   return { type: "file", src: url };
+}
+
+function featureTabDemo(envKey: string, defaultPath: string, poster: string) {
+  const url = env(envKey, defaultPath);
+  const fallback: VideoSource =
+    defaultPath.endsWith(".mp4") || defaultPath.endsWith(".webm")
+      ? { type: "file", src: defaultPath }
+      : { type: "placeholder" };
+
+  return {
+    video: parseVideoEnv(url, fallback),
+    poster: env(`${envKey}_POSTER`, poster),
+  };
 }

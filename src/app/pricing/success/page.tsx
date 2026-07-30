@@ -1,17 +1,30 @@
 import { Suspense } from "react";
+import PageHero from "@/components/marketing/page-hero";
+import SectionShell from "@/components/marketing/section-shell";
 import { Loader2 } from "lucide-react";
 import PricingSuccessContent from "./success-content";
 
+function SuccessFallback() {
+  return (
+    <div className="marketing-page">
+      <PageHero
+        eyebrow="Checkout"
+        title="Confirming payment…"
+        subtitle="Hang tight — we're verifying your payment with Paystack."
+        size="compact"
+      />
+      <SectionShell tone="default">
+        <div className="flex flex-col items-center py-8 text-center">
+          <Loader2 className="h-16 w-16 animate-spin text-emerald-500" />
+        </div>
+      </SectionShell>
+    </div>
+  );
+}
+
 export default function PricingSuccessPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="container-modern flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
-          <Loader2 className="h-16 w-16 animate-spin text-emerald-600" />
-          <h1 className="mt-6 text-3xl font-bold text-gray-900">Confirming payment…</h1>
-        </div>
-      }
-    >
+    <Suspense fallback={<SuccessFallback />}>
       <PricingSuccessContent />
     </Suspense>
   );

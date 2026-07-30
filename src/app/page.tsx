@@ -1,75 +1,31 @@
 "use client";
 
-import Link from "next/link";
 import {
-  ArrowRight,
-  BarChart3,
   Download,
-  Globe,
-  Lock,
   Moon,
-  Shield,
-  Smartphone,
   Sparkles,
-  Users,
-  Zap,
 } from "lucide-react";
-import PageHero from "@/components/marketing/page-hero";
+import PlugStyleHero, {
+  PlugHeroCtaPrimary,
+  PlugHeroCtaSecondary,
+} from "@/components/marketing/plug-style-hero";
 import SectionHeader from "@/components/marketing/section-header";
 import SectionShell from "@/components/marketing/section-shell";
-import TrustBadges from "@/components/marketing/trust-badges";
-import BentoFeatures from "@/components/marketing/bento-features";
 import HowItWorks from "@/components/marketing/how-it-works";
-import StatShowcase from "@/components/marketing/stat-showcase";
 import PlatformStrip from "@/components/marketing/platform-strip";
-import MediaFrame from "@/components/marketing/media-frame";
-import MediaSplit from "@/components/marketing/media-split";
-import VideoShowcase from "@/components/marketing/video-showcase";
-import CtaBand, { CtaPrimary, CtaSecondary } from "@/components/marketing/cta-band";
 import PricingPreview from "@/components/pricing/pricing-preview";
+import StatBar from "@/components/marketing/stat-bar";
+import ProductFaqSection from "@/components/marketing/product-faq-section";
+import FeatureTabsSection, { buildDefaultFeatureTabs } from "@/components/marketing/feature-tabs-showcase";
+import ReviewCarousel, { type ReviewItem } from "@/components/marketing/review-carousel";
 import { marketingMedia } from "@/lib/marketing-media";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
-
-const BENTO = [
-  {
-    icon: Smartphone,
-    title: "App blocking",
-    description: "Silence distracting apps during focus time with smart schedules and quick exceptions.",
-    span: "hero" as const,
-    accent: "emerald" as const,
-  },
-  {
-    icon: Globe,
-    title: "Website blocking",
-    description: "Cut off feeds, rabbit holes, and adult content at the source.",
-    accent: "teal" as const,
-  },
-  {
-    icon: BarChart3,
-    title: "Usage analytics",
-    description: "See where your time goes and track real progress.",
-    accent: "emerald" as const,
-  },
-  {
-    icon: Zap,
-    title: "Focus modes",
-    description: "Work, study, sleep — one tap to switch your rules.",
-    span: "wide" as const,
-    accent: "amber" as const,
-  },
-  {
-    icon: Lock,
-    title: "Content protection",
-    description: "Build healthier browsing with adult content blocking built in.",
-    accent: "rose" as const,
-  },
-];
 
 const STEPS = [
   {
     icon: Download,
     title: "Download & connect",
-    description: "Install on Android in under two minutes. Sign in to sync across devices.",
+    description: "Install on your device in under two minutes. Sign in to sync across platforms.",
   },
   {
     icon: Moon,
@@ -79,7 +35,33 @@ const STEPS = [
   {
     icon: Sparkles,
     title: "Reclaim your focus",
-    description: "Track habits, stay accountable, and upgrade to Pro when you need more power.",
+    description: "Boundaries hold through the day — see what improved and build better habits over time.",
+  },
+];
+
+const FEATURE_TABS = buildDefaultFeatureTabs(marketingMedia.featureTabs);
+
+const REVIEWS: ReviewItem[] = [
+  {
+    name: "Amina K.",
+    role: "Student · Nairobi",
+    initials: "AK",
+    gradient: "from-emerald-400 to-teal-500",
+    quote: "Pauseward made Twitter boring enough that I actually finish assignments.",
+  },
+  {
+    name: "James O.",
+    role: "Software developer",
+    initials: "JO",
+    gradient: "from-teal-400 to-cyan-500",
+    quote: "Network-level blocking finally stuck — I can't bypass it in seconds anymore.",
+  },
+  {
+    name: "Michael N.",
+    role: "Freelancer · Kisumu",
+    initials: "MN",
+    gradient: "from-emerald-500 to-green-600",
+    quote: "Focus modes are one tap. I don't dig through settings when I need to work.",
   },
 ];
 
@@ -88,151 +70,88 @@ export default function Home() {
 
   return (
     <div className="marketing-page">
-      <PageHero
-        eyebrow="Digital wellness · Kenya-first"
+      <PlugStyleHero
+        badge="Built for Kenya, made for your focus"
         title={
           <>
-            Pause before
+            Your <span className="text-emerald-400">Focus</span> Deserves
             <br />
-            <span className="hero-accent">distraction.</span>
+            <span className="text-emerald-400">Boundaries That Hold</span>
           </>
         }
-        subtitle="Block apps, protect your attention, and build healthier digital habits. Core features stay free — Pro unlocks the full toolkit."
-        media={
-          <MediaFrame image={marketingMedia.hero.image} aspect="phone" priority floating />
-        }
-        align="left"
+        phones={{
+          left: marketingMedia.features[0],
+          center: marketingMedia.hero.image,
+          right: marketingMedia.features[1],
+        }}
+        socialProof={{
+          text: "Focus protection on demand — whenever you need it",
+        }}
       >
-        <Link href="/pricing" className="btn-primary btn-arrow-nudge inline-flex items-center gap-2">
-          View pricing
-          <ArrowRight className="btn-arrow-icon h-4 w-4" />
-        </Link>
-        <Link href="/contact" className="btn-secondary">
-          Book a demo
-        </Link>
-      </PageHero>
+        <PlugHeroCtaPrimary href="#download">Get the app</PlugHeroCtaPrimary>
+        <PlugHeroCtaSecondary href="/pricing">View pricing</PlugHeroCtaSecondary>
+      </PlugStyleHero>
 
-      <section className="border-y border-emerald-100/50 bg-white/80 py-6 backdrop-blur-sm">
+      <StatBar
+        stats={[
+          { value: "On demand", label: "Focus protection" },
+          { value: "1 tap", label: "Focus modes" },
+          { value: "4", label: "Platforms" },
+          { value: "M-Pesa", label: "& card on web" },
+        ]}
+      />
+
+      <SectionShell tone="default" id="features">
+        <FeatureTabsSection
+          eyebrow="Features"
+          title="Everything you need to protect your focus"
+          subtitle="Watch how each tool works — app blocking, focus modes, website blocking, and insights."
+          items={FEATURE_TABS}
+        />
+      </SectionShell>
+
+      <section className="how-it-works-band">
         <div className="container-modern">
-          <TrustBadges
-            items={[
-              { icon: Shield, label: "Core features free" },
-              { icon: Users, label: "500+ beta testers" },
-              { icon: Smartphone, label: "Android live now" },
-            ]}
-          />
+          <div className="how-it-works-heading mx-auto max-w-2xl text-center">
+            <p className="page-eyebrow">How it works</p>
+            <h2 className="font-display text-2xl tracking-tight text-gray-900 dark:text-gray-50 md:text-3xl">
+              Up and running in minutes
+            </h2>
+          </div>
+          <HowItWorks steps={STEPS} compact />
         </div>
       </section>
 
-      <SectionShell tone="default">
-        <SectionHeader
-          eyebrow="Get started"
-          title="Available on Android today"
-          subtitle="More platforms are shipping soon. Join the beta and shape what we build next."
-        />
-        <PlatformStrip
-          items={[
-            { label: "Android", status: "live", href: links.downloadLinks.googlePlay || undefined },
-            { label: "iOS", status: "soon" },
-            { label: "Windows", status: "soon" },
-            { label: "macOS", status: "beta" },
-          ]}
-        />
-      </SectionShell>
-
-      <SectionShell tone="white">
-        <SectionHeader
-          eyebrow="How it works"
-          title="Up and running in minutes"
-          subtitle="Three simple steps to start protecting your focus."
-        />
-        <HowItWorks steps={STEPS} />
-      </SectionShell>
-
-      <SectionShell tone="mesh">
-        <MediaSplit
-          media={
-            <VideoShowcase
-              source={marketingMedia.demo.video}
-              poster={marketingMedia.demo.poster}
-              title="how Pauseward works"
-            />
-          }
-        >
+      <SectionShell tone="mesh" id="download" className="scroll-mt-28">
+        <div className="mesh-section-header">
           <SectionHeader
-            align="left"
-            eyebrow="Product tour"
-            title="See it in action"
-            subtitle="Watch blocking, focus sessions, and insights come together — or drop in your own demo reel."
+            eyebrow="Platforms"
+            title="On every device you use"
+            subtitle="Android, iOS, Windows, and macOS — block distractions and sync your boundaries across your whole setup."
           />
-          <Link href="/download" className="btn-primary btn-arrow-nudge mt-4 inline-flex items-center gap-2">
-            Try it free
-            <ArrowRight className="btn-arrow-icon h-4 w-4" />
-          </Link>
-        </MediaSplit>
-      </SectionShell>
-
-      <SectionShell tone="white">
-        <SectionHeader
-          eyebrow="Features"
-          title="Designed for deep focus"
-          subtitle="A bento of tools that work together — not another generic blocker."
-        />
-        <BentoFeatures items={BENTO} />
-      </SectionShell>
-
-      <SectionShell tone="default">
-        <MediaSplit
-          reverse
-          media={<MediaFrame image={marketingMedia.features[1]} aspect="wide" />}
-        >
-          <SectionHeader
-            align="left"
-            eyebrow="Insights"
-            title="Know your patterns"
-            subtitle="Beautiful analytics that show where time goes — so you can change it for good."
-          />
-        </MediaSplit>
-      </SectionShell>
-
-      <PricingPreview />
-
-      <SectionShell tone="dark">
-        <SectionHeader
-          light
-          eyebrow="Community"
-          title="Built with 500+ beta testers"
-          subtitle="Real feedback from Kenya and beyond shapes every release."
-        />
-        <StatShowcase
-          stats={[
-            { value: "500+", label: "Active beta testers", icon: Users },
-            { value: "4.9/5", label: "Community rating", icon: Sparkles },
-            { value: "50K+", label: "Hours tested", icon: Shield },
-          ]}
-        />
-        <div className="mt-12 text-center">
-          <a
-            href={links.downloadLinks.googlePlay}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            <Download className="h-4 w-4" />
-            Download for Android
-          </a>
         </div>
+        <PlatformStrip downloadLinks={links.downloadLinks} />
       </SectionShell>
 
-      <CtaBand
-        title="Ready to take back your time?"
-        subtitle="Start free on Android. Upgrade with M-Pesa or card in Kenya."
-      >
-        <CtaPrimary href={links.downloadLinks.googlePlay} external>
-          Get the app
-        </CtaPrimary>
-        <CtaSecondary href="/pricing">View pricing</CtaSecondary>
-      </CtaBand>
+      <ReviewCarousel items={REVIEWS} label="Stories from people who use Pauseward" />
+
+      <SectionShell tone="default">
+        <ProductFaqSection compact />
+      </SectionShell>
+
+      <PricingPreview hideStarter />
+
+      <section className="home-pricing-note border-t border-emerald-100/60 bg-white/90 py-6 text-center dark:border-emerald-900/30 dark:bg-gray-900/90">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Core blocking is available on every platform.{" "}
+          <a
+            href="/pricing"
+            className="font-semibold text-emerald-700 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300"
+          >
+            Compare all plans including Starter
+          </a>
+        </p>
+      </section>
     </div>
   );
 }

@@ -7,9 +7,15 @@ export type Step = {
   description: string;
 };
 
-export default function HowItWorks({ steps }: { steps: Step[] }) {
+export default function HowItWorks({
+  steps,
+  compact = false,
+}: {
+  steps: Step[];
+  compact?: boolean;
+}) {
   return (
-    <div className="how-it-works">
+    <div className={`how-it-works ${compact ? "how-it-works-compact" : ""}`}>
       {steps.map((step, i) => {
         const Icon = step.icon;
         return (

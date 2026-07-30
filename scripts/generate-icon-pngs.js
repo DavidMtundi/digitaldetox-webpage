@@ -45,8 +45,8 @@ async function generateIcons() {
       .toBuffer();
 
     fs.writeFileSync(path.join(outputDir, 'favicon.ico'), favicon32);
-    fs.copyFileSync(path.join(outputDir, 'pauseward.png'), path.join(outputDir, 'lucidfocus.png'));
-    console.log('✅ Generated favicon.ico and lucidfocus.png alias');
+    fs.copyFileSync(path.join(outputDir, 'pauseward.png'), path.join(outputDir, 'pauseward-legacy.png'));
+    console.log('✅ Generated favicon.ico and pauseward-legacy.png alias');
 
     console.log('\n🎉 All icons generated successfully!');
   } catch (error) {

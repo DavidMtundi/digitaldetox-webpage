@@ -9,6 +9,8 @@ type PageHeroProps = {
   media?: ReactNode;
   align?: "center" | "left";
   size?: "default" | "compact";
+  /** Dark plug-style hero (default, matches home). Use light for rare legacy layouts. */
+  tone?: "dark" | "light";
 };
 
 export default function PageHero({
@@ -19,17 +21,19 @@ export default function PageHero({
   media,
   align = "center",
   size = "default",
+  tone = "dark",
 }: PageHeroProps) {
+  const isDark = tone === "dark";
   const isCenter = align === "center" && !media;
   const hasMedia = Boolean(media);
 
   return (
     <section
-      className={`hero-shell relative overflow-hidden border-b border-emerald-100/50 dark:border-gray-800/60 ${
-        size === "compact" ? "py-16 md:py-20" : "py-20 md:py-28 lg:py-32"
-      }`}
+      className={`hero-shell relative overflow-hidden border-b ${
+        isDark ? "hero-shell--dark border-white/10" : "border-emerald-100/50 dark:border-gray-800/60"
+      } ${size === "compact" ? "py-16 md:py-20" : "py-20 md:py-28 lg:py-32"}`}
     >
-      <FocusBackground variant="hero" />
+      <FocusBackground variant={isDark ? "plug-dark" : "hero"} />
       <div className="container-modern relative z-10">
         <div
           className={
@@ -41,23 +45,27 @@ export default function PageHero({
           }
         >
           <div className={`hero-enter ${isCenter ? "mx-auto max-w-4xl" : "max-w-2xl"}`}>
-            {eyebrow && <p className="page-eyebrow">{eyebrow}</p>}
+            {eyebrow && (
+              <p className={isDark ? "page-eyebrow page-eyebrow--dark" : "page-eyebrow"}>{eyebrow}</p>
+            )}
             <h1
               className={`font-display ${
                 size === "compact" ? "text-4xl md:text-5xl lg:text-[3.25rem]" : "text-[2.75rem] md:text-6xl lg:text-[4.25rem]"
-              } leading-[1.05] tracking-tight text-gray-900 dark:text-gray-50`}
+              } leading-[1.05] tracking-tight ${isDark ? "text-white" : "text-gray-900 dark:text-gray-50"}`}
             >
               {title}
             </h1>
             {subtitle && (
               <p
-                className={`text-lead mt-6 max-w-xl ${isCenter ? "mx-auto" : ""}`}
+                className={`mt-6 max-w-xl text-lg leading-relaxed ${
+                  isCenter ? "mx-auto" : ""
+                } ${isDark ? "text-gray-400" : "text-lead"}`}
               >
                 {subtitle}
               </p>
             )}
             {children && (
-              <div className={`mt-10 flex flex-wrap gap-4 ${isCenter ? "justify-center" : ""}`}>
+              <div className={`mt-10 flex flex-wrap items-center gap-4 ${isCenter ? "justify-center" : ""}`}>
                 {children}
               </div>
             )}

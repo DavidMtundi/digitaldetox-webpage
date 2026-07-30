@@ -72,8 +72,16 @@
   @apply border-emerald-700 ring-emerald-900/50;
 }
 
-.dark .legal-accordion-item {
-  @apply border-gray-800 bg-gray-900;
+.dark .legal-accordion-item .font-semibold.text-gray-900 {
+  color: #f3f4f6;
+}
+
+.dark .legal-accordion-item .border-gray-100 {
+  @apply border-gray-700/80;
+}
+
+.dark .legal-accordion-item .text-gray-600 {
+  color: #d1d5db;
 }
 
 .dark .prose-legal h4 {
@@ -183,6 +191,189 @@
 
 .dark .marketing-page .text-gray-500 {
   @apply text-gray-500;
+}
+
+/* Light-surface patches in dark mode — keep readable contrast */
+.dark .stat-bar-section .text-gray-900,
+.dark .contrast-problem .text-gray-900,
+.dark .testimonial-card .text-gray-900 {
+  color: #f3f4f6;
+}
+
+.dark .stat-bar-section .text-gray-600,
+.dark .contrast-problem .text-gray-700,
+.dark .testimonial-card .text-gray-700 {
+  color: #d1d5db;
+}
+
+.dark .how-step-body h3 {
+  color: #f3f4f6;
+}
+
+.dark .how-step-body p {
+  color: #d1d5db;
+}
+
+.dark .how-step {
+  @apply border-gray-700/80 bg-gray-800/90;
+}
+
+.dark .review-card-quote {
+  color: #d1d5db;
+}
+
+.dark .review-card .text-gray-900 {
+  color: #f3f4f6;
+}
+
+.dark .review-card .text-gray-500 {
+  color: #9ca3af;
+}
+
+.dark .contrast-solution .text-emerald-800 {
+  color: #6ee7b7;
+}
+
+.dark .contrast-solution .text-gray-700 {
+  color: #d1d5db;
+}
+
+.dark .trust-badge {
+  @apply border-gray-700 bg-gray-800 text-gray-200 hover:border-emerald-700;
+}
+
+.dark .trust-badge .text-emerald-600 {
+  @apply text-emerald-400;
+}
+
+.dark .platform-tile .type-card-title {
+  color: #f9fafb;
+}
+
+.dark .platform-tile .text-gray-700 {
+  color: #d1d5db;
+}
+
+.dark .platform-tile .text-gray-600 {
+  color: #9ca3af;
+}
+
+/* Mesh sections — keep headings readable (not flipped to white on light surfaces) */
+.dark .mesh-section-header .font-display {
+  color: #f9fafb;
+}
+
+.dark .mesh-section-header .text-gray-600 {
+  color: #9ca3af;
+}
+
+/* Pricing preview cards — scoped text (pro tint must not flip to white on light surfaces) */
+.dark .pricing-tier-card {
+  @apply border-gray-700/80 bg-gray-900/80;
+}
+
+.dark .pricing-tier-card-pro {
+  @apply border-emerald-800/50 bg-emerald-950/40;
+}
+
+.dark .pricing-tier-card .pricing-tier-title,
+.dark .pricing-tier-card .pricing-tier-price {
+  color: #f3f4f6;
+}
+
+.dark .pricing-tier-card .pricing-tier-tagline,
+.dark .pricing-tier-card .pricing-tier-note,
+.dark .pricing-tier-card .pricing-tier-feature,
+.dark .pricing-tier-card .pricing-tier-footnote {
+  color: #d1d5db;
+}
+
+.dark .pricing-tier-card .pricing-tier-note {
+  color: #9ca3af;
+}
+
+.dark .pricing-tier-card .pricing-tier-footnote {
+  color: #6b7280;
+}
+
+.dark .currency-toggle {
+  @apply border-gray-700/80 bg-gray-900/90;
+}
+
+.dark .currency-toggle button:not(.currency-toggle-active) {
+  color: #9ca3af;
+}
+
+.dark .currency-toggle button:not(.currency-toggle-active):hover {
+  color: #f3f4f6;
+}
+
+.dark .pricing-preview-link {
+  @apply text-emerald-400 hover:text-emerald-300;
+}
+
+/* Platform strip — light cards in dark mode keep dark text */
+.dark .platform-strip-card .platform-strip-name {
+  color: #111827;
+}
+
+.dark .platform-strip-card .platform-strip-tagline {
+  color: #4b5563;
+}
+
+.dark .platform-strip-card .platform-strip-cta {
+  color: #047857;
+}
+
+.dark .platform-strip-card .platform-strip-cta-muted {
+  color: #6b7280;
+}
+
+.dark .platform-strip-download-outline {
+  @apply border-emerald-700 bg-emerald-950/40 text-emerald-200 hover:bg-emerald-950/60;
+}
+
+/* Feature tabs — scoped text (avoids marketing-page gray-900 flip on light surfaces) */
+.feature-tabs-title {
+  color: #111827;
+}
+
+.feature-tabs-subtitle {
+  color: #4b5563;
+}
+
+.feature-tabs-detail-title {
+  color: #111827;
+}
+
+.feature-tabs-detail-body {
+  color: #4b5563;
+}
+
+.dark .feature-tabs-unified {
+  @apply bg-gray-900;
+}
+
+.dark .feature-tabs-header .feature-tabs-title,
+.dark .feature-tabs-detail-title {
+  color: #f9fafb;
+}
+
+.dark .feature-tabs-header .feature-tabs-subtitle,
+.dark .feature-tabs-detail-body {
+  color: #d1d5db;
+}
+
+.dark .feature-tabs-body {
+  @apply bg-gray-800;
+}
+
+.dark .feature-tab-slot {
+  color: #9ca3af;
+}
+
+.dark .feature-tab-slot[aria-selected="true"] {
+  color: #6ee7b7;
 }
 
 .dark .contact-timeline-step h3 {
