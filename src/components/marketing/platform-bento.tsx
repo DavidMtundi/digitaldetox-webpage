@@ -14,11 +14,13 @@ const STATUS_PILL: Record<string, string> = {
 const PLATFORM_ROWS: Array<Array<(typeof PLATFORMS)[number]["id"]>> = [
   ["android", "ios"],
   ["windows", "macos"],
+  ["android_tv"],
   ["web"],
 ];
 
 const ACCENT_CLASS: Record<string, string> = {
   android: "platform-tile-accent-emerald",
+  android_tv: "platform-tile-accent-teal",
   ios: "platform-tile-accent-slate",
   macos: "platform-tile-accent-slate",
   windows: "platform-tile-accent-blue",
@@ -27,6 +29,7 @@ const ACCENT_CLASS: Record<string, string> = {
 
 type DownloadLinks = {
   googlePlay?: string;
+  androidTv?: string;
   appStore?: string;
   mac?: string;
   windows?: string;

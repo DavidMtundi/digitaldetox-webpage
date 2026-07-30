@@ -36,7 +36,7 @@ const FAQ = [
   {
     id: "platforms",
     q: "Which platforms are supported?",
-    a: "Android, iOS, Windows, and macOS are available. Billing, devices, and blocklists can be managed from the web dashboard.",
+    a: "Android, iOS, Windows, macOS, and Android TV are available. Billing, devices, and blocklists can be managed from the web dashboard.",
   },
   {
     id: "refund",

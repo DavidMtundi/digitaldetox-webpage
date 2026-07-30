@@ -68,7 +68,7 @@ export default function ContactChannels({ email, phone, hours }: ContactChannels
         </div>
         <h2 className="font-display text-lg text-gray-900">Apps & setup</h2>
         <p className="mt-2 flex-1 text-sm text-gray-600">
-          Download links for Android, iOS, macOS, Windows, and the web dashboard.
+          Download links for Android, iOS, macOS, Windows, Android TV, and the web dashboard.
         </p>
         <Link href="/download" className="contact-channel-link">
           Get apps

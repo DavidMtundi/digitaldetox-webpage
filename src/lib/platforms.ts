@@ -1,6 +1,6 @@
-export type PlatformId = "android" | "ios" | "macos" | "windows" | "web";
+export type PlatformId = "android" | "android_tv" | "ios" | "macos" | "windows" | "web";
 export type PlatformStatus = "available" | "beta" | "coming_soon";
-export type DownloadLinkKey = "googlePlay" | "appStore" | "mac" | "windows" | "web";
+export type DownloadLinkKey = "googlePlay" | "androidTv" | "appStore" | "mac" | "windows" | "web";
 
 export interface PlatformInfo {
   id: PlatformId;
@@ -23,6 +23,21 @@ export const PLATFORMS: PlatformInfo[] = [
     features: ["App & site blocking", "Focus timer", "Schedules", "Usage insights"],
     logoSrc: "/platforms/android.svg",
     downloadKey: "googlePlay",
+    ctaLabel: "Get on Google Play",
+  },
+  {
+    id: "android_tv",
+    name: "Android TV",
+    tagline: "Focus lock and scheduled blocks for your smart TV.",
+    status: "available",
+    features: [
+      "Remote-friendly blocking",
+      "Scheduled focus shifts",
+      "Large-screen TV UI",
+      "Sync with your Pauseward account",
+    ],
+    logoSrc: "/platforms/android-tv.svg",
+    downloadKey: "androidTv",
     ctaLabel: "Get on Google Play",
   },
   {

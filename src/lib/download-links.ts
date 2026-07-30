@@ -1,7 +1,8 @@
-export type DownloadLinkKey = "googlePlay" | "appStore" | "mac" | "windows" | "web";
+export type DownloadLinkKey = "googlePlay" | "androidTv" | "appStore" | "mac" | "windows" | "web";
 
 export interface DownloadLinksConfig {
   googlePlay: string;
+  androidTv: string | null;
   appStore: string | null;
   windows: string | null;
   mac: string | null;
@@ -10,6 +11,7 @@ export interface DownloadLinksConfig {
 
 export const EMPTY_DOWNLOAD_LINKS: DownloadLinksConfig = {
   googlePlay: "",
+  androidTv: null,
   appStore: null,
   windows: null,
   mac: null,
@@ -23,8 +25,12 @@ function readEnvLink(key: string): string | null {
 
 /** Static download URLs from NEXT_PUBLIC_* env (set in .env.local). */
 export function getEnvDownloadLinks(): DownloadLinksConfig {
+  const googlePlay = readEnvLink("NEXT_PUBLIC_DOWNLOAD_GOOGLE_PLAY") ?? "";
+  const androidTvDedicated = readEnvLink("NEXT_PUBLIC_DOWNLOAD_ANDROID_TV");
+
   return {
-    googlePlay: readEnvLink("NEXT_PUBLIC_DOWNLOAD_GOOGLE_PLAY") ?? "",
+    googlePlay,
+    androidTv: androidTvDedicated ?? (googlePlay || null),
     appStore: readEnvLink("NEXT_PUBLIC_DOWNLOAD_APP_STORE"),
     windows: readEnvLink("NEXT_PUBLIC_DOWNLOAD_WINDOWS"),
     mac: readEnvLink("NEXT_PUBLIC_DOWNLOAD_MAC"),
@@ -49,6 +55,9 @@ export function mergeDownloadLinks(
 ): DownloadLinksConfig {
   return {
     googlePlay: pickLink(firestore?.googlePlay, env.googlePlay) ?? "",
+    androidTv:
+      pickLink(firestore?.androidTv, env.androidTv) ??
+      pickLink(firestore?.googlePlay, env.googlePlay),
     appStore: pickLink(firestore?.appStore, env.appStore),
     windows: pickLink(firestore?.windows, env.windows),
     mac: pickLink(firestore?.mac, env.mac),

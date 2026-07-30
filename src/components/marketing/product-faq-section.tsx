@@ -33,7 +33,7 @@ const PRODUCT_FAQ = [
     title: "Which devices are supported?",
     content: (
       <p>
-        Android, iOS, Windows, and macOS are available. Pick your platform on the{" "}
+        Android, iOS, Windows, macOS, and Android TV are available. Pick your platform on the{" "}
         <Link href="#download" className="font-semibold text-emerald-700 hover:text-emerald-600 dark:text-emerald-400">
           download section
         </Link>{" "}
@@ -50,7 +50,7 @@ const PRODUCT_FAQ = [
     title: "How does pricing work?",
     content: (
       <p>
-        Download on Android, iOS, Windows, or macOS for core blocking and focus modes. Pro and Family add
+        Download on Android, iOS, Windows, macOS, or Android TV for core blocking and focus modes. Pro and Family add
         advanced schedules, deeper analytics, and shared dashboards — see{" "}
         <Link href="#pricing" className="font-semibold text-emerald-700 hover:text-emerald-600 dark:text-emerald-400">
           simple pricing

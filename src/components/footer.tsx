@@ -13,7 +13,7 @@ import {
   type PlatformId,
 } from "@/lib/platforms";
 
-const FOOTER_PLATFORM_IDS: PlatformId[] = ["android", "ios", "macos", "windows"];
+const FOOTER_PLATFORM_IDS: PlatformId[] = ["android", "ios", "macos", "windows", "android_tv"];
 
 const PRODUCT_LINKS = [
   { href: "/#features", label: "Features" },
@@ -80,7 +80,7 @@ export default function Footer() {
               <p className="site-footer-eyebrow">Focus on demand</p>
               <h2 className="site-footer-cta-title font-display">Protect your attention on every device</h2>
               <p className="site-footer-cta-subtitle">
-                Download on Android, iOS, Windows, or macOS. Upgrade on web with M-Pesa or card when you need more.
+                Download on Android, iOS, Windows, macOS, or Android TV. Upgrade on web with M-Pesa or card when you need more.
               </p>
             </div>
             <div className="site-footer-cta-actions">

@@ -11,10 +11,11 @@ import {
 } from "@/lib/platforms";
 
 /** Native + desktop platforms shown on the home page strip. */
-const HOME_PLATFORM_IDS: PlatformId[] = ["android", "ios", "macos", "windows"];
+const HOME_PLATFORM_IDS: PlatformId[] = ["android", "ios", "macos", "windows", "android_tv"];
 
 const ACCENT_CLASS: Record<PlatformId, string> = {
   android: "platform-strip-accent-emerald",
+  android_tv: "platform-strip-accent-teal",
   ios: "platform-strip-accent-emerald",
   macos: "platform-strip-accent-emerald",
   windows: "platform-strip-accent-emerald",

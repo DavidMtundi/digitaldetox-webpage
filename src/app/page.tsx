@@ -97,7 +97,7 @@ export default function Home() {
         stats={[
           { value: "On demand", label: "Focus protection" },
           { value: "1 tap", label: "Focus modes" },
-          { value: "4", label: "Platforms" },
+          { value: "5", label: "Platforms" },
           { value: "Family", label: "Up to 6 devices" },
         ]}
       />
@@ -132,7 +132,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Platforms"
             title="On every device you use"
-            subtitle="Android, iOS, Windows, and macOS — block distractions and sync your boundaries across your whole setup."
+            subtitle="Android, iOS, Windows, macOS, and Android TV — block distractions and sync your boundaries across your whole setup."
           />
         </div>
         <PlatformStrip downloadLinks={links.downloadLinks} />

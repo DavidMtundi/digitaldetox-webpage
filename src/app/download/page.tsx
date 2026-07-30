@@ -26,7 +26,7 @@ export default function DownloadPage() {
             <span className="hero-accent">Every device.</span>
           </>
         }
-        subtitle="Android, iOS, Windows, and macOS — download the native app for your device. Manage policies from any browser."
+        subtitle="Android, iOS, Windows, macOS, and Android TV — download the native app for your device. Manage policies from any browser."
         size="compact"
       >
         <PlugHeroCtaPrimary href="#platforms">Compare platforms</PlugHeroCtaPrimary>

@@ -17,7 +17,7 @@ import RevealOnScroll from "@/components/marketing/reveal-on-scroll";
 import { marketingMedia } from "@/lib/marketing-media";
 
 const SETUP_STEPS = [
-  { step: "1", title: "Install on their device", description: "Android, iOS, Windows, or Mac — under two minutes." },
+  { step: "1", title: "Install on their device", description: "Phone, computer, or Android TV — under two minutes." },
   { step: "2", title: "Set schedules & blocks", description: "Pick apps, sites, and quiet hours from your dashboard." },
   { step: "3", title: "Sync the whole family", description: "Up to six devices on one Family plan — one set of rules." },
 ];
