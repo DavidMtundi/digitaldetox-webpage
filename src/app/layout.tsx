@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/components/layout/site-chrome";
 import ThemeScript from "@/components/theme-script";
@@ -12,11 +12,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   preload: true,
 });
 
-const outfit = Outfit({
+/** Display / headlines — soft geometry reads well on dark heroes and parent-facing copy */
+const sora = Sora({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["600", "700"],
+  weight: ["500", "600", "700"],
   preload: true,
 });
 
@@ -86,7 +87,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${plusJakartaSans.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning={true}>
+      <body className={`${plusJakartaSans.variable} ${sora.variable} font-sans antialiased`} suppressHydrationWarning={true}>
         <ThemeScript />
         <SiteChrome>{children}</SiteChrome>
       </body>

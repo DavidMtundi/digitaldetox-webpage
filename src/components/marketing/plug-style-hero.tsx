@@ -8,7 +8,8 @@ import FeaturePills from "./feature-pills";
 import type { MarketingImage } from "@/lib/marketing-media";
 
 type PlugStyleHeroProps = {
-  badge: string;
+  /** Optional eyebrow pill above the title — omit when not needed */
+  badge?: string;
   title: ReactNode;
   phones: { left: MarketingImage; center: MarketingImage; right: MarketingImage };
   socialProof: { count?: string; label?: string; text?: string };
@@ -31,13 +32,17 @@ export default function PlugStyleHero({
 
       <div className="container-modern relative z-10 pt-28 md:pt-32 lg:pt-36">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="hero-enter inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-gray-300 backdrop-blur-sm">
-            <Globe className="h-3.5 w-3.5 text-emerald-400" aria-hidden />
-            {badge}
-          </div>
+          {badge ? (
+            <div className="hero-enter inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-gray-300 backdrop-blur-sm">
+              <Globe className="h-3.5 w-3.5 text-emerald-400" aria-hidden />
+              {badge}
+            </div>
+          ) : null}
 
           <h1
-            className="hero-enter hero-enter-delay-1 font-display mt-8 text-[2.5rem] font-bold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-[3.75rem] lg:leading-[1.06]"
+            className={`hero-enter hero-enter-delay-1 font-display font-bold leading-[1.08] tracking-tight text-white md:text-5xl lg:text-[3.75rem] lg:leading-[1.06] ${
+              badge ? "mt-8 text-[2.5rem]" : "mt-4 text-[2.5rem]"
+            }`}
           >
             {title}
           </h1>

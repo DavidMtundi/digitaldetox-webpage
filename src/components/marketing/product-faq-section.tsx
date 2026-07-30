@@ -65,7 +65,8 @@ const PRODUCT_FAQ = [
     content: (
       <p>
         Yes. Parent PIN helps prevent uninstall on shared devices, and Family plans cover up to six devices with
-        a shared dashboard and policies. Family plans work well when everyone needs boundaries on demand.
+        a shared dashboard and policies. Pauseward limits apps and sites — it does not read messages — so you can
+        set boundaries without hovering over every notification.
       </p>
     ),
   },
@@ -73,7 +74,7 @@ const PRODUCT_FAQ = [
 
 export default function ProductFaqSection({ compact = false }: { compact?: boolean }) {
   const sections = compact
-    ? PRODUCT_FAQ.filter((item) => ["different", "platforms", "pricing"].includes(item.id))
+    ? PRODUCT_FAQ.filter((item) => ["different", "family", "platforms", "pricing"].includes(item.id))
     : PRODUCT_FAQ;
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({ different: true });
 
