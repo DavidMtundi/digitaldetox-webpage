@@ -1159,7 +1159,7 @@ html.dark .site-header-shell--sticky {
   @apply border-gray-200/90 bg-white shadow-xl shadow-emerald-900/10 ring-1 ring-emerald-100/80;
 }
 
-htmlhtml.dark .parents-showcase-panel {
+html.dark .parents-showcase-panel {
   @apply border-emerald-900/20 bg-gray-950 text-white shadow-2xl shadow-emerald-950/30;
 }
 
