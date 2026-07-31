@@ -69,7 +69,7 @@ export default function TermsPage() {
         subtitle="Please read these terms carefully before using Pauseward. They govern your account, subscriptions, and use of our apps and web dashboard."
         size="compact"
       >
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           Version {termsOfService.version} · Effective {termsOfService.effectiveDate}
         </p>
       </PageHero>

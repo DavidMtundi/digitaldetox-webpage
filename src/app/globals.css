@@ -87,13 +87,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-accent {
-  color: #047857;
+  @apply text-emerald-700 dark:text-emerald-400;
   font-weight: 600;
 }
 
-.hero-shell--dark .hero-accent {
-  color: #34d399;
-}
+/* Marketing hero typography — component utilities handle text; keep legal helpers only */
 
 .marketing-page h3,
 .marketing-page h4,
@@ -500,15 +498,15 @@ p {
   @apply px-4 py-2 rounded-lg font-medium text-emerald-600 bg-emerald-50;
 }
 
-/* Modern Hero Section - Clause Style (Reduced Sizes) */
-.hero-title {
+/* Legacy clause-style hero (non-marketing pages) */
+.legacy-hero-title {
   @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900;
   letter-spacing: -0.02em;
   font-weight: 700;
   margin-bottom: 1.25rem;
 }
 
-.hero-subtitle {
+.legacy-hero-subtitle {
   @apply text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed;
   letter-spacing: -0.005em;
   line-height: 1.6;
@@ -702,11 +700,7 @@ html {
   transform: rotate(-1deg) translateY(-8px) scale(1.01);
 }
 
-/* 27Plug-inspired centered dark hero */
-.plug-hero {
-  background: #050807;
-}
-
+/* 27Plug-inspired centered hero — backgrounds via component Tailwind classes */
 .plug-hero-watermark {
   position: absolute;
   left: 50%;
@@ -716,11 +710,15 @@ html {
   font-size: clamp(5rem, 18vw, 14rem);
   font-weight: 700;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.03);
   letter-spacing: -0.04em;
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
+  color: rgba(16, 185, 129, 0.06);
+}
+
+html.dark .plug-hero-watermark {
+  color: rgba(255, 255, 255, 0.03);
 }
 
 .phone-fan-center {
@@ -750,11 +748,91 @@ html {
 }
 
 .site-header-bar {
-  @apply rounded-2xl border border-white/10 bg-gray-950/85 shadow-2xl shadow-black/40 backdrop-blur-xl md:rounded-full;
+  @apply rounded-2xl border border-emerald-100/80 bg-white/92 shadow-lg shadow-emerald-900/5 backdrop-blur-xl md:rounded-full;
 }
 
-/* Dark pill nav on light heroes — subtle top gradient so the bar reads clearly */
+.site-header-logo {
+  @apply text-gray-900;
+}
+
+.site-header-nav-link {
+  @apply text-gray-600 hover:bg-emerald-50 hover:text-emerald-800;
+}
+
+.site-header-nav-link--active {
+  @apply bg-emerald-50 text-emerald-700;
+}
+
+.site-header-dashboard-link {
+  @apply text-gray-600 hover:text-emerald-700;
+}
+
+.site-header-menu-btn {
+  @apply text-gray-700 hover:bg-emerald-50;
+}
+
+.site-header-mobile-menu {
+  @apply border border-emerald-100/80 bg-white/95;
+}
+
+.site-header-mobile-link {
+  @apply text-gray-700 hover:bg-emerald-50 hover:text-emerald-800;
+}
+
+.site-header-mobile-link--active {
+  @apply bg-emerald-50 text-emerald-700;
+}
+
+.site-header-mobile-divider {
+  @apply border-emerald-100/80;
+}
+
+/* Subtle top gradient so the sticky bar reads on light heroes */
 .site-header-shell--sticky {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.72) 70%, transparent 100%);
+}
+
+html.dark .site-header-bar {
+  @apply border-white/10 bg-gray-950/85 shadow-2xl shadow-black/40;
+}
+
+html.dark .site-header-logo {
+  @apply text-white;
+}
+
+html.dark .site-header-nav-link {
+  @apply text-gray-400 hover:bg-white/5 hover:text-white;
+}
+
+html.dark .site-header-nav-link--active {
+  @apply bg-emerald-500/15 text-emerald-300;
+}
+
+html.dark .site-header-dashboard-link {
+  @apply text-gray-400 hover:text-emerald-300;
+}
+
+html.dark .site-header-menu-btn {
+  @apply text-gray-300 hover:bg-white/10;
+}
+
+html.dark .site-header-mobile-menu {
+  @apply border-white/10 bg-gray-950/95;
+}
+
+html.dark .site-header-mobile-link {
+  @apply text-gray-400 hover:bg-white/5 hover:text-white;
+}
+
+html.dark .site-header-mobile-link--active {
+  @apply bg-emerald-500/15 text-emerald-300;
+}
+
+html.dark .site-header-mobile-divider {
+  @apply border-white/10;
+}
+
+html.dark .site-header-shell--sticky {
   background: linear-gradient(to bottom, rgba(5, 8, 7, 0.92) 0%, rgba(5, 8, 7, 0.55) 70%, transparent 100%);
 }
 
@@ -1030,11 +1108,11 @@ html {
 }
 
 .parents-showcase-panel {
-  @apply relative overflow-hidden rounded-3xl border border-emerald-900/20 bg-gray-950 text-white shadow-2xl shadow-emerald-950/30;
+  @apply relative overflow-hidden rounded-3xl border border-emerald-100/90 bg-white text-gray-900 shadow-xl shadow-emerald-900/5;
 }
 
 .parents-showcase-glow {
-  @apply pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_0%,rgba(16,185,129,0.22),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_100%,rgba(20,184,166,0.12),transparent_50%)];
+  @apply pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_0%,rgba(16,185,129,0.12),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_100%,rgba(20,184,166,0.08),transparent_50%)];
 }
 
 .parents-showcase-inner {
@@ -1042,15 +1120,15 @@ html {
 }
 
 .parents-showcase-eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.14em] text-emerald-400/90;
+  @apply text-xs font-semibold uppercase tracking-[0.14em] text-emerald-700;
 }
 
 .parents-showcase-title {
-  @apply mt-3 text-[1.75rem] leading-[1.1] tracking-tight text-white sm:text-4xl md:text-[2.5rem];
+  @apply mt-3 text-[1.75rem] leading-[1.1] tracking-tight text-gray-900 sm:text-4xl md:text-[2.5rem];
 }
 
 .parents-showcase-lead {
-  @apply mt-4 text-base leading-relaxed text-gray-400 sm:mt-5 sm:text-lg;
+  @apply mt-4 text-base leading-relaxed text-gray-600 sm:mt-5 sm:text-lg;
 }
 
 .parents-trust-pills {
@@ -1058,7 +1136,7 @@ html {
 }
 
 .parents-trust-pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3.5 py-2 text-xs font-medium text-gray-300 backdrop-blur-sm sm:text-sm;
+  @apply inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50/80 px-3.5 py-2 text-xs font-medium text-gray-700 backdrop-blur-sm sm:text-sm;
 }
 
 .parents-cta-row {
@@ -1070,7 +1148,7 @@ html {
 }
 
 .parents-cta-secondary {
-  @apply inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/10;
+  @apply inline-flex min-h-[48px] items-center justify-center rounded-full border border-emerald-200 bg-white px-6 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50;
 }
 
 .parents-showcase-media {
@@ -1078,7 +1156,39 @@ html {
 }
 
 .parents-phone-frame .media-frame {
-  @apply border-white/15 bg-gray-900 shadow-2xl shadow-black/40 ring-1 ring-white/10;
+  @apply border-gray-200/90 bg-white shadow-xl shadow-emerald-900/10 ring-1 ring-emerald-100/80;
+}
+
+htmlhtml.dark .parents-showcase-panel {
+  @apply border-emerald-900/20 bg-gray-950 text-white shadow-2xl shadow-emerald-950/30;
+}
+
+html.dark .parents-showcase-glow {
+  @apply bg-[radial-gradient(ellipse_80%_60%_at_20%_0%,rgba(16,185,129,0.22),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_100%,rgba(20,184,166,0.12),transparent_50%)];
+}
+
+html.dark .parents-showcase-eyebrow {
+  @apply text-emerald-400/90;
+}
+
+html.dark .parents-showcase-title {
+  @apply text-white;
+}
+
+html.dark .parents-showcase-lead {
+  @apply text-gray-400;
+}
+
+html.dark .parents-trust-pill {
+  @apply border-white/12 bg-white/[0.05] text-gray-300;
+}
+
+html.dark .parents-cta-secondary {
+  @apply border-white/20 bg-white/5 text-white hover:border-white/35 hover:bg-white/10;
+}
+
+html.dark .parents-phone-frame .media-frame {
+  @apply border-white/15 bg-gray-900 shadow-2xl shadow-black/40 ring-white/10;
 }
 
 .parents-phone-duo {
@@ -1336,21 +1446,20 @@ html {
   @apply inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md;
 }
 
-.hero-shell--dark .trust-badge {
+html:not(.dark) .hero-shell--dark .trust-badge {
+  @apply border-emerald-100 bg-white text-gray-700 shadow-sm hover:border-emerald-200 hover:text-gray-900;
+}
+
+html:not(.dark) .hero-shell--dark .trust-badge svg {
+  @apply text-emerald-600;
+}
+
+html.dark .hero-shell--dark .trust-badge {
   @apply border-white/15 bg-white/5 text-gray-300 shadow-none hover:border-white/25 hover:bg-white/10 hover:text-white;
 }
 
-.hero-shell--dark .trust-badge svg {
+html.dark .hero-shell--dark .trust-badge svg {
   @apply text-emerald-400;
-}
-
-.hero-shell--dark {
-  background: #050807;
-}
-
-.hero-shell--dark .hero-accent {
-  @apply text-emerald-400;
-  font-weight: 600;
 }
 
 .page-eyebrow--dark {

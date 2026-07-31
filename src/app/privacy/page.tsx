@@ -68,12 +68,12 @@ export default function PrivacyPage() {
         size="compact"
       >
         <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <div className="flex items-center gap-2 text-sm text-gray-300">
-            <Clock className="h-4 w-4 text-emerald-400" />
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+            <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
             <select
               value={selectedVersion}
               onChange={(e) => setSelectedVersion(e.target.value)}
-              className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"
+              className="rounded-lg border border-emerald-200/80 bg-white/90 px-3 py-2 text-sm text-gray-900 backdrop-blur-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 dark:border-white/20 dark:bg-white/10 dark:text-white dark:focus:border-emerald-400 dark:focus:ring-emerald-400/20"
             >
               {privacyPolicyVersions.versions.map((version) => (
                 <option key={version.version} value={version.version} className="text-gray-900">
@@ -82,12 +82,12 @@ export default function PrivacyPage() {
               ))}
             </select>
           </div>
-          <span className="text-sm text-gray-400">Effective {currentVersion?.effectiveDate}</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">Effective {currentVersion?.effectiveDate}</span>
         </div>
         <button
           type="button"
           onClick={() => setShowVersionHistory(!showVersionHistory)}
-          className="text-sm font-medium text-emerald-400 hover:text-emerald-300"
+          className="text-sm font-medium text-emerald-700 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300"
         >
           <FileText className="mr-1 inline h-4 w-4" />
           {showVersionHistory ? 'Hide' : 'Show'} version history

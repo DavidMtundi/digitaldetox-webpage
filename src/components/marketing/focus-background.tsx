@@ -17,16 +17,17 @@ export default function FocusBackground({ variant = "section", className = "" }:
   if (variant === "plug-dark") {
     return (
       <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden>
-        <div className="absolute inset-0 bg-[#050807]" />
+        <div className="focus-bg-plug-light absolute inset-0 mesh-hero dark:hidden" />
+        <div className="focus-bg-plug-dark absolute inset-0 hidden bg-[#050807] dark:block" />
         <div
-          className="absolute inset-0"
+          className="focus-bg-plug-glow absolute inset-0 hidden dark:block"
           style={{
             background:
               "radial-gradient(ellipse 90% 55% at 50% 100%, rgba(16, 185, 129, 0.35), transparent 55%), radial-gradient(ellipse 60% 40% at 20% 20%, rgba(20, 184, 166, 0.08), transparent 50%)",
           }}
         />
-        <div className="glow-orb glow-orb-emerald left-1/2 top-[60%] h-[32rem] w-[48rem] -translate-x-1/2 opacity-40" />
-        <div className="marketing-grain absolute inset-0 opacity-[0.18]" />
+        <div className="glow-orb glow-orb-emerald left-1/2 top-[60%] h-[32rem] w-[48rem] -translate-x-1/2 opacity-25 dark:opacity-40" />
+        <div className="marketing-grain absolute inset-0 opacity-[0.2] dark:opacity-[0.18]" />
       </div>
     );
   }

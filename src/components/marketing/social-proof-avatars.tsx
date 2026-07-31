@@ -22,17 +22,17 @@ export default function SocialProofAvatars({
         {avatars.map((avatar, i) => (
           <div
             key={avatar.initials}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border-2 border-gray-950 bg-gradient-to-br text-[10px] font-bold text-white shadow-md ${avatar.bg}`}
+            className={`flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br text-[10px] font-bold text-white shadow-md dark:border-gray-950 ${avatar.bg}`}
             style={{ zIndex: avatars.length - i }}
           >
             {avatar.initials}
           </div>
         ))}
       </div>
-      <p className="max-w-[min(100%,18rem)] text-center text-sm leading-snug text-gray-400 sm:max-w-none sm:text-left">
+      <p className="hero-social-proof max-w-[min(100%,18rem)] text-center text-sm leading-snug text-gray-600 dark:text-gray-400 sm:max-w-none sm:text-left">
         {text ?? (
           <>
-            Join <span className="font-semibold text-white">{count}</span> {label}
+            Join <span className="hero-social-proof-emphasis font-semibold text-gray-900 dark:text-white">{count}</span> {label}
           </>
         )}
       </p>

@@ -30,7 +30,9 @@ export default function PageHero({
   return (
     <section
       className={`hero-shell relative overflow-hidden border-b ${
-        isDark ? "hero-shell--dark border-white/10" : "border-emerald-100/50 dark:border-gray-800/60"
+        isDark
+          ? "hero-shell--dark border-emerald-100/60 bg-[#fafdfb] dark:border-white/10 dark:bg-[#050807]"
+          : "border-emerald-100/50 dark:border-gray-800/60"
       } ${size === "compact" ? "py-16 md:py-20" : "py-20 md:py-28 lg:py-32"}`}
     >
       <FocusBackground variant={isDark ? "plug-dark" : "hero"} />
@@ -46,20 +48,28 @@ export default function PageHero({
         >
           <div className={`hero-enter ${isCenter ? "mx-auto max-w-4xl" : "max-w-2xl"}`}>
             {eyebrow && (
-              <p className={isDark ? "page-eyebrow page-eyebrow--dark" : "page-eyebrow"}>{eyebrow}</p>
+              <p
+                className={
+                  isDark
+                    ? "hero-eyebrow mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200/80 bg-emerald-50/90 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-emerald-800 dark:border-white/15 dark:bg-white/5 dark:text-gray-300 dark:backdrop-blur-sm"
+                    : "page-eyebrow"
+                }
+              >
+                {eyebrow}
+              </p>
             )}
             <h1
-              className={`font-display ${
+              className={`hero-title font-display ${
                 size === "compact" ? "text-4xl md:text-5xl lg:text-[3.25rem]" : "text-[2.75rem] md:text-6xl lg:text-[4.25rem]"
-              } leading-[1.05] tracking-tight ${isDark ? "text-white" : "text-gray-900 dark:text-gray-50"}`}
+              } leading-[1.05] tracking-tight ${isDark ? "text-gray-900 dark:text-white" : "text-gray-900 dark:text-gray-50"}`}
             >
               {title}
             </h1>
             {subtitle && (
               <p
-                className={`mt-6 max-w-xl text-lg leading-relaxed ${
+                className={`hero-subtitle mt-6 max-w-xl text-lg leading-relaxed ${
                   isCenter ? "mx-auto" : ""
-                } ${isDark ? "text-gray-400" : "text-lead"}`}
+                } ${isDark ? "text-gray-600 dark:text-gray-400" : "text-lead"}`}
               >
                 {subtitle}
               </p>

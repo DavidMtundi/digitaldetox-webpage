@@ -16,9 +16,6 @@ const NAV = [
   { href: "/contact", label: "Contact" },
 ];
 
-const THEME_TOGGLE_CLASS =
-  "!border-white/15 !bg-white/5 !text-gray-300 hover:!border-white/25 hover:!bg-white/10 hover:!text-white";
-
 function isNavActive(pathname: string, href: string): boolean {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -34,20 +31,17 @@ export default function Header() {
     ? "site-header-shell site-header-shell--fixed"
     : "site-header-shell site-header-shell--sticky";
 
-  const navLinkClass = (active: boolean) =>
-    active
-      ? "bg-emerald-500/15 text-emerald-300"
-      : "text-gray-400 hover:bg-white/5 hover:text-white";
-
   return (
     <header className={shellClass}>
       <div className="container-modern">
-        <div className="site-header-bar flex h-14 items-center justify-between gap-3 px-2.5 sm:px-3 md:h-16 md:px-5">
+        <div className="site-header-bar flex h-14 items-center justify-between gap-3 rounded-2xl border border-emerald-100/80 bg-white/92 px-2.5 shadow-lg shadow-emerald-900/5 backdrop-blur-xl sm:px-3 md:h-16 md:rounded-full md:px-5 dark:border-white/10 dark:bg-gray-950/85 dark:shadow-2xl dark:shadow-black/40">
           <Link href="/" className="group flex min-w-0 items-center gap-2.5 md:gap-3">
             <div className="relative h-9 w-9 shrink-0 transition group-hover:scale-105 md:h-10 md:w-10">
               <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" priority />
             </div>
-            <span className="truncate font-display text-base font-bold text-white sm:text-lg md:text-xl">Pauseward</span>
+            <span className="site-header-logo truncate font-display text-base font-bold text-gray-900 dark:text-white sm:text-lg md:text-xl">
+              Pauseward
+            </span>
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex">
@@ -57,7 +51,9 @@ export default function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-full px-3.5 py-2 text-sm font-medium transition ${navLinkClass(active)}`}
+                  className={`site-header-nav-link rounded-full px-3.5 py-2 text-sm font-medium text-gray-600 transition hover:bg-emerald-50 hover:text-emerald-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white ${
+                    active ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300" : ""
+                  }`}
                 >
                   {item.label}
                 </Link>
@@ -66,12 +62,9 @@ export default function Header() {
           </nav>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <ThemeToggle className={THEME_TOGGLE_CLASS} />
+            <ThemeToggle />
             {user && (
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-gray-400 transition hover:text-emerald-300"
-              >
+              <Link href="/dashboard" className="site-header-dashboard-link text-sm font-medium text-gray-600 transition hover:text-emerald-700 dark:text-gray-400 dark:hover:text-emerald-300">
                 Dashboard
               </Link>
             )}
@@ -85,10 +78,10 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-1 lg:hidden">
-            <ThemeToggle className={THEME_TOGGLE_CLASS} />
+            <ThemeToggle />
             <button
               type="button"
-              className="rounded-lg p-2 text-gray-300 transition hover:bg-white/10"
+              className="site-header-menu-btn rounded-lg p-2 text-gray-700 transition hover:bg-emerald-50 dark:text-gray-300 dark:hover:bg-white/10"
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
               aria-expanded={open}
@@ -99,7 +92,7 @@ export default function Header() {
         </div>
 
         {open && (
-          <nav className="site-header-mobile-menu mt-2 rounded-2xl border border-white/10 bg-gray-950/95 px-3 py-4 backdrop-blur-xl lg:hidden">
+          <nav className="site-header-mobile-menu mt-2 rounded-2xl border border-emerald-100/80 bg-white/95 px-3 py-4 backdrop-blur-xl dark:border-white/10 dark:bg-gray-950/95 lg:hidden">
             <div className="flex flex-col gap-1">
               {NAV.map((item) => {
                 const active = isNavActive(pathname, item.href);
@@ -108,7 +101,9 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className={`rounded-lg px-3 py-2.5 text-sm font-medium transition ${navLinkClass(active)}`}
+                    className={`site-header-mobile-link rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-emerald-50 hover:text-emerald-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white ${
+                      active ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300" : ""
+                    }`}
                   >
                     {item.label}
                   </Link>
@@ -117,21 +112,21 @@ export default function Header() {
               <Link
                 href="/support"
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-400 transition hover:bg-white/5 hover:text-white"
+                className="site-header-mobile-link rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-emerald-50 hover:text-emerald-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white"
               >
                 Support Us
               </Link>
               <Link
                 href="/privacy"
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-400 transition hover:bg-white/5 hover:text-white"
+                className="site-header-mobile-link rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-emerald-50 hover:text-emerald-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/terms"
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-400 transition hover:bg-white/5 hover:text-white"
+                className="site-header-mobile-link rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-emerald-50 hover:text-emerald-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white"
               >
                 Terms of Service
               </Link>
@@ -139,12 +134,12 @@ export default function Header() {
                 <Link
                   href="/dashboard"
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-400 transition hover:bg-white/5 hover:text-white"
+                  className="site-header-mobile-link rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-emerald-50 hover:text-emerald-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white"
                 >
                   Dashboard
                 </Link>
               )}
-              <div className="mt-3 border-t border-white/10 pt-3">
+              <div className="site-header-mobile-divider mt-3 border-t border-emerald-100/80 pt-3 dark:border-white/10">
                 <Link
                   href="/download"
                   onClick={() => setOpen(false)}
