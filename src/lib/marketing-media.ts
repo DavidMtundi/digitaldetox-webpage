@@ -43,11 +43,15 @@ export const marketingMedia = {
   features: [
     {
       src: env("NEXT_PUBLIC_FEATURE_BLOCKING_IMAGE", "/marketing/feature-blocking.svg"),
-      alt: "App blocking schedule interface",
+      alt: "Pauseward app blocking screen with daily limits and toggles",
+      width: 390,
+      height: 844,
     },
     {
       src: env("NEXT_PUBLIC_FEATURE_ANALYTICS_IMAGE", "/marketing/feature-analytics.svg"),
-      alt: "Usage analytics dashboard",
+      alt: "Pauseward insights screen with screen time charts and top apps",
+      width: 390,
+      height: 844,
     },
   ] as MarketingImage[],
   /** Per-feature demo clips for the Features tab section */

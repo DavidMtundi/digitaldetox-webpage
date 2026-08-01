@@ -1,27 +1,82 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" fill="none">
-  <rect width="390" height="844" fill="#0a0f0d"/>
-  <rect x="24" y="48" width="342" height="760" rx="36" fill="#111827" stroke="#1f2937" stroke-width="2"/>
-  <rect x="44" y="88" width="298" height="28" rx="14" fill="#10b981"/>
-  <rect x="44" y="132" width="180" height="12" rx="6" fill="#374151"/>
-  <text x="44" y="178" fill="#6ee7b7" font-family="system-ui,sans-serif" font-size="11" font-weight="600">FAMILY DASHBOARD</text>
-  <rect x="44" y="196" width="298" height="72" rx="16" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
-  <circle cx="72" cy="232" r="18" fill="#10b981"/>
-  <rect x="98" y="218" width="120" height="10" rx="5" fill="#d1fae5"/>
-  <rect x="98" y="236" width="80" height="8" rx="4" fill="#6ee7b7" opacity="0.6"/>
-  <rect x="44" y="288" width="298" height="56" rx="14" fill="#1f2937"/>
-  <rect x="60" y="304" width="100" height="8" rx="4" fill="#9ca3af"/>
-  <rect x="280" y="300" width="48" height="24" rx="12" fill="#059669"/>
-  <rect x="44" y="364" width="298" height="56" rx="14" fill="#1f2937"/>
-  <rect x="60" y="380" width="120" height="8" rx="4" fill="#9ca3af"/>
-  <rect x="260" y="376" width="68" height="24" rx="12" fill="#374151"/>
-  <rect x="44" y="412" width="298" height="56" rx="14" fill="#1f2937"/>
-  <rect x="60" y="428" width="90" height="8" rx="4" fill="#9ca3af"/>
-  <rect x="248" y="424" width="80" height="24" rx="12" fill="#374151"/>
-  <rect x="44" y="500" width="298" height="120" rx="16" fill="#052e16" stroke="#10b981" stroke-width="1" stroke-dasharray="4 4"/>
-  <text x="58" y="528" fill="#a7f3d0" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Evening schedule</text>
-  <rect x="58" y="544" width="200" height="8" rx="4" fill="#10b981" opacity="0.5"/>
-  <rect x="58" y="564" width="160" height="8" rx="4" fill="#10b981" opacity="0.35"/>
-  <rect x="58" y="584" width="120" height="8" rx="4" fill="#10b981" opacity="0.25"/>
-  <circle cx="195" cy="720" r="36" fill="#10b981" opacity="0.15"/>
-  <path d="M195 700v24M183 712h24" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+  <defs>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#059669" flood-opacity="0.06"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.04"/>
+    </filter>
+    <linearGradient id="scheduleGrad" x1="0" y1="0" x2="350" y2="0">
+      <stop offset="0" stop-color="#059669" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#0D9488" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="390" height="844" fill="#FFFFFF"/>
+
+  <text x="32" y="52" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="600">9:41</text>
+
+  <!-- Header with family badge -->
+  <rect x="24" y="88" width="100" height="24" rx="12" fill="#059669" fill-opacity="0.1"/>
+  <text x="40" y="105" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700">FAMILY PLAN</text>
+  <text x="24" y="140" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="26" font-weight="800">Family dashboard</text>
+  <text x="24" y="164" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="14">3 devices · shared rules</text>
+
+  <!-- Child profile card -->
+  <rect x="20" y="188" width="350" height="88" rx="16" fill="#F8FAF9" stroke="#059669" stroke-opacity="0.12" stroke-width="1" filter="url(#cardShadow)"/>
+  <circle cx="56" cy="232" r="24" fill="#059669" fill-opacity="0.15"/>
+  <text x="56" y="238" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700">S</text>
+  <text x="88" y="224" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700">Sarah's phone</text>
+  <text x="88" y="246" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Screen time today: 1h 42m</text>
+  <rect x="290" y="216" width="56" height="28" rx="14" fill="#059669"/>
+  <text x="318" y="234" text-anchor="middle" fill="white" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600">Active</text>
+
+  <!-- Active rules -->
+  <text x="24" y="316" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">Active rules</text>
+
+  <rect x="20" y="332" width="350" height="56" rx="14" fill="#F8FAF9" stroke="#059669" stroke-opacity="0.08" stroke-width="1"/>
+  <rect x="36" y="346" width="32" height="32" rx="8" fill="#059669" fill-opacity="0.1"/>
+  <rect x="44" y="354" width="16" height="16" rx="2" fill="none" stroke="#059669" stroke-width="1.8"/>
+  <text x="80" y="356" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600">Social apps blocked</text>
+  <text x="80" y="372" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Instagram, TikTok, Snapchat</text>
+  <rect x="310" y="348" width="44" height="26" rx="13" fill="#059669"/>
+  <circle cx="332" cy="361" r="10" fill="white"/>
+
+  <rect x="20" y="420" width="350" height="56" rx="14" fill="#F8FAF9" stroke="#059669" stroke-opacity="0.08" stroke-width="1"/>
+  <rect x="36" y="434" width="32" height="32" rx="8" fill="#0D9488" fill-opacity="0.1"/>
+  <circle cx="52" cy="450" r="8" fill="none" stroke="#0D9488" stroke-width="1.5"/>
+  <ellipse cx="52" cy="450" rx="8" ry="4" fill="none" stroke="#0D9488" stroke-width="1.2"/>
+  <text x="80" y="448" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600">Harmful sites blocked</text>
+  <text x="80" y="464" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Network-wide protection</text>
+  <rect x="310" y="440" width="44" height="26" rx="13" fill="#059669"/>
+  <circle cx="332" cy="453" r="10" fill="white"/>
+
+  <!-- Evening schedule card -->
+  <rect x="20" y="488" width="350" height="140" rx="16" fill="url(#scheduleGrad)" stroke="#059669" stroke-opacity="0.2" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="36" y="516" fill="#047857" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700">EVENING SCHEDULE</text>
+  <text x="36" y="542" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700">Screens off at 9 PM</text>
+  <text x="36" y="562" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Applies to all family devices</text>
+  <!-- Schedule timeline -->
+  <rect x="36" y="580" width="318" height="8" rx="4" fill="#059669" fill-opacity="0.15"/>
+  <rect x="36" y="580" width="200" height="8" rx="4" fill="#059669" fill-opacity="0.4"/>
+  <circle cx="236" cy="584" r="6" fill="#059669"/>
+  <text x="36" y="612" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">6 PM</text>
+  <text x="220" y="612" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600">9 PM cutoff</text>
+  <text x="330" y="612" text-anchor="end" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">12 AM</text>
+
+  <!-- Parent PIN badge -->
+  <rect x="20" y="668" width="350" height="48" rx="12" fill="#F8FAF9" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="36" y="680" width="24" height="24" rx="6" fill="#059669" fill-opacity="0.1"/>
+  <rect x="42" y="686" width="12" height="12" rx="2" fill="none" stroke="#059669" stroke-width="1.5"/>
+  <circle cx="48" cy="694" r="2" fill="#059669"/>
+  <text x="72" y="696" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="600">Protected by parent PIN</text>
+  <text x="300" y="696" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">Locked</text>
+
+  <!-- Bottom nav -->
+  <rect x="16" y="768" width="358" height="64" rx="28" fill="white" fill-opacity="0.92" stroke="#059669" stroke-opacity="0.12" stroke-width="1" filter="url(#cardShadow)"/>
+  <rect x="28" y="776" width="72" height="48" rx="20" fill="#059669" fill-opacity="0.12"/>
+  <text x="58" y="822" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600">Home</text>
+  <text x="136" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Apps</text>
+  <text x="195" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Web</text>
+  <text x="276" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Insights</text>
+
+  <rect x="128" y="828" width="134" height="5" rx="2.5" fill="#1F2937" fill-opacity="0.15"/>
 </svg>

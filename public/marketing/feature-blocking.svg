@@ -1,10 +1,102 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
-  <rect width="800" height="500" fill="#f8faf9"/>
-  <rect x="80" y="60" width="640" height="380" rx="24" fill="#fff" stroke="#d1fae5" stroke-width="2"/>
-  <rect x="120" y="100" width="200" height="16" rx="8" fill="#10b981"/>
-  <rect x="120" y="130" width="320" height="10" rx="5" fill="#d1fae5"/>
-  <rect x="120" y="180" width="560" height="48" rx="12" fill="#ecfdf5"/>
-  <rect x="120" y="250" width="560" height="48" rx="12" fill="#ecfdf5"/>
-  <rect x="120" y="320" width="560" height="48" rx="12" fill="#ecfdf5"/>
-  <rect x="520" y="100" width="160" height="56" rx="28" fill="#059669"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" fill="none">
+  <defs>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#059669" flood-opacity="0.06"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.04"/>
+    </filter>
+    <filter id="btnShadow" x="-10%" y="-20%" width="120%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#059669" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="390" height="844" fill="#FFFFFF"/>
+
+  <!-- Status bar -->
+  <text x="32" y="52" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="600">9:41</text>
+
+  <!-- Header -->
+  <text x="24" y="108" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="28" font-weight="800">Apps</text>
+  <text x="24" y="132" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="14">Manage limits and blocks</text>
+
+  <!-- Summary pill -->
+  <rect x="24" y="152" width="120" height="28" rx="14" fill="#059669" fill-opacity="0.1"/>
+  <text x="40" y="170" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">8 apps managed</text>
+
+  <!-- Search bar -->
+  <rect x="20" y="196" width="350" height="44" rx="12" fill="#F8FAF9" stroke="#E2E8F0" stroke-width="1"/>
+  <circle cx="44" cy="218" r="7" fill="none" stroke="#9CA3AF" stroke-width="1.8"/>
+  <line x1="50" y1="224" x2="54" y2="228" stroke="#9CA3AF" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="64" y="222" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="14">Search apps…</text>
+
+  <!-- App list card -->
+  <rect x="20" y="260" width="350" height="380" rx="18" fill="#F8FAF9" stroke="#059669" stroke-opacity="0.1" stroke-width="1" filter="url(#cardShadow)"/>
+
+  <!-- Instagram - blocked -->
+  <circle cx="52" cy="304" r="20" fill="#E1306C" fill-opacity="0.15"/>
+  <rect x="44" y="296" width="16" height="16" rx="4" fill="#E1306C" fill-opacity="0.6"/>
+  <text x="80" y="302" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">Instagram</text>
+  <text x="80" y="318" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Daily limit · 30m</text>
+  <rect x="310" y="292" width="44" height="26" rx="13" fill="#059669"/>
+  <circle cx="332" cy="305" r="10" fill="white"/>
+
+  <line x1="36" y1="334" x2="354" y2="334" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- TikTok - blocked -->
+  <circle cx="52" cy="364" r="20" fill="#010101" fill-opacity="0.08"/>
+  <text x="80" y="362" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">TikTok</text>
+  <text x="80" y="378" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Blocked always</text>
+  <rect x="310" y="348" width="44" height="26" rx="13" fill="#059669"/>
+  <circle cx="332" cy="361" r="10" fill="white"/>
+
+  <line x1="36" y1="394" x2="354" y2="394" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- YouTube - limit -->
+  <circle cx="52" cy="424" r="20" fill="#FF0000" fill-opacity="0.12"/>
+  <polygon points="48,416 48,432 58,424" fill="#FF0000" fill-opacity="0.7"/>
+  <text x="80" y="422" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">YouTube</text>
+  <text x="80" y="438" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Daily limit · 1h</text>
+  <rect x="310" y="412" width="44" height="26" rx="13" fill="#059669"/>
+  <circle cx="332" cy="425" r="10" fill="white"/>
+
+  <line x1="36" y1="454" x2="354" y2="454" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Twitter/X - not blocked -->
+  <circle cx="52" cy="484" r="20" fill="#1DA1F2" fill-opacity="0.12"/>
+  <text x="80" y="482" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">X (Twitter)</text>
+  <text x="80" y="498" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">No limit set</text>
+  <rect x="310" y="468" width="44" height="26" rx="13" fill="#E2E8F0"/>
+  <circle cx="322" cy="481" r="10" fill="white"/>
+
+  <line x1="36" y1="514" x2="354" y2="514" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Snapchat -->
+  <circle cx="52" cy="544" r="20" fill="#FFFC00" fill-opacity="0.25"/>
+  <text x="80" y="542" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">Snapchat</text>
+  <text x="80" y="558" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Evening schedule</text>
+  <rect x="310" y="528" width="44" height="26" rx="13" fill="#059669"/>
+  <circle cx="332" cy="541" r="10" fill="white"/>
+
+  <line x1="36" y1="574" x2="354" y2="574" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- Reddit -->
+  <circle cx="52" cy="604" r="20" fill="#FF4500" fill-opacity="0.15"/>
+  <text x="80" y="602" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">Reddit</text>
+  <text x="80" y="618" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">Blocked always</text>
+  <rect x="310" y="588" width="44" height="26" rx="13" fill="#059669"/>
+  <circle cx="332" cy="601" r="10" fill="white"/>
+
+  <!-- Add apps CTA -->
+  <rect x="20" y="688" width="350" height="52" rx="26" fill="#059669" filter="url(#btnShadow)"/>
+  <text x="195" y="718" text-anchor="middle" fill="white" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">+ Add apps to block</text>
+
+  <!-- Bottom nav - Apps active -->
+  <rect x="16" y="768" width="358" height="64" rx="28" fill="white" fill-opacity="0.92" stroke="#059669" stroke-opacity="0.12" stroke-width="1" filter="url(#cardShadow)"/>
+  <rect x="100" y="776" width="72" height="48" rx="20" fill="#059669" fill-opacity="0.12"/>
+  <rect x="122" y="788" width="14" height="14" rx="3" fill="none" stroke="#059669" stroke-width="1.8"/>
+  <text x="136" y="822" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600">Apps</text>
+  <text x="58" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Home</text>
+  <text x="195" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Web</text>
+  <text x="276" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Insights</text>
+
+  <rect x="128" y="828" width="134" height="5" rx="2.5" fill="#1F2937" fill-opacity="0.15"/>
 </svg>

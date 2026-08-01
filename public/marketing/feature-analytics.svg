@@ -1,11 +1,103 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
-  <rect width="800" height="500" fill="#f8faf9"/>
-  <rect x="80" y="80" width="280" height="340" rx="20" fill="#fff" stroke="#d1fae5"/>
-  <rect x="400" y="80" width="320" height="160" rx="20" fill="#fff" stroke="#d1fae5"/>
-  <rect x="400" y="260" width="320" height="160" rx="20" fill="#fff" stroke="#d1fae5"/>
-  <rect x="110" y="120" width="120" height="120" rx="60" fill="#ecfdf5" stroke="#10b981" stroke-width="3"/>
-  <rect x="430" y="110" width="200" height="12" rx="6" fill="#a7f3d0"/>
-  <rect x="430" y="140" width="260" height="80" rx="8" fill="#ecfdf5"/>
-  <rect x="430" y="290" width="200" height="12" rx="6" fill="#a7f3d0"/>
-  <rect x="430" y="320" width="260" height="80" rx="8" fill="#ecfdf5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" fill="none">
+  <defs>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#059669" flood-opacity="0.06"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.04"/>
+    </filter>
+    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#059669" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#059669" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="390" height="844" fill="#FFFFFF"/>
+
+  <text x="32" y="52" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="600">9:41</text>
+
+  <!-- Header -->
+  <text x="24" y="108" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="28" font-weight="800">Insights</text>
+  <text x="24" y="132" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="14">Your screen time trends</text>
+
+  <!-- Period tabs -->
+  <rect x="24" y="152" width="72" height="32" rx="16" fill="#059669"/>
+  <text x="60" y="172" text-anchor="middle" fill="white" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">Today</text>
+  <text x="130" y="172" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500">Week</text>
+  <text x="190" y="172" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500">Month</text>
+
+  <!-- Chart card -->
+  <rect x="20" y="200" width="350" height="220" rx="18" fill="#F8FAF9" stroke="#059669" stroke-opacity="0.1" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="36" y="228" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600">SCREEN TIME</text>
+  <text x="36" y="258" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="28" font-weight="800">2h 14m</text>
+  <text x="36" y="278" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="600">↓ 18% vs yesterday</text>
+
+  <!-- Bar chart -->
+  <rect x="36" y="300" width="318" height="100" rx="8" fill="url(#chartGrad)"/>
+  <rect x="48" y="360" width="28" height="40" rx="4" fill="#059669" fill-opacity="0.25"/>
+  <rect x="88" y="340" width="28" height="60" rx="4" fill="#059669" fill-opacity="0.35"/>
+  <rect x="128" y="320" width="28" height="80" rx="4" fill="#059669" fill-opacity="0.5"/>
+  <rect x="168" y="350" width="28" height="50" rx="4" fill="#059669" fill-opacity="0.3"/>
+  <rect x="208" y="310" width="28" height="90" rx="4" fill="#059669" fill-opacity="0.55"/>
+  <rect x="248" y="330" width="28" height="70" rx="4" fill="#059669" fill-opacity="0.4"/>
+  <rect x="288" y="295" width="28" height="95" rx="4" fill="#059669"/>
+  <rect x="328" y="325" width="28" height="75" rx="4" fill="#059669" fill-opacity="0.45"/>
+  <text x="62" y="408" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="9">M</text>
+  <text x="102" y="408" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="9">T</text>
+  <text x="142" y="408" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="9">W</text>
+  <text x="182" y="408" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="9">T</text>
+  <text x="222" y="408" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="9">F</text>
+  <text x="262" y="408" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="9">S</text>
+  <text x="302" y="408" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="9" font-weight="700">S</text>
+
+  <!-- Top apps card -->
+  <rect x="20" y="436" width="350" height="280" rx="18" fill="#F8FAF9" stroke="#059669" stroke-opacity="0.1" stroke-width="1" filter="url(#cardShadow)"/>
+  <text x="36" y="464" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="15" font-weight="700">Top apps today</text>
+
+  <!-- App 1 -->
+  <circle cx="52" cy="500" r="18" fill="#E1306C" fill-opacity="0.15"/>
+  <text x="80" y="496" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600">Instagram</text>
+  <text x="80" y="512" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">58m</text>
+  <rect x="200" y="490" width="150" height="6" rx="3" fill="#E2E8F0"/>
+  <rect x="200" y="490" width="110" height="6" rx="3" fill="#059669"/>
+
+  <!-- App 2 -->
+  <circle cx="52" cy="548" r="18" fill="#FF0000" fill-opacity="0.12"/>
+  <text x="80" y="548" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600">YouTube</text>
+  <text x="80" y="564" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">42m</text>
+  <rect x="200" y="542" width="150" height="6" rx="3" fill="#E2E8F0"/>
+  <rect x="200" y="542" width="85" height="6" rx="3" fill="#10B981"/>
+
+  <!-- App 3 -->
+  <circle cx="52" cy="596" r="18" fill="#010101" fill-opacity="0.08"/>
+  <text x="80" y="600" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600">TikTok</text>
+  <text x="80" y="616" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">35m</text>
+  <rect x="200" y="594" width="150" height="6" rx="3" fill="#E2E8F0"/>
+  <rect x="200" y="594" width="65" height="6" rx="3" fill="#0D9488"/>
+
+  <!-- App 4 -->
+  <circle cx="52" cy="652" r="18" fill="#1DA1F2" fill-opacity="0.12"/>
+  <text x="80" y="652" fill="#1F2937" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="600">X (Twitter)</text>
+  <text x="80" y="668" fill="#6B7280" font-family="system-ui,-apple-system,sans-serif" font-size="12">22m</text>
+  <rect x="200" y="646" width="150" height="6" rx="3" fill="#E2E8F0"/>
+  <rect x="200" y="646" width="45" height="6" rx="3" fill="#047857"/>
+
+  <!-- Focus stat row -->
+  <rect x="36" y="688" width="150" height="56" rx="12" fill="#059669" fill-opacity="0.08"/>
+  <text x="52" y="710" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600">FOCUS TIME</text>
+  <text x="52" y="732" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="800">45m</text>
+  <rect x="204" y="688" width="150" height="56" rx="12" fill="#F59E0B" fill-opacity="0.08"/>
+  <text x="212" y="710" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600">STREAK</text>
+  <text x="212" y="732" fill="#F59E0B" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="800">5 days</text>
+
+  <!-- Bottom nav - Insights active -->
+  <rect x="16" y="768" width="358" height="64" rx="28" fill="white" fill-opacity="0.92" stroke="#059669" stroke-opacity="0.12" stroke-width="1" filter="url(#cardShadow)"/>
+  <rect x="244" y="776" width="72" height="48" rx="20" fill="#059669" fill-opacity="0.12"/>
+  <rect x="268" y="788" width="4" height="10" rx="1" fill="#059669"/>
+  <rect x="274" y="784" width="4" height="14" rx="1" fill="#059669"/>
+  <rect x="280" y="790" width="4" height="8" rx="1" fill="#059669"/>
+  <text x="276" y="822" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600">Insights</text>
+  <text x="58" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Home</text>
+  <text x="136" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Apps</text>
+  <text x="195" y="822" text-anchor="middle" fill="#9CA3AF" font-family="system-ui,-apple-system,sans-serif" font-size="10">Web</text>
+
+  <rect x="128" y="828" width="134" height="5" rx="2.5" fill="#1F2937" fill-opacity="0.15"/>
 </svg>
