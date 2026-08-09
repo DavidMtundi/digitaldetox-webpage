@@ -153,7 +153,7 @@ export default function PrivacyPage() {
         <div className="glass-card mt-8 !p-8">
           <h2 className="font-display text-2xl text-gray-900 dark:text-gray-50">Contact us</h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Questions about this policy or your data? Email us — we aim to respond within 48 hours.
+            Questions about this policy or your data? Email us — we aim to respond within 24 hours.
           </p>
           <div className="mt-4 flex items-center gap-3 text-gray-600 dark:text-gray-300">
             <Mail className="h-5 w-5 text-emerald-600" />

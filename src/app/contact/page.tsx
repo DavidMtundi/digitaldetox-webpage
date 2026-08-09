@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, Clock, Mail, MapPin, MessageCircle, Shield } from "lucide-react";
+import { ArrowRight, Clock, MapPin, MessageCircle, Shield } from "lucide-react";
 import PageHero from "@/components/marketing/page-hero";
 import SectionHeader from "@/components/marketing/section-header";
 import SectionShell from "@/components/marketing/section-shell";
@@ -16,11 +16,15 @@ import ContactChannels, {
   ContactTimeline,
 } from "@/components/marketing/contact-channels";
 import {
+  PlugHeroCtaEmail,
   PlugHeroCtaPrimary,
-  PlugHeroCtaSecondary,
 } from "@/components/marketing/plug-style-hero";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
 import { DEFAULT_CONTACT_EMAIL } from "@/lib/contact";
+import {
+  SUPPORT_RESPONSE_BADGE,
+  SUPPORT_RESPONSE_SHORT,
+} from "@/lib/contact-validation";
 
 const FAQ = [
   {
@@ -80,13 +84,10 @@ export default function ContactPage() {
           <MessageCircle className="h-4 w-4" aria-hidden />
           Send a message
         </PlugHeroCtaPrimary>
-        <PlugHeroCtaSecondary href={`mailto:${contactEmail}`}>
-          <Mail className="h-4 w-4" aria-hidden />
-          Email directly
-        </PlugHeroCtaSecondary>
+        <PlugHeroCtaEmail href={`mailto:${contactEmail}`} email={contactEmail} />
         <TrustBadges
           items={[
-            { icon: Clock, label: "Reply within 48h" },
+            { icon: Clock, label: SUPPORT_RESPONSE_BADGE },
             { icon: MapPin, label: "Kenya-born" },
             { icon: Shield, label: "Privacy-first" },
           ]}
@@ -95,7 +96,7 @@ export default function ContactPage() {
 
       <StatBar
         stats={[
-          { value: "48h", label: "Typical response" },
+          { value: SUPPORT_RESPONSE_SHORT, label: "Typical response" },
           { value: "EAT", label: contactHours },
           { value: "Email", label: "Primary channel" },
         ]}

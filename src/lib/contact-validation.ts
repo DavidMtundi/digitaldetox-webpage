@@ -1,5 +1,12 @@
 export const DEFAULT_CONTACT_EMAIL = "hello@pauseward.app";
 
+/** Customer-facing support response SLA (hours). */
+export const SUPPORT_RESPONSE_HOURS = 24;
+export const SUPPORT_RESPONSE_SHORT = "24hrs";
+export const SUPPORT_RESPONSE_BADGE = `Reply within ${SUPPORT_RESPONSE_SHORT}`;
+export const SUPPORT_RESPONSE_THANKS = `Thanks — we received your message and will reply within ${SUPPORT_RESPONSE_HOURS} hours.`;
+export const SUPPORT_RESPONSE_META = `Typical reply within ${SUPPORT_RESPONSE_HOURS} hours.`;
+
 export interface ContactFormData {
   name: string;
   email: string;

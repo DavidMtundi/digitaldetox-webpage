@@ -88,12 +88,11 @@ export default function ParentsSection() {
               <h2
                 className="parents-showcase-title font-display mt-3 text-[1.75rem] leading-[1.1] tracking-tight text-gray-900 sm:text-4xl md:text-[2.5rem] dark:text-white"
               >
-                Peace of mind when they&apos;re online
+                Peaceful evenings when they&apos;re online
               </h2>
               <p className="parents-showcase-lead mt-4 text-base leading-relaxed text-gray-600 sm:mt-5 sm:text-lg dark:text-gray-400">
-                Pauseward helps you set boundaries kids can&apos;t easily bypass — blocking harmful content,
-                limiting risky apps, and keeping screens off when it matters. You stay in control without
-                hovering over every notification.
+                Set boundaries kids can&apos;t easily bypass — fewer late-night scrolls, safer browsing, and
+                screen time that ends when it should. You stay in control without hovering over every notification.
               </p>
 
               <ul className="parents-trust-pills mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3" aria-label="Parent trust highlights">

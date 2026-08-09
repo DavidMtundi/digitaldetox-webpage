@@ -1,25 +1,46 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { FormEvent, Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { signIn, signUp } from "@/lib/auth";
 import { useAuth } from "@/components/auth/auth-provider";
-import ThemeToggle from "@/components/theme-toggle";
+import ServiceUnavailablePanel from "@/components/dashboard/service-unavailable-panel";
+import DashboardAuthShell, {
+  DashboardAuthBrand,
+  DashboardAuthTabs,
+} from "@/components/dashboard/dashboard-auth-shell";
 import { resolveSafeRedirect } from "@/lib/safe-redirect";
+
+const COPY = {
+  signin: {
+    title: "Welcome back",
+    subtitle: "Manage your devices, blocklists, schedules, and subscription in one place.",
+    submit: "Sign in",
+    submitting: "Signing in…",
+  },
+  signup: {
+    title: "Create your account",
+    subtitle: "Free to start — sync focus settings across Android, iOS, Windows, macOS, and TV.",
+    submit: "Create account",
+    submitting: "Creating account…",
+  },
+} as const;
 
 export default function DashboardLoginPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex min-h-screen items-center justify-center bg-[#f5f5f7] dark:bg-gray-950">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
-        </div>
-      }
-    >
+    <Suspense fallback={<DashboardAuthLoading />}>
       <DashboardLoginContent />
     </Suspense>
+  );
+}
+
+function DashboardAuthLoading() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-[#fafdfb] dark:bg-[#050807]">
+      <Loader2 className="h-8 w-8 animate-spin text-emerald-600" aria-label="Loading" />
+    </div>
   );
 }
 
@@ -34,11 +55,18 @@ function DashboardLoginContent() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
+  const copy = COPY[mode];
+
   useEffect(() => {
     if (!loading && user) {
       router.replace(resolveSafeRedirect(redirectTo, "/dashboard"));
     }
   }, [loading, user, router, redirectTo]);
+
+  function switchMode(next: "signin" | "signup") {
+    setMode(next);
+    setError(null);
+  }
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -58,7 +86,7 @@ function DashboardLoginContent() {
       }
       router.replace(resolveSafeRedirect(redirectTo, "/dashboard"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Authentication failed.");
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -66,103 +94,94 @@ function DashboardLoginContent() {
 
   if (!configured) {
     return (
-      <div className="relative flex min-h-screen items-center justify-center bg-[#f5f5f7] px-4 dark:bg-gray-950">
-        <div className="absolute right-4 top-4">
-          <ThemeToggle />
-        </div>
-        <div className="max-w-md rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm dark:border-gray-800 dark:bg-gray-900">
-          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">API not configured</h1>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Set <code className="text-xs">NEXT_PUBLIC_PAUSEWARD_API_URL</code> to your pauseward-api
-            instance to enable sign-in and checkout.
-          </p>
-          <Link href="/" className="mt-6 inline-block text-sm font-medium text-emerald-700 hover:underline">
-            Back to home
-          </Link>
-        </div>
+      <div className="relative flex min-h-screen items-center justify-center bg-[#fafdfb] px-4 dark:bg-[#050807]">
+        <ServiceUnavailablePanel />
       </div>
     );
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-[#f5f5f7] px-4 dark:bg-gray-950">
-      <div className="absolute right-4 top-4">
-        <ThemeToggle />
+    <DashboardAuthShell
+      footer={
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          <Link href="/download" className="font-medium text-emerald-700 hover:underline dark:text-emerald-400">
+            Download the app
+          </Link>
+          {" · "}
+          <Link href="/contact" className="font-medium text-emerald-700 hover:underline dark:text-emerald-400">
+            Need help?
+          </Link>
+        </p>
+      }
+    >
+      <DashboardAuthBrand />
+
+      <DashboardAuthTabs mode={mode} onChange={switchMode} />
+
+      <div className="dashboard-auth-heading">
+        <h1 className="dashboard-auth-title">{copy.title}</h1>
+        <p className="dashboard-auth-subtitle">{copy.subtitle}</p>
       </div>
-      <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div className="mb-6">
-          <div className="mb-4 flex items-center gap-3">
-            <Image src="/pauseward.png" alt="Pauseward" width={40} height={40} className="rounded-lg" />
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">Pauseward</h1>
-          </div>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            Sign in with your Pauseward account. Billing and subscriptions are stored in PostgreSQL.
-          </p>
-        </div>
 
-        <form onSubmit={onSubmit} className="space-y-4">
-          <label className="block text-sm">
-            <span className="font-medium text-gray-700 dark:text-gray-300">Email</span>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none ring-emerald-500 focus:ring-2 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100"
-            />
-          </label>
-          <label className="block text-sm">
-            <span className="font-medium text-gray-700 dark:text-gray-300">Password</span>
-            <input
-              type="password"
-              required
-              minLength={8}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none ring-emerald-500 focus:ring-2 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100"
-            />
-          </label>
+      <form onSubmit={onSubmit} className="dashboard-auth-form">
+        <label className="dashboard-auth-field">
+          <span>Email</span>
+          <input
+            type="email"
+            name="email"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="you@example.com"
+          />
+        </label>
 
-          {error ? <p className="text-sm text-red-600">{error}</p> : null}
-
-          <button
-            type="submit"
-            disabled={submitting}
-            className="w-full rounded-lg bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-60"
-          >
-            {submitting ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
-          </button>
-        </form>
-
-        <button
-          type="button"
-          onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-          className="mt-4 w-full text-sm text-gray-600 hover:text-emerald-700 dark:text-gray-400 dark:hover:text-emerald-400"
-        >
-          {mode === "signin" ? "Need an account? Create one" : "Already have an account? Sign in"}
-        </button>
+        <label className="dashboard-auth-field">
+          <span>Password</span>
+          <input
+            type="password"
+            name="password"
+            autoComplete={mode === "signin" ? "current-password" : "new-password"}
+            required
+            minLength={8}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder={mode === "signup" ? "At least 8 characters" : "Your password"}
+          />
+        </label>
 
         {mode === "signin" ? (
-          <Link
-            href="/dashboard/forgot-password"
-            className="mt-3 block text-center text-sm text-gray-600 hover:text-emerald-700 dark:text-gray-400"
-          >
-            Forgot password?
-          </Link>
+          <div className="dashboard-auth-forgot">
+            <Link href="/dashboard/forgot-password">Forgot password?</Link>
+          </div>
         ) : null}
 
-        <p className="mt-6 text-center text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-          By continuing, you agree to our{" "}
-          <Link href="/terms" className="text-emerald-700 hover:underline">
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link href="/privacy" className="text-emerald-700 hover:underline">
-            Privacy Policy
-          </Link>
-          .
-        </p>
-      </div>
-    </div>
+        {error ? (
+          <div className="dashboard-auth-error" role="alert">
+            {error}
+          </div>
+        ) : null}
+
+        <button type="submit" disabled={submitting} className="dashboard-auth-submit">
+          {submitting ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+              {copy.submitting}
+            </>
+          ) : (
+            <>
+              {copy.submit}
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </>
+          )}
+        </button>
+      </form>
+
+      <p className="dashboard-auth-legal">
+        By continuing, you agree to our{" "}
+        <Link href="/terms">Terms of Service</Link> and <Link href="/privacy">Privacy Policy</Link>.
+      </p>
+    </DashboardAuthShell>
   );
 }

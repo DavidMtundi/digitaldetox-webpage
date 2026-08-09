@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import SectionHeader from "@/components/marketing/section-header";
 import FocusBackground from "@/components/marketing/focus-background";
+import TrustBadges from "@/components/marketing/trust-badges";
+import RevealOnScroll from "@/components/marketing/reveal-on-scroll";
 import BillingIntervalToggle, { type BillingInterval } from "@/components/pricing/billing-interval-toggle";
 import PricingAmount from "@/components/pricing/pricing-amount";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
@@ -16,20 +18,13 @@ import {
 } from "@/lib/billing";
 import { bestAnnualSavings, maxAnnualSavingsPercent } from "@/lib/billing-discount";
 import { detectDefaultCurrency, detectRegionCode } from "@/lib/geo";
-
-const FREE_FEATURES = [
-  "Basic app & website blocking",
-  "Focus modes",
-  "Usage insights",
-  "Cross-device sync",
-];
-
-const PRO_FEATURES = [
-  "Advanced blocking & schedules",
-  "Daily limits & deep analytics",
-  "Cross-device sync",
-  "Priority support",
-];
+import { PLAN_TIER_SUBTITLES, PRICING_TIER_TAGLINES } from "@/lib/marketing-copy";
+import {
+  FAMILY_EXTRA_FEATURES,
+  PRICING_TRUST_BADGES,
+  PRO_FEATURES,
+  STARTER_FEATURES,
+} from "@/lib/pricing-content";
 
 function findTierProduct(products: CatalogProduct[], tier: string, interval: BillingInterval) {
   return products.find((p) => p.tier === tier && p.interval === interval);
@@ -40,7 +35,6 @@ export default function PricingPreview({ hideStarter = false }: { hideStarter?: 
   const [interval, setInterval] = useState<BillingInterval>("annual");
   const [displayCurrency, setDisplayCurrency] = useState<BillingCurrency>("KES");
   const [loading, setLoading] = useState(true);
-  const [apiConnected, setApiConnected] = useState(false);
 
   useEffect(() => {
     setDisplayCurrency(detectDefaultCurrency());
@@ -51,10 +45,9 @@ export default function PricingPreview({ hideStarter = false }: { hideStarter?: 
         if (catalog.products.length > 0) {
           setProducts(catalog.products);
         }
-        setApiConnected(true);
       })
       .catch(() => {
-        setApiConnected(false);
+        // Fall back to FALLBACK_CATALOG_PRODUCTS silently
       })
       .finally(() => setLoading(false));
   }, []);
@@ -108,17 +101,18 @@ export default function PricingPreview({ hideStarter = false }: { hideStarter?: 
         <div className="mesh-section-header">
           <SectionHeader
             eyebrow="Simple pricing"
-            title="Upgrade when you need more"
-            subtitle="Start with core blocking on any platform. Pro and Family unlock advanced tools — pay with M-Pesa or card in Kenya, or card worldwide."
+            title="Invest in the time you keep"
+            subtitle="Start free on any device. Upgrade when you want evenings back, deeper focus, or a calmer household."
           />
         </div>
 
-        <div className="mb-10 flex justify-center">
+        <div className="mb-6 flex flex-col items-center gap-6">
           <BillingIntervalToggle
             value={interval}
             onChange={setInterval}
             savingsPercent={maxSavingsPercent}
           />
+          <TrustBadges items={PRICING_TRUST_BADGES} />
         </div>
 
         {loading ? (
@@ -130,76 +124,81 @@ export default function PricingPreview({ hideStarter = false }: { hideStarter?: 
             className={`grid gap-5 mx-auto max-w-6xl ${hideStarter ? "md:grid-cols-2 max-w-4xl" : "md:grid-cols-3"}`}
           >
             {!hideStarter && (
-              <PricingTierCard
-                name="Starter"
-                tagline="Core blocking on every platform"
-                prices={{ KES: 0, USD: 0 }}
-                primaryCurrency={displayCurrency}
-                interval={interval}
-                priceNote="Download and get started"
-                features={FREE_FEATURES}
-                cta={{ label: "Download", href: "/download", external: false }}
-                variant="free"
-              />
+              <RevealOnScroll>
+                <PricingTierCard
+                  name="Starter"
+                  tagline={PRICING_TIER_TAGLINES.starter}
+                  prices={{ KES: 0, USD: 0 }}
+                  primaryCurrency={displayCurrency}
+                  interval={interval}
+                  priceNote="Download and get started"
+                  features={[...STARTER_FEATURES]}
+                  cta={{ label: "Download", href: "/download", external: false }}
+                  variant="free"
+                />
+              </RevealOnScroll>
             )}
 
             {proPricing && (
-              <PricingTierCard
-                name="Pro"
-                tagline="For individuals who want deeper focus"
-                prices={proPricing.prices}
-                primaryCurrency={displayCurrency}
-                compareAtPrices={proPricing.compareAtPrices}
-                interval={interval}
-                savingsLabel={proPricing.savingsLabel}
-                priceNote={proPricing.priceNote}
-                features={PRO_FEATURES}
-                cta={{
-                  label: interval === "annual" ? "Get Pro yearly" : "Get Pro",
-                  href: "/pricing",
-                  external: false,
-                }}
-                variant="pro"
-                paymentIcons
-              />
+              <RevealOnScroll delay={hideStarter ? 0 : 80}>
+                <PricingTierCard
+                  name="Pro"
+                  tagline={PRICING_TIER_TAGLINES.pro}
+                  prices={proPricing.prices}
+                  primaryCurrency={displayCurrency}
+                  compareAtPrices={proPricing.compareAtPrices}
+                  interval={interval}
+                  savingsLabel={proPricing.savingsLabel}
+                  priceNote={proPricing.priceNote}
+                  features={[...PRO_FEATURES]}
+                  cta={{
+                    label: interval === "annual" ? "Get Pro yearly" : "Get Pro",
+                    href: "/pricing",
+                    external: false,
+                  }}
+                  variant="pro"
+                  paymentIcons
+                />
+              </RevealOnScroll>
             )}
 
             {familyPricing && (
-              <PricingTierCard
-                name="Family"
-                tagline="Up to 6 devices — best for households"
-                prices={familyPricing.prices}
-                primaryCurrency={displayCurrency}
-                compareAtPrices={familyPricing.compareAtPrices}
-                interval={interval}
-                savingsLabel={familyPricing.savingsLabel}
-                priceNote={familyPricing.priceNote}
-                features={[...PRO_FEATURES, "Family dashboard", "Shared policies"]}
-                cta={{
-                  label: interval === "annual" ? "Get Family yearly" : "Get Family",
-                  href: "/pricing",
-                  external: false,
-                }}
-                variant="family"
-                highlighted
-                paymentIcons
-              />
+              <RevealOnScroll delay={hideStarter ? 80 : 160}>
+                <PricingTierCard
+                  name="Family"
+                  tagline={PRICING_TIER_TAGLINES.family}
+                  prices={familyPricing.prices}
+                  primaryCurrency={displayCurrency}
+                  compareAtPrices={familyPricing.compareAtPrices}
+                  interval={interval}
+                  savingsLabel={familyPricing.savingsLabel}
+                  priceNote={familyPricing.priceNote}
+                  features={[...PRO_FEATURES, ...FAMILY_EXTRA_FEATURES]}
+                  cta={{
+                    label: interval === "annual" ? "Get Family yearly" : "Get Family",
+                    href: "/pricing",
+                    external: false,
+                  }}
+                  variant="family"
+                  highlighted
+                  paymentIcons
+                />
+              </RevealOnScroll>
             )}
           </div>
         )}
 
-        <div className="mt-10 text-center">
-          <Link
-            href="/pricing"
-            className="pricing-preview-link inline-flex items-center gap-2 text-emerald-700 font-semibold hover:text-emerald-800 transition"
-          >
-            See full plan details & checkout
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          {!apiConnected && (
-            <p className="mt-2 text-xs text-gray-400">Showing estimated prices — live catalog unavailable</p>
-          )}
-        </div>
+        <RevealOnScroll delay={120}>
+          <div className="mt-10 text-center">
+            <Link
+              href="/pricing"
+              className="pricing-preview-link inline-flex items-center gap-2 text-emerald-700 font-semibold hover:text-emerald-800 transition"
+            >
+              See full plan details & checkout
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </RevealOnScroll>
       </div>
     </section>
   );
@@ -236,7 +235,7 @@ function PricingTierCard({
 }) {
   return (
     <div
-      className={`pricing-tier-card glass-card flex flex-col !p-8 ${
+      className={`pricing-tier-card glass-card flex h-full flex-col !p-8 ${
         highlighted ? "gradient-border ring-2 ring-emerald-100 dark:ring-emerald-900/40" : ""
       } ${variant === "pro" ? "pricing-tier-card-pro" : ""}`}
     >

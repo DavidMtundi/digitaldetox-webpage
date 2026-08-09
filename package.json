@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node node_modules/next/dist/bin/next build",
+    "build": "node node_modules/next/dist/bin/next build && node scripts/strip-rsc-txt.mjs",
     "export": "next build && next export",
     "start": "next start",
     "lint": "eslint",

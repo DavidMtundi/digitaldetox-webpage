@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Check, Download, ExternalLink, Mail } from "lucide-react";
-import SectionHeader from "@/components/marketing/section-header";
 import PlatformLogo from "@/components/marketing/platform-logo";
 import RevealOnScroll from "@/components/marketing/reveal-on-scroll";
 import { PLATFORMS, resolvePlatformDownloadTarget, resolvePlatformHref, statusLabel, type PlatformInfo } from "@/lib/platforms";
@@ -11,11 +10,26 @@ const STATUS_PILL: Record<string, string> = {
   coming_soon: "platform-pill-soon",
 };
 
-const PLATFORM_ROWS: Array<Array<(typeof PLATFORMS)[number]["id"]>> = [
-  ["android", "ios"],
-  ["windows", "macos"],
-  ["android_tv"],
-  ["web"],
+const PLATFORM_GROUPS: Array<{
+  label: string;
+  description: string;
+  platforms: Array<(typeof PLATFORMS)[number]["id"]>;
+}> = [
+  {
+    label: "Mobile",
+    description: "Phones and tablets with blocking, focus modes, and insights.",
+    platforms: ["android", "ios"],
+  },
+  {
+    label: "Desktop",
+    description: "Native apps with menu bar or system tray focus tools.",
+    platforms: ["windows", "macos"],
+  },
+  {
+    label: "TV & web",
+    description: "Living-room controls and browser-based management.",
+    platforms: ["android_tv", "web"],
+  },
 ];
 
 const ACCENT_CLASS: Record<string, string> = {
@@ -47,27 +61,33 @@ function isExternalUrl(href: string): boolean {
 }
 
 function PlatformCta({ platform, href }: { platform: PlatformInfo; href: string | null }) {
+  const variantClass =
+    platform.id === "web"
+      ? "platform-cta-secondary"
+      : href
+        ? "platform-cta-primary"
+        : platform.status === "coming_soon"
+          ? "platform-cta-muted"
+          : "platform-cta-outline";
+
   if (href) {
     const external = isExternalUrl(href);
-    const className =
-      platform.id === "web"
-        ? "platform-cta platform-cta-secondary"
-        : "platform-cta platform-cta-primary";
+    const className = `platform-cta ${variantClass}`;
 
     if (external) {
       return (
         <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
-          {platform.id !== "web" && <Download className="h-4 w-4" />}
-          {platform.ctaLabel}
-          <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+          {platform.id !== "web" && <Download className="h-4 w-4 shrink-0" aria-hidden />}
+          <span className="platform-cta-label">{platform.ctaLabel}</span>
+          <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
         </a>
       );
     }
 
     return (
       <Link href={href} className={className}>
-        {platform.id !== "web" && <Download className="h-4 w-4" />}
-        {platform.ctaLabel}
+        {platform.id !== "web" && <Download className="h-4 w-4 shrink-0" aria-hidden />}
+        <span className="platform-cta-label">{platform.ctaLabel}</span>
       </Link>
     );
   }
@@ -75,15 +95,15 @@ function PlatformCta({ platform, href }: { platform: PlatformInfo; href: string 
   if (platform.status === "coming_soon") {
     return (
       <span className="platform-cta platform-cta-muted">
-        Coming soon — join the waitlist for early access
+        <span className="platform-cta-label">Coming soon — join the waitlist for early access</span>
       </span>
     );
   }
 
   return (
     <Link href="/contact" className="platform-cta platform-cta-outline">
-      <Mail className="h-4 w-4" />
-      Request access
+      <Mail className="h-4 w-4 shrink-0" aria-hidden />
+      <span className="platform-cta-label">Request access</span>
     </Link>
   );
 }
@@ -91,84 +111,78 @@ function PlatformCta({ platform, href }: { platform: PlatformInfo; href: string 
 export default function PlatformBento({ downloadLinks }: { downloadLinks: DownloadLinks }) {
   return (
     <div className="platform-bento">
-      {PLATFORM_ROWS.map((row, rowIndex) => (
-        <div
-          key={row.join("-")}
-          className={`platform-row ${row.length === 1 ? "platform-row--solo" : ""}`}
-        >
-          {row.map((platformId, i) => {
-            const platform = platformById(platformId);
-            const directHref = resolvePlatformHref(platform, downloadLinks);
-            const target =
-              directHref && platform.status !== "coming_soon"
-                ? { href: directHref, external: isExternalUrl(directHref) && platform.id !== "web" }
-                : resolvePlatformDownloadTarget(platform, downloadLinks);
-            const featured = platform.status === "available";
+      {PLATFORM_GROUPS.map((group, groupIndex) => (
+        <div key={group.label} className="platform-group">
+          <RevealOnScroll delay={groupIndex * 40}>
+            <div className="platform-group-header">
+              <p className="platform-group-label">{group.label}</p>
+              <p className="platform-group-description">{group.description}</p>
+            </div>
+          </RevealOnScroll>
 
-            return (
-              <RevealOnScroll key={platform.id} delay={rowIndex * 80 + i * 60} variant="scale">
-                <article
-                  id={`platform-${platform.id}`}
-                  className={`platform-tile ${ACCENT_CLASS[platform.id] ?? ""} ${
-                    featured ? "platform-tile-featured gradient-border" : ""
-                  } ${platform.status === "coming_soon" ? "platform-tile-soon" : ""}`}
+          <div
+            className={`platform-row ${group.platforms.length === 1 ? "platform-row--solo" : ""}`}
+          >
+            {group.platforms.map((platformId, i) => {
+              const platform = platformById(platformId);
+              const directHref = resolvePlatformHref(platform, downloadLinks);
+              const target =
+                directHref && platform.status !== "coming_soon"
+                  ? { href: directHref, external: isExternalUrl(directHref) && platform.id !== "web" }
+                  : resolvePlatformDownloadTarget(platform, downloadLinks);
+              const featured = platform.status === "available";
+
+              return (
+                <RevealOnScroll
+                  key={platform.id}
+                  delay={groupIndex * 80 + i * 60}
+                  variant="scale"
+                  className="h-full"
                 >
-                  <div>
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="platform-logo-wrap">
-                          <PlatformLogo platformId={platform.id} size={44} />
+                  <article
+                    id={`platform-${platform.id}`}
+                    className={`platform-tile ${ACCENT_CLASS[platform.id] ?? ""} ${
+                      featured ? "platform-tile-featured gradient-border" : ""
+                    } ${platform.status === "coming_soon" ? "platform-tile-soon" : ""}`}
+                  >
+                    <div className="platform-tile-body">
+                      <header className="platform-tile-header">
+                        <div className="platform-tile-brand">
+                          <div className="platform-logo-wrap">
+                            <PlatformLogo platformId={platform.id} size={44} />
+                          </div>
+                          <div className="platform-tile-meta">
+                            <h2 className="platform-tile-title type-card-title text-gray-900 dark:text-gray-50">
+                              {platform.name}
+                            </h2>
+                            <p className="platform-tile-tagline">{platform.tagline}</p>
+                          </div>
                         </div>
-                        <div className="min-w-0">
-                          <h2 className="type-card-title text-xl text-gray-900 dark:text-gray-50">
-                            {platform.name}
-                          </h2>
-                          <p className="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-                            {platform.tagline}
-                          </p>
-                        </div>
-                      </div>
-                      <span className={`platform-pill shrink-0 ${STATUS_PILL[platform.status]}`}>
-                        {statusLabel(platform.status)}
-                      </span>
+                        <span className={`platform-pill ${STATUS_PILL[platform.status]}`}>
+                          {statusLabel(platform.status)}
+                        </span>
+                      </header>
+
+                      <ul className="platform-tile-features">
+                        {platform.features.map((feature) => (
+                          <li key={feature} className="platform-tile-feature">
+                            <Check className="platform-tile-feature-icon" aria-hidden />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
-                      {platform.features.map((feature) => (
-                        <li
-                          key={feature}
-                          className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300"
-                        >
-                          <Check
-                            className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
-                            aria-hidden
-                          />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mt-6 border-t border-gray-200/80 pt-5 dark:border-gray-700/80">
-                    <PlatformCta platform={platform} href={target?.href ?? null} />
-                  </div>
-                </article>
-              </RevealOnScroll>
-            );
-          })}
+
+                    <footer className="platform-tile-footer">
+                      <PlatformCta platform={platform} href={target?.href ?? null} />
+                    </footer>
+                  </article>
+                </RevealOnScroll>
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>
-  );
-}
-
-export function PlatformBentoSection({ downloadLinks }: { downloadLinks: DownloadLinks }) {
-  return (
-    <>
-      <SectionHeader
-        eyebrow="Platforms"
-        title="Pick your environment"
-        subtitle="Each platform is tailored to how you actually use that device."
-      />
-      <PlatformBento downloadLinks={downloadLinks} />
-    </>
   );
 }

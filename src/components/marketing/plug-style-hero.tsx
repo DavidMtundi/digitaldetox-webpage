@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight, Globe } from "lucide-react";
+import { ArrowRight, Globe, Mail } from "lucide-react";
 import FocusBackground from "./focus-background";
 import SocialProofAvatars from "./social-proof-avatars";
 import PhoneFan from "./phone-fan";
@@ -92,9 +92,32 @@ export function PlugHeroCtaSecondary({ href, children }: { href: string; childre
   return (
     <Link
       href={href}
-      className="hero-cta-secondary inline-flex min-h-[48px] items-center justify-center rounded-full border border-emerald-200/90 bg-white/90 px-7 py-3 text-sm font-semibold text-gray-900 shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:border-white/35 dark:hover:bg-white/10"
+      className="hero-cta-secondary inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-full border border-emerald-200/90 bg-white/90 px-6 py-3 text-sm font-semibold text-gray-900 shadow-sm backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:border-white/35 dark:hover:bg-white/10 [&_svg]:shrink-0"
     >
       {children}
+    </Link>
+  );
+}
+
+export function PlugHeroCtaEmail({
+  href,
+  email,
+  label = "Email support",
+}: {
+  href: string;
+  email: string;
+  label?: string;
+}) {
+  return (
+    <Link href={href} className="hero-cta-email group">
+      <span className="hero-cta-email-icon" aria-hidden>
+        <Mail className="h-4 w-4" />
+      </span>
+      <span className="hero-cta-email-copy">
+        <span className="hero-cta-email-label">{label}</span>
+        <span className="hero-cta-email-address">{email}</span>
+      </span>
+      <ArrowRight className="hero-cta-email-arrow h-4 w-4 shrink-0" aria-hidden />
     </Link>
   );
 }

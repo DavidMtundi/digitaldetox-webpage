@@ -149,6 +149,22 @@
   @apply border-emerald-900/60 from-emerald-950/40 via-gray-900 to-gray-900;
 }
 
+.dark .contact-channel-card--primary::before {
+  @apply bg-emerald-500/10;
+}
+
+.dark .contact-email-meta-pill {
+  @apply border-emerald-900/50 bg-emerald-950/30 text-emerald-300;
+}
+
+.dark .contact-email-meta-pill--muted {
+  @apply border-gray-700 bg-gray-900/60 text-gray-400;
+}
+
+.dark .contact-email-cta {
+  @apply border-white/15 bg-white/5 shadow-black/20 hover:border-white/30 hover:bg-white/10;
+}
+
 .dark .contact-resource-link {
   @apply border-gray-800 bg-gray-900/80 text-gray-300 hover:border-emerald-800 hover:bg-gray-900 hover:text-emerald-300;
 }
@@ -246,8 +262,24 @@
   @apply text-emerald-400;
 }
 
+.dark .about-mission-glow {
+  @apply bg-[radial-gradient(ellipse_85%_55%_at_15%_0%,rgba(16,185,129,0.22),transparent_58%),radial-gradient(ellipse_55%_45%_at_100%_100%,rgba(20,184,166,0.14),transparent_52%)];
+}
+
+.dark .about-values-glow {
+  @apply bg-[radial-gradient(ellipse_80%_50%_at_80%_0%,rgba(244,63,94,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(16,185,129,0.18),transparent_55%)];
+}
+
 .dark .platform-tile .type-card-title {
   color: #f9fafb;
+}
+
+.dark .platform-tile-title {
+  color: #f9fafb;
+}
+
+.dark .platform-tile-tagline {
+  color: #9ca3af;
 }
 
 .dark .platform-tile .text-gray-700 {
@@ -310,6 +342,90 @@
 
 .dark .pricing-preview-link {
   @apply text-emerald-400 hover:text-emerald-300;
+}
+
+.dark .pricing-spotlight-panel {
+  @apply border-emerald-900/30 bg-gray-950 text-white shadow-2xl shadow-emerald-950/30;
+}
+
+.dark .pricing-spotlight-glow {
+  @apply bg-[radial-gradient(ellipse_80%_60%_at_10%_0%,rgba(16,185,129,0.22),transparent_55%),radial-gradient(ellipse_60%_50%_at_100%_100%,rgba(20,184,166,0.14),transparent_50%)];
+}
+
+.dark .pricing-spotlight-eyebrow {
+  @apply text-emerald-400/90;
+}
+
+.dark .pricing-spotlight-tab {
+  @apply border-white/12 bg-white/[0.04] text-gray-300 hover:border-emerald-800/60 hover:bg-emerald-950/30;
+}
+
+.dark .pricing-spotlight-tab-icon {
+  @apply bg-white/10 text-gray-300;
+}
+
+.dark .pricing-spotlight-title {
+  @apply text-white;
+}
+
+.dark .pricing-spotlight-description {
+  @apply text-gray-400;
+}
+
+.dark .pricing-spotlight-proof {
+  @apply border-emerald-800/50 bg-emerald-950/40 text-emerald-300;
+}
+
+.dark .pricing-comparison-title {
+  @apply text-white;
+}
+
+.dark .pricing-comparison-subtitle {
+  @apply text-gray-400;
+}
+
+.dark .pricing-comparison-scroll {
+  @apply border-emerald-900/30 bg-gray-900/80;
+}
+
+.dark .pricing-comparison-table thead th {
+  @apply border-emerald-900/30 bg-emerald-950/30 text-gray-100;
+}
+
+.dark .pricing-comparison-plan-col--pro {
+  @apply bg-emerald-950/25 text-emerald-300;
+}
+
+.dark .pricing-comparison-plan-col--family {
+  @apply bg-teal-950/25 text-teal-300;
+}
+
+.dark .pricing-comparison-category th {
+  @apply border-emerald-900/20 bg-gray-900/60 text-gray-500;
+}
+
+.dark .pricing-comparison-table tbody tr {
+  @apply border-gray-800/80 hover:bg-emerald-950/20;
+}
+
+.dark .pricing-comparison-feature-name {
+  @apply text-gray-300;
+}
+
+.dark .pricing-comparison-row--highlight .pricing-comparison-feature-name {
+  @apply text-white;
+}
+
+.dark .pricing-comparison-check {
+  @apply bg-emerald-950/50 text-emerald-400;
+}
+
+.dark .pricing-comparison-dash {
+  @apply bg-gray-800 text-gray-600;
+}
+
+.dark .pricing-comparison-text {
+  @apply text-gray-300;
 }
 
 /* Platform strip — light cards in dark mode keep dark text */

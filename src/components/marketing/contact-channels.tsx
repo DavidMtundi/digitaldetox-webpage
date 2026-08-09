@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
+  Clock,
   CreditCard,
   Download,
   Heart,
@@ -12,6 +13,7 @@ import {
   Scale,
 } from "lucide-react";
 import { CopyEmailButton } from "@/components/marketing/contact-form";
+import { SUPPORT_RESPONSE_HOURS, SUPPORT_RESPONSE_SHORT } from "@/lib/contact";
 
 interface ContactChannelsProps {
   email: string;
@@ -23,29 +25,45 @@ export default function ContactChannels({ email, phone, hours }: ContactChannels
   return (
     <div className="contact-channel-grid">
       <article className="contact-channel-card contact-channel-card--primary">
-        <div className="flex flex-1 flex-col gap-4 md:flex-row md:items-start md:gap-6">
-          <div className="contact-channel-icon">
-            <Mail className="h-6 w-6" />
-          </div>
-          <div className="flex-1">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">Recommended</p>
-            <h2 className="mt-1 font-display text-2xl text-gray-900">Email support</h2>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600">
+        <div className="contact-email-showcase">
+          <div className="contact-email-showcase-main">
+            <div className="contact-email-showcase-brand">
+              <div className="contact-channel-icon contact-channel-icon--featured" aria-hidden>
+                <Mail className="h-6 w-6" />
+              </div>
+              <div>
+                <p className="contact-email-badge">Recommended</p>
+                <h2 className="contact-email-title">Email support</h2>
+              </div>
+            </div>
+
+            <p className="contact-email-desc">
               The fastest way to reach us for billing, account access, bug reports, and anything that needs detail.
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
-              <a
-                href={`mailto:${email}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-900/10 transition hover:bg-emerald-700"
-              >
-                {email}
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <CopyEmailButton email={email} />
+
+            <div className="contact-email-meta">
+              <span className="contact-email-meta-pill">
+                <Clock className="h-3.5 w-3.5" aria-hidden />
+                Reply within {SUPPORT_RESPONSE_SHORT}
+              </span>
+              <span className="contact-email-meta-pill contact-email-meta-pill--muted">{hours}</span>
             </div>
           </div>
+
+          <div className="contact-email-showcase-actions">
+            <a href={`mailto:${email}`} className="contact-email-cta group">
+              <span className="contact-email-cta-icon" aria-hidden>
+                <Mail className="h-4 w-4" />
+              </span>
+              <span className="contact-email-cta-copy">
+                <span className="contact-email-cta-label">Write to us</span>
+                <span className="contact-email-cta-address">{email}</span>
+              </span>
+              <ArrowRight className="contact-email-cta-arrow h-4 w-4 shrink-0" aria-hidden />
+            </a>
+            <CopyEmailButton email={email} />
+          </div>
         </div>
-        <p className="mt-4 text-xs text-gray-500 md:mt-0 md:pl-[4.5rem]">{hours}</p>
       </article>
 
       <article className="contact-channel-card">
@@ -127,7 +145,7 @@ export function ContactTimeline() {
   const steps = [
     { title: "You send a message", body: "Use the form or email us directly with as much context as you can." },
     { title: "We triage your request", body: "Billing and technical issues are routed to the right person on our team." },
-    { title: "Reply within 48 hours", body: "Most messages get a response within one to two business days." },
+    { title: `Reply within ${SUPPORT_RESPONSE_HOURS} hours`, body: `Most messages get a response within ${SUPPORT_RESPONSE_HOURS} hours.` },
   ];
 
   return (

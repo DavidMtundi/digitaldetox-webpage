@@ -5,10 +5,7 @@ import {
   Moon,
   Sparkles,
 } from "lucide-react";
-import PlugStyleHero, {
-  PlugHeroCtaPrimary,
-  PlugHeroCtaSecondary,
-} from "@/components/marketing/plug-style-hero";
+import HomePlugHero from "@/components/marketing/home-plug-hero";
 import SectionHeader from "@/components/marketing/section-header";
 import SectionShell from "@/components/marketing/section-shell";
 import HowItWorks from "@/components/marketing/how-it-works";
@@ -19,24 +16,25 @@ import ProductFaqSection from "@/components/marketing/product-faq-section";
 import FeatureTabsSection, { buildDefaultFeatureTabs } from "@/components/marketing/feature-tabs-showcase";
 import ParentsSection from "@/components/marketing/parents-section";
 import ReviewCarousel, { type ReviewItem } from "@/components/marketing/review-carousel";
+import { HOME_PROOF_STATS } from "@/lib/marketing-copy";
 import { marketingMedia } from "@/lib/marketing-media";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
 
 const STEPS = [
   {
     icon: Download,
-    title: "Download & connect",
-    description: "Install on your device in under two minutes. Sign in to sync across platforms.",
+    title: "Two minutes to a calmer default",
+    description: "Install and sign in — you're almost protected before the next distraction hits.",
   },
   {
     icon: Moon,
-    title: "Set your boundaries",
-    description: "Pick apps, sites, and schedules that match your day — work, study, or wind-down.",
+    title: "Rules that run without you",
+    description: "Set study hours, work blocks, or bedtime — Pauseward keeps them even when willpower doesn't.",
   },
   {
     icon: Sparkles,
-    title: "Reclaim your focus",
-    description: "Boundaries hold through the day — see what improved and build better habits over time.",
+    title: "Feel the difference",
+    description: "More done. Less 'where did the evening go?' — see habits improve week by week.",
   },
 ];
 
@@ -63,7 +61,8 @@ const REVIEWS: ReviewItem[] = [
     role: "Software developer",
     initials: "JO",
     gradient: "from-teal-400 to-cyan-500",
-    quote: "Network-level blocking finally stuck — I can't bypass it in seconds anymore.",
+    quote:
+      "I finally leave work at work — no more 'five more minutes' that turn into an hour on my phone.",
   },
 ];
 
@@ -72,41 +71,15 @@ export default function Home() {
 
   return (
     <div className="marketing-page">
-      <PlugStyleHero
-        title={
-          <>
-            Your <span className="text-emerald-400">Focus</span> Deserves
-            <br />
-            <span className="text-emerald-400">Boundaries That Hold</span>
-          </>
-        }
-        phones={{
-          left: marketingMedia.features[0],
-          center: marketingMedia.hero.image,
-          right: marketingMedia.features[1],
-        }}
-        socialProof={{
-          text: "For individuals and families — focus protection on demand",
-        }}
-      >
-        <PlugHeroCtaPrimary href="#download">Get the app</PlugHeroCtaPrimary>
-        <PlugHeroCtaSecondary href="/pricing">View pricing</PlugHeroCtaSecondary>
-      </PlugStyleHero>
+      <HomePlugHero />
 
-      <StatBar
-        stats={[
-          { value: "On demand", label: "Focus protection" },
-          { value: "1 tap", label: "Focus modes" },
-          { value: "5", label: "Platforms" },
-          { value: "Family", label: "Up to 6 devices" },
-        ]}
-      />
+      <StatBar stats={HOME_PROOF_STATS} />
 
       <SectionShell tone="default" id="features">
         <FeatureTabsSection
-          eyebrow="Features"
-          title="Everything you need to protect your focus"
-          subtitle="Watch how each tool works — app blocking, focus modes, website blocking, and insights."
+          eyebrow="What changes"
+          title="Life with fewer scroll spirals"
+          subtitle="Not a list of tools — real shifts in how your day feels when Pauseward is on."
           items={FEATURE_TABS}
         />
       </SectionShell>
@@ -120,7 +93,7 @@ export default function Home() {
           <div className="how-it-works-heading mx-auto max-w-2xl text-center">
             <p className="page-eyebrow">How it works</p>
             <h2 className="font-display text-2xl tracking-tight text-gray-900 dark:text-gray-50 md:text-3xl">
-              Up and running in minutes
+              Protected in minutes — different by tonight
             </h2>
           </div>
           <HowItWorks steps={STEPS} compact />
@@ -131,14 +104,14 @@ export default function Home() {
         <div className="mesh-section-header">
           <SectionHeader
             eyebrow="Platforms"
-            title="On every device you use"
-            subtitle="Android, iOS, Windows, macOS, and Android TV — block distractions and sync your boundaries across your whole setup."
+            title="One calm setup on every screen"
+            subtitle="Phone, laptop, or TV — the same boundaries follow you so you don't rebuild habits on each device."
           />
         </div>
         <PlatformStrip downloadLinks={links.downloadLinks} />
       </SectionShell>
 
-      <ReviewCarousel items={REVIEWS} label="Stories from people who use Pauseward" />
+      <ReviewCarousel items={REVIEWS} label="What changes after a week" />
 
       <SectionShell tone="default">
         <ProductFaqSection compact />

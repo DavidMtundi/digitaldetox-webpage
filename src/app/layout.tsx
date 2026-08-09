@@ -21,10 +21,13 @@ const sora = Sora({
   preload: true,
 });
 
+const SITE_DESCRIPTION =
+  "Stop losing evenings to your phone. Pauseward holds your boundaries for study, work, and sleep — on Android, iOS, Windows, macOS, and TV.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lucidfocus-landing.web.app'),
-  title: "Pauseward: App Blocker & Focus",
-  description: "Pause before distraction. Guard your focus with Pauseward — block apps, run focus sessions, and manage screen time across Mac, Windows, iOS, and Android.",
+  title: "Pauseward — Take back your evenings",
+  description: SITE_DESCRIPTION,
   keywords: ["pauseward", "app blocker", "screen time", "focus app", "focus timer", "digital detox", "app block", "distraction blocker", "deep work", "stay focused"],
   authors: [{ name: "Pauseward Team" }],
   creator: "Pauseward",
@@ -55,8 +58,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lucidfocus-landing.web.app',
-    title: 'Pauseward: App Blocker & Focus',
-    description: 'Pause before distraction. Guard your focus with Pauseward — block apps, run focus sessions, and manage screen time across Mac, Windows, iOS, and Android.',
+    title: 'Pauseward — Take back your evenings',
+    description: SITE_DESCRIPTION,
     siteName: 'Pauseward',
     images: [
       {
@@ -69,8 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pauseward: App Blocker & Focus',
-    description: 'Pause before distraction. Guard your focus with Pauseward — block apps, run focus sessions, and manage screen time across Mac, Windows, iOS, and Android.',
+    title: 'Pauseward — Take back your evenings',
+    description: SITE_DESCRIPTION,
     images: [process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/pauseward.png` : '/pauseward.png'],
   },
 };

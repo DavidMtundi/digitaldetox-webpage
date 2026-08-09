@@ -9,6 +9,8 @@ type PageHeroProps = {
   media?: ReactNode;
   align?: "center" | "left";
   size?: "default" | "compact";
+  /** Stack hero actions vertically (CTAs then badges, etc.) */
+  childrenLayout?: "row" | "stack";
   /** Dark plug-style hero (default, matches home). Use light for rare legacy layouts. */
   tone?: "dark" | "light";
 };
@@ -21,6 +23,7 @@ export default function PageHero({
   media,
   align = "center",
   size = "default",
+  childrenLayout = "row",
   tone = "dark",
 }: PageHeroProps) {
   const isDark = tone === "dark";
@@ -67,15 +70,21 @@ export default function PageHero({
             </h1>
             {subtitle && (
               <p
-                className={`hero-subtitle mt-6 max-w-xl text-lg leading-relaxed ${
-                  isCenter ? "mx-auto" : ""
-                } ${isDark ? "text-gray-600 dark:text-gray-400" : "text-lead"}`}
+                className={`hero-subtitle mt-6 text-lg leading-relaxed ${
+                  hasMedia ? "max-w-xl" : "max-w-xl"
+                } ${isCenter ? "mx-auto" : ""} ${isDark ? "text-gray-600 dark:text-gray-400" : "text-lead"}`}
               >
                 {subtitle}
               </p>
             )}
             {children && (
-              <div className={`mt-10 flex flex-wrap items-center gap-4 ${isCenter ? "justify-center" : ""}`}>
+              <div
+                className={
+                  childrenLayout === "stack"
+                    ? `mt-8 flex w-full flex-col gap-5 sm:mt-10 sm:gap-6 ${isCenter && !hasMedia ? "items-center" : "items-start"}`
+                    : `mt-10 flex flex-wrap items-center gap-4 ${isCenter ? "justify-center" : ""}`
+                }
+              >
                 {children}
               </div>
             )}

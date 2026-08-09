@@ -6,14 +6,22 @@ export type TrustBadge = {
   label: string;
 };
 
-export default function TrustBadges({ items }: { items: TrustBadge[] }) {
+export default function TrustBadges({
+  items,
+  layout = "inline",
+}: {
+  items: TrustBadge[];
+  layout?: "inline" | "grid";
+}) {
   return (
-    <div className="trust-marquee">
+    <div className={layout === "grid" ? "trust-marquee trust-marquee--grid" : "trust-marquee"}>
       {items.map((item, i) => (
-        <RevealOnScroll key={item.label} delay={i * 70} variant="fade">
-          <span className="trust-badge">
-            <item.icon className="h-4 w-4 text-emerald-600" />
-            {item.label}
+        <RevealOnScroll key={item.label} delay={i * 70} variant="fade" className={layout === "grid" ? "h-full" : ""}>
+          <span className={`trust-badge ${layout === "grid" ? "trust-badge--grid" : ""}`}>
+            <span className="trust-badge-icon" aria-hidden>
+              <item.icon className="h-4 w-4" />
+            </span>
+            <span className="trust-badge-label">{item.label}</span>
           </span>
         </RevealOnScroll>
       ))}

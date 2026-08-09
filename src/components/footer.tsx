@@ -77,15 +77,15 @@ export default function Footer() {
         <div className="site-footer-cta-panel">
           <div className="site-footer-cta-inner">
             <div className="site-footer-cta-copy">
-              <p className="site-footer-eyebrow">Focus on demand</p>
-              <h2 className="site-footer-cta-title font-display">Protect your attention on every device</h2>
+              <p className="site-footer-eyebrow">Start tonight</p>
+              <h2 className="site-footer-cta-title font-display">Take back the evening you keep losing</h2>
               <p className="site-footer-cta-subtitle">
-                Download on Android, iOS, Windows, macOS, or Android TV. Upgrade on web with M-Pesa or card when you need more.
+                Download on Android, iOS, Windows, macOS, or Android TV — or upgrade on web with M-Pesa or card when you&apos;re ready for more.
               </p>
             </div>
             <div className="site-footer-cta-actions">
               <Link href="/download" className="site-footer-cta-primary">
-                Get the app
+                Start tonight&apos;s focus
                 <ArrowUpRight className="h-4 w-4" aria-hidden />
               </Link>
               <Link href="/pricing" className="site-footer-cta-secondary">
@@ -101,7 +101,7 @@ export default function Footer() {
               <div className="relative h-11 w-11 shrink-0 transition group-hover:scale-105">
                 <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" />
               </div>
-              <span className="font-display text-xl font-bold text-white">Pauseward</span>
+              <span className="font-display text-xl font-bold">Pauseward</span>
             </Link>
             <p className="site-footer-tagline">
               Pause before distraction. Block apps and sites, turn focus modes on when you need them, and sync
@@ -109,11 +109,11 @@ export default function Footer() {
             </p>
             <div className="site-footer-origin-row">
               <span className="site-footer-origin-pill site-footer-origin-pill-accent">
-                <MapPin className="h-3.5 w-3.5 text-emerald-400" aria-hidden />
+                <MapPin className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden />
                 Kenya-born
               </span>
               <span className="site-footer-origin-pill">
-                <Globe className="h-3.5 w-3.5 text-emerald-400/90" aria-hidden />
+                <Globe className="h-3.5 w-3.5 text-emerald-600/90 dark:text-emerald-400/90" aria-hidden />
                 Focus everywhere
               </span>
             </div>
@@ -152,14 +152,14 @@ export default function Footer() {
             <ul className="site-footer-contact">
               <li>
                 <a href={`mailto:${links.contact.email}`} className="site-footer-contact-link">
-                  <Mail className="h-4 w-4 shrink-0 text-emerald-400/80" aria-hidden />
+                  <Mail className="h-4 w-4 shrink-0 text-emerald-600/90 dark:text-emerald-400/80" aria-hidden />
                   <span className="site-footer-email">{links.contact.email}</span>
                 </a>
               </li>
               {links.contact.phone ? (
                 <li>
                   <a href={`tel:${links.contact.phone}`} className="site-footer-contact-link">
-                    <Phone className="h-4 w-4 shrink-0 text-emerald-400/80" aria-hidden />
+                    <Phone className="h-4 w-4 shrink-0 text-emerald-600/90 dark:text-emerald-400/80" aria-hidden />
                     <span>{links.contact.phone}</span>
                   </a>
                 </li>

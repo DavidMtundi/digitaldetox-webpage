@@ -5,6 +5,19 @@ export type StatBarItem = {
   label: string;
 };
 
+function statGridClass(count: number): string {
+  switch (count) {
+    case 1:
+      return "mx-auto grid max-w-xs grid-cols-1 gap-6";
+    case 2:
+      return "mx-auto grid max-w-2xl grid-cols-2 gap-6 sm:gap-8";
+    case 3:
+      return "mx-auto grid max-w-3xl grid-cols-1 gap-6 min-[420px]:grid-cols-3 sm:gap-8";
+    default:
+      return "grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8";
+  }
+}
+
 export default function StatBar({
   eyebrow,
   stats,
@@ -24,10 +37,10 @@ export default function StatBar({
             </p>
           </RevealOnScroll>
         )}
-        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8">
+        <div className={statGridClass(stats.length)}>
           {stats.map((stat, i) => (
             <RevealOnScroll key={stat.label} delay={i * 80} variant="scale">
-              <div className="stat-bar-cell text-center lg:text-left">
+              <div className="stat-bar-cell text-center">
                 <div className="font-display text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
                   {stat.value}
                 </div>

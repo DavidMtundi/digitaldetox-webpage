@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getEnvContactInfo } from "@/lib/contact";
+import { getEnvContactInfo, SUPPORT_RESPONSE_META } from "@/lib/contact";
 
 const contact = getEnvContactInfo();
 
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Get help with Pauseward setup, billing, M-Pesa payments, and your account.",
   openGraph: {
     title: "Contact Pauseward",
-    description: "Email support for billing, bugs, and account help. Typical reply within 48 hours.",
+    description: `Email support for billing, bugs, and account help. ${SUPPORT_RESPONSE_META}`,
   },
 };
 
