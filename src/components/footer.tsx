@@ -17,13 +17,16 @@ const FOOTER_PLATFORM_IDS: PlatformId[] = ["android", "ios", "macos", "windows",
 
 const PRODUCT_LINKS = [
   { href: "/#features", label: "Features" },
+  { href: "/#how-it-works", label: "How it works" },
   { href: "/download", label: "Download" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 const COMPANY_LINKS = [
   { href: "/about", label: "About" },
-  { href: "/support", label: "Support us" },
+  { href: "/contact", label: "Help & contact" },
+  { href: "/support", label: "Donate" },
 ];
 
 const LEGAL_LINKS = [
@@ -141,9 +144,6 @@ export default function Footer() {
                   <FooterNavLink href={link.href}>{link.label}</FooterNavLink>
                 </li>
               ))}
-              <li>
-                <FooterNavLink href="/contact">Contact</FooterNavLink>
-              </li>
             </ul>
           </nav>
 

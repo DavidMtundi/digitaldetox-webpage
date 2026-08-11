@@ -88,7 +88,7 @@ export default function Home() {
         <ParentsSection />
       </SectionShell>
 
-      <section className="how-it-works-band">
+      <section id="how-it-works" className="how-it-works-band scroll-mt-28">
         <div className="container-modern">
           <div className="how-it-works-heading mx-auto max-w-2xl text-center">
             <p className="page-eyebrow">How it works</p>
@@ -113,7 +113,7 @@ export default function Home() {
 
       <ReviewCarousel items={REVIEWS} label="What changes after a week" />
 
-      <SectionShell tone="default">
+      <SectionShell tone="default" id="faq" className="scroll-mt-28">
         <ProductFaqSection compact />
       </SectionShell>
 

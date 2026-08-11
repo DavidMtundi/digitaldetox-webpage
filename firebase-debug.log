@@ -1,0 +1,37 @@
+[debug] [2026-08-09T13:53:39.588Z] ----------------------------------------------------------------------
+[debug] [2026-08-09T13:53:39.591Z] Command:       /Users/david/.nvm/versions/node/v24.19.0/bin/node /Users/david/projects/detoxify/digitaldetox-webpage/node_modules/.bin/firebase deploy --only hosting --project detoxifyblocker
+[debug] [2026-08-09T13:53:39.591Z] CLI Version:   15.26.0
+[debug] [2026-08-09T13:53:39.591Z] Platform:      darwin
+[debug] [2026-08-09T13:53:39.591Z] Node Version:  v24.19.0
+[debug] [2026-08-09T13:53:39.591Z] Detected Agent: cursor
+[debug] [2026-08-09T13:53:39.591Z] Time:          Sun Aug 09 2026 16:53:39 GMT+0300 (East Africa Time)
+[debug] [2026-08-09T13:53:39.591Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-08-09T13:53:40.990Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-08-09T13:53:40.991Z] > authorizing via signed-in user (davidmtundi2017@gmail.com)
+[debug] [2026-08-09T13:53:40.991Z] [iam] checking project detoxifyblocker for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-08-09T13:53:41.000Z] Checked if tokens are valid: false, expires at: 1786269285810
+[debug] [2026-08-09T13:53:41.000Z] Checked if tokens are valid: false, expires at: 1786269285810
+[debug] [2026-08-09T13:53:41.001Z] > refreshing access token with scopes: []
+[debug] [2026-08-09T13:53:41.002Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-08-09T13:53:41.002Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-08-09T13:53:41.526Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-08-09T13:53:41.526Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-08-09T13:53:41.539Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/detoxifyblocker:testIamPermissions [none]
+[debug] [2026-08-09T13:53:41.540Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/detoxifyblocker:testIamPermissions  x-goog-user-project=detoxifyblocker
+[debug] [2026-08-09T13:53:41.540Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/detoxifyblocker:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-08-09T13:53:43.094Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/detoxifyblocker:testIamPermissions 403
+[debug] [2026-08-09T13:53:43.094Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/detoxifyblocker:testIamPermissions {"error":{"code":403,"message":"Caller does not have required permission to use project detoxifyblocker. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam?project=detoxifyblocker and then retry. Propagation of the new permission may take a few minutes.","status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"USER_PROJECT_DENIED","domain":"googleapis.com","metadata":{"consumer":"projects/detoxifyblocker","service":"cloudresourcemanager.googleapis.com","consoleUrl":"https://console.developers.google.com/iam-admin/iam?project=detoxifyblocker","containerInfo":"detoxifyblocker"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"Caller does not have required permission to use project detoxifyblocker. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam?project=detoxifyblocker and then retry. Propagation of the new permission may take a few minutes."},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developer console IAM admin","url":"https://console.developers.google.com/iam-admin/iam?project=detoxifyblocker"}]}]}}
+[debug] [2026-08-09T13:53:43.095Z] [iam] error while checking permissions, command may fail: Request to https://cloudresourcemanager.googleapis.com/v1/projects/detoxifyblocker:testIamPermissions had HTTP Error: 403, Caller does not have required permission to use project detoxifyblocker. Grant the caller the roles/serviceusage.serviceUsageConsumer role, or a custom role with the serviceusage.services.use permission, by visiting https://console.developers.google.com/iam-admin/iam?project=detoxifyblocker and then retry. Propagation of the new permission may take a few minutes.
+[debug] [2026-08-09T13:53:43.095Z] Checked if tokens are valid: true, expires at: 1786287220526
+[debug] [2026-08-09T13:53:43.095Z] Checked if tokens are valid: true, expires at: 1786287220526
+[debug] [2026-08-09T13:53:43.095Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/detoxifyblocker [none]
+[debug] [2026-08-09T13:53:43.701Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/detoxifyblocker 403
+[debug] [2026-08-09T13:53:43.701Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/detoxifyblocker {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-08-09T13:53:43.702Z] Request to https://firebase.googleapis.com/v1beta1/projects/detoxifyblocker had HTTP Error: 403, The caller does not have permission
+[debug] [2026-08-09T13:53:44.252Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/detoxifyblocker had HTTP Error: 403, The caller does not have permission
+    at responseToError (/Users/david/projects/detoxify/digitaldetox-webpage/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/Users/david/projects/detoxify/digitaldetox-webpage/node_modules/firebase-tools/lib/apiv2.js:415:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[error] 
+[error] Error: Failed to get Firebase project detoxifyblocker. Please make sure the project exists and your account has permission to access it.

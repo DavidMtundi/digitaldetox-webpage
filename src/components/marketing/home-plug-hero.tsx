@@ -52,7 +52,7 @@ export default function HomePlugHero() {
       }}
     >
       <PlugHeroCtaPrimary href="#download">{hero.ctaPrimary}</PlugHeroCtaPrimary>
-      <PlugHeroCtaSecondary href="/pricing">View pricing</PlugHeroCtaSecondary>
+      <PlugHeroCtaSecondary href="#how-it-works">See how it works</PlugHeroCtaSecondary>
     </PlugStyleHero>
   );
 }
