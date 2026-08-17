@@ -18,6 +18,10 @@ export const EMPTY_DOWNLOAD_LINKS: DownloadLinksConfig = {
   web: null,
 };
 
+/** Official Android listing; used when env/Firestore do not override. */
+export const DEFAULT_GOOGLE_PLAY =
+  "https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&pcampaignid=web_share";
+
 function readEnvLink(key: string): string | null {
   const value = process.env[key]?.trim();
   return value || null;
@@ -25,12 +29,12 @@ function readEnvLink(key: string): string | null {
 
 /** Static download URLs from NEXT_PUBLIC_* env (set in .env.local). */
 export function getEnvDownloadLinks(): DownloadLinksConfig {
-  const googlePlay = readEnvLink("NEXT_PUBLIC_DOWNLOAD_GOOGLE_PLAY") ?? "";
+  const googlePlay = readEnvLink("NEXT_PUBLIC_DOWNLOAD_GOOGLE_PLAY") ?? DEFAULT_GOOGLE_PLAY;
   const androidTvDedicated = readEnvLink("NEXT_PUBLIC_DOWNLOAD_ANDROID_TV");
 
   return {
     googlePlay,
-    androidTv: androidTvDedicated ?? (googlePlay || null),
+    androidTv: androidTvDedicated,
     appStore: readEnvLink("NEXT_PUBLIC_DOWNLOAD_APP_STORE"),
     windows: readEnvLink("NEXT_PUBLIC_DOWNLOAD_WINDOWS"),
     mac: readEnvLink("NEXT_PUBLIC_DOWNLOAD_MAC"),
@@ -55,9 +59,7 @@ export function mergeDownloadLinks(
 ): DownloadLinksConfig {
   return {
     googlePlay: pickLink(firestore?.googlePlay, env.googlePlay) ?? "",
-    androidTv:
-      pickLink(firestore?.androidTv, env.androidTv) ??
-      pickLink(firestore?.googlePlay, env.googlePlay),
+    androidTv: pickLink(firestore?.androidTv, env.androidTv),
     appStore: pickLink(firestore?.appStore, env.appStore),
     windows: pickLink(firestore?.windows, env.windows),
     mac: pickLink(firestore?.mac, env.mac),
