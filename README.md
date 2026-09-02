@@ -41,24 +41,43 @@ npm run dev
 
 ## 🚀 Deployment
 
-### Firebase Hosting (detoxifyblocker – default)
+One Firebase project: **`digitaldetox-app`** (same as the Play Store app). Do not deploy this site to `detoxifyblocker`.
+
+GitHub Actions needs:
+- Secret `FIREBASE_SERVICE_ACCOUNT` — JSON for a **digitaldetox-app** service account with Firebase Hosting Admin
+- Vars `NEXT_PUBLIC_FIREBASE_*` — Web app config from [Project settings](https://console.firebase.google.com/project/digitaldetox-app/settings/general)
+- `NEXT_PUBLIC_SITE_URL=https://pauseward.app`
+
+After adding a Hosting site named `digitaldetox-app` and attaching `pauseward.app`:
+
 ```bash
-firebase use detoxifyblocker
+npx -y firebase-tools@latest use digitaldetox-app
 npm run build
-firebase deploy --only hosting
+npx -y firebase-tools@latest deploy --only hosting --project digitaldetox-app
 ```
 
-Site URL: https://detoxifyblocker.web.app
+Site: https://digitaldetox-app.web.app (and https://pauseward.app once DNS is pointed here).
 
-Set Firebase config in `.env.local` (see `.env.example`). Create the project first: `firebase login` then `firebase projects:create detoxifyblocker` (or use [Firebase Console](https://console.firebase.google.com/)).
+`pauseward.app` is already added on this Hosting site. In the domain registrar, add:
 
-### Deploy to lucidfocus-landing instead
-```bash
-firebase use lucidfocus-landing
-# Temporarily set firebase.json hosting "site" to lucidfocus-landing if needed
-npm run build
-firebase deploy --only hosting --project lucidfocus-landing
-```
+- A record `@` → `199.36.158.100`
+- TXT record `@` → `hosting-site=digitaldetox-app`
+
+Leave `pauseward.com` on `detoxifyblocker` until you are ready to cut that domain over (it is still live there).
+
+GitHub Actions (`DavidMtundi/digitaldetox-webpage`) must use a **digitaldetox-app** Hosting service account in secret `FIREBASE_SERVICE_ACCOUNT`, and these repository variables:
+
+- `NEXT_PUBLIC_FIREBASE_API_KEY` = `AIzaSyC06gi5ui80gtwm-Tk7iDT8WBArZ211MBs`
+- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` = `digitaldetox-app.firebaseapp.com`
+- `NEXT_PUBLIC_FIREBASE_PROJECT_ID` = `digitaldetox-app`
+- `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` = `digitaldetox-app.firebasestorage.app`
+- `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` = `356083145385`
+- `NEXT_PUBLIC_FIREBASE_APP_ID` = `1:356083145385:web:0cc80dbaf8a70051eae7b8`
+- `NEXT_PUBLIC_SITE_URL` = `https://pauseward.app`
+
+Firestore **rules** are not deployed from this repo. Canonical rules live in DigitalDetox (`DigitalDetox/firestore.rules`).
+
+Copy `.env.example` to `.env.local` for local Firebase JS SDK values.
 
 ## 📁 Project Structure
 
@@ -148,8 +167,8 @@ This project is private and proprietary.
 ## 📞 Support
 
 For questions or support, please contact:
-- Email: (configured via Firestore)
-- Site: https://lucidfocus-landing.web.app
+- Email: hello@pauseward.app
+- Site: https://pauseward.app
 
 ---
 

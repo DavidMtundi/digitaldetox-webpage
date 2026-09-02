@@ -1,6 +1,6 @@
 {
   "name": "digitaldetox-webpage",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,9 +9,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --import tsx --test src/lib/*.test.ts",
-    "deploy": "npm run build && firebase deploy",
+    "deploy": "npm run build && firebase deploy --only hosting",
     "deploy:hosting": "firebase deploy --only hosting",
-    "deploy:rules": "firebase deploy --only firestore:rules"
+    "deploy:rules": "echo 'Firestore rules for digitaldetox-app must be deployed from the DigitalDetox repo.' && exit 1"
   },
   "dependencies": {
     "clsx": "^2.1.1",

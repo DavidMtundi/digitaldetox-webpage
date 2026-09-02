@@ -1,20 +1,5 @@
 {
   "projects": {
-    "default": "detoxifyblocker",
-    "lucidfocus-landing": "lucidfocus-landing",
-    "detoxifyblocker": "detoxifyblocker"
-  },
-  "targets": {
-    "lucidfocus-landing": {
-      "hosting": {
-        "lucidfocus-landing": ["lucidfocus-landing"]
-      }
-    },
-    "detoxifyblocker": {
-      "hosting": {
-        "detoxifyblocker": ["detoxifyblocker"]
-      }
-    }
-  },
-  "etags": {}
+    "default": "digitaldetox-app"
+  }
 }

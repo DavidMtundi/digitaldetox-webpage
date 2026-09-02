@@ -1,9 +1,6 @@
 {
-  "firestore": {
-    "rules": "firestore.rules"
-  },
   "hosting": {
-    "site": "detoxifyblocker",
+    "site": "digitaldetox-app",
     "public": "out",
     "ignore": [
       "firebase.json",

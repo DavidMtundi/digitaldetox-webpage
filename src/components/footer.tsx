@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { ArrowUpRight, Globe, Mail, MapPin, Phone } from "lucide-react";
+import BrandLogo from "@/components/brand-logo";
 import PlatformLogo from "@/components/marketing/platform-logo";
 import { useAuth } from "@/components/auth/auth-provider";
 import { useExternalLinks } from "@/hooks/useExternalLinks";
@@ -102,7 +102,7 @@ export default function Footer() {
           <div className="site-footer-brand">
             <Link href="/" className="site-footer-logo group">
               <div className="relative h-11 w-11 shrink-0 transition group-hover:scale-105">
-                <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" />
+                <BrandLogo fill alt="Pauseward" sizes="44px" />
               </div>
               <span className="font-display text-xl font-bold">Pauseward</span>
             </Link>

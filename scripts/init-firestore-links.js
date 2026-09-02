@@ -1,38 +1,24 @@
 /**
- * Script to initialize Firestore with external links
- * 
+ * Seed website config docs on digitaldetox-app.
+ *
  * Usage:
- * 1. Install Firebase Admin SDK: npm install firebase-admin
- * 2. Get your service account key from Firebase Console
- * 3. Set GOOGLE_APPLICATION_CREDENTIALS environment variable
- * 4. Run: node scripts/init-firestore-links.js
- * 
- * Or use Firebase CLI:
- * firebase firestore:import firestore-data.json
+ *   GOOGLE_APPLICATION_CREDENTIALS=/path/to/digitaldetox-app-sa.json \
+ *     node scripts/init-firestore-links.js
+ *
+ * Document IDs must match the web client: config/downloadlinks (lowercase).
  */
 
-const admin = require('firebase-admin');
+const admin = require("firebase-admin");
 
-// Initialize Firebase Admin (you'll need to set up service account)
-// Option 1: Use service account file
-// const serviceAccount = require('../path-to-service-account-key.json');
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount)
-// });
-
-// Option 2: Use environment variable (recommended for production)
-// Set GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
 if (!admin.apps.length) {
   try {
     admin.initializeApp({
-      credential: admin.credential.applicationDefault()
+      credential: admin.credential.applicationDefault(),
+      projectId: "digitaldetox-app",
     });
   } catch (error) {
-    console.error('Error initializing Firebase Admin:', error);
-    console.log('\nPlease set up Firebase Admin SDK:');
-    console.log('1. Install: npm install firebase-admin');
-    console.log('2. Get service account key from Firebase Console');
-    console.log('3. Set GOOGLE_APPLICATION_CREDENTIALS environment variable');
+    console.error("Error initializing Firebase Admin:", error);
+    console.log("Set GOOGLE_APPLICATION_CREDENTIALS to a digitaldetox-app service account JSON.");
     process.exit(1);
   }
 }
@@ -40,7 +26,9 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 const downloadLinks = {
-  googlePlay: "",
+  googlePlay:
+    "https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&pcampaignid=web_share",
+  androidTv: null,
   appStore: null,
   windows: null,
   mac: null,
@@ -48,37 +36,30 @@ const downloadLinks = {
 };
 
 const contact = {
-  email: "",
-  phone: ""
+  email: "hello@pauseward.app",
+  phone: "",
 };
 
 const donation = {
-  url: ""
+  url: "",
 };
 
 async function initializeLinks() {
   try {
-    // Create three separate documents
     await Promise.all([
-      db.collection('config').doc('downloadLinks').set(downloadLinks),
-      db.collection('config').doc('contact').set(contact),
-      db.collection('config').doc('donation').set(donation)
+      db.collection("config").doc("downloadlinks").set(downloadLinks, { merge: true }),
+      db.collection("config").doc("contact").set(contact, { merge: true }),
+      db.collection("config").doc("donation").set(donation, { merge: true }),
     ]);
-    
-    console.log('✅ External links initialized successfully in Firestore!');
-    console.log('\nDocuments created:');
-    console.log('  - config/downloadLinks');
-    console.log('  - config/contact');
-    console.log('  - config/donation');
-    console.log('\nData structure:');
-    console.log('downloadLinks:', JSON.stringify(downloadLinks, null, 2));
-    console.log('contact:', JSON.stringify(contact, null, 2));
-    console.log('donation:', JSON.stringify(donation, null, 2));
+
+    console.log("Seeded digitaldetox-app config docs:");
+    console.log("  - config/downloadlinks");
+    console.log("  - config/contact");
+    console.log("  - config/donation");
   } catch (error) {
-    console.error('❌ Error initializing links:', error);
+    console.error("Error initializing links:", error);
     process.exit(1);
   }
 }
 
 initializeLinks();
-

@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useAuth } from "@/components/auth/auth-provider";
+import BrandLogo from "@/components/brand-logo";
 import ThemeToggle from "@/components/theme-toggle";
 
 const NAV = [
@@ -37,7 +37,7 @@ export default function Header() {
         <div className="site-header-bar flex h-14 items-center justify-between gap-3 rounded-2xl border border-emerald-100/80 bg-white/92 px-2.5 shadow-lg shadow-emerald-900/5 backdrop-blur-xl sm:px-3 md:h-16 md:rounded-full md:px-5 dark:border-white/10 dark:bg-gray-950/85 dark:shadow-2xl dark:shadow-black/40">
           <Link href="/" className="group flex min-w-0 items-center gap-2.5 md:gap-3">
             <div className="relative h-9 w-9 shrink-0 transition group-hover:scale-105 md:h-10 md:w-10">
-              <Image src="/pauseward.png" alt="Pauseward" fill className="object-contain" priority />
+              <BrandLogo fill alt="Pauseward" priority sizes="40px" />
             </div>
             <span className="site-header-logo truncate font-display text-base font-bold text-gray-900 dark:text-white sm:text-lg md:text-xl">
               Pauseward

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import BrandLogo from "@/components/brand-logo";
 import {
   BarChart3,
   CalendarClock,
@@ -43,13 +43,7 @@ export default function DashboardSidebar() {
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-2">
             <div className="relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-lg">
-              <Image
-                src="/pauseward.png"
-                alt="Pauseward"
-                width={32}
-                height={32}
-                className="object-cover"
-              />
+              <BrandLogo alt="Pauseward" width={32} height={32} className="object-cover" />
             </div>
             <div className="min-w-0">
               <p className="dashboard-sidebar-title truncate text-sm font-semibold text-gray-900 dark:text-gray-100">

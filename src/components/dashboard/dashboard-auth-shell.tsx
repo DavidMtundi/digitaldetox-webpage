@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { ReactNode } from "react";
+import BrandLogo from "@/components/brand-logo";
 import FocusBackground from "@/components/marketing/focus-background";
 import ThemeToggle from "@/components/theme-toggle";
 
@@ -16,7 +16,7 @@ export default function DashboardAuthShell({ children, footer }: DashboardAuthSh
 
       <header className="relative z-10 flex items-center justify-between px-4 py-4 sm:px-6">
         <Link href="/" className="dashboard-auth-home inline-flex items-center gap-2.5">
-          <Image src="/pauseward.png" alt="" width={32} height={32} className="rounded-lg" aria-hidden />
+          <BrandLogo alt="" width={32} height={32} className="rounded-lg" />
           <span className="font-display text-lg font-semibold text-gray-900 dark:text-white">Pauseward</span>
         </Link>
         <ThemeToggle />
@@ -34,7 +34,7 @@ export default function DashboardAuthShell({ children, footer }: DashboardAuthSh
 export function DashboardAuthBrand() {
   return (
     <div className="dashboard-auth-brand">
-      <Image src="/pauseward.png" alt="Pauseward" width={48} height={48} className="rounded-xl shadow-sm" />
+      <BrandLogo alt="Pauseward" width={48} height={48} className="rounded-xl shadow-sm" />
       <div>
         <p className="dashboard-auth-brand-label">Pauseward</p>
         <p className="dashboard-auth-brand-tagline">Your focus dashboard</p>
