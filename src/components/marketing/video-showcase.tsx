@@ -39,7 +39,7 @@ export default function VideoShowcase({
         poster={poster}
         title={title}
         onPlay={() => setActive(true)}
-        hint="Add NEXT_PUBLIC_DEMO_VIDEO_URL or pauseward-demo-ios.mp4"
+        hint="Add NEXT_PUBLIC_DEMO_VIDEO_URL or an .mp4 in /public/marketing"
       />
     );
   }
@@ -177,7 +177,7 @@ function PlaceholderPanel({
     >
       <p className="font-display text-xl text-white">Video slot ready</p>
       <p className="mt-2 max-w-sm text-sm text-gray-400">
-        Upload a demo to <code className="rounded bg-black/40 px-1.5 py-0.5 text-xs">/public/marketing/pauseward-demo-ios.mp4</code> or set{" "}
+        Upload a demo to <code className="rounded bg-black/40 px-1.5 py-0.5 text-xs">/public/marketing/</code> or set{" "}
         <code className="rounded bg-black/40 px-1.5 py-0.5 text-xs">NEXT_PUBLIC_DEMO_VIDEO_URL</code>.
       </p>
       <button type="button" onClick={onClose} className="btn-secondary mt-6 text-sm">

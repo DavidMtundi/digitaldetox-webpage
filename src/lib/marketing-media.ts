@@ -35,10 +35,10 @@ export const marketingMedia = {
   },
   demo: {
     video: parseVideoEnv(
-      env("NEXT_PUBLIC_DEMO_VIDEO_URL", "/marketing/pauseward-demo-ios.mp4"),
-      { type: "file", src: "/marketing/pauseward-demo-ios.mp4" } as VideoSource,
+      env("NEXT_PUBLIC_DEMO_VIDEO_URL", "/marketing/feature-app-blocking.mp4"),
+      { type: "file", src: "/marketing/feature-app-blocking.mp4" } as VideoSource,
     ),
-    poster: env("NEXT_PUBLIC_DEMO_VIDEO_POSTER", "/marketing/hero-app-preview.svg"),
+    poster: env("NEXT_PUBLIC_DEMO_VIDEO_POSTER", "/marketing/feature-app-blocking-poster.jpg"),
   },
   features: [
     {
@@ -58,23 +58,23 @@ export const marketingMedia = {
   featureTabs: {
     appBlocking: featureTabDemo(
       "NEXT_PUBLIC_FEATURE_VIDEO_APP_BLOCKING",
-      "/marketing/pauseward-demo-ios.mp4",
-      "/marketing/feature-blocking.svg",
+      "/marketing/feature-app-blocking.mp4",
+      "/marketing/feature-app-blocking-poster.jpg",
     ),
     insights: featureTabDemo(
       "NEXT_PUBLIC_FEATURE_VIDEO_INSIGHTS",
       "/marketing/feature-insights.mp4",
-      "/marketing/feature-analytics.svg",
+      "/marketing/feature-insights-poster.jpg",
     ),
     focusModes: featureTabDemo(
       "NEXT_PUBLIC_FEATURE_VIDEO_FOCUS_MODES",
       "/marketing/feature-focus-modes.mp4",
-      "/marketing/hero-app-preview.svg",
+      "/marketing/feature-focus-modes-poster.jpg",
     ),
     websiteBlocking: featureTabDemo(
       "NEXT_PUBLIC_FEATURE_VIDEO_WEBSITE_BLOCKING",
       "/marketing/feature-website-blocking.mp4",
-      "/marketing/feature-blocking.svg",
+      "/marketing/feature-website-blocking-poster.jpg",
     ),
   },
   about: {
