@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
+  DEFAULT_APP_STORE,
   DEFAULT_GOOGLE_PLAY,
   getEnvDownloadLinks,
   mergeDownloadLinks,
@@ -20,6 +21,22 @@ describe("getEnvDownloadLinks", () => {
         delete process.env.NEXT_PUBLIC_DOWNLOAD_GOOGLE_PLAY;
       } else {
         process.env.NEXT_PUBLIC_DOWNLOAD_GOOGLE_PLAY = previous;
+      }
+    }
+  });
+});
+
+describe("getEnvDownloadLinks App Store", () => {
+  it("defaults iOS to the official App Store listing", () => {
+    const previous = process.env.NEXT_PUBLIC_DOWNLOAD_APP_STORE;
+    delete process.env.NEXT_PUBLIC_DOWNLOAD_APP_STORE;
+
+    try {
+      assert.equal(getEnvDownloadLinks().appStore, DEFAULT_APP_STORE);
+      assert.equal(mergeDownloadLinks({ appStore: null }).appStore, DEFAULT_APP_STORE);
+    } finally {
+      if (previous !== undefined) {
+        process.env.NEXT_PUBLIC_DOWNLOAD_APP_STORE = previous;
       }
     }
   });

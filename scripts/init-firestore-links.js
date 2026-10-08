@@ -29,7 +29,7 @@ const downloadLinks = {
   googlePlay:
     "https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&pcampaignid=web_share",
   androidTv: null,
-  appStore: null,
+  appStore: "https://apps.apple.com/us/app/pause-ward/id6806811524",
   windows: null,
   mac: null,
   web: null,

@@ -22,6 +22,9 @@ export const EMPTY_DOWNLOAD_LINKS: DownloadLinksConfig = {
 export const DEFAULT_GOOGLE_PLAY =
   "https://play.google.com/store/apps/details?id=com.davidmtundi.digitaldetox&pcampaignid=web_share";
 
+/** Official iOS listing; used when env/Firestore do not override. */
+export const DEFAULT_APP_STORE = "https://apps.apple.com/us/app/pause-ward/id6806811524";
+
 function readEnvLink(key: string): string | null {
   const value = process.env[key]?.trim();
   return value || null;
@@ -35,7 +38,7 @@ export function getEnvDownloadLinks(): DownloadLinksConfig {
   return {
     googlePlay,
     androidTv: androidTvDedicated,
-    appStore: readEnvLink("NEXT_PUBLIC_DOWNLOAD_APP_STORE"),
+    appStore: readEnvLink("NEXT_PUBLIC_DOWNLOAD_APP_STORE") ?? DEFAULT_APP_STORE,
     windows: readEnvLink("NEXT_PUBLIC_DOWNLOAD_WINDOWS"),
     mac: readEnvLink("NEXT_PUBLIC_DOWNLOAD_MAC"),
     web: readEnvLink("NEXT_PUBLIC_DOWNLOAD_WEB"),
