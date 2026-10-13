@@ -27,6 +27,7 @@ export const privacyPolicyVersions: PrivacyPolicyData = {
         "Added Paystack billing (M-Pesa and card) and subscription entitlements",
         "Described device and blocklist sync via pauseward-api",
         "Updated third-party processors (Paystack, Google Play, Firebase where applicable)",
+        "Described the Pauseward browser extension and that it keeps data on your device",
       ],
     },
     {
@@ -130,6 +131,12 @@ No method of transmission or storage is 100% secure. Please use a strong, unique
 ### iOS / macOS
 - **Screen Time / Family Controls** (where supported) — app shields and limits
 - **Notifications** — focus session reminders
+
+### Browser extension (Chrome, Edge, Brave, Firefox)
+- **Website blocking** — during focus sessions the extension redirects sites on your blocklist to a Pauseward page
+- **Scroll Guard** — hides endless feeds (for example YouTube Shorts or a home timeline), shows a short pause before feeds, and enforces daily time budgets you set
+- **Local only** — it talks only to the Pauseward app on the same computer (native messaging or 127.0.0.1). It stores per-site minute totals for budgets in browser storage on your device and never records page addresses, titles, or content
+- **No transmission** — the extension does not send browsing data to Pauseward servers or anyone else
 
 ### What permissions do not allow
 - Reading private content inside other applications
