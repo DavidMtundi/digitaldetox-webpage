@@ -17,7 +17,7 @@ function HeroHeadline({ variant }: { variant: HomeHeroVariant }) {
     <>
       {variant.line1}
       <br />
-      <span className="text-emerald-400">{variant.accent}</span>
+      <span className="text-emerald-600 dark:text-emerald-400">{variant.accent}</span>
     </>
   );
 }
@@ -42,6 +42,7 @@ export default function HomePlugHero() {
           <HeroHeadline variant={hero} />
         </span>
       }
+      subtitle="Block distractions. Keep the hours that matter."
       phones={{
         left: marketingMedia.features[0],
         center: marketingMedia.hero.image,

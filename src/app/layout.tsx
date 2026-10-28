@@ -57,16 +57,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lucidfocus-landing.web.app',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://pauseward.com',
     title: 'Pauseward — Take back your evenings',
     description: SITE_DESCRIPTION,
     siteName: 'Pauseward',
     images: [
       {
-        url: '/pauseward.png',
-        width: 512,
-        height: 512,
-        alt: 'Pauseward App Icon',
+        url: '/marketing/launch-hero.jpg',
+        width: 1920,
+        height: 1080,
+        alt: 'Pauseward — take back your evenings',
       },
     ],
   },
@@ -74,7 +74,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Pauseward — Take back your evenings',
     description: SITE_DESCRIPTION,
-    images: [process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/pauseward.png` : '/pauseward.png'],
+    images: [
+      process.env.NEXT_PUBLIC_SITE_URL
+        ? `${process.env.NEXT_PUBLIC_SITE_URL}/marketing/launch-hero.jpg`
+        : '/marketing/launch-hero.jpg',
+    ],
   },
 };
 

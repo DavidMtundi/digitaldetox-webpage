@@ -11,10 +11,10 @@ export type HomeHeroVariant = {
 
 /** SSR / first paint fallback — safe default before client picks a variant. */
 export const DEFAULT_HOME_HERO: HomeHeroVariant = {
-  line1: "Stop losing evenings to",
-  accent: "apps and sites you didn't mean to open",
+  line1: "Take back your",
+  accent: "evenings",
   socialProof: "Block distracting apps and websites on phone, laptop, and TV",
-  ctaPrimary: "Start tonight's focus",
+  ctaPrimary: "Download free",
 };
 
 const MORNING_HEROES: HomeHeroVariant[] = [

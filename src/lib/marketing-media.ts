@@ -28,6 +28,13 @@ export const marketingMedia = {
       width: 390,
       height: 844,
     } satisfies MarketingImage,
+    /** Social/OG share art only — do not place as in-page hero (has baked-in copy). */
+    shareImage: {
+      src: env("NEXT_PUBLIC_HERO_LAUNCH_IMAGE", "/marketing/launch-hero.jpg"),
+      alt: "Pauseward — take back your evenings with focus blocking on your phone",
+      width: 1920,
+      height: 1080,
+    } satisfies MarketingImage,
     video: parseVideoEnv(
       env("NEXT_PUBLIC_HERO_VIDEO_URL", ""),
       { type: "placeholder" } as VideoSource,

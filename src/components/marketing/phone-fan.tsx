@@ -9,8 +9,12 @@ type PhoneFanProps = {
 
 export default function PhoneFan({ left, center, right }: PhoneFanProps) {
   return (
-    <div className="phone-fan mx-auto mt-8 max-w-4xl px-2 sm:mt-12 sm:px-4 md:mt-16">
-      <div className="phone-fan-inner flex items-end justify-center gap-2 sm:gap-3 md:gap-5">
+    <div className="phone-fan relative mx-auto mt-10 max-w-5xl px-2 sm:mt-14 sm:px-4 md:mt-16">
+      <div
+        className="pointer-events-none absolute inset-x-[12%] bottom-0 top-1/3 rounded-full bg-emerald-400/15 blur-3xl dark:bg-emerald-400/10"
+        aria-hidden
+      />
+      <div className="phone-fan-inner relative flex items-end justify-center gap-2 sm:gap-3 md:gap-5">
         <PhoneSlot image={left} className="phone-fan-left hidden sm:block -rotate-6 md:-rotate-8" size="sm" />
         <PhoneSlot image={center} className="phone-fan-center z-10" size="lg" priority />
         <PhoneSlot image={right} className="phone-fan-right hidden sm:block rotate-6 md:rotate-8" size="sm" />
